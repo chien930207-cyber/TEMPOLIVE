@@ -120,21 +120,6 @@ v1.17 切換歌曲時，會更新歌曲的速度、拍號、細分與預備拍�
 
 未完成的一局只保留在目前頁面中，重新整理或關閉整個網頁後不會還原。遊戲不會替使用者停止主節拍器，要避免兩組節奏重疊，請先自行停止或靜音本機節拍。
 
-## 部署
-
-本專案是單檔靜態網頁。直接使用時只需要下載 HTML；發布到 GitHub Pages 時，可將正式使用的完整 HTML 複製為 `index.html`：
-
-```text
-TEMPOLIVE/
-├── README.md
-├── index.html              # 網站入口，內容為完整節拍器 HTML
-└── TEMPOLIVE-v1.17.html     # 保留版本原始檔
-```
-
-在儲存庫 **Settings → Pages** 選擇 **Deploy from a branch**，指定存放檔案的分支與根目錄後儲存。詳細流程可參考 [GitHub Pages 官方部署說明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
-
-GitHub Pages 只提供網頁檔案，**不會提供或取代房間中繼服務**。團隊功能仍依 HTML 內的中繼設定連線。
-
 ## 技術
 
 | 用途 | 實作 |
@@ -159,10 +144,6 @@ GitHub Pages 只提供網頁檔案，**不會提供或取代房間中繼服務**
 可透過 Issues 回報操作問題或提出建議。請附上使用版本、手機／電腦型號、瀏覽器、重現步驟，以及是否使用藍牙、房間或語音功能；有錯誤提示時請提供完整文字。截圖與診斷資料請先移除不需要公開的房間代碼及訊息內容。
 
 新增功能的入口使用 **NEW** 標示，並維持手機操作、深淺色與既有資料相容性。
-
-## 授權
-
-目前提供的程式未附明確授權條款；主程式與整合小遊戲的授權安排，待專案擁有人確認。
 
 ---
 
