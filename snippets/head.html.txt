@@ -1,0 +1,10 @@
+<!-- TEMPOLIVE favicon setup. Update existing matching tags; do not add duplicates.
+     Paths are relative to index.html, so GitHub project subdirectories work.
+     This text file is an optional snippet, not a replacement index.html. -->
+<link rel="icon" href="./favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64 128x128 256x256">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" sizes="any">
+<link id="tempolive-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+
+<!-- Optional manifest: only add after reviewing its relative start_url/scope.
+     A manifest does NOT add offline caching or guarantee app installation. -->
+<!-- <link rel="manifest" href="./site.webmanifest"> -->

@@ -1,0 +1,408 @@
+{
+  "provenance": {
+    "asset_pack": "TEMPOLIVE Logo Kit 1.0",
+    "based_on": "TEMPOLIVE-v2.1.12.html",
+    "website_modified": false,
+    "source_sha256": "3706a7e046fdf45eaf39c03cdc0edc1fb5174b21f9d57bb7dcdf489380fe2e12",
+    "logo_viewBox": "0 0 24 24",
+    "logo_paths": [
+      "M8 3h8l4 18H4L8 3Z",
+      "m10 16 7-10M8 17h8",
+      "M9 11h2"
+    ],
+    "stroke_width": 1.7,
+    "stroke_linecap": "round",
+    "stroke_linejoin": "round",
+    "colors": {
+      "dark": "#202020",
+      "white": "#ffffff"
+    },
+    "lettering": {
+      "method": "Outlined glyphs, no font binaries distributed",
+      "latin": "Arimo Bold (Arial-compatible rendering of the existing heading)",
+      "chinese": "Noto Sans CJK TC Regular",
+      "note": "Horizontal/stacked layouts are asset applications of the existing mark and name, not an altered metronome symbol."
+    },
+    "sources": [
+      {
+        "title": "GitHub social preview",
+        "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview"
+      },
+      {
+        "title": "W3C Web App Manifest - masks and safe zone",
+        "url": "https://www.w3.org/TR/appmanifest/#icon-masks"
+      },
+      {
+        "title": "Apple Web Clip icons",
+        "url": "https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "assets/brand/svg/tempolive-mark-dark.svg",
+      "format": "svg",
+      "usage": "Transparent symbol; geometry extracted directly from v2.1.12",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-mark-dark-512.png",
+      "format": "png",
+      "width": 512,
+      "height": 512,
+      "alpha": true,
+      "usage": "Transparent standalone logo"
+    },
+    {
+      "path": "assets/brand/png/tempolive-mark-dark-1024.png",
+      "format": "png",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "usage": "Transparent standalone logo"
+    },
+    {
+      "path": "assets/brand/png/tempolive-mark-dark-2048.png",
+      "format": "png",
+      "width": 2048,
+      "height": 2048,
+      "alpha": true,
+      "usage": "Transparent standalone logo"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-horizontal-dark.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-horizontal-dark-2400.png",
+      "format": "png",
+      "width": 2400,
+      "height": 480,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-bilingual-dark.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-bilingual-dark-2400.png",
+      "format": "png",
+      "width": 2400,
+      "height": 560,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-stacked-dark.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-stacked-dark-1200.png",
+      "format": "png",
+      "width": 1200,
+      "height": 990,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-wordmark-dark.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-wordmark-dark-2400.png",
+      "format": "png",
+      "width": 2400,
+      "height": 360,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-mark-white.svg",
+      "format": "svg",
+      "usage": "Transparent symbol; geometry extracted directly from v2.1.12",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-mark-white-512.png",
+      "format": "png",
+      "width": 512,
+      "height": 512,
+      "alpha": true,
+      "usage": "Transparent standalone logo"
+    },
+    {
+      "path": "assets/brand/png/tempolive-mark-white-1024.png",
+      "format": "png",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "usage": "Transparent standalone logo"
+    },
+    {
+      "path": "assets/brand/png/tempolive-mark-white-2048.png",
+      "format": "png",
+      "width": 2048,
+      "height": 2048,
+      "alpha": true,
+      "usage": "Transparent standalone logo"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-horizontal-white.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-horizontal-white-2400.png",
+      "format": "png",
+      "width": 2400,
+      "height": 480,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-bilingual-white.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-bilingual-white-2400.png",
+      "format": "png",
+      "width": 2400,
+      "height": 560,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-stacked-white.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-stacked-white-1200.png",
+      "format": "png",
+      "width": 1200,
+      "height": 990,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-logo-wordmark-white.svg",
+      "format": "svg",
+      "usage": "Outlined lettering; no font dependency",
+      "alpha": "transparent"
+    },
+    {
+      "path": "assets/brand/png/tempolive-logo-wordmark-white-2400.png",
+      "format": "png",
+      "width": 2400,
+      "height": 360,
+      "alpha": true,
+      "usage": "Transparent logo lockup for pages, slides and documents"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-icon-dark.svg",
+      "format": "svg",
+      "usage": "Square icon; do not pre-mask for operating-system use",
+      "alpha": "background"
+    },
+    {
+      "path": "assets/brand/png/tempolive-icon-dark-1024.png",
+      "format": "png",
+      "width": 1024,
+      "height": 1024,
+      "alpha": false,
+      "usage": "Square social/avatar icon"
+    },
+    {
+      "path": "assets/brand/svg/tempolive-icon-light.svg",
+      "format": "svg",
+      "usage": "Square icon; do not pre-mask for operating-system use",
+      "alpha": "background"
+    },
+    {
+      "path": "assets/brand/png/tempolive-icon-light-1024.png",
+      "format": "png",
+      "width": 1024,
+      "height": 1024,
+      "alpha": false,
+      "usage": "Square social/avatar icon"
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "format": "png",
+      "width": 180,
+      "height": 180,
+      "alpha": false,
+      "usage": "Original v2.1.12 GitHub asset; bytes unchanged",
+      "sha256_original": "eb8940a54ca8146f65b780f500b843d1ea4f195415710cb2122de93f5d6368d9"
+    },
+    {
+      "path": "tempolive-cover.png",
+      "format": "png",
+      "width": 512,
+      "height": 512,
+      "alpha": false,
+      "usage": "Original v2.1.12 GitHub asset; bytes unchanged",
+      "sha256_original": "6ebd6e68363fbfce5b1b4e882d9a3c0eb32499c3dcbb7cc6e4e99f00540f4ccd"
+    },
+    {
+      "path": "favicon.svg",
+      "format": "svg",
+      "usage": "Browser tab icon"
+    },
+    {
+      "path": "assets/brand/icons/favicon-16x16.png",
+      "format": "png",
+      "width": 16,
+      "height": 16,
+      "alpha": true,
+      "usage": "Browser tab icon"
+    },
+    {
+      "path": "assets/brand/icons/favicon-32x32.png",
+      "format": "png",
+      "width": 32,
+      "height": 32,
+      "alpha": true,
+      "usage": "Browser tab icon"
+    },
+    {
+      "path": "assets/brand/icons/favicon-48x48.png",
+      "format": "png",
+      "width": 48,
+      "height": 48,
+      "alpha": true,
+      "usage": "Browser tab icon"
+    },
+    {
+      "path": "favicon.ico",
+      "format": "ico",
+      "sizes": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256
+      ],
+      "usage": "Multi-size browser icon"
+    },
+    {
+      "path": "assets/brand/icons/icon-192.png",
+      "format": "png",
+      "width": 192,
+      "height": 192,
+      "alpha": false,
+      "usage": "Web manifest general icon"
+    },
+    {
+      "path": "assets/brand/icons/maskable-icon-192.png",
+      "format": "png",
+      "width": 192,
+      "height": 192,
+      "alpha": false,
+      "usage": "Maskable icon with verified circular safe zone"
+    },
+    {
+      "path": "assets/brand/icons/icon-512.png",
+      "format": "png",
+      "width": 512,
+      "height": 512,
+      "alpha": false,
+      "usage": "Web manifest general icon"
+    },
+    {
+      "path": "assets/brand/icons/maskable-icon-512.png",
+      "format": "png",
+      "width": 512,
+      "height": 512,
+      "alpha": false,
+      "usage": "Maskable icon with verified circular safe zone"
+    },
+    {
+      "path": "assets/brand/icons/apple-touch-icon-152.png",
+      "format": "png",
+      "width": 152,
+      "height": 152,
+      "alpha": false,
+      "usage": "Additional iPad touch-icon size"
+    },
+    {
+      "path": "assets/brand/icons/apple-touch-icon-167.png",
+      "format": "png",
+      "width": 167,
+      "height": 167,
+      "alpha": false,
+      "usage": "Additional iPad touch-icon size"
+    },
+    {
+      "path": "assets/brand/social/github-social-preview.svg",
+      "format": "svg",
+      "usage": "Repository/website sharing image",
+      "alpha": "background"
+    },
+    {
+      "path": "assets/brand/social/github-social-preview.png",
+      "format": "png",
+      "width": 1280,
+      "height": 640,
+      "alpha": false,
+      "usage": "Opaque sharing cover"
+    },
+    {
+      "path": "assets/brand/social/og-image.svg",
+      "format": "svg",
+      "usage": "Repository/website sharing image",
+      "alpha": "background"
+    },
+    {
+      "path": "assets/brand/social/og-image.png",
+      "format": "png",
+      "width": 1200,
+      "height": 630,
+      "alpha": false,
+      "usage": "Opaque sharing cover"
+    },
+    {
+      "path": "assets/brand/social/readme-banner-light.svg",
+      "format": "svg",
+      "usage": "GitHub README header",
+      "alpha": "background"
+    },
+    {
+      "path": "assets/brand/social/readme-banner-light.png",
+      "format": "png",
+      "width": 1600,
+      "height": 480,
+      "alpha": false,
+      "usage": "README header / document cover strip"
+    },
+    {
+      "path": "assets/brand/social/readme-banner-dark.svg",
+      "format": "svg",
+      "usage": "GitHub README header",
+      "alpha": "background"
+    },
+    {
+      "path": "assets/brand/social/readme-banner-dark.png",
+      "format": "png",
+      "width": 1600,
+      "height": 480,
+      "alpha": false,
+      "usage": "README header / document cover strip"
+    }
+  ]
+}
