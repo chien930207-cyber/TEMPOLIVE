@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-Hant" data-theme="light">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="UTF-8">
+<!-- TEMPOLIVE app-r3: ARCO-style raster icons + standalone Home Screen app.
+     Relative resources stay inside this Pages project; no root-host icon override. -->
+<link rel="icon" type="image/x-icon" href="./tempolive-app-r3.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="./tempolive-app-r3-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./tempolive-app-r3-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="./tempolive-app-r3-48.png">
+<link id="tempolive-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./tempolive-app-r3-180.png">
+<link rel="manifest" href="./site.webmanifest?v=app-r3">
+<meta name="application-name" content="TEMPOLIVE">
+<meta name="apple-mobile-web-app-title" content="TEMPOLIVE">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="tempolive-icon-release" content="app-r3">
+<meta name="tempolive-app-release" content="app-r3">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="application-version" content="2.1.2"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f7f7f5">
 <title>TEMPOLIVE 連線節拍器</title>
 <style>
@@ -270,10 +286,7 @@ button,summary{-webkit-user-select:none;user-select:none}
 
 .band-alert{display:none}.band-alert-fallback{display:block}.band-alert:popover-open{display:block}
 </style><meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放，並使用 live傳話。">
-<!-- TEMPOLIVE favicon compatibility fix: real PNG/ICO resources for older Safari.
-     Paths are relative so GitHub project sites do not use another site's icon. -->
-<link rel="icon" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64 128x128 256x256" href="./tempolive-favicon.ico?v=20261005">
-<link rel="icon" type="image/png" sizes="48x48" href="./tempolive-favicon-48.png?v=20261005">
+
 <style id="tempolive-design-refresh">
 /* TEMPOLIVE v1.18 visual layer. All metronome, room, speech, storage and game
    JavaScript is the unmodified v1.17.1 source. No external assets or fonts. */
@@ -1465,7 +1478,7 @@ body.design-refresh .transport #transportPrevSong{grid-column:1;grid-row:2}
 body.design-refresh .transport #transportNextSong{grid-column:2;grid-row:2}
 body.design-refresh .transport #tapBtn{grid-column:1/-1;grid-row:3}
 </style>
-<meta name="application-name" content="TEMPOLIVE"><meta name="apple-mobile-web-app-title" content="TEMPOLIVE"><link id="tempolive-touch-icon" rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=20261005">
+
 <style id="tempolive-media-brand-style">.media-brand-info{border-top:1px solid var(--line);padding-top:16px;margin-top:18px}.media-brand-info h3{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;font-weight:600;line-height:1.5}.media-brand-info .audio-explain{margin-top:7px;overflow-wrap:anywhere}</style>
 <style id="tempolive-stage-touch-v2110">/* v2.1.10: stage view only. The original controls keep their event listeners.
    Use the space reclaimed from the subdivision selector for larger track keys.
@@ -1852,7 +1865,15 @@ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:act
 <div class="settings-top"><div class="dialog-head"><div class="row settings-heading"><h2 id="settingsTitle">設定</h2><span id="modePill" class="pill"><span class="dot"></span><span id="modeText">單人模式</span></span></div><button type="button" class="icon-btn" data-close="settingsDialog" aria-label="關閉設定" autofocus><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><p id="settingsNotice" class="settings-notice" role="status" aria-live="polite" hidden></p></div>
 <div class="settings-body"><section class="settings-appearance" aria-labelledby="themeLabel"><div><h3 id="themeLabel">深色模式</h3><p id="themeState">目前使用淺色外觀</p></div><button type="button" id="themeBtn" class="theme-toggle" role="switch" aria-checked="false" aria-labelledby="themeLabel" aria-describedby="themeState"><span class="theme-track"><span class="theme-thumb"><svg aria-hidden="true"><use href="#i-sun"/></svg></span></span></button></section>
 <section class="settings-appearance settings-flash" aria-labelledby="screenFlashLabel"><div><h3 id="screenFlashLabel">螢幕閃爍 <span class="flash-new-badge" lang="en">NEW</span></h3><p id="screenFlashState">關閉，不顯示拍點螢光</p></div><button type="button" id="screenFlashBtn" class="theme-toggle" role="switch" aria-checked="false" aria-labelledby="screenFlashLabel" aria-describedby="screenFlashState screenFlashHint"><span class="theme-track"><span class="theme-thumb"><svg aria-hidden="true"><use href="#i-screen-flash"/></svg></span></span></button></section><p id="screenFlashHint" class="flash-hint">預設關閉。僅在節拍器區塊顯示拍點螢光：淺色模式為黑色，深色模式為白色，每次發光約 0.32 秒，並逐漸淡出，不閃動整個頁面。高速時自動減少閃爍次數；對閃光敏感者請保持關閉。</p>
-<section class="settings-audio" id="audioPanel" aria-labelledby="audioSettingsTitle"><div class="settings-audio-heading"><h3 id="audioSettingsTitle">音訊與藍牙</h3><p id="audioSummary">馬林巴 · 加強</p></div><div class="audio-content"><div class="audio-grid"><div><label class="field-label" for="tone">節拍音色</label><select id="tone" aria-describedby="toneDescription"></select><p class="audio-explain" id="toneDescription" style="margin-top:9px"></p></div></div><div class="audio-power-row"><label class="field-label" for="audioPower">輸出強度</label><select id="audioPower" aria-describedby="audioPowerHint"><option value="standard">標準</option><option value="boost" selected>加強</option></select></div><p class="audio-explain" id="audioPowerHint" style="margin-top:9px"></p><p class="audio-explain" style="margin-top:9px">使用耳機請先降低音量，再逐步調整。手機外放的實際音量仍受喇叭功率限制。</p><hr class="rule"><label class="field-label" for="audioOutput">聲音輸出裝置</label><div class="output-row"><select id="audioOutput"><option value="">系統預設（喇叭／耳機）</option></select><button id="chooseOutput" class="btn small-btn">選擇輸出</button><button id="testAudio" class="btn small-btn">試聽音色</button></div><p class="audio-explain" style="margin-top:12px" id="outputHint">未連接耳機時，可直接使用手機喇叭；請調高系統的媒體音量。使用藍牙時，請先在系統配對並選擇輸出。</p><section class="audio-continuity-setting"><label class="check-row" for="continueAudio"><input type="checkbox" id="continueAudio" checked aria-describedby="continueAudioHint earDetectionHint"><span>音訊中斷後自動續播 <span class="flash-new-badge" lang="en">NEW</span></span></label><p class="audio-explain" id="continueAudioHint">預設開啟。耳機切換或音訊中斷後，會嘗試恢復原本播放的節拍；不會自動開始已停止或靜音的節拍。</p><p class="audio-explain" id="earDetectionHint">網頁無法關閉耳機的配戴偵測。若拿下單邊耳機仍會暫停，請在耳機或系統設定關閉「自動耳部偵測／取下暫停」。</p></section><div class="calibration"><div class="calibration-header"><label for="latency">本機時間校正</label><div class="row" style="gap:6px"><input type="number" id="latencyValue" aria-label="時間校正毫秒" min="-300" max="300" step="5" value="0"><span class="small muted">ms</span></div></div><input type="range" id="latency" min="-300" max="300" step="5" value="0"><div class="range-labels"><span>提前 300 ms</span><span>延後 300 ms</span></div><p class="audio-explain" style="margin-top:13px">聲音比其他人慢，往負值調整；太快則往正值調整。只影響這台裝置。</p></div><label class="check-row"><input type="checkbox" id="autoLatency" checked><span>使用瀏覽器提供的輸出延遲估計（不等於實際量測）</span></label><label class="check-row" style="margin-top:12px"><input type="checkbox" id="keepAwake" checked><span>播放時保持螢幕開啟（裝置支援時）<span id="wakeStatus" class="muted"></span></span></label><section class="media-brand-info" aria-labelledby="mediaBrandingLabel"><h3><span id="mediaBrandingLabel" data-i18n-dynamic>鎖定畫面品牌資訊</span><span class="flash-new-badge" lang="en">NEW</span></h3><p id="mediaBrandingHint" class="audio-explain" data-i18n-dynamic>播放時提供 TEMPOLIVE 名稱與 Logo；實際顯示由系統決定，仍可能保留網站來源。</p></section><p class="audio-warning">藍牙不是房間連線方式。各台裝置需要網路，並各自連接耳機。藍牙延遲不一且可能變動，正式演出請優先使用有線監聽，並先實測。</p></div></section></div>
+<section class="settings-audio" id="audioPanel" aria-labelledby="audioSettingsTitle"><div class="settings-audio-heading"><h3 id="audioSettingsTitle">音訊與藍牙</h3><p id="audioSummary">馬林巴 · 加強</p></div><div class="audio-content"><div class="audio-grid"><div><label class="field-label" for="tone">節拍音色</label><select id="tone" aria-describedby="toneDescription"></select><p class="audio-explain" id="toneDescription" style="margin-top:9px"></p></div></div><div class="audio-power-row"><label class="field-label" for="audioPower">輸出強度</label><select id="audioPower" aria-describedby="audioPowerHint"><option value="standard">標準</option><option value="boost" selected>加強</option></select></div><p class="audio-explain" id="audioPowerHint" style="margin-top:9px"></p><p class="audio-explain" style="margin-top:9px">使用耳機請先降低音量，再逐步調整。手機外放的實際音量仍受喇叭功率限制。</p><hr class="rule"><label class="field-label" for="audioOutput">聲音輸出裝置</label><div class="output-row"><select id="audioOutput"><option value="">系統預設（喇叭／耳機）</option></select><button id="chooseOutput" class="btn small-btn">選擇輸出</button><button id="testAudio" class="btn small-btn">試聽音色</button></div><p class="audio-explain" style="margin-top:12px" id="outputHint">未連接耳機時，可直接使用手機喇叭；請調高系統的媒體音量。使用藍牙時，請先在系統配對並選擇輸出。</p><section class="audio-continuity-setting"><label class="check-row" for="continueAudio"><input type="checkbox" id="continueAudio" checked aria-describedby="continueAudioHint earDetectionHint"><span>音訊中斷後自動續播 <span class="flash-new-badge" lang="en">NEW</span></span></label><p class="audio-explain" id="continueAudioHint">預設開啟。耳機切換或音訊中斷後，會嘗試恢復原本播放的節拍；不會自動開始已停止或靜音的節拍。</p><p class="audio-explain" id="earDetectionHint">網頁無法關閉耳機的配戴偵測。若拿下單邊耳機仍會暫停，請在耳機或系統設定關閉「自動耳部偵測／取下暫停」。</p></section><div class="calibration"><div class="calibration-header"><label for="latency">本機時間校正</label><div class="row" style="gap:6px"><input type="number" id="latencyValue" aria-label="時間校正毫秒" min="-300" max="300" step="5" value="0"><span class="small muted">ms</span></div></div><input type="range" id="latency" min="-300" max="300" step="5" value="0"><div class="range-labels"><span>提前 300 ms</span><span>延後 300 ms</span></div><p class="audio-explain" style="margin-top:13px">聲音比其他人慢，往負值調整；太快則往正值調整。只影響這台裝置。</p></div><label class="check-row"><input type="checkbox" id="autoLatency" checked><span>使用瀏覽器提供的輸出延遲估計（不等於實際量測）</span></label><label class="check-row" style="margin-top:12px"><input type="checkbox" id="keepAwake" checked><span>播放時保持螢幕開啟（裝置支援時）<span id="wakeStatus" class="muted"></span></span></label><section class="media-brand-info" aria-labelledby="mediaBrandingLabel"><h3><span id="mediaBrandingLabel" data-i18n-dynamic>鎖定畫面品牌資訊</span><span class="flash-new-badge" lang="en">NEW</span></h3><p id="mediaBrandingHint" class="audio-explain" data-i18n-dynamic>播放時提供 TEMPOLIVE 名稱與 Logo；實際顯示由系統決定，仍可能保留網站來源。</p></section>
+<section class="media-brand-info app-install-info" aria-labelledby="appInstallLabel">
+ <h3><span id="appInstallLabel" data-i18n-dynamic>主畫面 App</span><span class="flash-new-badge" lang="en">NEW</span></h3>
+ <p class="audio-explain" id="appInstallState" data-i18n-dynamic role="status">目前在瀏覽器分頁</p>
+ <p class="audio-explain" id="appInstallHint" data-i18n-dynamic></p>
+ <p class="audio-explain" id="appInstallData" data-i18n-dynamic></p>
+ <p class="audio-explain" id="appInstallNetwork" data-i18n-dynamic></p>
+</section>
+<p class="audio-warning">藍牙不是房間連線方式。各台裝置需要網路，並各自連接耳機。藍牙延遲不一且可能變動，正式演出請優先使用有線監聽，並先實測。</p></div></section></div>
 </dialog>
 <dialog id="songDialog" aria-labelledby="songDialogTitle"><div class="dialog-head"><h2 id="songDialogTitle">新增歌曲</h2><button class="icon-btn" data-close="songDialog" aria-label="關閉"><svg><use href="#i-close"/></svg></button></div><form id="songForm" class="dialog-body"><p>儲存速度與拍號，下次點歌名即可切換。</p><label class="field-label" for="songName">歌曲名稱</label><input id="songName" maxlength="40" required placeholder="例如：本週開場詩歌" autocomplete="off"><div class="dialog-grid"><div><label class="field-label" for="songBpm">速度 BPM</label><input type="number" id="songBpm" min="40" max="300" required></div><div><label class="field-label" for="songMeter">拍號</label><select id="songMeter"><option>2/4</option><option>3/4</option><option selected>4/4</option><option>5/4</option><option>6/8</option><option>7/8</option><option>12/8</option></select></div><div><label class="field-label" for="songNote">音符細分</label><select id="songNote"><option value="4">四分音符</option><option value="8">八分音符</option><option value="16">十六分音符</option></select></div><div><label class="field-label" for="songCountIn">預備拍</label><select id="songCountIn"><option value="0">關閉</option><option value="1">1 小節</option><option value="2">2 小節</option></select></div></div><div class="song-order" id="songOrder"><span class="muted">歌單順序</span><button type="button" class="btn small-btn" id="moveSongUp">↑ 上移</button><button type="button" class="btn small-btn" id="moveSongDown">↓ 下移</button><span id="songPosition" class="muted"></span></div><div class="dialog-actions"><button type="button" id="deleteSong" class="btn danger">刪除</button><button type="button" class="btn" data-close="songDialog">取消</button><button type="submit" class="btn primary">儲存歌曲</button></div></form></dialog>
 <dialog id="roomDialog" aria-labelledby="roomDialogTitle"><div class="dialog-head"><h2 id="roomDialogTitle">建立團隊房間</h2><button class="icon-btn" data-close="roomDialog" aria-label="關閉"><svg><use href="#i-close"/></svg></button></div><form id="roomForm" class="dialog-body"><p id="roomDialogIntro">你將成為主持人，統一控制大家的節奏。</p><label class="field-label" id="instrumentPickerLabel">你的樂器／角色</label><input id="displayName" type="hidden"><div id="instrumentPicker" class="instrument-picker" role="group" aria-labelledby="instrumentPickerLabel"></div><div id="instrumentSelected" class="instrument-selected" aria-live="polite">請選擇本次使用的樂器或角色。</div><div class="instrument-add-box" id="instrumentAddBox" hidden><label class="field-label" for="customInstrument">新增樂器或角色</label><div class="row"><input id="customInstrument" maxlength="16" placeholder="例如：薩克斯風" autocomplete="off"><button type="button" class="btn small-btn" id="addInstrumentConfirm">新增並選擇</button></div><p id="instrumentAddError" class="band-helper" role="status"></p></div><div class="room-voice-setup"><div class="row"><label class="check-row"><input type="checkbox" id="roomAutoSpeak" checked><span>收到團隊訊息時自動播報</span></label><button type="button" class="btn small-btn" id="roomVoiceTest">試聽語音</button></div><p id="roomVoiceStatus">待啟用語音</p><p>請先試聽，確認喇叭或耳機有聲音。語音與節拍器分開控制，不使用麥克風。</p></div><div id="joinCodeField" hidden><label class="field-label" for="joinCode">4 位數字房間代碼</label><input id="joinCode" class="join-code" type="text" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" spellcheck="false" autocomplete="off" placeholder="4826"></div><div class="note-box"><p>使用 shiftr.io 公開測試中繼（WSS 443）。傳送樂器名稱、歌名、節奏與傳話文字，不錄音、不傳送麥克風聲音。指定傳話由主持人轉送，並非端到端加密；請勿輸入敏感資料。</p></div><p class="small">主持人與團員都請使用此新版。公開中繼僅供試用，不保證服務可用率；正式演出應改用專用服務並先實測。</p><div id="roomError" class="form-error" role="status" aria-live="polite"></div><div class="dialog-actions"><button type="button" class="btn" data-close="roomDialog">取消</button><button type="submit" class="btn primary" id="roomSubmit">建立房間</button></div></form></dialog>
@@ -4115,6 +4136,62 @@ texts();
   refresh:()=>refresh(true),
   snapshot:()=>({version:'2.1.9-media-branding',supported:!!api(window),title:api(window)?.metadata?.title||'',artist:api(window)?.metadata?.artist||'',artwork:!!api(window)?.metadata?.artwork?.length,artworkSource:artSrc.startsWith('data:')?'embedded-png':'site-png',gameSupported:!!api(gameWindow()),writes,error:lastError})
  });
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
+})();
+</script>
+<script id="tempolive-app-shell">/* App deployment layer, app-r3.
+   Matches ARCO's static manifest / Apple metadata approach. No service worker,
+   reload, audio, room messages, setlist writes or browser-data clearing. */
+(()=>{
+ 'use strict';
+ const COPY={
+  'zh-Hant':{
+   heading:'\u4e3b\u756b\u9762 App',
+   browser:'\u76ee\u524d\u5728\u700f\u89bd\u5668\u5206\u9801',
+   standalone:'\u5df2\u4ee5 App \u7368\u7acb\u6a21\u5f0f\u958b\u555f',
+   install:'iPhone / iPad\uff1a\u5728 Safari \u958b\u555f\u6b63\u5f0f\u7db2\u7ad9\uff0c\u9ede\u300c\u5206\u4eab\u300d\u2192\u300c\u52a0\u5165\u4e3b\u756b\u9762\u300d\uff0c\u518d\u5f9e\u4e3b\u756b\u9762\u9ede TEMPOLIVE\u3002\u5176\u4ed6\u88dd\u7f6e\u53ef\u4f7f\u7528\u700f\u89bd\u5668\u63d0\u4f9b\u7684\u5b89\u88dd\u9078\u9805\u3002',
+   active:'\u76ee\u524d\u662f\u4e3b\u756b\u9762 App \u8996\u7a97\uff0c\u4e0d\u662f\u4e00\u822c Safari \u5206\u9801\u3002\u7bc0\u62cd\u5668\u3001\u6b4c\u55ae\u8207\u623f\u9593\u64cd\u4f5c\u65b9\u5f0f\u4e0d\u8b8a\u3002',
+   data:'\u9996\u6b21\u5207\u63db\u5230 App \u524d\uff0c\u5148\u5728\u539f\u700f\u89bd\u5668\u532f\u51fa\u6b4c\u55ae\u3002\u5982 App \u4e2d\u6c92\u6709\u820a\u6b4c\u55ae\uff0c\u518d\u532f\u5165\u5099\u4efd\uff1b\u4e0d\u9700\u6e05\u9664\u7db2\u7ad9\u8cc7\u6599\u3002',
+   network:'\u672c\u5305\u4e0d\u65b0\u589e\u96e2\u7dda\u5feb\u53d6\u6216\u80cc\u666f\u64ad\u653e\u4fdd\u8b49\u3002\u9996\u6b21\u958b\u555f\u3001\u91cd\u65b0\u8f09\u5165\u53ca\u623f\u9593\u529f\u80fd\u8acb\u4fdd\u6301\u7db2\u8def\u9023\u7dda\u3002'
+  },
+  en:{
+   heading:'Home Screen app',browser:'Currently in a browser tab',standalone:'Running in standalone app mode',
+   install:'On iPhone / iPad, open the published website in Safari, choose Share > Add to Home Screen, then launch TEMPOLIVE from the Home Screen. On other devices, use the browser\'s installation option when available.',
+   active:'This is a standalone Home Screen app window, not a regular Safari tab. Metronome, setlist and room controls work the same way.',
+   data:'Export your setlist from the original browser before switching to the app. If your setlist is missing in the app, import that backup. Do not clear website data.',
+   network:'This package does not add offline caching or guarantee background playback. Stay online for initial loading, reloading and room features.'
+  },
+  de:{
+   heading:'Home-Bildschirm-App',browser:'Derzeit in einem Browser-Tab',standalone:'Im eigenst\u00e4ndigen App-Modus ge\u00f6ffnet',
+   install:'Auf iPhone / iPad die ver\u00f6ffentlichte Website in Safari \u00f6ffnen, Teilen > Zum Home-Bildschirm w\u00e4hlen und TEMPOLIVE danach vom Home-Bildschirm starten. Auf anderen Ger\u00e4ten die Installationsoption des Browsers verwenden, sofern verf\u00fcgbar.',
+   active:'Dies ist ein eigenst\u00e4ndiges App-Fenster, kein normaler Safari-Tab. Metronom, Setlist und Raumsteuerung funktionieren wie bisher.',
+   data:'Vor dem Wechsel zur App die Setlist im bisherigen Browser exportieren. Fehlt sie in der App, diese Sicherung importieren. Website-Daten nicht l\u00f6schen.',
+   network:'Dieses Paket f\u00fcgt keinen Offline-Cache hinzu und garantiert keine Hintergrundwiedergabe. Zum ersten Laden, Neuladen und f\u00fcr Raumfunktionen online bleiben.'
+  }
+ };
+ const mode=window.matchMedia?.('(display-mode: standalone)');
+ const isApp=()=>window.navigator.standalone===true||!!mode?.matches;
+ const copy=()=>COPY[window.TempoliveI18n?.lang||document.documentElement.lang]||COPY['zh-Hant'];
+ const values={
+  appInstallLabel:()=>copy().heading,
+  appInstallState:()=>isApp()?copy().standalone:copy().browser,
+  appInstallHint:()=>isApp()?copy().active:copy().install,
+  appInstallData:()=>copy().data,
+  appInstallNetwork:()=>copy().network
+ };
+ function paint(){for(const [id,text] of Object.entries(values)){const node=document.getElementById(id);if(node)node.textContent=text();}}
+ function mount(){
+  const i18n=window.TempoliveI18n;
+  if(i18n){for(const [id,text] of Object.entries(values)){const node=document.getElementById(id);if(node)i18n.bind(node,text);}i18n.onChange(paint);}
+  paint();
+ }
+ if(mode?.addEventListener)mode.addEventListener('change',paint);else mode?.addListener?.(paint);
+ window.addEventListener('pageshow',paint);
+ window.TempoliveAppShell=Object.freeze({snapshot:()=>({release:'app-r3',standalone:isApp(),
+  expectedIdentity:'/TEMPOLIVE/',manifestURL:document.querySelector('link[rel="manifest"]')?.href||'',
+  appleCapable:document.querySelector('meta[name="apple-mobile-web-app-capable"]')?.content==='yes',
+  iconURLs:[...document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]')].map(e=>e.href),
+  serviceWorkerAdded:false})});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
 </script>
