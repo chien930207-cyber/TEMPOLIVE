@@ -1,0 +1,1559 @@
+/* Source layer: base */
+
+/* Edit this palette to change the visual identity. No external fonts or images. */
+:root{--bg:#f7f7f5;--surface:#fff;--soft:#f2f2f0;--ink:#20211f;--muted:#6c6d67;--line:#e5e5df;--strong:#232420;--on-strong:#fff;--shadow:0 4px 24px #11111103;--radius:24px;--focus:#767970}
+:root[data-theme=dark]{--bg:#191a18;--surface:#232421;--soft:#2d2e2a;--ink:#f3f3ed;--muted:#b0b1a8;--line:#3b3c36;--strong:#eeeee7;--on-strong:#20211f;--shadow:none;--focus:#c7c9bc}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans TC","Noto Sans CJK TC",-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button,select,input{ -webkit-tap-highlight-color:transparent}button{border:0;background:none}button:disabled,select:disabled,input:disabled{cursor:not-allowed;opacity:.42}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:4px}a{color:inherit}h1,h2,h3,p{margin:0}h2{font-size:19px;font-weight:650;letter-spacing:.01em}h3{font-size:17px}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}button svg{pointer-events:none}input[type=range]{width:100%;accent-color:var(--strong);height:24px;cursor:pointer;margin:0}input:not([type=range]):not([type=checkbox]),select{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 12px;max-width:100%;min-height:46px}input[type=checkbox]{accent-color:var(--strong);width:18px;height:18px}select{width:100%}label{display:block}small,.small{font-size:13px;line-height:1.6}.muted{color:var(--muted)}.hidden,[hidden]{display:none!important}.row{display:flex;align-items:center;gap:12px}.spread{justify-content:space-between}.stack{display:grid;gap:12px}.icon-btn{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0}.icon-btn:hover{background:var(--soft)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;border:1px solid var(--line);border-radius:13px;padding:10px 17px;font-weight:600;background:var(--surface);text-decoration:none;transition:background .16s,transform .16s}.btn:hover:not(:disabled){background:var(--soft)}.btn:active:not(:disabled){transform:translateY(1px)}.btn.primary{background:var(--strong);color:var(--on-strong);border-color:var(--strong)}.btn.primary:hover{opacity:.88}.btn.small-btn{font-size:14px;min-height:39px;padding:7px 12px;border-radius:10px}.btn.full{width:100%}.pill{display:inline-flex;align-items:center;gap:7px;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:13px;font-weight:550;white-space:nowrap}.dot{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block}.field-label{font-size:14px;font-weight:550;display:block;margin-bottom:9px}.rule{height:1px;background:var(--line);border:0;margin:25px 0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.header{height:86px;max-width:1260px;padding:0 36px;margin:auto;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{gap:11px}.brand-icon{width:38px;height:38px;background:var(--strong);color:var(--on-strong);border-radius:11px;display:flex;align-items:center;justify-content:center}.brand-icon svg{width:25px;height:25px}.brand-title{font-size:22px;font-weight:700;letter-spacing:.07em}.header-actions{gap:5px}.header-actions .pill{margin-right:10px}.shell{max-width:1188px;margin:0 auto;padding:36px 24px 24px}.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:26px}.eyebrow{font-size:12px;letter-spacing:.16em;font-weight:650;color:var(--muted);margin-bottom:7px}.intro h1{font-size:32px;letter-spacing:.01em;font-weight:650;line-height:1.4}.intro p{margin-top:7px;color:var(--muted);font-size:15px}.intro-tip{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);padding-bottom:4px;white-space:nowrap}.intro-tip svg{width:16px;height:16px}.workspace{display:grid;grid-template-columns:minmax(0,1fr)330px;gap:24px;align-items:start}.left,.sidebar{min-width:0;display:grid;gap:20px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.metro-card{padding:24px 30px 20px;overflow:hidden}.current-label{font-size:12px;color:var(--muted);margin-bottom:2px}.current-title{font-size:17px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:330px}.mini-state{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px}.tempo-zone{text-align:center;padding-top:24px}.tempo-label{font-size:13px;color:var(--muted);letter-spacing:.06em}.tempo-control{display:flex;align-items:center;justify-content:center;gap:24px;margin:1px 0 -3px}.tempo-control .stepper{height:44px;width:44px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}.stepper:hover{background:var(--soft)}#bpm{border:0;background:none;width:242px;text-align:center;min-height:0;height:137px;padding:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:112px;font-weight:620;letter-spacing:-.075em;line-height:1.1;font-variant-numeric:tabular-nums;appearance:textfield}#bpm::-webkit-inner-spin-button,#bpm::-webkit-outer-spin-button{appearance:none}.bpm-caption{display:flex;justify-content:center;align-items:center;gap:10px;font-size:12px;color:var(--muted)}.bpm-caption strong{font-size:13px;letter-spacing:.13em;font-weight:650;color:var(--ink)}.tempo-range{max-width:390px;margin:23px auto 20px}.range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);line-height:1.2;padding-top:4px}.beat-track{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;min-height:53px;margin:2px 0 5px}.beat{height:45px;width:45px;border-radius:50%;border:1.5px solid var(--line);font-size:16px;font-variant-numeric:tabular-nums;background:var(--soft);transition:background .06s,color .06s;position:relative}.beat[data-level="2"]{border:2px solid var(--strong);font-weight:700}.beat[data-level="2"]:after{content:"";position:absolute;bottom:5px;left:calc(50% - 2px);width:4px;height:4px;border-radius:50%;background:currentColor}.beat[data-level="0"]{background:none;color:var(--muted);border-style:dashed}.beat.active{background:var(--strong);color:var(--on-strong);border-color:var(--strong)}.beat[data-level="0"].active{background:var(--soft);color:var(--muted)}.beat-hint{font-size:12px;color:var(--muted);text-align:center;margin-bottom:22px}.transport{display:flex;align-items:center;justify-content:center;gap:11px}.play-btn{min-width:208px;height:56px;font-size:17px}.play-btn svg{width:20px;height:20px}.tap-btn{height:56px;min-width:108px;font-size:15px;position:relative}.tap-btn.tapped{background:var(--strong);color:var(--on-strong)}.transport-info{font-size:13px;color:var(--muted);text-align:center;min-height:23px;margin-top:10px}.settings-grid{display:grid;grid-template-columns:1fr 1.65fr 1fr;gap:18px;align-items:start}.note-segment{display:flex;background:var(--soft);padding:4px;border-radius:12px;gap:3px;height:49px}.note-option{flex:1;display:flex;gap:5px;align-items:center;justify-content:center;border-radius:9px;font-size:13px}.note-option[aria-pressed=true]{background:var(--surface);box-shadow:0 1px 5px #0000000b;font-weight:700}.note-option svg{height:25px;width:20px}.control-foot{border-top:1px solid var(--line);margin-top:22px;padding-top:15px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}.counter{font-variant-numeric:tabular-nums}.save-current{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:13px;padding:3px 0}.save-current svg{width:16px;height:16px}.listen-banner{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:16px}.listen-banner .btn{margin-top:10px}
+.song-card{padding:23px 20px 19px}.section-title{margin-bottom:4px}.section-intro{color:var(--muted);font-size:13px;margin-bottom:19px}.song-count{font-size:12px;color:var(--muted);margin-left:7px}.song-list{list-style:none;margin:0;padding:0;display:grid;gap:7px;max-height:316px;overflow:auto}.song-item{display:flex;align-items:center;gap:0;border:1px solid transparent;border-radius:13px;position:relative}.song-item.selected{background:var(--soft);border-color:var(--line)}.song-item:hover{background:var(--soft)}.song-main{display:flex;align-items:center;gap:11px;text-align:left;flex:1;min-width:0;padding:12px 5px 12px 9px}.song-number{width:27px;height:29px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;flex-shrink:0}.song-item.selected .song-number{color:var(--ink)}.song-copy{min-width:0;flex:1}.song-name{font-size:15px;font-weight:550;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.song-meta{font-size:12px;color:var(--muted);display:block;margin-top:2px;font-variant-numeric:tabular-nums}.song-edit{width:35px;height:36px;border-radius:9px;margin-right:3px}.song-edit svg{width:15px;height:15px}.song-actions{margin-top:15px;display:flex;gap:8px}.song-actions .btn:first-child{flex:1}.song-tools{display:flex;gap:12px;justify-content:space-between;padding:15px 1px 0}.text-btn{font-size:12px;color:var(--muted);padding:0;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}.text-btn:hover{text-decoration-color:currentColor}.room-card{padding:23px 23px 21px}.room-icon{display:flex;align-items:center;justify-content:center;background:var(--soft);border-radius:14px;width:46px;height:46px;margin-bottom:15px}.room-icon svg{width:25px;height:25px}.room-card h2{font-size:20px;margin-bottom:8px}.room-card .description{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:18px}.room-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.room-buttons .btn{font-size:14px;padding:10px 8px}.room-note{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.75}.room-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:31px;font-weight:650;letter-spacing:.15em;margin:8px 0;white-space:nowrap}.room-code-box{padding:12px 13px;background:var(--soft);border:1px solid var(--line);border-radius:14px;margin:15px 0}.member-list{max-height:180px;overflow:auto;display:grid;gap:9px;padding:0;list-style:none;margin:13px 0}.member{display:flex;align-items:center;gap:8px;font-size:13px}.avatar{width:27px;height:27px;display:inline-flex;align-items:center;justify-content:center;background:var(--soft);border:1px solid var(--line);border-radius:50%;font-size:11px}.member-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px}.member-state{margin-left:auto;color:var(--muted);font-size:11px}.room-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;margin:12px 0}.room-stats strong{display:block;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}.connection-note{padding:9px 11px;background:var(--soft);border-radius:10px;font-size:12px;margin-top:10px;color:var(--muted)}
+.audio-card{padding:0 24px}.audio-card>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:20px 0;cursor:pointer}.audio-card>summary::-webkit-details-marker{display:none}.audio-card>summary h2{font-size:16px}.audio-card>summary p{font-size:12px;color:var(--muted);margin-top:1px}.audio-card .chevron{margin-left:auto;width:18px;height:18px}.audio-card[open] .chevron{transform:rotate(180deg)}.audio-content{border-top:1px solid var(--line);padding:21px 0 22px}.audio-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.volume-line{display:flex;align-items:center;gap:9px}.volume-line output{min-width:40px;font-size:13px;text-align:right;font-variant-numeric:tabular-nums}.output-row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.output-row select{flex:1;min-width:180px;font-size:14px}.audio-explain{font-size:13px;color:var(--muted);line-height:1.8}.calibration{margin:18px 0;padding:16px;background:var(--soft);border-radius:14px}.calibration-header{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;margin-bottom:7px}.calibration input[type=number]{width:94px;padding:5px 9px;font-size:14px;min-height:35px}.check-row{display:flex;gap:8px;align-items:flex-start;font-size:13px;cursor:pointer}.check-row input{flex-shrink:0;margin:3px 0}.audio-warning{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:17px}.footer{display:flex;justify-content:space-between;gap:16px;margin-top:25px;color:var(--muted);font-size:12px;padding:0 3px 12px}.footer span{display:flex;align-items:center;gap:7px}.footer svg{height:14px;width:14px}kbd{font-family:inherit;font-size:11px;border:1px solid var(--line);border-radius:5px;display:inline-block;padding:1px 5px;background:var(--surface)}.shortcut-help{display:flex;gap:13px}
+dialog{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:23px;padding:0;width:min(520px,calc(100% - 28px));max-height:90dvh;box-shadow:0 20px 80px #0003}dialog::backdrop{background:#0006;backdrop-filter:blur(5px)}.dialog-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 12px}.dialog-body{padding:4px 24px 25px}.dialog-body p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:15px}.dialog-body .field-label{margin-top:12px}.dialog-body input:not([type=checkbox]):not([type=range]){width:100%}.dialog-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.dialog-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:23px}.dialog-actions .danger{margin-right:auto}.dialog-body h3{margin:21px 0 7px}.dialog-body h3:first-child{margin-top:3px}.dialog-body .note-box{background:var(--soft);padding:14px;border-radius:12px;font-size:13px;margin:16px 0;line-height:1.8}.dialog-body .note-box p{font-size:13px;margin:0}.join-code{text-transform:uppercase;letter-spacing:.16em;font-family:ui-monospace,monospace;font-size:24px}.form-error{font-size:13px;padding-top:10px;color:var(--ink);min-height:22px}.song-order{display:flex;gap:8px;align-items:center;margin-top:17px;font-size:13px}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,15px);max-width:calc(100% - 30px);padding:12px 20px;border:1px solid var(--line);background:var(--strong);color:var(--on-strong);box-shadow:0 4px 30px #0002;border-radius:13px;font-size:14px;opacity:0;transition:opacity .15s,transform .15s;pointer-events:none;z-index:100}.toast.visible{opacity:1;transform:translate(-50%,0)}.offline-banner{background:var(--soft);border:1px solid var(--line);border-radius:12px;font-size:13px;padding:12px 16px;margin-bottom:20px}.focus-mode .sidebar,.focus-mode .intro,.focus-mode .audio-card,.focus-mode .footer{display:none}.focus-mode .workspace{display:block;max-width:940px;margin:auto}.focus-mode .metro-card{padding:25px 50px}.focus-mode #bpm{font-size:170px;height:200px;width:340px}.focus-mode .tempo-zone{padding-top:20px}.focus-mode .beat{width:58px;height:58px}.focus-mode .transport{margin-top:18px}.focus-mode .play-btn{min-width:300px}.focus-mode .shell{padding-top:24px}
+.metro-card input:disabled,.metro-card select:disabled{opacity:1;-webkit-text-fill-color:var(--ink)}.note-option:disabled,.beat:disabled{opacity:1;cursor:default}
+@media(min-width:1500px){.shell{padding-top:49px}.intro{margin-bottom:32px}.tempo-zone{padding-top:30px}.metro-card{padding-bottom:23px}}
+@media(max-width:960px){.workspace{grid-template-columns:minmax(0,1fr)290px;gap:17px}.metro-card{padding:21px}.settings-grid{gap:10px;grid-template-columns:1fr 1.45fr 1fr}.note-option{gap:2px}.current-title{max-width:220px}.header{padding:0 24px}.shell{padding-top:27px}.intro-tip{display:none}#bpm{font-size:100px;width:210px;height:123px}.tempo-control{gap:15px}.beat{height:39px;width:39px}.beat-track{gap:9px}.room-card{padding:21px}.song-card{padding:21px 16px}.audio-grid{gap:16px}.settings-grid select{padding-left:8px;padding-right:5px}.note-option svg{width:17px}}
+@media(max-width:760px){.header{height:72px;padding:0 20px}.brand-title{font-size:20px}.header-actions .pill{display:none}.shell{padding:25px 16px 20px}.intro{margin-bottom:22px}.intro h1{font-size:27px}.intro p{font-size:14px}.eyebrow{font-size:11px}.workspace{grid-template-columns:1fr;gap:18px}.sidebar{grid-template-columns:1fr 1fr;gap:16px}.metro-card{padding:21px 24px}.settings-grid{grid-template-columns:1fr 1.5fr 1fr;gap:17px}#bpm{width:248px;font-size:119px;height:139px}.tempo-control{gap:25px}.tempo-zone{padding-top:19px}.current-title{max-width:260px}.song-card,.room-card{padding:21px 17px}.room-buttons{grid-template-columns:1fr}.room-code{font-size:26px}.footer{flex-direction:column;gap:9px}.focus-mode .metro-card{padding:22px}.focus-mode #bpm{font-size:137px;width:270px;height:170px}.focus-mode .tempo-control{gap:12px}.focus-mode .beat{width:46px;height:46px}.focus-mode .play-btn{min-width:200px}.beat-track{gap:11px}.beat{width:44px;height:44px}.audio-card{padding:0 23px}}
+@media(max-width:480px){.sidebar{grid-template-columns:1fr}.intro h1{font-size:25px}.intro p{font-size:13px}.header{padding:0 16px}.header-actions{gap:0}.header .icon-btn{width:38px;height:40px}.metro-card{padding:20px 17px}.tempo-control{gap:17px}#bpm{width:205px;font-size:105px;height:127px}.tempo-control .stepper{height:39px;width:39px}.tempo-zone{padding-top:21px}.settings-grid{grid-template-columns:1fr 1.48fr;gap:16px 12px}.settings-grid .count-field{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:15px}.count-field .field-label{margin:0}.count-field select{width:135px}.transport{gap:9px}.play-btn{min-width:185px}.tap-btn{min-width:95px}.control-foot{font-size:12px}.audio-grid{grid-template-columns:1fr;gap:16px}.room-buttons{grid-template-columns:1fr 1fr}.song-card,.room-card{padding:23px}.current-title{max-width:203px}.dialog-head{padding:18px 19px 9px}.dialog-body{padding:3px 19px 22px}.beat-track{gap:8px}.beat{width:40px;height:40px}.focus-mode .metro-card{padding:19px 15px}.focus-mode #bpm{font-size:107px;width:206px;height:137px}.focus-mode .play-btn{min-width:185px}.focus-mode .beat{width:40px;height:40px}.focus-mode .tempo-control{gap:15px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.audio-power-row{display:flex;gap:16px;align-items:center;margin-top:18px;padding-top:17px;border-top:1px solid var(--line)}.audio-power-row .field-label{margin:0;white-space:nowrap}.audio-power-row select{flex:1;min-width:0}
+.btn.primary.play-btn:not(.audio-muted),.btn.primary.play-btn:not(.audio-muted):hover:not(:disabled){background:var(--strong);color:var(--on-strong);border-color:var(--strong);opacity:1}.btn.primary.play-btn.audio-muted,.btn.primary.play-btn.audio-muted:hover:not(:disabled){background:var(--surface);color:var(--ink);border-color:var(--line);opacity:1}.main-volume .icon-btn[aria-pressed="true"]{background:var(--strong);color:var(--on-strong)}
+.transport .transport-next{min-width:92px;min-height:56px;padding:9px 10px;font-size:15px;gap:5px}.transport .transport-next svg{width:17px;height:17px}
+@media(max-width:480px){.transport{display:grid;grid-template-columns:64px minmax(0,1fr) 80px;gap:8px}.transport .transport-next,.transport .play-btn,.transport .tap-btn{min-width:0;padding:8px;font-size:13px}.transport .transport-next{padding:6px 2px;font-size:12px;white-space:nowrap}.transport .transport-next svg{display:none}.transport .play-btn{font-size:14px}}
+@media(max-width:360px){.transport{grid-template-columns:52px minmax(0,1fr) 64px;gap:5px}.transport .transport-next,.transport .tap-btn{padding:6px;font-size:12px}.transport .play-btn{padding:6px;font-size:12px}.transport .play-btn svg{display:none}}
+
+/* v1.4: only the requested control layout and touch behavior are changed.
+   manipulation prevents double-tap zoom on controls, but permits scroll/pinch.
+   Do NOT add user-scalable=no or maximum-scale=1 to the viewport. */
+button,summary,input,select,[role="button"]{touch-action:manipulation}
+button,summary{-webkit-user-select:none;user-select:none}
+.main-volume{display:flex;align-items:center;gap:14px;padding:10px 14px;margin:18px 0 0;background:var(--soft);border-radius:14px}
+.main-volume>label{font-size:14px;font-weight:550;white-space:nowrap}
+.main-volume .volume-line{flex:1;min-width:0;gap:10px}
+.main-volume .volume-line input{flex:1;min-width:0;height:32px}
+.main-volume .volume-line output{min-width:44px;font-size:14px}
+.main-volume .icon-btn{width:44px;height:44px}
+.sidebar{align-items:start}
+.sidebar .audio-card{padding:0 21px}
+.sidebar .audio-grid{grid-template-columns:1fr;gap:16px}
+.sidebar .audio-card>summary{gap:10px}
+.sidebar .audio-card>summary>div{min-width:0}
+.sidebar .audio-card>summary p{white-space:normal;overflow-wrap:anywhere}
+.sidebar .audio-content{padding-top:18px}
+.sidebar .output-row{gap:8px}
+.sidebar .output-row select{flex-basis:100%;min-width:0}
+.sidebar .output-row button{flex:1;min-width:0;min-height:44px;padding:8px}
+.sidebar .audio-power-row{gap:12px}
+.sidebar .audio-power-row select{min-width:0}
+.sidebar .calibration{padding:13px}
+.sidebar .calibration-header{flex-wrap:wrap;gap:8px}
+.sidebar .calibration-header>.row{margin-left:auto;flex-shrink:0}
+.sidebar .calibration input[type=number]{width:84px;min-height:44px}
+.sidebar .check-row{line-height:1.7}
+.song-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.song-navigation .song-step{min-width:0;min-height:56px;padding:10px 8px;font-size:16px;gap:8px}
+.song-step svg{width:19px;height:19px}
+.song-prev-icon{transform:rotate(180deg)}
+.song-add-row{display:flex;justify-content:flex-start;margin-top:9px}
+.song-add-row .btn{min-height:44px;padding:8px 10px;border-color:transparent;background:transparent;font-size:14px;font-weight:500;color:var(--muted)}
+.song-add-row .btn:hover{background:var(--soft)}
+.song-add-row svg{width:17px;height:17px}
+.song-tools{padding-top:10px}
+/* Compact add/edit dialog: same fields, readable text and native form controls. */
+#songDialog{width:min(440px,calc(100% - 28px))}
+#songDialog .dialog-head{padding:17px 20px 8px}
+#songDialog .dialog-body{padding:0 20px 20px}
+#songDialog .dialog-body>p{font-size:13px;margin-bottom:9px}
+#songDialog .field-label{margin-top:8px;margin-bottom:7px}
+#songDialog .dialog-grid{gap:8px 14px}
+#songDialog .dialog-actions{margin-top:18px}
+#songDialog .song-order{margin-top:15px}
+@media(max-width:760px){
+  .sidebar .audio-card{grid-column:1/-1}
+  .sidebar .audio-grid{grid-template-columns:1fr}
+  .sidebar .audio-content{max-width:none}
+  .sidebar .audio-card select,.sidebar .audio-card input[type=number]{font-size:16px}
+}
+@media(max-width:480px){
+  .main-volume{gap:7px;padding:8px 10px;margin-top:15px}
+  .main-volume>label{font-size:13px}
+  .main-volume .volume-line{gap:6px}
+  .main-volume .volume-line output{min-width:39px;font-size:13px}
+  .tempo-control,.focus-mode .tempo-control{gap:12px}
+  .tempo-control .stepper{width:44px;height:44px}
+  .tempo-control #bpm{max-width:calc(100% - 112px);min-width:0;font-size:clamp(80px,27vw,105px)}
+  #songDialog .dialog-head{padding:14px 17px 7px}
+  #songDialog .dialog-body{padding:0 17px 18px}
+  #songDialog .dialog-actions{gap:8px}
+  #songDialog .dialog-actions .btn{padding:9px 12px;font-size:14px;min-height:44px}
+}
+@media(max-width:360px){
+  .transport .play-btn,.focus-mode .transport .play-btn{min-width:0;flex:1;padding:10px 8px}
+  .transport .tap-btn{min-width:0;width:104px;flex-shrink:0;padding:10px 8px}
+  .main-volume{gap:5px;padding:8px}
+  .main-volume .volume-line{gap:4px}
+}
+
+/* v1.5: combine appearance and audio in the toolbar settings panel.
+   Main volume, DSP, transport, songs, room protocol and stored choices are unchanged. */
+.header-actions>.icon-btn{width:44px;height:44px}
+#settingsBtn[aria-expanded="true"]{background:var(--soft)}
+#settingsDialog{position:fixed;inset:78px max(24px,calc((100vw - 1188px)/2)) auto auto;margin:0;width:min(460px,calc(100% - 28px));max-height:calc(100vh - 96px);max-height:min(850px,calc(100dvh - 96px));padding:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+#settingsDialog::backdrop{background:#0004;backdrop-filter:blur(3px)}
+.settings-top{position:sticky;top:0;z-index:2;background:var(--surface);border-bottom:1px solid var(--line)}
+#settingsDialog .dialog-head{padding:14px 20px;gap:12px}
+#settingsDialog .dialog-head>.icon-btn{width:44px;height:44px}
+.settings-heading{gap:12px;min-width:0}
+.settings-heading h2{font-size:20px;white-space:nowrap}
+.settings-heading .pill{font-size:12px;padding:4px 9px}
+.settings-body{padding:0 22px 22px}
+.settings-appearance{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.settings-appearance h3{font-size:16px;font-weight:600}
+.settings-appearance p{font-size:13px;color:var(--muted);margin-top:3px}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:60px;height:44px;flex-shrink:0;border-radius:12px;padding:0}
+.theme-track{display:block;position:relative;width:54px;height:30px;background:var(--soft);border:1px solid var(--line);border-radius:99px;transition:background .15s}
+.theme-thumb{position:absolute;top:3px;left:3px;display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--surface);color:var(--ink);box-shadow:0 1px 4px #0002;transition:transform .15s}
+.theme-thumb svg{width:15px;height:15px;stroke-width:1.8}
+.theme-toggle[aria-checked="true"] .theme-track{background:var(--strong);border-color:var(--strong)}
+.theme-toggle[aria-checked="true"] .theme-thumb{transform:translateX(24px)}
+.settings-audio-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:20px 0 15px}
+.settings-audio-heading h3{font-size:16px;font-weight:600}
+.settings-audio-heading p{font-size:12px;color:var(--muted)}
+#settingsDialog .audio-content{padding:0;border:0}
+#settingsDialog .audio-grid{grid-template-columns:1fr;gap:16px}
+#settingsDialog .field-label{font-size:14px}
+#settingsDialog select,#settingsDialog input[type="number"]{font-size:16px;min-height:44px}
+#settingsDialog .output-row{gap:8px}
+#settingsDialog .output-row select{flex-basis:100%;min-width:0}
+#settingsDialog .output-row button{flex:1;min-width:0;min-height:44px;padding:8px;font-size:14px}
+#settingsDialog .audio-power-row{gap:12px}
+#settingsDialog .audio-power-row select{min-width:0}
+#settingsDialog .calibration{padding:14px}
+#settingsDialog .calibration-header{flex-wrap:wrap;gap:8px}
+#settingsDialog .calibration-header>.row{margin-left:auto;flex-shrink:0}
+#settingsDialog .calibration input[type="number"]{width:84px}
+#settingsDialog .check-row{line-height:1.7}
+#settingsDialog .audio-warning{margin-bottom:0}
+.settings-notice{font-size:13px;line-height:1.7;background:var(--soft);padding:10px 12px;border-radius:10px;margin:0 20px 14px;overflow-wrap:anywhere}
+@media(max-width:760px){
+  #settingsDialog{top:80px;right:14px;max-height:calc(100vh - 94px);max-height:calc(100dvh - 94px)}
+}
+@media(max-width:480px){
+  #settingsDialog .dialog-head{padding:10px 14px}
+  .settings-body{padding:0 17px 20px}
+  .settings-appearance{padding:17px 0}
+  .settings-audio-heading{padding-top:17px}
+  .settings-notice{margin:0 14px 12px}
+}
+@media(max-height:540px){
+  #settingsDialog{top:12px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px)}
+}
+/* Optional rhythm game. All selectors are scoped; v1.5 styles remain unchanged. */
+#rhythmGameDialog{width:min(870px,calc(100% - 32px));height:min(790px,calc(100vh - 44px));height:min(790px,calc(100dvh - 44px));max-width:none;max-height:none;overflow:hidden;padding:0;border-radius:24px}
+#rhythmGameDialog[open]{display:flex;flex-direction:column}
+#rhythmGameDialog::backdrop{background:#0006;backdrop-filter:blur(4px)}
+.rhythm-dialog-header{padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);background:var(--surface);flex-shrink:0}
+.rhythm-dialog-header h2{font-size:17px;font-weight:650}
+.rhythm-dialog-header p{font-size:12px;color:var(--muted);margin-top:3px}
+.rhythm-close{display:flex;align-items:center;gap:7px;min-height:44px;flex-shrink:0;border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13px;background:var(--surface)}
+.rhythm-close:hover{background:var(--soft)}
+.rhythm-close svg{width:17px;height:17px}
+.rhythm-frame-wrap{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--surface)}
+#rhythmGameFrame{display:block;width:100%;height:100%;border:0;background:var(--surface)}
+.rhythm-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:14px;color:var(--muted);z-index:2}
+.rhythm-active-notice{padding:9px 22px;border-bottom:1px solid var(--line);background:var(--soft);font-size:12px;color:var(--muted);line-height:1.65;flex-shrink:0}
+@media(max-width:480px){#rhythmGameDialog{width:calc(100% - 18px);height:calc(100vh - 24px);height:calc(100dvh - 24px);border-radius:19px}.rhythm-dialog-header{padding:11px 14px;gap:8px}.rhythm-dialog-header h2{font-size:16px}.rhythm-dialog-header p{font-size:11px;max-width:220px}.rhythm-close{width:44px;padding:0;justify-content:center}.rhythm-close span{display:none}.rhythm-active-notice{padding:8px 14px;font-size:11px}}
+@media(max-height:500px){#rhythmGameDialog{height:calc(100vh - 14px);height:calc(100dvh - 14px)}.rhythm-dialog-header{padding-top:7px;padding-bottom:7px}.rhythm-dialog-header p{display:none}.rhythm-dialog-header h2{font-size:15px}.rhythm-active-notice{padding-top:5px;padding-bottom:5px}.rhythm-close{min-height:38px}}
+
+
+/* v1.7: the game launcher is a quiet toolbar action, not a sidebar feature. */
+.game-toolbar-btn{position:relative;overflow:visible}
+.game-toolbar-btn>svg{width:23px;height:23px}
+.game-toolbar-btn[aria-expanded="true"]{background:var(--soft)}
+.game-new-badge{position:absolute;top:-3px;right:-1px;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:14px;padding:0 4px;border:1px solid var(--bg);border-radius:99px;background:var(--strong);color:var(--on-strong);font-family:inherit;font-size:8px;font-weight:750;line-height:1;letter-spacing:.04em;pointer-events:none}
+
+/* v1.8: independent, always-visible GAME volume; not the metronome slider. */
+.rhythm-game-audio{display:flex;align-items:center;gap:12px;flex-shrink:0;padding:9px 22px;border-bottom:1px solid var(--line);background:var(--surface)}
+.rhythm-game-audio label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:550;white-space:nowrap}
+.rhythm-game-audio label svg{width:18px;height:18px}
+.rhythm-game-audio input[type=range]{min-width:0;flex:1;height:36px;touch-action:manipulation}
+.rhythm-game-audio output{min-width:43px;font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.rhythm-game-volume-hint{color:var(--muted);font-size:12px;white-space:nowrap}
+@media(max-width:600px){.rhythm-game-volume-hint{display:none}.rhythm-game-audio{padding:6px 14px;gap:10px}.rhythm-game-audio label{font-size:12px;gap:6px}.rhythm-game-audio output{font-size:12px;min-width:37px}}
+@media(max-height:500px){.rhythm-game-audio{padding-top:2px;padding-bottom:2px}.rhythm-game-audio input[type=range]{height:30px}}
+
+/* v1.9: requested branding/copy only. Keep all existing program logic intact.
+   Stack the longer brand on phones while retaining 44px toolbar targets. */
+.header{gap:16px}
+.header .brand{min-width:0}
+.header .brand-icon{flex-shrink:0}
+.header .brand-title{margin:0;display:flex;align-items:baseline;gap:.38em;white-space:nowrap;font-size:22px;line-height:1.35;letter-spacing:.035em}
+.header .brand-name,.header .brand-description{display:block}
+.header .header-actions{flex-shrink:0}
+.intro{justify-content:flex-end;margin-bottom:18px}
+@media(max-width:960px){.intro{display:none}}
+@media(max-width:600px){
+  .header{gap:8px}
+  .header .brand{gap:8px}
+  .header .brand-icon{width:32px;height:32px}
+  .header .brand-title{flex-direction:column;align-items:flex-start;gap:3px;font-size:16px;line-height:1.15;letter-spacing:.025em}
+  .header .brand-description{font-size:12px;letter-spacing:.055em}
+  .header .header-actions{gap:0}
+}
+@media(max-width:360px){
+  .header{padding-left:12px;padding-right:12px;gap:4px}
+  .header .brand{gap:6px}
+  .header .brand-icon{width:24px;height:28px;border-radius:8px}
+  .header .brand-icon svg{width:20px;height:20px}
+  .header .brand-title{font-size:15px;letter-spacing:.015em}
+}
+
+/* v1.11: the visual pulse is confined to the metronome card.
+   All glow is INSET and clipped by the existing card. No outer halo or page wash.
+   An isolated negative layer sits above the card background but behind its text
+   and controls. It never intercepts touch, changes layout, or filters the UI. */
+.metro-card{position:relative;isolation:isolate}
+#beatScreenFlash{
+  position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  opacity:0;pointer-events:none;user-select:none;transition:none;contain:strict;
+  background:linear-gradient(115deg,rgba(0,0,0,.08),rgba(0,0,0,.13) 50%,rgba(0,0,0,.08));
+  box-shadow:inset 0 0 0 3px rgba(0,0,0,.98),inset 0 0 25px 6px rgba(0,0,0,.32),inset 0 0 64px 10px rgba(0,0,0,.18)
+}
+:root[data-theme="dark"] #beatScreenFlash{
+  background:linear-gradient(115deg,rgba(255,255,255,.065),rgba(255,255,255,.11) 50%,rgba(255,255,255,.065));
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,1),inset 0 0 27px 7px rgba(255,255,255,.44),inset 0 0 72px 14px rgba(255,255,255,.22)
+}
+.settings-flash{padding-bottom:14px;border-bottom:0}
+.flash-hint{font-size:12px;line-height:1.75;color:var(--muted);margin:0;padding:0 0 17px;border-bottom:1px solid var(--line)}
+/* v1.12: theme-matched monochrome pulse and a settings-only NEW label. */
+#screenFlashLabel{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.flash-new-badge{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;height:18px;padding:0 6px;border-radius:99px;background:var(--strong);color:var(--on-strong);font-family:inherit;font-size:10px;font-weight:750;line-height:1;letter-spacing:.04em}
+
+
+/* Source layer: band-addon-style */
+.instrument-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 14px}.instrument-picker button,.band-tile{min-height:51px;background:var(--soft);border:1px solid var(--line);border-radius:12px;font-size:16px;font-weight:550;padding:11px 8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;line-height:1.35;min-width:0;overflow-wrap:anywhere}.instrument-picker button[aria-pressed="true"],.band-tile[aria-pressed="true"]{background:var(--strong);border-color:var(--strong);color:var(--on-strong)}.instrument-picker button:hover,.band-tile:hover{border-color:var(--muted)}.band-tile small{font-size:11px;line-height:1.5;font-weight:400;color:var(--muted)}.band-tile[aria-pressed="true"] small{color:inherit;opacity:.8}.instrument-add-box{padding:12px 14px;background:var(--soft);border-radius:12px;margin-bottom:14px}.instrument-add-box .row{align-items:stretch;gap:7px}.instrument-add-box .row input{min-width:0;flex:1;width:auto!important}.instrument-add-box .btn{padding:8px 10px;white-space:nowrap}.instrument-selected{font-size:13px;color:var(--muted);min-height:23px;margin-bottom:10px}.room-voice-setup{padding:13px;background:var(--soft);border:1px solid var(--line);border-radius:13px;margin-top:15px}.room-voice-setup .row{flex-wrap:wrap;gap:10px}.room-voice-setup p{margin:9px 0 0;font-size:12px}.room-voice-setup .check-row{flex:1;min-width:180px}
+
+/* v1.14 live message drawer. Main metronome and instrument picker are untouched. */
+.band-quick-open{position:fixed;right:max(0px,env(safe-area-inset-right));top:50%;bottom:auto;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:46px;min-height:118px;padding:10px 5px;border:1px solid var(--line);border-right:0;border-radius:15px 0 0 15px;background:var(--strong);color:var(--on-strong);box-shadow:-3px 3px 17px #0002;touch-action:manipulation}
+.band-quick-open[hidden]{display:none!important}.band-quick-open:disabled{opacity:.5}
+/* v1.15 presentation-only change. Project convention: add a NEW badge to
+   newly introduced feature entry points; retain existing feature badges. */
+.band-new-badge{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:33px;height:18px;padding:0 5px;border-radius:99px;background:var(--strong);color:var(--on-strong);font-family:inherit;font-size:9px;font-weight:750;line-height:1;letter-spacing:.04em;white-space:nowrap;pointer-events:none}
+#bandQuickOpen>.band-new-badge{position:absolute;top:-7px;left:6px;min-width:32px;height:16px;padding:0 4px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+#bandTitle{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+.band-tab-icon{position:relative;display:flex;align-items:center;justify-content:center;height:24px;width:31px}.band-tab-icon>svg{width:22px;height:22px}.band-tab-arrow{position:absolute;left:-2px;top:7px;width:7px!important;height:11px!important}
+.band-tab-live{font-size:10px;line-height:1.1;letter-spacing:.025em;font-weight:650}.band-tab-title{font-size:16px;font-weight:650;line-height:1.45;writing-mode:vertical-rl;letter-spacing:.06em}
+.band-drawer-open .band-quick-open{visibility:hidden}
+#bandDialog{position:fixed;inset:0 0 0 auto;margin:0;width:min(430px,calc(100vw - 18px));height:100vh;height:100dvh;max-width:none;max-height:none;border:1px solid var(--line);border-right:0;border-radius:22px 0 0 22px;padding:0;overflow:hidden;box-shadow:-14px 0 55px #0002;overscroll-behavior:contain}
+#bandDialog[open]{display:flex;flex-direction:column;animation:bandDrawerIn .17s ease-out}
+#bandDialog::backdrop{background:#0004;backdrop-filter:blur(2px)}
+@keyframes bandDrawerIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes bandStepIn{from{opacity:.5;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+.band-dialog-top{flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--line);z-index:2}.band-dialog-top .dialog-head{padding:18px 19px 15px;gap:12px}.band-dialog-top h2{font-size:22px;line-height:1.3;letter-spacing:.015em}.band-subline{font-size:13px;line-height:1.5;color:var(--muted);margin-top:5px;overflow-wrap:anywhere}.band-dialog-top .icon-btn{width:44px;height:44px;flex-shrink:0}
+.band-dialog-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:18px 20px max(22px,env(safe-area-inset-bottom));scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.band-flow-line{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);margin-bottom:19px}.band-flow-line p{font-size:12px;line-height:1.5}.band-step-counter{font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:4px 9px;background:var(--soft)}
+.band-step-panel{animation:bandStepIn .13s ease-out}.band-step-panel h3{font-size:22px;font-weight:650;line-height:1.45;margin-bottom:14px}.band-step-panel h3:focus{outline:none}
+.band-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.band-tile{min-height:77px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid var(--line);border-radius:14px;padding:13px 8px;background:var(--soft);color:var(--ink);font-size:18px;font-weight:600;line-height:1.45;min-width:0;overflow-wrap:anywhere;text-align:center;touch-action:manipulation}
+.band-tile:hover:not(:disabled){border-color:var(--muted)}.band-tile:active:not(:disabled){background:var(--strong);color:var(--on-strong)}.band-tile small{font-size:12px;font-weight:400;line-height:1.45;color:var(--muted)}.band-tile:active small{color:inherit}.band-tile:disabled{opacity:.45;cursor:not-allowed}.band-tile[aria-pressed="true"]{border-color:var(--strong)}
+.band-tile[data-target="all"]{grid-column:1/-1;flex-direction:row;justify-content:space-between;padding:16px 20px;min-height:65px;background:var(--strong);color:var(--on-strong)}.band-tile[data-target="all"] small{color:inherit;font-size:12px;opacity:.8}
+.band-target-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--line);background:var(--soft);border-radius:13px;margin-bottom:21px}.band-target-strip>div{min-width:0}.band-target-strip span{font-size:11px;color:var(--muted);display:block;margin-bottom:2px}.band-target-strip strong{font-size:18px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}.band-target-strip .btn{font-size:12px;min-height:44px;padding:8px 10px;flex-shrink:0}.band-target-strip .btn svg{width:14px;height:14px}
+.band-direct-hint{font-size:13px;color:var(--muted);line-height:1.7;margin:-6px 0 15px}.band-helper{font-size:12px;line-height:1.75;color:var(--muted)}p.band-helper{margin:11px 0 0}.band-connect-note{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.75;margin-bottom:17px}
+.band-custom-box{margin-top:14px;padding:15px 13px;background:var(--soft);border:1px solid var(--line);border-radius:14px}.band-custom-box>input{width:100%;font-size:16px;min-height:47px}.band-custom-box .field-label{font-size:14px}.band-save-phrase{margin-top:11px}.band-draft-choice{margin-top:15px;width:100%;background:var(--surface);font-size:16px}.band-draft-choice small{font-size:11px}
+.band-options{margin-top:22px;border-top:1px solid var(--line);padding-top:10px}.band-options>summary{font-size:13px;font-weight:550;color:var(--muted);cursor:pointer;min-height:44px;line-height:44px}.band-options-body{padding:9px 0 0}.band-options-body select,.band-options-body input{font-size:16px}.band-voice-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line)}.band-voice-bar strong{font-size:14px;display:block}.band-voice-bar span{display:block;font-size:12px;color:var(--muted);margin-top:4px}.band-voice-bar .btn{min-height:44px;white-space:nowrap;font-size:13px;padding:8px 11px}.band-volume-row{display:flex;align-items:center;gap:10px;margin:17px 0}.band-volume-row label{font-size:14px;white-space:nowrap}.band-volume-row input{flex:1;min-width:0;height:35px}.band-volume-row output{font-size:13px;min-width:39px;text-align:right}
+.band-saved-list{display:grid;gap:6px;margin-top:14px}.band-saved-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;min-height:44px}.band-saved-row span{overflow-wrap:anywhere}.band-saved-row button{font-size:12px;text-decoration:underline;text-underline-offset:4px;min-height:44px;color:var(--muted)}.band-inline-notice{font-size:13px;padding:11px 13px;margin:0 19px 13px;background:var(--soft);border-radius:10px;line-height:1.75}
+.band-alert{position:fixed;inset:85px 16px auto auto;margin:0;width:min(430px,calc(100vw - 32px));max-height:calc(100dvh - 115px);overflow:auto;z-index:120;border:2px solid var(--strong);background:var(--surface);color:var(--ink);border-radius:18px;padding:13px 17px 17px;box-shadow:0 12px 55px #0003}.band-alert:not(:popover-open):not(.band-alert-fallback){display:none}.band-alert-from{font-size:13px;font-weight:600;color:var(--muted)}.band-alert>.row{gap:12px}.band-alert>.row .icon-btn{width:44px;height:44px;flex-shrink:0}.band-alert>p{font-size:23px;font-weight:650;line-height:1.6;margin:7px 0 6px;overflow-wrap:anywhere}.band-alert-actions{display:flex;gap:9px;margin-top:12px}.band-alert-actions .btn{min-height:44px;font-size:14px}
+@media(max-width:560px){#bandDialog{border-radius:19px 0 0 19px}.band-dialog-top .dialog-head{padding:15px 16px 13px}.band-dialog-body{padding:16px 16px max(20px,env(safe-area-inset-bottom))}.band-dialog-top h2{font-size:21px}.band-flow-line{margin-bottom:17px}.band-flow-line p{font-size:11px}.band-tile{min-height:75px;font-size:17px;padding:12px 7px}.band-tile small{font-size:11px}.band-step-panel h3{font-size:21px}.band-alert{inset:79px 10px auto 10px;width:calc(100vw - 20px);max-height:calc(100dvh - 98px);padding:11px 14px 15px}.band-alert>p{font-size:21px}.band-inline-notice{margin:0 16px 11px}}
+@media(max-height:500px){.band-dialog-top .dialog-head{padding-top:8px;padding-bottom:8px}.band-dialog-body{padding-top:12px}.band-quick-open{min-height:105px}}
+@media(prefers-reduced-motion:reduce){#bandDialog[open],.band-step-panel{animation:none!important}.band-tile,.band-alert{transition:none!important}}
+
+.band-alert{display:none}.band-alert-fallback{display:block}.band-alert:popover-open{display:block}
+
+
+/* Source layer: tempolive-design-refresh */
+
+/* TEMPOLIVE v1.18 visual layer. All metronome, room, speech, storage and game
+   JavaScript is the unmodified v1.17.1 source. No external assets or fonts. */
+:root{
+ --bg:#f5f5f5;--surface:#ffffff;--soft:#f1f1f1;--ink:#181818;--muted:#626262;
+ --line:#dddddd;--strong:#202020;--on-strong:#ffffff;--focus:#454545;
+ --radius:24px;--shadow:0 12px 38px rgba(24,24,24,.035);
+ --ui-font:"Microsoft JhengHei","PingFang TC","Noto Sans CJK TC","Noto Sans TC",sans-serif;
+ --number-font:"Bahnschrift","DIN Alternate","Arial",sans-serif;
+ --text-xs:12px;--text-sm:14px;--text-base:16px;
+ --control-radius:12px;--header-height:80px;
+}
+:root[data-theme=dark]{
+ --bg:#151515;--surface:#202020;--soft:#2b2b2b;--ink:#f5f5f5;--muted:#b8b8b8;
+ --line:#424242;--strong:#f1f1f1;--on-strong:#181818;--focus:#eeeeee;
+ --shadow:0 12px 38px rgba(0,0,0,.12);
+}
+html{scroll-padding-top:100px}
+body.design-refresh{font-family:var(--ui-font);font-size:16px;background:var(--bg);letter-spacing:0;}
+.design-refresh button,.design-refresh input,.design-refresh select{font-family:inherit}
+.design-refresh p{text-wrap:pretty}
+.design-refresh h2,.design-refresh h3{text-wrap:balance;letter-spacing:0}
+.design-refresh :is(button,input,select,summary,a):focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.design-refresh :is(button,input,select,summary){touch-action:manipulation}
+.design-refresh .btn{border-radius:var(--control-radius);font-weight:600;min-height:48px;transition:background .14s ease,border-color .14s ease,transform .1s ease}
+.design-refresh .btn:active:not(:disabled){transform:translateY(1px)}
+.design-refresh .icon-btn{height:44px;width:44px;border-radius:11px}
+.design-refresh .text-btn{min-height:44px;font-size:13px;line-height:1.5;padding:5px 1px;text-underline-offset:4px}
+.design-refresh input:not([type=range]):not([type=checkbox]),.design-refresh select{border-radius:10px;min-height:48px;font-size:16px;padding:10px 12px;}
+.design-refresh input[type=checkbox]{width:20px;height:20px}
+.design-refresh input[type=range]{height:36px;accent-color:var(--strong);touch-action:manipulation}
+.design-refresh .field-label{font-size:14px;font-weight:600;margin-bottom:10px}
+.design-refresh .small,.design-refresh small{line-height:1.65}
+.design-refresh .pill{border-radius:8px;background:var(--soft);padding:5px 9px;font-size:12px}
+.design-refresh .rule{margin:24px 0}
+.skip-control{position:fixed;top:12px;left:16px;z-index:150;background:var(--strong);color:var(--on-strong);padding:12px 18px;border-radius:10px;transform:translateY(-170%);text-decoration:none}
+.skip-control:focus{transform:translateY(0)}
+
+/* Header and workspace: the instrument owns the most space, not a hero banner. */
+.design-refresh .header{height:var(--header-height);max-width:1248px;padding:0 24px;gap:20px;border-bottom:1px solid var(--line);}
+.design-refresh .brand{gap:12px}
+.design-refresh .brand-icon{width:38px;height:38px;border-radius:12px}
+.design-refresh .brand-icon svg{width:25px;height:25px}
+.design-refresh .header .brand-title{gap:12px;font-size:20px;align-items:center;line-height:1.3;letter-spacing:0}
+.design-refresh .brand-name{font-family:Arial,sans-serif;font-size:23px;font-weight:800;letter-spacing:-.045em}
+.design-refresh .brand-description{font-size:15px;font-weight:550;color:var(--muted);padding-left:12px;border-left:1px solid var(--line)}
+.design-refresh .header-actions{gap:8px}
+.design-refresh .header-actions>.icon-btn{width:46px;height:46px;border:1px solid transparent;background:transparent}
+.design-refresh .header-actions>.icon-btn:hover{border-color:var(--line);background:var(--surface)}
+.design-refresh #focusBtn[aria-pressed=true],.design-refresh #settingsBtn[aria-expanded=true]{background:var(--surface);border-color:var(--line)}
+.design-refresh .header-actions svg{width:21px;height:21px;stroke-width:1.7}
+.design-refresh :is(.game-new-badge,.flash-new-badge,.band-new-badge){border-radius:4px;letter-spacing:.035em;font-weight:700;box-shadow:none}
+.design-refresh .game-new-badge{top:-2px;right:-1px;min-width:28px;height:14px;font-size:8px;border:1px solid var(--bg)}
+.design-refresh .shell{max-width:1248px;padding:26px 24px 22px}
+.design-refresh .intro{margin-bottom:18px}
+.design-refresh .intro-tip{font-size:12px;padding-bottom:0;gap:7px}
+.design-refresh .workspace{grid-template-columns:minmax(0,1fr)340px;gap:24px;align-items:start}
+.design-refresh .left,.design-refresh .sidebar{gap:20px}
+.design-refresh .card{border:1px solid var(--line);border-radius:20px;box-shadow:none}
+.design-refresh .metro-card{border-radius:24px;padding:24px 30px 16px;box-shadow:var(--shadow)}
+
+/* The tempo readout is the one bold element. The controls stay familiar. */
+.design-refresh .metro-head{gap:14px;min-height:49px;padding-bottom:18px;border-bottom:1px solid var(--line);align-items:center}
+.design-refresh .current-label{font-size:12px;margin-bottom:3px}
+.design-refresh .current-title{font-size:20px;line-height:1.45;font-weight:650;max-width:420px;letter-spacing:-.025em}
+.design-refresh .mini-state{font-size:12px;white-space:nowrap;border:1px solid var(--line);background:var(--soft);border-radius:7px;padding:5px 8px;gap:6px;flex-shrink:0}
+.design-refresh .mini-state .dot{width:5px;height:5px}
+.design-refresh .tempo-zone{padding-top:22px}
+.design-refresh .tempo-label{font-size:13px;font-weight:500;letter-spacing:.02em}
+.design-refresh .tempo-control{gap:28px;margin:0;}
+.design-refresh .tempo-control .stepper{width:50px;height:50px;border-radius:14px;border:1px solid var(--line);background:var(--surface);transition:background .12s,transform .1s}
+.design-refresh .stepper:active{transform:scale(.96)}
+.design-refresh .tempo-control .stepper:hover{background:var(--soft);border-color:var(--muted)}
+.design-refresh #bpm{font-family:var(--number-font);font-size:132px;font-weight:500;letter-spacing:-.055em;line-height:1;height:145px;width:258px;max-width:calc(100% - 140px);padding:0;border:0;min-height:0;border-radius:9px;font-variant-numeric:tabular-nums;background:transparent}
+.design-refresh .bpm-caption{font-size:12px;gap:9px;margin-top:-2px}
+.design-refresh .bpm-caption strong{font-family:Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:.11em}
+.design-refresh .tempo-range{width:100%;max-width:420px;margin:19px auto 18px}
+.design-refresh #bpmRange{height:32px;margin:0}
+.design-refresh .tempo-range .range-labels{font-family:var(--number-font);font-size:12px;padding-top:3px;position:relative}
+.design-refresh .tempo-range .range-labels::before{content:"";position:absolute;left:29px;right:35px;top:5px;height:5px;background:repeating-linear-gradient(to right,var(--line) 0,var(--line) 1px,transparent 1px,transparent calc(100% / 26));pointer-events:none}
+.design-refresh .beat-track{gap:12px;min-height:54px;margin:0 0 8px}
+.design-refresh .beat{width:46px;height:46px;border-radius:13px;font-family:var(--number-font);font-size:17px;font-weight:500;border-width:1px;transition:none}
+.design-refresh .beat[data-level="2"]{border-width:2px;font-weight:700}
+.design-refresh .beat[data-level="2"]:after{bottom:5px;width:3px;height:3px;left:calc(50% - 1.5px)}
+.design-refresh .beat[data-level="0"]{background:none;border-style:dashed}
+.design-refresh .beat-hint{font-size:12px;margin-bottom:21px;line-height:1.5}
+.design-refresh .transport{display:grid;grid-template-columns:98px minmax(190px,280px) 112px;justify-content:center;gap:12px}
+.design-refresh .transport>.btn{min-width:0;width:100%;height:58px;min-height:58px;border-radius:13px;padding:10px 12px;font-size:15px;white-space:nowrap}
+.design-refresh .transport #playBtn{font-size:18px;font-weight:650;box-shadow:0 3px 0 rgba(0,0,0,.1);gap:9px}
+.design-refresh .transport #playBtn svg{width:19px;height:19px}
+.design-refresh .transport .transport-next{background:var(--soft);border-color:transparent;gap:5px;font-size:14px}
+.design-refresh .transport .tap-btn{background:var(--surface);font-size:14px}
+.design-refresh .transport .tap-btn.tapped{background:var(--strong);color:var(--on-strong)}
+.design-refresh .transport-info{font-size:12px;line-height:1.65;min-height:23px;margin-top:10px;overflow-wrap:anywhere}
+.design-refresh .main-volume{gap:14px;margin-top:17px;padding:8px 14px;border-radius:13px;min-height:58px;border:1px solid transparent;background:var(--soft)}
+.design-refresh .main-volume>label{font-size:14px;font-weight:600}
+.design-refresh .main-volume .volume-line{gap:9px}
+.design-refresh .main-volume .icon-btn{width:44px;height:44px}
+.design-refresh .main-volume .volume-line output{font-family:var(--number-font);font-size:14px;min-width:40px}
+.design-refresh .settings-grid{grid-template-columns:minmax(80px,.85fr) minmax(140px,1.4fr) minmax(100px,1fr);gap:16px}
+.design-refresh .settings-grid .field-label{font-size:13px;margin-bottom:8px}
+.design-refresh .settings-grid select{height:49px;min-height:49px;font-family:var(--ui-font);padding:9px 11px;font-size:15px}
+.design-refresh .note-segment{height:49px;border:1px solid var(--line);border-radius:10px;background:var(--soft);padding:3px;gap:3px}
+.design-refresh .note-option{min-height:41px;border-radius:7px;gap:5px;font-size:13px;font-family:var(--number-font);font-weight:500}
+.design-refresh .note-option[aria-pressed=true]{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08);font-weight:700}
+.design-refresh .note-option svg{width:19px;height:25px}
+.design-refresh .control-foot{margin-top:20px;padding-top:10px;gap:10px;font-size:12px;min-height:46px}
+.design-refresh .counter{font-family:var(--number-font);font-size:12px}
+.design-refresh .save-current{font-size:13px;min-height:44px;gap:6px;border-radius:7px;padding:6px 0 6px 8px;white-space:nowrap}
+.design-refresh .save-current:hover{background:var(--soft)}
+
+/* Set list reads as a list of songs, not a stack of generic action cards. */
+.design-refresh .song-card{padding:23px 19px 14px}
+.design-refresh .section-title{gap:12px;min-height:34px;margin-bottom:2px;align-items:center}
+.design-refresh .section-title h2{font-size:18px;display:flex;align-items:center;gap:9px}
+.design-refresh .song-count{margin:0;display:inline-flex;align-items:center;justify-content:center;width:25px;height:23px;background:var(--soft);border:1px solid var(--line);border-radius:6px;font-size:11px;font-family:var(--number-font);font-weight:600}
+.design-refresh #freeMode{font-size:12px;white-space:nowrap}
+.design-refresh .section-intro{font-size:13px;margin-bottom:15px;line-height:1.6}
+.design-refresh .song-list{gap:4px;max-height:280px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding:2px 0}
+.design-refresh .song-item{border-radius:12px;border:1px solid transparent;min-height:72px;}
+.design-refresh .song-item.selected{border-color:var(--line);background:var(--soft)}
+.design-refresh .song-main{gap:10px;min-height:70px;padding:12px 4px 12px 9px}
+.design-refresh .song-number{width:26px;height:28px;font-family:var(--number-font);font-size:12px;border-radius:7px}
+.design-refresh .song-item.selected .song-number{background:var(--strong);color:var(--on-strong);font-weight:600}
+.design-refresh .song-name{font-size:16px;font-weight:600;line-height:1.55}
+.design-refresh .song-meta{font-family:var(--number-font);font-size:12px;line-height:1.5;margin-top:3px}
+.design-refresh .song-edit{width:44px;height:44px;min-width:44px;margin-right:0;border-radius:9px}
+.design-refresh .song-edit svg{width:17px;height:17px}
+.design-refresh .song-navigation{gap:10px;margin-top:14px;padding-top:15px;border-top:1px solid var(--line)}
+.design-refresh .song-navigation .song-step{min-height:50px;border-radius:11px;font-size:15px;font-weight:550}
+.design-refresh .song-step svg{width:17px;height:17px}
+.design-refresh .song-add-row{margin-top:7px}
+.design-refresh .song-add-row .btn{font-size:13px;min-height:44px;padding:8px;color:var(--ink)}
+.design-refresh .song-tools{padding-top:4px;gap:10px;align-items:center;border-top:1px solid var(--line);margin-top:4px}
+.design-refresh .song-tools .text-btn{font-size:12px;min-height:42px}
+.design-refresh .song-tools>.small{font-size:11px;white-space:nowrap}
+.design-refresh .room-card{padding:23px 21px 21px}
+.design-refresh .room-icon{width:38px;height:38px;border-radius:11px;margin-bottom:14px;border:1px solid var(--line);background:transparent}
+.design-refresh .room-icon svg{width:22px;height:22px}
+.design-refresh .room-card h2{font-size:19px;font-weight:650;line-height:1.5;margin-bottom:9px}
+.design-refresh .room-card .description{font-size:14px;line-height:1.8;margin-bottom:19px}
+.design-refresh .room-buttons{gap:9px;grid-template-columns:1fr 1fr}
+.design-refresh .room-buttons .btn{min-height:48px;font-size:14px;border-radius:10px;padding:9px 8px;white-space:nowrap}
+.design-refresh #roomLive>.row{flex-wrap:wrap;gap:8px}
+.design-refresh #roomHeading{font-size:17px!important}
+.design-refresh .room-code-box{border-radius:13px;margin:16px 0;padding:14px 15px}
+.design-refresh .room-code{font-family:var(--number-font);font-size:37px;letter-spacing:.18em;font-weight:500;line-height:1.35;margin:6px 0 8px}
+.design-refresh #copyCode{width:44px!important;height:44px!important;margin:-7px -8px -3px 0}
+.design-refresh .member-list{gap:9px;margin:10px 0 13px;max-height:190px}
+.design-refresh .member{min-height:35px;font-size:13px}
+.design-refresh .avatar{width:29px;height:29px;border-radius:8px}
+.design-refresh .member-state{font-size:11px}
+.design-refresh .connection-note{font-size:12px;line-height:1.8;border-radius:10px;padding:11px 12px}
+.design-refresh #leaveRoom{min-height:45px;margin-top:12px!important}
+.design-refresh .footer{margin-top:23px;padding:0 2px 10px;align-items:center;font-size:12px;gap:20px;line-height:1.8}
+.design-refresh .footer>span{align-items:flex-start;max-width:620px}
+.design-refresh .footer>span svg{margin-top:4px}
+.design-refresh .shortcut-help{gap:14px;white-space:nowrap;font-size:11px}
+.design-refresh kbd{background:var(--surface);border-color:var(--line);border-radius:5px;padding:1px 5px;font-size:11px}
+
+/* Secondary controls: coherent density, type and corner hierarchy. */
+.design-refresh dialog{border-radius:20px;border-color:var(--line);box-shadow:0 18px 70px rgba(0,0,0,.22)}
+.design-refresh dialog::backdrop{background:rgba(0,0,0,.4);backdrop-filter:blur(3px)}
+.design-refresh .dialog-head{padding:22px 24px 12px;gap:14px}
+.design-refresh .dialog-head h2{font-size:21px;line-height:1.4}
+.design-refresh .dialog-body{padding:4px 24px 24px}
+.design-refresh .dialog-body p{font-size:14px;line-height:1.8}
+.design-refresh .dialog-grid{gap:16px}
+.design-refresh .dialog-actions{gap:9px;margin-top:24px}
+.design-refresh .dialog-actions .btn{min-height:48px;font-size:15px;}
+.design-refresh .form-error{font-size:14px;line-height:1.65}
+.design-refresh .note-box{border-radius:11px;background:var(--soft);font-size:13px}
+.design-refresh #settingsDialog{top:84px;right:max(24px,calc((100vw - 1200px)/2));width:min(452px,calc(100% - 24px));max-height:calc(100dvh - 102px);border-radius:20px}
+.design-refresh #settingsDialog .dialog-head{padding:15px 21px;min-height:75px}
+.design-refresh .settings-heading{gap:12px}
+.design-refresh .settings-heading h2{font-size:22px}
+.design-refresh .settings-body{padding:0 24px 24px}
+.design-refresh .settings-appearance{padding:20px 0;gap:20px}
+.design-refresh .settings-appearance h3{font-size:16px;font-weight:600}
+.design-refresh .settings-appearance p{font-size:13px;line-height:1.75;margin-top:5px}
+.design-refresh .settings-audio-heading{padding-top:23px;padding-bottom:17px}
+.design-refresh .settings-audio-heading h3{font-size:17px}
+.design-refresh .settings-audio-heading p{font-size:12px}
+.design-refresh .settings-flash{padding-bottom:12px;border-bottom:0}
+.design-refresh .flash-hint{padding-bottom:20px;font-size:12px;line-height:1.85}
+.design-refresh .theme-track{height:30px;width:54px;background:var(--line);border:1px solid var(--line)}
+.design-refresh .theme-thumb{box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.design-refresh .theme-toggle[aria-checked=true] .theme-thumb{background:var(--surface)}
+.design-refresh #settingsDialog .field-label{font-size:14px;margin-bottom:9px}
+.design-refresh #settingsDialog select,.design-refresh #settingsDialog input[type=number]{min-height:48px;border-radius:10px}
+.design-refresh #settingsDialog .audio-explain{font-size:13px;line-height:1.85}
+.design-refresh #settingsDialog .calibration{border:1px solid var(--line);padding:16px;border-radius:13px}
+.design-refresh #settingsDialog .output-row button{min-height:46px;font-size:13px;border-radius:10px}
+.design-refresh #settingsDialog .check-row{font-size:13px;line-height:1.8;gap:10px}
+.design-refresh .audio-warning{line-height:1.85}
+.design-refresh #songDialog{width:min(470px,calc(100% - 24px))}
+.design-refresh #songDialog .dialog-head{padding:18px 22px 10px}
+.design-refresh #songDialog .dialog-body{padding:0 22px 22px}
+.design-refresh #songDialog .field-label{margin-top:12px;margin-bottom:8px;font-size:14px}
+.design-refresh #songDialog .dialog-grid{gap:10px 16px}
+.design-refresh #songDialog .dialog-actions{margin-top:22px}
+.design-refresh #songDialog .song-order{flex-wrap:wrap;gap:9px}
+.design-refresh #songDialog .song-order .btn{min-height:44px;font-size:13px}
+.design-refresh .instrument-picker{gap:9px;margin-bottom:16px}
+.design-refresh .instrument-picker button{min-height:54px;border-radius:11px;font-size:16px}
+.design-refresh .instrument-selected{font-size:13px;line-height:1.7;margin-bottom:14px}
+.design-refresh .room-voice-setup{padding:15px;border-radius:12px}
+.design-refresh .room-voice-setup p{line-height:1.8}
+.design-refresh .room-voice-setup .btn{min-height:44px;font-size:13px}
+.design-refresh #joinCode{font-family:var(--number-font);font-size:28px;letter-spacing:.14em;min-height:58px}
+.design-refresh #bandDialog{width:min(438px,calc(100vw - 16px));border-radius:22px 0 0 22px;box-shadow:-16px 0 56px rgba(0,0,0,.18)}
+.design-refresh .band-dialog-top .dialog-head{padding:19px 22px 17px}
+.design-refresh #bandTitle{font-size:23px;gap:9px}
+.design-refresh .band-dialog-body{padding:20px 22px max(24px,env(safe-area-inset-bottom))}
+.design-refresh .band-step-panel h3{font-size:22px;font-weight:650}
+.design-refresh .band-flow-line{margin-bottom:22px}
+.design-refresh .band-step-counter{border-radius:6px;font-family:var(--number-font)}
+.design-refresh .band-tile{border-radius:12px;min-height:77px;font-size:18px;font-weight:600;background:var(--soft)}
+.design-refresh .band-tile[data-target=all]{background:var(--strong);min-height:65px}
+.design-refresh .band-target-strip{padding:12px 14px;border-radius:12px}
+.design-refresh .band-quick-open{width:42px;min-height:116px;border-radius:13px 0 0 13px;box-shadow:-2px 3px 12px rgba(0,0,0,.12)}
+.design-refresh #bandQuickOpen>.band-new-badge{left:5px;font-size:8px;min-width:30px;height:15px;border-radius:4px}
+.design-refresh .band-tab-title{font-size:16px}
+.design-refresh .band-options>summary{font-size:14px;min-height:46px}
+.design-refresh .band-alert{border-width:1px;border-radius:16px;padding:14px 18px 18px;box-shadow:0 16px 55px rgba(0,0,0,.18)}
+.design-refresh .band-alert>p{font-size:23px;line-height:1.6}
+.design-refresh #rhythmGameDialog{border-radius:22px}
+.design-refresh .rhythm-dialog-header{padding:17px 22px}
+.design-refresh .rhythm-dialog-header h2{font-size:19px;font-weight:650}
+.design-refresh .rhythm-close{border-radius:10px;min-height:46px}
+.design-refresh .rhythm-game-audio{padding:8px 22px;gap:12px}
+.design-refresh .rhythm-game-audio output{font-family:var(--number-font);font-size:14px}
+.design-refresh .rhythm-game-volume-hint{font-size:12px}
+.design-refresh .rhythm-active-notice{font-size:12px;line-height:1.8}
+.design-refresh .toast{border-radius:12px;font-size:14px;line-height:1.7;padding:12px 18px}
+
+/* Stage focus: preserve the original controls, increase only the reading scale. */
+.design-refresh.focus-mode .workspace{max-width:1000px}
+.design-refresh.focus-mode .metro-card{padding:25px 48px 18px}
+.design-refresh.focus-mode .tempo-zone{padding-top:20px}
+.design-refresh.focus-mode #bpm{font-size:174px;width:360px;height:190px;max-width:calc(100% - 148px)}
+.design-refresh.focus-mode .beat{width:57px;height:57px;font-size:22px;border-radius:15px}
+.design-refresh.focus-mode .transport{grid-template-columns:115px minmax(200px,340px) 125px;gap:14px;margin-top:20px}
+.design-refresh.focus-mode .transport>.btn{min-width:0;height:64px;font-size:16px}
+.design-refresh.focus-mode .transport #playBtn{font-size:21px}
+.design-refresh.focus-mode .settings-grid{max-width:750px;width:100%;margin:auto}
+
+@media(min-width:1500px){.design-refresh .shell{padding-top:30px}.design-refresh .tempo-zone{padding-top:22px}}
+@media(max-width:1100px) and (min-width:761px){
+ .design-refresh .workspace{grid-template-columns:minmax(0,1fr)305px;gap:20px}.design-refresh .metro-card{padding:22px 22px 15px}
+ .design-refresh #bpm{font-size:118px;width:225px;height:137px}.design-refresh .tempo-control{gap:20px}
+ .design-refresh .transport{grid-template-columns:84px minmax(145px,1fr) 93px;gap:9px}.design-refresh .transport>.btn{padding:9px 7px;font-size:13px}.design-refresh .transport #playBtn{font-size:16px}.design-refresh .transport .transport-next{font-size:12px}
+ .design-refresh .settings-grid{grid-template-columns:minmax(67px,.8fr) minmax(120px,1.35fr) minmax(85px,1fr);gap:10px}.design-refresh .settings-grid select{padding:9px 7px;font-size:14px}
+ .design-refresh .current-title{max-width:265px;font-size:18px}.design-refresh .main-volume{padding:7px 10px;gap:8px}.design-refresh .main-volume>label{font-size:13px}
+ .design-refresh .note-option{gap:3px}.design-refresh .song-card{padding:20px 16px 13px}.design-refresh .room-card{padding:21px 18px}.design-refresh .footer{align-items:flex-start;flex-direction:column;gap:8px}
+}
+@media(max-width:880px) and (min-width:761px){.design-refresh .workspace{grid-template-columns:minmax(0,1fr)280px;gap:16px}.design-refresh .metro-card{padding:20px 16px 14px}.design-refresh .shell{padding:22px 20px}.design-refresh .current-title{max-width:180px}.design-refresh .tempo-control{gap:12px}.design-refresh #bpm{font-size:100px;width:190px;max-width:calc(100% - 120px)}.design-refresh .tempo-control .stepper{width:44px;height:46px}.design-refresh .transport{grid-template-columns:65px minmax(135px,1fr) 77px;gap:7px}.design-refresh .transport-next svg{display:none}.design-refresh .settings-grid{grid-template-columns:1fr 1.6fr}.design-refresh .count-field{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding-top:9px}.design-refresh .count-field .field-label{margin:0}.design-refresh .count-field select{width:130px}.design-refresh .mini-state{font-size:11px}}
+@media(max-width:760px){
+ :root{--header-height:76px}
+ .design-refresh .header{height:76px;padding:0 20px;gap:12px}
+ .design-refresh .shell{padding:18px 16px 18px}
+ .design-refresh .workspace{grid-template-columns:1fr;gap:20px}.design-refresh .sidebar{grid-template-columns:1fr 1fr;gap:18px}
+ .design-refresh .metro-card{padding:23px 26px 14px}.design-refresh .current-title{max-width:370px}
+ .design-refresh .tempo-zone{padding-top:21px}.design-refresh #bpm{font-size:136px;height:144px;width:270px}
+ .design-refresh .tempo-range{max-width:430px;margin-top:18px}.design-refresh .settings-grid{gap:15px}
+ .design-refresh .song-card,.design-refresh .room-card{padding:21px 18px 16px}.design-refresh .room-buttons{grid-template-columns:1fr}
+ .design-refresh .footer{flex-direction:column;align-items:flex-start;gap:8px;margin-top:20px}
+ .design-refresh #settingsDialog{top:82px;right:12px;max-height:calc(100dvh - 96px)}
+ .design-refresh.focus-mode .metro-card{padding:23px 28px 16px}.design-refresh.focus-mode #bpm{font-size:155px;height:171px;width:290px}.design-refresh.focus-mode .transport{grid-template-columns:98px minmax(170px,1fr) 106px;gap:12px}
+}
+@media(max-width:600px){
+ .design-refresh .header .brand-title{flex-direction:column;align-items:flex-start;gap:3px}
+ .design-refresh .brand-description{border:0;padding:0;font-size:11px;letter-spacing:.09em;line-height:1.4}
+ .design-refresh .brand-name{font-size:21px;line-height:1.15}
+ .design-refresh .header-actions{gap:3px}.design-refresh .header-actions>.icon-btn{width:44px;height:44px}
+ .design-refresh .brand-icon{width:34px;height:38px;border-radius:10px}.design-refresh .brand{gap:10px}
+ .design-refresh .sidebar{grid-template-columns:1fr}.design-refresh .room-buttons{grid-template-columns:1fr 1fr}
+ .design-refresh .song-list{max-height:300px}.design-refresh .song-card{padding:21px 21px 14px}.design-refresh .room-card{padding:23px 21px}
+ .design-refresh .current-title{max-width:270px}.design-refresh .song-item{min-height:71px}
+ .design-refresh .rhythm-game-audio{padding:6px 14px;gap:10px}.design-refresh .rhythm-dialog-header{padding:13px 14px}.design-refresh .rhythm-dialog-header h2{font-size:17px}
+}
+@media(max-width:480px){
+ :root{--header-height:72px}
+ .design-refresh .header{height:72px;padding:0 14px;gap:8px}
+ .design-refresh .brand{gap:8px}.design-refresh .brand-icon{width:29px;height:33px;border-radius:9px}.design-refresh .brand-icon svg{width:22px;height:22px}
+ .design-refresh .brand-name{font-size:18px}.design-refresh .brand-description{font-size:10px;letter-spacing:.07em}
+ .design-refresh .header-actions{gap:0}.design-refresh .header-actions>.icon-btn{width:44px;height:44px;border-radius:10px}.design-refresh .header-actions svg{width:20px;height:20px}
+ .design-refresh .shell{padding:14px 12px 18px}.design-refresh .workspace{gap:16px}.design-refresh .sidebar{gap:16px}
+ .design-refresh .metro-card{padding:18px 17px 10px;border-radius:20px}.design-refresh .card{border-radius:18px}
+ .design-refresh .metro-head{padding-bottom:14px;min-height:48px;gap:8px}.design-refresh .current-label{font-size:11px;margin-bottom:3px}.design-refresh .current-title{font-size:17px;max-width:212px}.design-refresh .mini-state{font-size:11px;gap:5px;padding:4px 6px;border-radius:6px}
+ .design-refresh .tempo-zone{padding-top:16px}.design-refresh .tempo-label{font-size:12px}.design-refresh .tempo-control{gap:15px}.design-refresh .tempo-control .stepper{width:46px;height:46px;border-radius:12px}
+ .design-refresh #bpm{font-size:118px;height:128px;width:224px;max-width:calc(100% - 122px);font-weight:500;letter-spacing:-.06em}
+ .design-refresh .bpm-caption{font-size:12px;margin-top:0;gap:8px}.design-refresh .tempo-range{margin:12px auto 15px;max-width:100%}.design-refresh #bpmRange{height:32px}.design-refresh .range-labels{font-size:11px}
+ .design-refresh .beat-track{gap:9px;min-height:49px;margin:0 0 7px}.design-refresh .beat{width:45px;height:45px;border-radius:12px;font-size:17px}.design-refresh .beat-hint{font-size:11px;line-height:1.6;margin-bottom:17px}
+ .design-refresh .transport{grid-template-columns:72px minmax(0,1fr) 80px;gap:8px}.design-refresh .transport>.btn{height:55px;min-height:55px;padding:8px 6px;font-size:13px;border-radius:11px}.design-refresh .transport #playBtn{font-size:16px;gap:6px}.design-refresh .transport #playBtn svg{display:block;width:16px;height:16px}.design-refresh .transport .transport-next{font-size:12px}.design-refresh .transport .transport-next svg{display:none}.design-refresh .transport .tap-btn{font-size:12px}
+ .design-refresh .transport-info{font-size:11px;min-height:22px;line-height:1.75;margin-top:8px}
+ .design-refresh .main-volume{margin-top:13px;padding:5px 9px;gap:7px;border-radius:11px;min-height:55px}.design-refresh .main-volume>label{font-size:12px}.design-refresh .main-volume .volume-line{gap:4px}.design-refresh .main-volume .icon-btn{width:44px;height:44px}.design-refresh .main-volume .volume-line output{font-size:13px;min-width:34px}
+ .design-refresh .rule{margin:19px 0}
+ .design-refresh .settings-grid{grid-template-columns:minmax(66px,.8fr) minmax(120px,1.45fr) minmax(78px,.95fr);gap:8px}
+ .design-refresh .settings-grid .field-label{font-size:12px;margin-bottom:8px}.design-refresh .settings-grid select{padding:7px 6px;height:48px;min-height:48px;font-size:16px}
+ .design-refresh .count-field{grid-column:auto;display:block;border-top:0;padding:0}.design-refresh .count-field .field-label{margin-bottom:8px}.design-refresh .count-field select{width:100%}
+ .design-refresh .note-segment{height:48px;padding:2px;gap:0;border-radius:10px}.design-refresh .note-option{min-height:42px;gap:2px;flex-direction:column;font-size:10px;line-height:1}.design-refresh .note-option svg{height:22px;width:19px}.design-refresh .note-option span{font-size:10px}
+ .design-refresh .control-foot{margin-top:16px;padding-top:7px;gap:6px}.design-refresh .counter{font-size:11px}.design-refresh .save-current{font-size:12px;gap:5px;min-height:44px}.design-refresh .save-current svg{width:15px;height:15px}
+ .design-refresh .song-card{padding:20px 18px 12px}.design-refresh .room-card{padding:22px 19px}.design-refresh .section-title h2{font-size:18px}.design-refresh .song-name{font-size:16px}.design-refresh .song-meta{font-size:12px}.design-refresh .section-intro{font-size:13px}
+ .design-refresh .song-tools{gap:10px}.design-refresh .song-tools .text-btn{font-size:12px}.design-refresh .song-tools>.small{font-size:11px!important}
+ .design-refresh .footer{font-size:11px;gap:8px;margin-top:18px}.design-refresh .shortcut-help{gap:12px;font-size:10px}.design-refresh .footer>span svg{width:13px;height:13px}
+ .design-refresh #settingsDialog{top:78px;right:10px;width:calc(100% - 20px);max-height:calc(100dvh - 90px);border-radius:18px}.design-refresh #settingsDialog .dialog-head{padding:12px 16px;min-height:69px}.design-refresh .settings-body{padding:0 18px 20px}.design-refresh .settings-heading h2{font-size:21px}.design-refresh .settings-appearance{padding:18px 0}.design-refresh .settings-appearance p{font-size:12px}.design-refresh .settings-flash{padding-bottom:12px}.design-refresh .settings-audio-heading{padding-top:21px}
+ .design-refresh #songDialog .dialog-head{padding:15px 17px 9px}.design-refresh #songDialog .dialog-body{padding:0 17px 20px}.design-refresh #songDialog .dialog-grid{gap:10px 12px}.design-refresh #songDialog .dialog-actions .btn{padding:9px 12px;min-height:46px;font-size:14px}
+ .design-refresh .dialog-head{padding:17px 18px 10px}.design-refresh .dialog-body{padding:3px 18px 21px}.design-refresh .dialog-head h2{font-size:20px}.design-refresh .dialog-actions .btn{padding:9px 12px;font-size:14px}.design-refresh .instrument-picker{gap:8px}.design-refresh .instrument-picker button{font-size:14px;min-height:52px;padding:9px 5px}
+ .design-refresh .band-dialog-top .dialog-head{padding:16px 18px 14px}.design-refresh .band-dialog-body{padding:17px 18px max(22px,env(safe-area-inset-bottom))}.design-refresh #bandTitle{font-size:22px}.design-refresh .band-tile{font-size:18px;min-height:77px}.design-refresh .band-alert>p{font-size:21px}
+ .design-refresh.focus-mode .metro-card{padding:20px 17px 12px}.design-refresh.focus-mode #bpm{font-size:130px;height:150px;width:230px;max-width:calc(100% - 122px)}.design-refresh.focus-mode .tempo-control{gap:15px}.design-refresh.focus-mode .beat{width:47px;height:47px;font-size:18px;border-radius:12px}.design-refresh.focus-mode .transport{grid-template-columns:72px minmax(0,1fr) 80px;gap:8px;margin-top:17px}.design-refresh.focus-mode .transport>.btn{height:56px;min-width:0;font-size:13px}.design-refresh.focus-mode .transport #playBtn{font-size:16px}
+}
+@media(max-width:360px){
+ .design-refresh .header{padding:0 10px;gap:6px}.design-refresh .brand{gap:5px}.design-refresh .brand-icon{width:24px;height:30px;border-radius:8px}.design-refresh .brand-icon svg{width:19px;height:19px}.design-refresh .brand-name{font-size:15px}.design-refresh .brand-description{font-size:9px;letter-spacing:0}.design-refresh .header-actions>.icon-btn{width:44px;height:44px}.design-refresh .header-actions svg{width:19px;height:19px}
+ .design-refresh .shell{padding:12px 10px 18px}.design-refresh .metro-card,.design-refresh.focus-mode .metro-card{padding-left:14px;padding-right:14px}.design-refresh .current-title{max-width:168px;font-size:16px}.design-refresh .mini-state{font-size:10px}
+ .design-refresh #bpm{font-size:100px;height:118px;max-width:calc(100% - 114px)}.design-refresh .tempo-control,.design-refresh.focus-mode .tempo-control{gap:12px}.design-refresh .tempo-control .stepper{width:44px;height:46px}.design-refresh .beat-track{gap:8px}
+ .design-refresh .transport,.design-refresh.focus-mode .transport{grid-template-columns:60px minmax(0,1fr) 68px;gap:7px}.design-refresh .transport #playBtn,.design-refresh.focus-mode .transport #playBtn{font-size:14px;gap:4px;padding:8px 4px;min-width:0}.design-refresh .transport .tap-btn{width:auto;padding:8px 4px}.design-refresh .transport .transport-next{padding:8px 4px}.design-refresh .transport #playBtn svg{width:14px;height:14px}
+ .design-refresh .settings-grid{grid-template-columns:.9fr 1.5fr;gap:13px 12px}.design-refresh .count-field{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--line)}.design-refresh .count-field .field-label{margin:0}.design-refresh .count-field select{width:120px}.design-refresh .note-option{flex-direction:row;font-size:12px;gap:5px}.design-refresh .note-option span{font-size:11px}
+ .design-refresh .main-volume{padding-left:6px;padding-right:6px;gap:4px}.design-refresh .main-volume>label{font-size:11px}.design-refresh .main-volume .volume-line{gap:3px}
+ .design-refresh .control-foot{gap:4px}.design-refresh .counter{font-size:10px}.design-refresh .save-current{font-size:11px;padding-left:5px}.design-refresh .song-card{padding-left:16px;padding-right:16px}.design-refresh .song-tools{gap:8px}
+}
+@media(max-height:580px){.design-refresh #settingsDialog{top:12px;max-height:calc(100dvh - 24px)}.design-refresh #rhythmGameDialog{height:calc(100dvh - 16px)}.design-refresh .rhythm-dialog-header{padding-top:8px;padding-bottom:8px}.design-refresh .rhythm-game-audio{padding-top:3px;padding-bottom:3px}}
+@media(prefers-reduced-motion:reduce){.design-refresh *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+/* Optical pass: remove duplicate visual BPM label but retain its native label
+   relationship; shorten noninteractive spacing, never the touch targets. */
+.design-refresh .tempo-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.design-refresh .tempo-zone{padding-top:15px}
+.design-refresh #bpm{height:137px}
+.design-refresh .tempo-range{margin-top:15px;margin-bottom:14px}
+.design-refresh .beat-hint{margin-bottom:17px}
+.design-refresh .main-volume{margin-top:14px;min-height:54px;padding-top:5px;padding-bottom:5px}
+.design-refresh .rule{margin:20px 0}
+.design-refresh .control-foot{margin-top:16px;padding-top:7px}
+.design-refresh .transport #playBtn{white-space:normal;line-height:1.35}
+.design-refresh .transport #playBtn span{line-height:1.35}
+@media(max-width:480px){
+ .design-refresh .tempo-zone{padding-top:12px}.design-refresh #bpm{height:117px;font-size:112px}
+ .design-refresh .tempo-range{margin:10px auto 12px}.design-refresh .beat-hint{margin-bottom:14px}
+ .design-refresh .main-volume{margin-top:10px}.design-refresh .rule{margin:16px 0}.design-refresh .control-foot{margin-top:13px}
+}
+/* The room-only live tab gets its own narrow rail on phones so it cannot cover
+   the volume, tempo slider or another important control while scrolling. */
+@media(max-width:600px){
+}
+@media(max-width:360px){.design-refresh #bpm{font-size:96px;height:109px}}
+/* Minimum touch target pass. Selected notes remain visually nested, but all
+   three segments retain a full 44px activation height. */
+.design-refresh .note-segment{height:52px}
+.design-refresh .note-option{min-height:44px}
+.design-refresh .settings-grid select{height:52px;min-height:52px}
+.design-refresh .song-tools .text-btn{min-height:44px}
+.design-refresh .band-quick-open{width:44px}
+@media(max-width:480px){.design-refresh .note-segment{height:50px}.design-refresh .settings-grid select{height:50px;min-height:50px}}
+.design-refresh .note-option{min-width:44px}
+@media(min-width:361px) and (max-width:480px){.design-refresh .settings-grid{grid-template-columns:minmax(66px,.8fr) minmax(138px,1.45fr) minmax(78px,.95fr)}}
+
+
+
+/* Source layer: tempolive-i18n-layout */
+/* v1.19 localized text fitting only; original design tokens and controls remain. */
+.language-btn{position:relative;overflow:visible;border:1px solid var(--line);font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
+.language-btn[aria-pressed=true]{background:var(--soft)}
+/* v2.1.1: the language selector uses EN / TW only, without a NEW badge. */
+html[lang=en] .brand-description{font-size:14px;letter-spacing:.005em}
+html[lang=en] .current-title{max-width:min(360px,50vw)}
+html[lang=en] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr)}
+html[lang=en] .count-field .field-label{white-space:nowrap}
+html[lang=en] .main-volume>label{font-size:13px}
+html[lang=en] .transport-info{font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+html[lang=en] .song-step{font-size:14px}
+html[lang=en] .room-buttons .btn{font-size:13px;padding-left:8px;padding-right:8px}
+html[lang=en] .settings-appearance{gap:12px}
+html[lang=en] .band-tab-title{writing-mode:horizontal-tb;font-size:11px;letter-spacing:0;line-height:1.5}
+html[lang=en] .band-quick-open{min-height:103px;gap:8px}
+html[lang=en] .band-tile{font-size:16px;overflow-wrap:normal;word-break:normal}
+html[lang=en] .band-tile small{font-size:11px}
+html[lang=en] .band-target-strip strong{font-size:17px}
+html[lang=en] .band-target-strip .btn{font-size:11px;max-width:110px;white-space:normal;line-height:1.4}
+html[lang=en] .instrument-picker button{font-size:14px;min-height:61px;overflow-wrap:normal}
+html[lang=en] .room-voice-setup .check-row{min-width:130px}
+html[lang=en] #songDialog .dialog-actions .btn{font-size:13px}
+html[lang=en] #bandPhraseTitle{font-size:22px}
+html[lang=en] .member-name{max-width:none;flex:1;min-width:0}
+html[lang=en] .member-state{max-width:105px;text-align:right;white-space:normal;line-height:1.4}
+@media(max-width:560px){
+ .header{height:auto!important;min-height:96px;display:grid!important;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;row-gap:10px!important;padding-top:14px!important;padding-bottom:13px!important}
+ .header .brand{grid-column:1;grid-row:1}
+ .header .header-actions{grid-column:1/-1;grid-row:2;width:100%;justify-content:flex-end;gap:10px!important}
+ .header .header-actions>.icon-btn{width:44px!important;height:44px!important;min-width:44px;min-height:44px}
+ .header .brand-title{flex-direction:row!important;align-items:baseline!important;font-size:18px!important;gap:8px!important}
+ .header .brand-description{font-size:12px!important}
+ .header .brand-icon{width:30px!important;height:32px!important}
+ #settingsDialog{top:134px;max-height:calc(100dvh - 150px)}
+ html[lang=en] .brand-title{flex-wrap:wrap}
+ html[lang=en] .transport .btn{font-size:13px;padding:9px 6px;line-height:1.4}
+ html[lang=en] .transport .transport-next,html[lang=en] .transport .tap-btn{font-size:12px;white-space:normal;min-width:0}
+ html[lang=en] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+ html[lang=en] .beat-hint{font-size:11px;line-height:1.6}
+ html[lang=en] .counter,html[lang=en] .save-current{font-size:12px}
+ html[lang=en] .save-current{max-width:145px;line-height:1.45;text-align:right}
+ html[lang=en] #modePill{font-size:11px}
+ html[lang=en] .rhythm-dialog-header>div{min-width:0}
+ html[lang=en] .rhythm-dialog-header p{font-size:11px;line-height:1.5}
+ html[lang=en] .rhythm-dialog-header h2{font-size:16px}
+ html[lang=en] #rhythmGameVolumeLabel{font-size:12px}
+ html[lang=en] .band-flow-line p{font-size:11px;max-width:245px}
+ html[lang=en] .band-step-panel h3{font-size:21px}
+}
+@media(max-width:350px){.header .header-actions{gap:8px!important}.header .brand-title{font-size:16px!important}.header .brand-description{font-size:11px!important}html[lang=en] .header .brand-description{font-size:11px!important}html[lang=en] .main-volume>label{font-size:11px}html[lang=en] .song-step{font-size:13px}html[lang=en] .instrument-picker button{font-size:12px}}
+@media(max-height:540px){#settingsDialog{top:12px;max-height:calc(100dvh - 24px)}}
+@media(min-width:361px) and (max-width:480px){html[lang=en] .design-refresh .settings-grid .field-label{min-height:38px;display:flex;align-items:flex-end;line-height:1.5}}
+
+
+/* Source layer: tempolive-contextual-controls */
+/* v1.20: move existing actions to their subject, without changing playback.
+   The brand owns Help; the metronome card owns its Expand/Restore control. */
+.design-refresh .brand-lockup{display:flex;align-items:center;min-width:0;gap:0}
+.design-refresh .header .brand-lockup .brand-title{display:block;min-width:0;flex:none;margin:0}
+.design-refresh .brand-lockup .brand-description{display:block;min-width:0;margin:0;line-height:1.4}
+.design-refresh #helpBtn.brand-help{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;margin:0 2px;border:1px solid transparent;border-radius:12px;color:var(--muted)}
+.design-refresh #helpBtn.brand-help svg{width:19px;height:19px;stroke-width:1.7}
+.design-refresh #helpBtn.brand-help:hover{color:var(--ink);background:var(--surface);border-color:var(--line)}
+.design-refresh .metro-head .metro-song-details{flex:1;min-width:0}
+.design-refresh .metro-current-meta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:5px}
+.design-refresh .metro-current-meta .current-label{margin:0;line-height:1.6}
+.design-refresh .metro-current-meta .mini-state{font-size:11px;line-height:1.3;padding:4px 7px;flex-shrink:0}
+.design-refresh .metro-head .current-title{max-width:100%;width:100%}
+.design-refresh #focusBtn.metro-focus-control{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;min-height:44px;width:auto;max-width:190px;padding:9px 12px;background:var(--soft);border:1px solid var(--line);border-radius:11px;font-size:13px;font-weight:600;line-height:1.4;color:var(--ink);text-align:left;touch-action:manipulation}
+.design-refresh #focusBtn.metro-focus-control svg{width:18px;height:18px;flex-shrink:0;stroke-width:1.8}
+.design-refresh #focusBtn.metro-focus-control>span{min-width:0;white-space:normal}
+.design-refresh #focusBtn.metro-focus-control:hover{background:var(--surface);border-color:var(--muted)}
+.design-refresh #focusBtn.metro-focus-control[aria-pressed=true]{background:var(--strong);color:var(--on-strong);border-color:var(--strong)}
+@media(max-width:760px){
+ .design-refresh .brand-lockup{display:grid;grid-template-columns:minmax(0,1fr) 44px;grid-template-rows:auto auto;column-gap:2px;row-gap:1px}
+ .design-refresh .header .brand-lockup .brand-title{grid-column:1;grid-row:1;line-height:1.1!important;white-space:nowrap}
+ .design-refresh .brand-lockup .brand-description{grid-column:1;grid-row:2;padding:0;border:0;font-size:11px!important;letter-spacing:0!important;white-space:normal}
+ .design-refresh #helpBtn.brand-help{grid-column:2;grid-row:1/3;margin:0;align-self:start;transform:translateY(-10px)}
+ .design-refresh .metro-head{gap:12px}
+}
+@media(max-width:560px){
+ /* Three global actions now fit beside the brand on a single header row. */
+ .design-refresh .header{display:flex!important;flex-direction:row;height:auto!important;min-height:76px;gap:8px!important;padding:10px 14px!important}
+ .design-refresh .header .brand{display:flex;min-width:0;flex:0 1 auto;gap:0;grid-row:auto;grid-column:auto}
+ .design-refresh .header .brand-icon{display:none}
+ .design-refresh .header .brand-lockup{min-width:0}
+ .design-refresh .header .brand-lockup .brand-title{font-size:18px!important;gap:0!important;flex-wrap:nowrap!important}
+ .design-refresh .header .brand-name{font-size:19px;line-height:1.1}
+ .design-refresh .header .header-actions{grid-column:auto;grid-row:auto;width:auto;flex-shrink:0;gap:6px!important;justify-content:flex-end}
+ .design-refresh .header .header-actions>.icon-btn{width:44px!important;height:44px!important;min-width:44px;min-height:44px}
+ .design-refresh #focusBtn.metro-focus-control{max-width:126px;padding:9px 10px;gap:6px;font-size:12px}
+ .design-refresh .metro-current-meta{gap:5px 8px}
+ .design-refresh .metro-current-meta .mini-state{font-size:10px;padding:3px 5px}
+ .design-refresh .metro-current-meta .current-label{font-size:11px}
+ .design-refresh #settingsDialog{top:84px;max-height:calc(100dvh - 98px)}
+}
+@media(max-width:350px){
+ .design-refresh .header{padding-left:10px!important;padding-right:10px!important;gap:6px!important}
+ .design-refresh .header .brand-name{font-size:17px}
+ .design-refresh .header .header-actions{gap:3px!important}
+ .design-refresh .brand-lockup .brand-description{font-size:10px!important}
+ .design-refresh .metro-head{gap:8px}
+ .design-refresh #focusBtn.metro-focus-control{max-width:118px;padding-left:8px;padding-right:8px}
+}
+@media(max-height:540px){.design-refresh #settingsDialog{top:12px;max-height:calc(100dvh - 24px)}}
+
+
+/* Source layer: tempolive-guide-refinement */
+/* v1.20.1: compact icon-only panel sizing; no label or layout side effects. */
+.design-refresh #focusBtn.metro-focus-control{width:44px;height:44px;min-width:44px;min-height:44px;max-width:44px;padding:0;gap:0;flex:0 0 44px;border-radius:12px;text-align:center}
+.design-refresh #focusBtn.metro-focus-control svg{width:23px;height:23px;stroke-width:1.75}
+/* Help is the only redesigned dialog. Native disclosures keep long details
+   out of the first view; a fixed header leaves Close available when reading. */
+.design-refresh #helpDialog{width:min(720px,calc(100vw - 32px));height:auto;max-height:min(850px,calc(100vh - 40px));max-height:min(850px,calc(100dvh - 40px));padding:0;overflow:hidden;border-radius:24px}
+.design-refresh #helpDialog[open]{display:flex;flex-direction:column}
+.design-refresh #helpDialog .guide-header{flex:none;align-items:flex-start;gap:16px;padding:23px 26px 19px;border-bottom:1px solid var(--line);background:var(--surface)}
+.design-refresh #helpDialog .guide-header>div{min-width:0}
+.design-refresh #helpDialog #helpTitle{font-size:24px;line-height:1.4;font-weight:650;letter-spacing:.01em;margin:0}
+.design-refresh #helpDialog #guideIntro{font-size:14px;line-height:1.7;color:var(--muted);margin:4px 0 0;max-width:490px}
+.design-refresh #helpDialog #guideClose{height:44px;width:44px;min-width:44px;min-height:44px;margin-top:-2px;border:1px solid var(--line);background:var(--soft);border-radius:12px}
+.design-refresh #helpDialog #guideClose:hover{background:var(--surface)}
+.design-refresh #helpDialog .guide-scroll{overflow-y:auto;overflow-x:hidden;flex:1 1 auto;min-height:0;padding:23px 26px 26px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;scroll-padding:12px}
+.design-refresh #helpDialog .guide-start{padding:18px;background:var(--soft);border:1px solid var(--line);border-radius:18px}
+.design-refresh #helpDialog .guide-start h3{font-size:14px;font-weight:600;color:var(--muted);line-height:1.5;margin:0 0 15px}
+.design-refresh #helpDialog .guide-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:0;margin:0;list-style:none}
+.design-refresh #helpDialog .guide-steps li{display:flex;flex-direction:column;gap:12px;min-width:0;margin:0}
+.design-refresh #helpDialog .guide-step-number{width:27px;height:27px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 27px;background:var(--strong);color:var(--on-strong);font-size:12px;line-height:1;border-radius:8px;font-weight:600;font-variant-numeric:tabular-nums}
+.design-refresh #helpDialog .guide-steps h4{margin:0 0 4px;font-size:16px;line-height:1.5;font-weight:650;color:var(--ink)}
+.design-refresh #helpDialog .guide-steps p{margin:0;font-size:14px;line-height:1.75;color:var(--muted);overflow-wrap:break-word}
+.design-refresh #helpDialog #guideTopicsTitle{font-size:14px;color:var(--muted);line-height:1.6;font-weight:550;margin:25px 0 11px}
+.design-refresh #helpDialog .guide-topic{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin:0 0 9px;overflow:clip}
+.design-refresh #helpDialog .guide-topic:last-child{margin-bottom:0}
+.design-refresh #helpDialog .guide-topic>summary{display:flex;align-items:center;gap:13px;min-height:61px;padding:14px 17px;cursor:pointer;list-style:none;touch-action:manipulation;font-size:16px;font-weight:600;line-height:1.55;position:relative;color:var(--ink)}
+.design-refresh #helpDialog .guide-topic>summary::-webkit-details-marker{display:none}
+.design-refresh #helpDialog .guide-topic>summary::marker{content:''}
+.design-refresh #helpDialog .guide-topic>summary:hover{background:var(--soft)}
+.design-refresh #helpDialog .guide-topic>summary:focus-visible{outline:3px solid var(--focus);outline-offset:-4px;border-radius:12px}
+.design-refresh #helpDialog .guide-topic>summary>span{flex:1;min-width:0;overflow-wrap:break-word}
+.design-refresh #helpDialog .guide-topic-icon{width:22px;height:22px;stroke-width:1.7;color:var(--muted);flex:0 0 22px}
+.design-refresh #helpDialog .guide-chevron{width:17px;height:17px;stroke-width:1.8;flex:0 0 17px;color:var(--muted);transition:transform .16s}
+.design-refresh #helpDialog .guide-topic[open]>summary{border-bottom:1px solid var(--line);background:var(--soft)}
+.design-refresh #helpDialog .guide-topic[open] .guide-chevron{transform:rotate(180deg)}
+.design-refresh #helpDialog .guide-topic-content{padding:19px 20px 21px}
+.design-refresh #helpDialog .guide-facts{display:grid;gap:19px;margin:0;padding:0}
+.design-refresh #helpDialog .guide-fact{display:block}
+.design-refresh #helpDialog .guide-fact dt{font-size:15px;font-weight:650;color:var(--ink);line-height:1.55;margin:0 0 5px}
+.design-refresh #helpDialog .guide-fact dd{font-size:15px;line-height:1.85;color:var(--muted);margin:0;overflow-wrap:break-word}
+.design-refresh #helpDialog .guide-note{padding:15px 16px;background:var(--soft);border-radius:12px;margin-top:20px;border-left:3px solid var(--line)}
+.design-refresh #helpDialog .guide-note>strong{display:block;font-size:14px;font-weight:650;line-height:1.6;margin:0 0 5px;color:var(--ink)}
+.design-refresh #helpDialog .guide-note>p{font-size:14px;color:var(--muted);line-height:1.85;margin:0;overflow-wrap:break-word}
+.design-refresh #helpDialog .guide-keys{margin:0;padding:0;display:grid;gap:0}
+.design-refresh #helpDialog .guide-keys>div{display:grid;grid-template-columns:155px minmax(0,1fr);gap:15px;align-items:center;min-height:47px;padding:9px 0;border-bottom:1px solid var(--line)}
+.design-refresh #helpDialog .guide-keys>div:first-child{padding-top:0}
+.design-refresh #helpDialog .guide-keys>div:last-child{border-bottom:0}
+.design-refresh #helpDialog .guide-keys dt{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;margin:0}
+.design-refresh #helpDialog .guide-keys dd{font-size:14px;line-height:1.7;margin:0;color:var(--ink)}
+.design-refresh #helpDialog .guide-keys kbd{font-size:12px;line-height:1.6;padding:3px 7px;min-width:25px;text-align:center;white-space:nowrap;background:var(--soft)}
+.design-refresh #helpDialog .guide-footnote{font-size:13px;line-height:1.8;color:var(--muted);margin:16px 0 0}
+@media(max-width:600px){
+ .design-refresh #helpDialog{width:calc(100vw - 22px);max-height:calc(100vh - 22px);max-height:calc(100dvh - 22px);border-radius:21px}
+ .design-refresh #helpDialog .guide-header{padding:18px 18px 15px;gap:13px}
+ .design-refresh #helpDialog #helpTitle{font-size:23px}
+ .design-refresh #helpDialog #guideIntro{font-size:13px;line-height:1.75;margin-top:3px}
+ .design-refresh #helpDialog .guide-scroll{padding:17px 17px 20px}
+ .design-refresh #helpDialog .guide-start{padding:16px;border-radius:15px}
+ .design-refresh #helpDialog .guide-start h3{margin-bottom:13px}
+ .design-refresh #helpDialog .guide-steps{grid-template-columns:1fr;gap:14px}
+ .design-refresh #helpDialog .guide-steps li{flex-direction:row;gap:12px;align-items:flex-start}
+ .design-refresh #helpDialog .guide-step-number{margin-top:1px;width:25px;height:25px;flex-basis:25px;border-radius:7px}
+ .design-refresh #helpDialog .guide-steps h4{font-size:15px;margin-bottom:2px}
+ .design-refresh #helpDialog .guide-steps p{font-size:13px;line-height:1.8}
+ .design-refresh #helpDialog #guideTopicsTitle{margin-top:21px;margin-bottom:10px;font-size:13px}
+ .design-refresh #helpDialog .guide-topic>summary{min-height:60px;padding:13px 14px;gap:11px;font-size:15px}
+ .design-refresh #helpDialog .guide-topic-icon{width:20px;height:20px;flex-basis:20px}
+ .design-refresh #helpDialog .guide-topic-content{padding:17px 15px 19px}
+ .design-refresh #helpDialog .guide-fact dd{font-size:14px;line-height:1.85}
+ .design-refresh #helpDialog .guide-fact dt{font-size:15px}
+ .design-refresh #helpDialog .guide-facts{gap:18px}
+ .design-refresh #helpDialog .guide-note{padding:13px 14px}
+ .design-refresh #helpDialog .guide-note>p{font-size:13px;line-height:1.9}
+ .design-refresh #helpDialog .guide-keys>div{grid-template-columns:122px minmax(0,1fr);gap:10px}
+ .design-refresh #helpDialog .guide-keys dd{font-size:13px}
+ .design-refresh #helpDialog .guide-keys kbd{font-size:11px;padding:2px 5px;min-width:23px}
+}
+@media(max-width:350px){
+ .design-refresh #helpDialog .guide-header{padding-left:15px;padding-right:15px}
+ .design-refresh #helpDialog .guide-scroll{padding-left:13px;padding-right:13px}
+ .design-refresh #helpDialog .guide-keys>div{grid-template-columns:106px minmax(0,1fr);gap:8px}
+ .design-refresh #helpDialog .guide-keys kbd{font-size:10px;padding:2px 4px;min-width:20px}
+}
+@media(max-height:500px){
+ .design-refresh #helpDialog{max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px)}
+ .design-refresh #helpDialog .guide-header{padding-top:12px;padding-bottom:12px}
+}
+
+
+/* Source layer: tempolive-guide-priorities */
+
+/* v1.20.2: promote room, sync, live talk and metronome guidance only.
+   Every selector is scoped to the help dialog. No control, transport, storage,
+   room, game, audio, focus-mode or language behavior is changed. */
+.design-refresh #helpDialog .guide-primary>h3{font-size:14px;font-weight:600;color:var(--muted);line-height:1.6;margin:0 0 13px}
+.design-refresh #helpDialog .guide-primary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.design-refresh #helpDialog .guide-feature{min-width:0;padding:17px 18px 18px;border:1px solid var(--line);border-radius:16px;background:var(--soft)}
+.design-refresh #helpDialog .guide-feature-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.design-refresh #helpDialog .guide-feature-icon{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 34px;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--ink)}
+.design-refresh #helpDialog .guide-feature-icon svg{width:21px;height:21px;stroke-width:1.65}
+.design-refresh #helpDialog .guide-feature h4{font-size:17px;line-height:1.45;font-weight:650;letter-spacing:0;margin:0;color:var(--ink);overflow-wrap:break-word}
+.design-refresh #helpDialog .guide-feature-lead{font-size:14px;line-height:1.7;font-weight:600;color:var(--ink);margin:0 0 6px;overflow-wrap:break-word}
+.design-refresh #helpDialog .guide-feature-copy{font-size:14px;line-height:1.8;color:var(--muted);margin:0;overflow-wrap:break-word}
+@media(max-width:600px){
+ .design-refresh #helpDialog .guide-primary-grid{grid-template-columns:1fr;gap:10px}
+ .design-refresh #helpDialog .guide-primary>h3{font-size:13px;margin-bottom:11px}
+ .design-refresh #helpDialog .guide-feature{padding:14px 15px 15px;border-radius:14px}
+ .design-refresh #helpDialog .guide-feature-head{margin-bottom:9px;gap:9px}
+ .design-refresh #helpDialog .guide-feature-icon{width:30px;height:30px;flex-basis:30px;border-radius:9px}
+ .design-refresh #helpDialog .guide-feature-icon svg{width:19px;height:19px}
+ .design-refresh #helpDialog .guide-feature h4{font-size:16px}
+ .design-refresh #helpDialog .guide-feature-lead{font-size:14px;line-height:1.65;margin-bottom:4px}
+ .design-refresh #helpDialog .guide-feature-copy{font-size:14px;line-height:1.75}
+}
+
+
+/* Source layer: tempolive-tutorial-style */
+/* TEMPOLIVE v2.1: reserved-space walkthrough. No floating explanation sits over
+   the original controls: a separate, scrollable app viewport is beside/above the
+   tutorial dock. Outside the walkthrough this wrapper is display:contents. */
+#tourWorkspace{display:contents}
+#tutorialBtn{position:relative;flex-shrink:0}
+#tutorialBtn>svg{width:22px;height:22px}
+#tutorialBtn[aria-expanded=true]{background:var(--soft);border-color:var(--line)}
+.tour-new{position:absolute;top:-4px;right:-2px;min-width:28px;height:14px;display:inline-flex;justify-content:center;align-items:center;padding:0 3px;border:1px solid var(--bg);border-radius:4px;background:var(--strong);color:var(--on-strong);font-size:8px;font-weight:700;line-height:1;letter-spacing:.03em;pointer-events:none}
+/* The fourth action fits a normal phone without shrinking touch targets. */
+@media(min-width:380px) and (max-width:560px){.design-refresh .header .header-actions{gap:3px!important}.design-refresh .header{gap:5px!important;padding-left:12px!important;padding-right:12px!important}.design-refresh .header .brand-name{font-size:18px}}
+@media(max-width:379px){.design-refresh .header{flex-wrap:wrap!important;gap:6px!important;padding-top:10px!important;padding-bottom:9px!important}.design-refresh .header .header-actions{margin-left:auto!important;gap:6px!important}.design-refresh .header .brand{flex-basis:100%}.design-refresh #settingsDialog{top:131px;max-height:calc(100dvh - 143px)}}
+@media(max-width:379px) and (max-height:540px){.design-refresh #settingsDialog{top:12px;max-height:calc(100dvh - 24px)}}
+:root{--tour-dock-width:340px;--tour-dock-height:244px}
+body.tour-active{overflow:hidden!important}
+.tour-active #tourWorkspace{display:block;position:fixed;inset:0 var(--tour-dock-width) 0 0;z-index:200;overflow:auto;overscroll-behavior:contain;scroll-behavior:auto;background:var(--bg);container:tour-page/inline-size}
+.tour-active #tourWorkspace>.header,.tour-active #tourWorkspace>.shell{max-width:100%;width:100%;margin-left:auto;margin-right:auto}
+.tour-active #tourWorkspace>.header{position:relative}
+.tour-active #tourWorkspace .shell{padding-left:20px;padding-right:20px}
+.tour-active #tourWorkspace .workspace{grid-template-columns:minmax(0,1fr) 300px;gap:20px}
+.tour-active #tourWorkspace .sidebar{display:grid!important}
+.tour-active #tourWorkspace .footer{display:flex!important}
+.tour-active #tourWorkspace .current-title{max-width:100%}
+.tour-focus{outline:3px solid var(--strong)!important;outline-offset:6px!important;border-radius:12px;scroll-margin:22px}
+#tourStage{position:fixed;inset:0 var(--tour-dock-width) 0 0;z-index:201;background:var(--bg);display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.tour-stage-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 22px;background:var(--surface);border-bottom:1px solid var(--line);flex-shrink:0}
+.tour-stage-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;line-height:1.5}.tour-stage-label svg{width:18px;height:18px}
+.tour-preview-tag{font-size:11px;font-weight:550;padding:4px 8px;line-height:1.5;border:1px solid var(--line);border-radius:6px;color:var(--muted);white-space:nowrap}
+#tourStageScroller{flex:1;min-height:0;overflow:auto;padding:26px;overscroll-behavior:contain}
+#tourPreview{max-width:640px;margin:0 auto;padding:23px 24px;border:1px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:var(--shadow);color:var(--ink)}
+#tourPreview h3{font-size:21px;font-weight:650;line-height:1.5;margin:0 0 17px}
+#tourPreview h4{font-size:15px;font-weight:600;margin:18px 0 8px;line-height:1.5}
+#tourPreview p{line-height:1.7}
+#tourPreview .field-label{margin-top:14px;font-size:14px}
+#tourPreview .tour-sample-note{font-size:12px;color:var(--muted);margin-top:13px;line-height:1.7}
+#tourPreview input:not([type=checkbox]):not([type=range]),#tourPreview select{width:100%;min-height:46px;font-size:16px}
+#tourPreview button{cursor:default}
+.tour-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.tour-preview-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tour-demo-tile{padding:12px 8px;min-height:58px;border:1px solid var(--line);border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1.5;font-weight:550;text-align:center;overflow-wrap:anywhere}
+.tour-demo-tile.selected{background:var(--strong);color:var(--on-strong);border-color:var(--strong)}
+.tour-demo-tile.wide{grid-column:1/-1}
+.tour-demo-phrase{display:flex;flex-direction:column;gap:4px}
+.tour-demo-phrase small{font-size:11px;color:var(--muted);font-weight:400}
+.tour-preview-code{font-family:var(--number-font,monospace);font-size:34px;letter-spacing:.2em;background:var(--soft);padding:12px 17px;border:1px solid var(--line);border-radius:12px;margin:10px 0 18px}
+.tour-preview-members{display:grid;gap:10px;margin:15px 0}
+.tour-preview-member{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;border-bottom:1px solid var(--line);font-size:15px}
+.tour-preview-member>small{font-size:12px;color:var(--muted)}
+.tour-preview-volume{display:flex;align-items:center;gap:12px;margin:18px 0;padding:10px 12px;background:var(--soft);border-radius:12px;font-size:13px}
+.tour-preview-volume input{flex:1;min-width:0}
+.tour-demo-callout{padding:13px 14px;background:var(--soft);border:1px solid var(--line);border-radius:13px;font-size:14px;line-height:1.7;margin-top:16px}
+.tour-demo-status{display:inline-flex;gap:7px;align-items:center;border:1px solid var(--line);border-radius:99px;padding:5px 10px;font-size:12px;background:var(--soft)}
+.tour-demo-status::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.tour-preview-steps{display:grid;gap:12px}.tour-preview-line{display:flex;align-items:flex-start;gap:12px;font-size:15px}.tour-preview-line>span:first-child{display:flex;justify-content:center;align-items:center;width:25px;height:25px;border:1px solid var(--line);border-radius:50%;flex-shrink:0;background:var(--soft);font-size:12px}
+.tour-demo-mini-head{display:flex;align-items:center;justify-content:space-between;gap:13px;padding:12px 0;border-bottom:1px solid var(--line)}
+#tourCoach{position:fixed;inset:0 0 0 auto;z-index:210;display:flex;flex-direction:column;width:var(--tour-dock-width);max-width:100vw;background:var(--surface);color:var(--ink);border:0;border-left:1px solid var(--line);box-shadow:-8px 0 30px #00000005;overflow:hidden}
+.tour-coach-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:19px 20px 10px;flex-shrink:0}
+.tour-coach-brand{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:14px;line-height:1.5;font-weight:650;min-width:0}
+.tour-coach-brand .flash-new-badge{font-size:8px;height:15px;min-height:0;padding:0 4px}
+.tour-coach-tools{display:flex;align-items:center;gap:2px;flex-shrink:0}
+#tourCoach .icon-btn{width:44px;min-width:44px;height:44px;min-height:44px;border:1px solid transparent}
+#tourCoach .icon-btn:hover{border-color:var(--line);background:var(--soft)}
+#tourLang{font-size:12px;font-weight:600}
+.tour-coach-scroll{overflow-y:auto;min-height:0;padding:3px 22px 20px;flex:1}
+.tour-chapter{font-size:12px;font-weight:550;color:var(--muted);line-height:1.5;margin:11px 0 10px}
+#tourStepTitle{font-size:26px;font-weight:650;line-height:1.45;letter-spacing:-.01em;margin:0 0 12px;overflow-wrap:anywhere}
+#tourStepBody{font-size:16px;line-height:1.85;margin:0 0 17px;overflow-wrap:anywhere}
+.tour-location{display:flex;align-items:flex-start;gap:7px;padding:10px 12px;background:var(--soft);border:1px solid var(--line);border-radius:11px;font-size:12px;color:var(--muted);line-height:1.7}
+.tour-location svg{height:15px;width:15px;margin-top:2px}
+.tour-jump{border-top:1px solid var(--line);margin-top:21px;padding-top:16px}
+.tour-jump label{font-size:12px;font-weight:550;color:var(--muted);margin-bottom:7px}
+#tourJump{min-height:44px;width:100%;max-width:100%;font-size:13px;padding:9px 10px;border-radius:10px}
+.tour-readonly-note{font-size:11px;line-height:1.8;color:var(--muted);margin-top:14px}
+.tour-coach-footer{flex-shrink:0;padding:14px 20px max(18px,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface)}
+.tour-progress-row{display:flex;align-items:center;gap:12px;margin-bottom:11px}.tour-progress-track{height:3px;border-radius:99px;background:var(--line);flex:1;overflow:hidden}.tour-progress-fill{height:100%;background:var(--strong);width:0}.tour-counter{font-size:12px;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.tour-nav{display:grid;grid-template-columns:1fr 1.25fr;gap:10px}.tour-nav .btn{min-height:47px;width:100%;font-size:14px;padding:9px 12px}.tour-nav svg{width:17px;height:17px}
+#tourPrev:disabled{opacity:.4}
+.tour-active #bandQuickOpen{visibility:hidden!important}
+.tour-active #toast{bottom:14px;max-width:calc(100vw - var(--tour-dock-width) - 32px);left:calc((100vw - var(--tour-dock-width))/2);z-index:220}
+.tour-active .band-alert{right:calc(var(--tour-dock-width) + 16px);width:min(400px,calc(100vw - var(--tour-dock-width) - 32px))}
+/* Container width, not the outer browser width, determines the preview layout. */
+@container tour-page (max-width:1020px){.tour-active #tourWorkspace .workspace{grid-template-columns:minmax(0,1fr)}.tour-active #tourWorkspace .sidebar{grid-template-columns:minmax(0,1fr)}.tour-active #tourWorkspace .shell{max-width:760px}.tour-active #tourWorkspace .metro-card{padding:22px}.tour-active #tourWorkspace .header .brand-description{display:none}.tour-active #tourWorkspace .header .brand-icon{display:none}.tour-active #tourWorkspace .header{padding:13px 20px!important;gap:8px!important;min-height:76px;height:auto}.tour-active #tourWorkspace .header .header-actions{gap:3px!important}.tour-active #tourWorkspace .brand-lockup{display:flex;align-items:center}.tour-active #tourWorkspace #helpBtn{transform:none}.tour-active #tourWorkspace .header .brand-name{font-size:20px}}
+@container tour-page (max-width:630px){.tour-active #tourWorkspace .transport{grid-template-columns:75px minmax(0,1fr) 85px;gap:8px}.tour-active #tourWorkspace .transport>.btn{font-size:13px;min-width:0;padding:8px 6px;white-space:normal}.tour-active #tourWorkspace .transport #playBtn{font-size:15px}.tour-active #tourWorkspace .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}.tour-active #tourWorkspace .count-field{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between}.tour-active #tourWorkspace .count-field select{width:135px}.tour-active #tourWorkspace .count-field .field-label{margin:0}.tour-active #tourWorkspace #bpm{font-size:108px!important;height:132px!important;width:215px!important;max-width:calc(100% - 112px)}.tour-active #tourWorkspace .tempo-control{gap:12px!important}.tour-active #tourWorkspace .tempo-control .stepper{width:44px;height:44px}.tour-active #tourWorkspace .tempo-zone{padding-top:17px}}
+@container tour-page (max-width:390px){.tour-active #tourWorkspace .header{flex-wrap:wrap!important}.tour-active #tourWorkspace .header .brand{flex-basis:100%}.tour-active #tourWorkspace .header-actions{margin-left:auto}.tour-active #tourWorkspace .shell{padding:18px 12px}.tour-active #tourWorkspace .metro-card{padding:18px 14px}.tour-active #tourWorkspace .main-volume{gap:5px;padding:8px}.tour-active #tourWorkspace .main-volume>label{font-size:12px}.tour-active #tourWorkspace .transport{grid-template-columns:61px minmax(0,1fr) 70px;gap:6px}.tour-active #tourWorkspace .transport>.btn{font-size:12px}.tour-active #tourWorkspace .transport #playBtn{font-size:14px}}
+/* Portrait/mobile: separate upper app window and lower instruction dock. */
+@media(max-width:1000px) and (min-height:551px), (max-width:700px){
+ .tour-active #tourWorkspace,#tourStage{inset:0 0 var(--tour-dock-height) 0}
+ #tourCoach{inset:auto 0 0 0;width:100%;max-height:48vh;max-height:48dvh;border-left:0;border-top:1px solid var(--line);box-shadow:0 -8px 30px #00000006}
+ .tour-coach-header{padding:7px 14px 0;min-height:44px}
+ .tour-coach-brand{font-size:12px}.tour-coach-scroll{padding:0 16px 10px;flex:0 1 auto}.tour-chapter{display:none}
+ #tourStepTitle{font-size:20px;line-height:1.4;margin:1px 0 6px}#tourStepBody{font-size:14px;line-height:1.7;margin:0 0 7px}
+ .tour-location{font-size:11px;line-height:1.5;padding:6px 9px;border-radius:7px}
+ .tour-jump{border:0;margin:8px 0 0;padding:0;display:flex;align-items:center;gap:8px}.tour-jump label{font-size:11px;margin:0;flex-shrink:0}#tourJump{flex:1;min-width:0;font-size:12px;min-height:36px;height:36px;padding:5px 8px}
+ .tour-readonly-note{display:none}.tour-coach-footer{padding:8px 14px max(10px,env(safe-area-inset-bottom))}
+ .tour-progress-row{margin:0 0 7px}.tour-nav .btn{min-height:44px;height:44px;font-size:13px;padding:6px 10px}
+ .tour-stage-header{padding:9px 14px}.tour-stage-label{font-size:12px}.tour-preview-tag{font-size:10px;padding:3px 6px}
+ #tourStageScroller{padding:16px}#tourPreview{padding:18px 16px;border-radius:17px}#tourPreview h3{font-size:20px;margin-bottom:13px}.tour-demo-tile{font-size:14px;min-height:51px;padding:9px 5px}.tour-preview-grid{gap:8px}
+ .tour-active #toast{left:50%;max-width:calc(100vw - 28px);bottom:calc(var(--tour-dock-height) + 10px)}
+ .tour-active .band-alert{right:12px;left:12px;top:12px;width:auto;max-height:calc(100dvh - var(--tour-dock-height) - 24px)}
+}
+@media(min-width:701px) and (max-height:550px){:root{--tour-dock-width:306px}.tour-coach-header{padding:7px 12px 0}.tour-coach-scroll{padding:0 16px 10px}.tour-chapter{margin:5px 0;font-size:11px}#tourStepTitle{font-size:21px;margin-bottom:8px}#tourStepBody{font-size:14px;line-height:1.65;margin-bottom:10px}.tour-jump{margin-top:12px;padding-top:10px}.tour-readonly-note{display:none}.tour-coach-footer{padding:8px 12px}.tour-nav .btn{min-height:44px}.tour-stage-header{padding:8px 13px}#tourStageScroller{padding:17px}}
+@media(prefers-reduced-motion:reduce){.tour-active *{scroll-behavior:auto!important}.tour-focus{transition:none!important}}
+/* Explicit primary hover avoids inheriting the old generic pale hover fill. */
+#tourCoach .tour-nav .btn.primary:hover:not(:disabled){background:var(--strong);color:var(--on-strong);border-color:var(--strong);opacity:.92}
+.tour-active .header.tour-focus{outline-offset:-3px!important}
+
+
+/* Source layer: tempolive-german-layout */
+/* v2.1.3: local German text fitting and compact ordered language picker.
+   Existing Chinese/English layouts, theme controls and beat visuals stay intact. */
+.language-btn{position:relative}
+.language-btn[aria-expanded=true]{background:var(--soft)}
+.language-menu{position:fixed;inset:auto;margin:0;z-index:1000;max-width:calc(100vw - 24px);padding:7px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--ink);box-shadow:0 12px 38px #0002;box-sizing:border-box}
+.language-menu[hidden]{display:none!important}
+.language-menu:popover-open{display:block}
+.language-menu::backdrop{background:transparent;pointer-events:none}
+.language-menu button{display:flex;align-items:center;gap:9px;width:100%;min-height:48px;padding:10px 9px;border-radius:9px;text-align:left;font-size:14px;background:transparent;color:var(--ink);touch-action:manipulation}
+.language-menu button:hover,.language-menu button[aria-checked=true]{background:var(--soft)}
+.language-menu button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.language-option-code{font-size:12px;font-weight:650;min-width:25px;font-variant-numeric:tabular-nums}
+.language-option-name{flex:1;min-width:0}
+.language-option-new{font-size:8px;font-weight:750;line-height:1;border-radius:99px;padding:4px 5px;background:var(--strong);color:var(--on-strong);letter-spacing:.03em}
+.language-option-check{width:12px;font-size:13px;visibility:hidden}
+.language-menu button[aria-checked=true] .language-option-check{visibility:visible}
+#languageBtn.language-is-de::after,#tourLang.language-is-de::after{content:'NEW';position:absolute;top:-5px;right:-1px;padding:2px 4px;background:var(--strong);color:var(--on-strong);border:1px solid var(--surface);border-radius:99px;font-size:8px;line-height:1;font-weight:750;letter-spacing:.025em;pointer-events:none}
+#tourLang{position:relative;overflow:visible}
+html[lang=de] .brand-description{font-size:14px;letter-spacing:0}
+html[lang=de] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr)}
+html[lang=de] .settings-grid .field-label{line-height:1.5}
+html[lang=de] .transport .btn{white-space:normal;line-height:1.4}
+html[lang=de] .main-volume>label{font-size:13px;white-space:normal;max-width:116px;line-height:1.45}
+html[lang=de] .transport-info{font-size:12px;line-height:1.65;overflow-wrap:break-word}
+html[lang=de] .save-current{white-space:normal;text-align:right;line-height:1.45;max-width:190px}
+html[lang=de] .song-step{font-size:14px;line-height:1.45}
+html[lang=de] .room-buttons .btn{font-size:14px;line-height:1.4;padding:10px 8px}
+html[lang=de] .settings-appearance{gap:12px}
+html[lang=de] #settingsTitle{font-size:19px}
+html[lang=de] .settings-heading .pill{font-size:11px;white-space:normal;line-height:1.4}
+html[lang=de] .band-quick-open .band-tab-title{writing-mode:horizontal-tb;font-size:10px;letter-spacing:0;line-height:1.5}
+html[lang=de] .band-tile{font-size:16px;line-height:1.45;hyphens:auto;overflow-wrap:break-word;word-break:normal}
+html[lang=de] .band-tile small{font-size:12px}
+html[lang=de] .band-target-strip strong{font-size:17px}
+html[lang=de] .band-target-strip .btn{font-size:12px;max-width:128px;white-space:normal;line-height:1.4}
+html[lang=de] .instrument-picker button{font-size:14px;min-height:62px;hyphens:auto;overflow-wrap:break-word;word-break:normal}
+html[lang=de] .instrument-add-box .row{flex-wrap:wrap}
+html[lang=de] .instrument-add-box .row input{flex-basis:100%}
+html[lang=de] .room-voice-setup .check-row{min-width:140px}
+html[lang=de] .member-name{min-width:0;max-width:none;flex:1}
+html[lang=de] .member-state{max-width:105px;text-align:right;line-height:1.4;white-space:normal}
+html[lang=de] .band-flow-line p{font-size:12px;line-height:1.6}
+html[lang=de] .band-step-panel h3{font-size:22px;hyphens:auto}
+html[lang=de] .band-voice-bar .btn{white-space:normal;min-width:105px;line-height:1.5;font-size:12px}
+html[lang=de] .band-volume-row label{white-space:normal;max-width:125px;font-size:13px;line-height:1.4}
+html[lang=de] .guide-primary-title,html[lang=de] .guide-item-title,html[lang=de] #tourStepTitle{hyphens:auto;overflow-wrap:break-word}
+html[lang=de] .rhythm-dialog-header>div{min-width:0}
+html[lang=de] .rhythm-dialog-header h2{font-size:17px}
+html[lang=de] .rhythm-dialog-header p{font-size:12px;line-height:1.5}
+html[lang=de] .tour-preview-grid .tour-preview-tile{hyphens:auto;overflow-wrap:break-word}
+html[lang=de] .tour-step-actions .btn{white-space:normal}
+@media(max-width:560px){
+ html[lang=de] .header .brand-description{font-size:10px!important}
+ html[lang=de] .transport .transport-next{font-size:12px;padding:8px 4px;min-width:0}
+ html[lang=de] .transport .play-btn{font-size:15px;padding:8px}
+ html[lang=de] .transport .tap-btn{font-size:12px;padding:8px 4px;min-width:0}
+ html[lang=de] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+ html[lang=de] .counter{font-size:12px}
+ html[lang=de] .save-current{font-size:12px;max-width:140px}
+ html[lang=de] .song-step{font-size:13px}
+ html[lang=de] #songDialog .dialog-actions .btn{font-size:13px;padding:10px}
+ html[lang=de] .beat-hint{font-size:12px;line-height:1.6}
+ html[lang=de] #screenFlashLabel{font-size:15px}
+ html[lang=de] .rhythm-dialog-header h2{font-size:15px}
+ html[lang=de] .rhythm-dialog-header p{font-size:11px}
+ html[lang=de] #rhythmGameVolumeLabel{font-size:12px}
+ html[lang=de] #bandDialog .band-dialog-top h2{font-size:21px}
+ html[lang=de] .band-target-strip .btn{max-width:118px}
+ html[lang=de] #tourStepTitle{font-size:19px;line-height:1.3}
+ html[lang=de] #tourNext{white-space:normal;font-size:13px}
+}
+@media(max-width:350px){html[lang=de] .main-volume>label{font-size:11px;max-width:81px}html[lang=de] .instrument-picker button{font-size:12px}html[lang=de] .control-foot{align-items:flex-start;gap:8px}html[lang=de] .save-current{max-width:122px}html[lang=de] .band-tile{font-size:15px}}
+/* German settings heading is wider than its Chinese/English counterparts. */
+html[lang=de] #settingsDialog .settings-heading{min-width:0;flex-wrap:wrap;gap:6px 10px}
+@media(max-width:379px){html[lang=de] .design-refresh #settingsDialog{width:calc(100vw - 20px);max-width:calc(100vw - 20px);left:auto;right:10px}html[lang=de] #settingsDialog .settings-heading{flex:1}html[lang=de] #settingsDialog .dialog-head{gap:8px}html[lang=de] #settingsTitle{font-size:18px}}
+@media(max-width:560px){
+ html[lang=de] .design-refresh .sidebar{grid-template-columns:minmax(0,1fr)}
+ html[lang=de] .design-refresh .room-buttons,html[lang=de] .design-refresh .song-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html[lang=de] .design-refresh .room-buttons .btn,html[lang=de] .design-refresh .song-navigation .btn{min-width:0;hyphens:auto;overflow-wrap:break-word}
+ html[lang=de] .design-refresh .shortcut-help{flex-wrap:wrap;gap:8px;min-width:0}
+ html[lang=de] .design-refresh .song-tools{flex-wrap:wrap;gap:10px}
+ html[lang=de] .design-refresh .song-tools>*{min-width:0}
+}
+/* Keep intrinsic German button widths from expanding narrow desktop sidebars. */
+html[lang=de] .design-refresh .sidebar>.card{min-width:0}
+html[lang=de] .design-refresh .room-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[lang=de] .design-refresh .room-buttons .btn{min-width:0;hyphens:auto;overflow-wrap:break-word}
+html[lang=de] .design-refresh .song-tools{flex-wrap:wrap;gap:10px}
+html[lang=de] .design-refresh .song-tools>*{min-width:0}
+
+
+/* Source layer: tempolive-stage-layout */
+/* v2.1.4 - stage view and compact track controls. No room-only gutter. */
+.design-refresh .transport{display:grid;grid-template-columns:52px minmax(140px,260px) 52px minmax(94px,120px);gap:10px;justify-content:center;align-items:center}
+.design-refresh .transport>.transport-skip{display:inline-flex;align-items:center;justify-content:center;min-width:0;width:52px;height:58px;min-height:44px;padding:0;border-radius:14px;grid-row:1;font-size:0}
+.design-refresh .transport>.transport-skip svg{display:block!important;width:23px;height:23px;stroke-width:1.7}
+.design-refresh .transport #transportPrevSong{grid-column:1}
+.design-refresh .transport #playBtn{grid-column:2;grid-row:1;min-width:0;width:100%;height:58px;min-height:44px;padding:8px 10px}
+.design-refresh .transport #transportNextSong{grid-column:3}
+.design-refresh .transport #tapBtn{grid-column:4;grid-row:1;min-width:0;width:100%;height:58px;min-height:44px;padding:8px 6px;font-size:14px}
+.audio-continuity-setting{padding:17px 0 0;margin-top:18px;border-top:1px solid var(--line)}
+.audio-continuity-setting .check-row{font-size:14px;line-height:1.65;align-items:flex-start;gap:10px}
+.audio-continuity-setting .check-row>span{flex:1;min-width:0}
+.audio-continuity-setting .flash-new-badge{margin-left:5px;vertical-align:middle}
+.audio-continuity-setting .audio-explain{margin-top:9px;font-size:12px}
+@media(max-width:600px){
+ .design-refresh .transport{grid-template-columns:48px minmax(0,1fr) 48px;gap:8px}
+ .design-refresh .transport>.transport-skip{width:48px;height:54px}
+ .design-refresh .transport #playBtn{height:54px;min-width:0;font-size:17px}
+ .design-refresh .transport #tapBtn{grid-column:1/-1;grid-row:2;height:44px;min-height:44px;font-size:13px;background:transparent;border-color:var(--line)}
+}
+/* LIVE Talk stays fixed above the content: entering a room changes no column,
+   page width or padding. A small edge tab remains the only entry point. */
+.design-refresh .band-quick-open{right:max(0px,env(safe-area-inset-right));z-index:75;box-shadow:-3px 4px 18px #0002}
+/* Stage focus is strictly visual: the same beat buttons and same setlist keep
+   their listeners, live accent state, room authority and playback timeline. */
+body.design-refresh.focus-mode:not(.tour-active){overflow:hidden}
+body.design-refresh.focus-mode:not(.tour-active) #tourWorkspace>.header,
+body.design-refresh.focus-mode:not(.tour-active) .header,
+body.design-refresh.focus-mode:not(.tour-active) .intro,
+body.design-refresh.focus-mode:not(.tour-active) .footer,
+body.design-refresh.focus-mode:not(.tour-active) #offlineBanner{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .shell{width:100%;max-width:none;height:100vh;height:100dvh;margin:0;padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));overflow:hidden}
+body.design-refresh.focus-mode:not(.tour-active) .workspace{display:grid;grid-template-columns:minmax(0,1fr) clamp(218px,25vw,330px);grid-template-rows:minmax(0,1fr);gap:10px;width:100%;max-width:none;height:100%;margin:0;align-items:stretch}
+body.design-refresh.focus-mode:not(.tour-active) .left{display:block;min-width:0;min-height:0}
+body.design-refresh.focus-mode:not(.tour-active) .sidebar{display:block!important;min-width:0;min-height:0}
+body.design-refresh.focus-mode:not(.tour-active) .sidebar>:not(.song-card),
+body.design-refresh.focus-mode:not(.tour-active) .left>:not(.metro-card){display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card{display:flex;flex-direction:column;position:relative;height:100%;width:100%;min-width:0;min-height:0;padding:60px 15px 15px;border-radius:20px;overflow:hidden}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>:not(.stage-tempo-group):not(#beats):not(#beatScreenFlash):not(.metro-head):not(.tempo-zone):not(.transport):not(.main-volume):not(.settings-grid){display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .metro-head{position:absolute;right:10px;top:8px;left:auto;min-height:44px;margin:0;padding:0;background:none;border:0}
+body.design-refresh.focus-mode:not(.tour-active) .metro-head>.metro-song-details{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) #focusBtn{height:44px;width:44px;min-height:44px;min-width:44px;padding:0}
+body.design-refresh.focus-mode:not(.tour-active) #beats{display:grid;grid-template-columns:repeat(var(--stage-cols,2),minmax(0,1fr));grid-template-rows:repeat(var(--stage-rows,2),minmax(0,1fr));flex:1;min-height:0;width:100%;gap:clamp(8px,1.3vw,16px);margin:0;align-items:stretch;justify-items:stretch}
+body.design-refresh.focus-mode:not(.tour-active) #beats>.beat{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:0;min-width:0;margin:0;padding:0;border-radius:clamp(12px,2vw,24px);font-size:clamp(26px,var(--stage-font,11vw),150px);font-weight:600;line-height:1.2;border-width:2px}
+body.design-refresh.focus-mode:not(.tour-active) #beats>.beat[data-level="2"]{border-width:3px;font-weight:750}
+body.design-refresh.focus-mode:not(.tour-active) #beats>.beat[data-level="2"]:after{width:7px;height:7px;bottom:10px;left:calc(50% - 3.5px)}
+body.design-refresh.focus-mode:not(.tour-active) .song-card{display:flex;flex-direction:column;min-height:0;height:100%;padding:14px 11px 10px;border-radius:20px;overflow:hidden}
+body.design-refresh.focus-mode:not(.tour-active) .song-card>.section-title{margin:0 0 8px;padding:0 2px;min-height:29px;flex-shrink:0}
+body.design-refresh.focus-mode:not(.tour-active) .song-card h2{font-size:14px;line-height:1.5;font-weight:650}
+body.design-refresh.focus-mode:not(.tour-active) .song-card .song-count{font-size:11px;margin-left:7px}
+body.design-refresh.focus-mode:not(.tour-active) .song-card .section-intro,
+body.design-refresh.focus-mode:not(.tour-active) .song-card #freeMode,
+body.design-refresh.focus-mode:not(.tour-active) .song-card .song-navigation,
+body.design-refresh.focus-mode:not(.tour-active) .song-card .song-add-row,
+body.design-refresh.focus-mode:not(.tour-active) .song-card .song-tools,
+body.design-refresh.focus-mode:not(.tour-active) .song-card .song-edit{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) #songList{display:flex;flex-direction:column;flex:1;gap:5px;min-height:0;max-height:none;height:auto;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:1px}
+body.design-refresh.focus-mode:not(.tour-active) .song-item{flex-shrink:0;border-radius:11px;min-height:48px}
+body.design-refresh.focus-mode:not(.tour-active) .song-main{padding:10px 8px;gap:7px;min-width:0;width:100%;min-height:48px}
+body.design-refresh.focus-mode:not(.tour-active) .song-number{width:23px;height:25px;min-width:23px;font-size:11px;border-radius:7px}
+body.design-refresh.focus-mode:not(.tour-active) .song-copy{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+body.design-refresh.focus-mode:not(.tour-active) .song-name{font-size:14px;line-height:1.5;min-width:0;flex:1}
+body.design-refresh.focus-mode:not(.tour-active) .song-meta{font-size:11px;white-space:nowrap;margin:0;flex-shrink:0}
+body.design-refresh.focus-mode:not(.tour-active) .song-item.selected .song-name{font-weight:700}
+@media(max-width:639px){
+ body.design-refresh.focus-mode:not(.tour-active) .workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) clamp(140px,27dvh,224px);gap:9px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{padding:56px 11px 11px;border-radius:17px}
+ body.design-refresh.focus-mode:not(.tour-active) .song-card{padding:9px 10px 7px;border-radius:17px}
+ body.design-refresh.focus-mode:not(.tour-active) .song-card>.section-title{min-height:23px;margin-bottom:5px}
+ body.design-refresh.focus-mode:not(.tour-active) .song-main{padding:7px 9px;min-height:45px}
+ body.design-refresh.focus-mode:not(.tour-active) .song-item{min-height:45px}
+}
+@media(max-height:500px) and (min-width:640px){
+ body.design-refresh.focus-mode:not(.tour-active) .workspace{grid-template-columns:minmax(0,1fr) 230px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{padding-top:51px;padding-bottom:10px}
+}
+@media(prefers-reduced-motion:reduce){.design-refresh.focus-mode #beats{transition:none}}
+
+
+/* Source layer: tempolive-stage-controls-v216 */
+/* v2.1.6: generous track hit areas; compact, playable stage controls.
+   All controls are the original DOM nodes and keep their existing listeners. */
+body.design-refresh .transport,
+body.design-refresh.focus-mode .transport,
+body.design-refresh.tour-active #tourWorkspace .transport{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto auto;
+ gap:10px;justify-content:center;align-items:stretch;width:100%;max-width:640px;margin-left:auto;margin-right:auto;
+}
+body.design-refresh .transport #transportPrevSong{grid-column:1;grid-row:1}
+body.design-refresh .transport #transportNextSong{grid-column:2;grid-row:1}
+body.design-refresh .transport #playBtn{grid-column:1/-1;grid-row:2}
+body.design-refresh .transport #tapBtn{grid-column:1/-1;grid-row:3}
+body.design-refresh .transport>.transport-skip{
+ display:flex;width:100%;min-width:0;height:64px;min-height:64px;padding:12px;border-radius:14px;
+ align-items:center;justify-content:center;border:1px solid var(--line);background:var(--surface);
+}
+body.design-refresh .transport>.transport-skip svg{display:block!important;width:28px;height:28px;stroke-width:1.8}
+body.design-refresh .transport #playBtn{width:100%;min-width:0;min-height:60px;height:60px;padding:10px 14px;font-size:19px;line-height:1.35;white-space:normal}
+body.design-refresh .transport #playBtn svg{display:block;width:20px;height:20px}
+body.design-refresh .transport #tapBtn{width:100%;min-width:0;min-height:48px;height:48px;padding:10px 12px;font-size:15px;line-height:1.4;background:var(--surface);border-color:var(--line)}
+body.design-refresh .transport #tapBtn.tapped{background:var(--strong);color:var(--on-strong)}
+/* The meter and count-in remain available in normal view / song editing.
+   The stage contains BPM, small accents, transport, local volume and 4/8/16. */
+body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+ display:flex;flex-direction:column;align-items:center;justify-content:safe center;
+ gap:12px;padding:54px 20px 18px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;
+ scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.tempo-zone,
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>#beats,
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport,
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.main-volume,
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.settings-grid{flex:0 0 auto;min-width:0;width:100%;max-width:640px}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.tempo-zone{display:block!important;padding:0;margin:0}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-zone>.tempo-label,
+body.design-refresh.focus-mode:not(.tour-active) .tempo-zone>.tempo-range,
+body.design-refresh.focus-mode:not(.tour-active) .bpm-caption>span{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control{margin:0;gap:20px;min-height:94px}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{width:208px;max-width:calc(100% - 152px);height:96px;min-height:0;font-size:92px;font-weight:620;line-height:1;letter-spacing:-.045em;padding:0;border:0}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper{display:flex;align-items:center;justify-content:center;width:60px;height:60px;min-height:60px;min-width:60px;border:1px solid var(--line);border-radius:15px;background:var(--soft);padding:0}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper svg{height:25px;width:25px}
+body.design-refresh.focus-mode:not(.tour-active) .bpm-caption{display:flex;justify-content:center;margin:0;line-height:1.3;min-height:19px}
+body.design-refresh.focus-mode:not(.tour-active) .bpm-caption strong{font-size:12px;letter-spacing:.13em}
+body.design-refresh.focus-mode:not(.tour-active) #beats{
+ display:flex;flex:0 0 auto;flex-wrap:wrap;align-items:center;justify-content:center;
+ gap:8px;min-height:44px;height:auto;max-width:640px;margin:0;padding:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) #beats>.beat{
+ flex:0 0 44px;width:44px;height:44px;min-height:44px;min-width:44px;padding:0;margin:0;
+ border-radius:11px;font-size:17px;line-height:1.2;font-weight:550;border-width:1.5px;
+}
+body.design-refresh.focus-mode:not(.tour-active) #beats>.beat[data-level="2"]{border-width:2px;font-weight:700}
+body.design-refresh.focus-mode:not(.tour-active) #beats>.beat[data-level="2"]:after{width:4px;height:4px;bottom:4px;left:calc(50% - 2px)}
+body.design-refresh.focus-mode:not(.tour-active) .transport{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto auto;gap:9px;margin:0;align-self:center}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{width:100%;height:62px;min-height:62px;padding:10px;border-radius:13px}
+body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{height:58px;min-height:58px;font-size:19px;border-radius:13px}
+body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{height:46px;min-height:46px;font-size:14px;border-radius:12px}
+body.design-refresh.focus-mode:not(.tour-active) .main-volume{display:flex!important;align-items:center;margin:0;padding:5px 10px;gap:10px;min-height:54px;border-radius:12px}
+body.design-refresh.focus-mode:not(.tour-active) .main-volume>label{font-size:13px;line-height:1.4;white-space:nowrap}
+body.design-refresh.focus-mode:not(.tour-active) .main-volume .volume-line{flex:1;min-width:0;gap:7px}
+body.design-refresh.focus-mode:not(.tour-active) .main-volume .icon-btn{width:44px;height:44px;min-width:44px;padding:0}
+body.design-refresh.focus-mode:not(.tour-active) .main-volume input{flex:1;min-width:44px;width:100%;height:44px}
+body.design-refresh.focus-mode:not(.tour-active) .main-volume output{min-width:37px;font-size:13px;flex-shrink:0}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid{display:block!important;margin:0;padding:0;border:0}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid>div:not(:nth-child(2)){display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid>div:nth-child(2){display:block!important;margin:0;padding:0;min-width:0}
+body.design-refresh.focus-mode:not(.tour-active) #noteLabel{display:block;font-size:12px;font-weight:550;margin:0 0 6px;line-height:1.4;color:var(--muted)}
+body.design-refresh.focus-mode:not(.tour-active) .note-segment{display:flex;gap:5px;height:54px;padding:4px;border-radius:13px}
+body.design-refresh.focus-mode:not(.tour-active) .note-option{display:flex;flex-direction:row;flex:1;gap:8px;min-width:44px;min-height:46px;padding:6px;font-size:17px;align-items:center;justify-content:center;border-radius:10px}
+body.design-refresh.focus-mode:not(.tour-active) .note-option svg{display:block;height:26px;width:21px}
+/* Keep the v2.1.5 compact setlist dimensions and row styling exactly as before. */
+@media(max-width:639px){
+ body.design-refresh.focus-mode:not(.tour-active) .workspace{grid-template-rows:minmax(0,1fr) clamp(128px,21dvh,178px)}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{padding:56px 12px 12px;gap:9px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{gap:12px;min-height:86px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{font-size:80px;height:86px;width:170px;max-width:calc(100% - 136px)}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper{width:56px;height:56px;min-width:56px;min-height:56px;border-radius:13px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport{gap:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{height:60px;min-height:60px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{height:56px;min-height:56px;font-size:17px}
+ body.design-refresh.focus-mode:not(.tour-active) .main-volume{gap:4px;padding:4px 8px;min-height:52px}
+ body.design-refresh.focus-mode:not(.tour-active) .main-volume>label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap}
+ body.design-refresh.focus-mode:not(.tour-active) .main-volume .volume-line{gap:5px}
+ body.design-refresh.focus-mode:not(.tour-active) .note-segment{height:52px}
+ body.design-refresh.focus-mode:not(.tour-active) .note-option{min-height:44px}
+}
+@media(max-width:359px){
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{font-size:72px;letter-spacing:-.04em}
+ body.design-refresh.focus-mode:not(.tour-active) .main-volume{padding-left:5px;padding-right:6px}
+}
+/* In stage view, LIVE Talk floats in the reserved upper-left area rather than
+   covering the new +/- or wide navigation buttons. It still uses no side gutter. */
+body.design-refresh.focus-mode:not(.tour-active) .band-quick-open{
+ left:max(24px,calc(env(safe-area-inset-left) + 24px));right:auto;
+ top:max(18px,calc(env(safe-area-inset-top) + 18px));bottom:auto;transform:none;
+ width:auto;min-height:44px;height:44px;padding:4px 10px;flex-direction:row;gap:6px;
+ border:1px solid var(--line);border-radius:10px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .band-tab-icon{width:23px;height:22px}
+body.design-refresh.focus-mode:not(.tour-active) .band-tab-icon>.band-tab-arrow{display:none}
+body.design-refresh.focus-mode:not(.tour-active) .band-tab-live{font-size:10px;line-height:1.2}
+body.design-refresh.focus-mode:not(.tour-active) .band-tab-title{writing-mode:horizontal-tb;font-size:13px;line-height:1.3;letter-spacing:0}
+body.design-refresh.focus-mode:not(.tour-active) #bandQuickOpen>.band-new-badge{top:-7px;left:5px;font-size:8px;min-width:28px;height:13px;padding:0 4px}
+@media(max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{justify-content:flex-start;padding-top:52px}
+}
+
+body.design-refresh.focus-mode:not(.tour-active) .note-option span{font-size:16px;line-height:1.3}
+
+
+/* Source layer: tempolive-stage-controls-v217 */
+/* v2.1.7: stage view only. Hiding the fader never changes the saved
+   volume, mute state, audio engine, voice volume or game volume.
+   Normal view retains the v2.1.6 order and its complete volume control. */
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.main-volume{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{grid-column:1/-1;grid-row:1}
+body.design-refresh.focus-mode:not(.tour-active) .transport #transportPrevSong{grid-column:1;grid-row:2}
+body.design-refresh.focus-mode:not(.tour-active) .transport #transportNextSong{grid-column:2;grid-row:2}
+body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{grid-column:1/-1;grid-row:3}
+
+
+/* Source layer: tempolive-transport-order-v218 */
+/* v2.1.8: same transport order in both views and the tutorial workspace.
+   Preserve all hit areas and the existing normal/focus volume visibility. */
+body.design-refresh .transport #playBtn{grid-column:1/-1;grid-row:1}
+body.design-refresh .transport #transportPrevSong{grid-column:1;grid-row:2}
+body.design-refresh .transport #transportNextSong{grid-column:2;grid-row:2}
+body.design-refresh .transport #tapBtn{grid-column:1/-1;grid-row:3}
+
+
+/* Source layer: tempolive-media-brand-style */
+.media-brand-info{border-top:1px solid var(--line);padding-top:16px;margin-top:18px}.media-brand-info h3{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;font-weight:600;line-height:1.5}.media-brand-info .audio-explain{margin-top:7px;overflow-wrap:anywhere}
+
+/* Source layer: tempolive-stage-touch-v2110 */
+/* v2.1.10: stage view only. The original controls keep their event listeners.
+   Use the space reclaimed from the subdivision selector for larger track keys.
+   Nothing here changes the selected note value, volume or transport timeline. */
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.settings-grid{
+ display:none!important;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport{
+ column-gap:14px;row-gap:14px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{
+ width:100%;min-width:0;
+ height:clamp(88px,14vh,112px);height:clamp(88px,14dvh,112px);min-height:88px;
+ padding:18px;border-radius:16px;border:2px solid var(--line);
+ touch-action:manipulation;-webkit-user-select:none;user-select:none;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip svg{
+ display:block!important;width:40px;height:40px;stroke-width:1.9;pointer-events:none;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip:active:not(:disabled){
+ background:var(--strong);border-color:var(--strong);color:var(--on-strong);transform:none;
+}
+@media(max-width:359px){
+ body.design-refresh.focus-mode:not(.tour-active) .transport{column-gap:12px;row-gap:12px}
+}
+/* Short phones reclaim non-interactive tempo whitespace, never shrink the
+   track targets. Four-beat presets keep all transport actions on screen. */
+@media(max-width:639px) and (max-height:650px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{gap:8px;padding-top:54px;padding-bottom:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{min-height:60px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{height:60px;font-size:60px}
+ body.design-refresh.focus-mode:not(.tour-active) .bpm-caption{min-height:14px;height:14px;line-height:14px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport{column-gap:12px;row-gap:12px}
+}
+/* On phone landscape there is insufficient vertical space for a tall stack.
+   Keep the same controls and reading order, with the transport beside tempo. */
+@media(min-width:800px) and (max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+  display:grid;grid-template-columns:minmax(170px,.8fr) minmax(220px,1.2fr);
+  grid-template-rows:minmax(0,1fr) minmax(0,1fr);column-gap:16px;row-gap:12px;align-items:center;
+  padding-left:14px;padding-right:14px;
+ }
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.tempo-zone{grid-column:1;grid-row:1;align-self:end}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>#beats{grid-column:1;grid-row:2;align-self:start;align-content:start}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport{grid-column:2;grid-row:1/-1;align-self:center}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{min-height:68px;gap:7px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{width:110px;max-width:calc(100% - 102px);height:68px;font-size:64px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper{width:44px;min-width:44px;height:48px;min-height:48px}
+}
+
+
+/* Source layer: tempolive-stage-current-v2111 */
+/* v2.1.11: the live stage fills the viewport with the current song, tempo and
+   existing transport controls. The regular view and tutorial keep their layout.
+   No duplicated inputs/listeners; hiding the setlist never changes its data. */
+.stage-tempo-group{display:contents}
+body.design-refresh.focus-mode:not(.tour-active) .workspace{
+ display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);
+ width:100%;height:100%;max-width:none;gap:0;margin:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .workspace>.sidebar{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+ --live-bpm:clamp(100px,calc(54vw - 82px),250px);
+ --live-step:56px;
+ display:grid;grid-template-columns:minmax(0,1fr);
+ grid-template-rows:max-content minmax(min-content,1fr) auto;
+ grid-template-areas:"song" "tempo" "transport";
+ align-content:stretch;align-items:center;justify-content:normal;
+ gap:12px;width:100%;height:100%;min-width:0;min-height:0;
+ padding:14px 12px 16px;overflow-x:hidden;overflow-y:auto;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.metro-head{
+ grid-area:song;position:relative;inset:auto;display:flex;align-items:center;
+ justify-content:space-between;gap:12px;width:100%;min-width:0;min-height:44px;
+ margin:0;padding:0;background:none;border:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-head>.metro-song-details{
+ display:block!important;min-width:0;flex:1;margin:0;padding:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-head .metro-current-meta{display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .metro-head #currentTitle{
+ width:100%;max-width:none;font-size:clamp(19px,3.5vw,28px);font-weight:650;
+ line-height:1.5;margin:0;padding:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+/* LIVE Talk remains an overlay in the existing upper-left position. In a room
+   only the title row drops below it, so neither song text nor controls are hit. */
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{padding-top:44px;min-height:88px}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #focusBtn{position:absolute;top:0;right:0}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.stage-tempo-group{
+ grid-area:tempo;display:flex!important;flex-direction:column;align-items:stretch;
+ justify-content:center;gap:16px;width:100%;height:auto;min-width:0;min-height:min-content;align-self:stretch;
+}
+body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>.tempo-zone{
+ grid-area:tempo;display:flex!important;flex-direction:column;justify-content:center;
+ width:100%;max-width:none;min-width:0;margin:0;padding:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control{
+ display:grid;grid-template-columns:var(--live-step) minmax(0,1fr) var(--live-step);
+ align-items:center;justify-content:stretch;gap:10px;width:100%;min-height:0;margin:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{
+ width:100%;max-width:none;min-width:0;min-height:0;height:1.12em;
+ font-size:var(--live-bpm);font-weight:620;line-height:1.12;letter-spacing:-.045em;
+ margin:0;padding:0;border:0;text-align:center;border-radius:12px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper{
+ width:var(--live-step);height:var(--live-step);min-width:var(--live-step);min-height:var(--live-step);
+ border-radius:15px;display:flex;align-items:center;justify-content:center;padding:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper svg{width:28px;height:28px}
+body.design-refresh.focus-mode:not(.tour-active) .bpm-caption{
+ display:flex;min-height:22px;height:auto;margin:0;line-height:1.4;
+}
+body.design-refresh.focus-mode:not(.tour-active) .bpm-caption strong{font-size:14px;letter-spacing:.14em}
+body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats{
+ grid-area:beats;width:100%;max-width:none;min-width:0;height:auto;min-height:44px;
+ gap:8px;margin:0;padding:0;align-self:center;justify-content:center;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport{
+ grid-area:transport;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));
+ grid-template-rows:minmax(60px,1fr) minmax(112px,1.85fr) minmax(50px,.85fr);
+ width:100%;max-width:none;min-width:0;height:clamp(250px,38dvh,372px);max-height:none;
+ gap:14px;align-self:stretch;align-items:stretch;justify-content:stretch;margin:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{
+ grid-row:1;grid-column:1/-1;min-width:0;min-height:60px;width:100%;height:100%;
+ padding:10px 14px;font-size:clamp(19px,4.8vw,25px);line-height:1.4;border-radius:15px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn svg{height:24px;width:24px}
+body.design-refresh.focus-mode:not(.tour-active) .transport #transportPrevSong{grid-column:1;grid-row:2}
+body.design-refresh.focus-mode:not(.tour-active) .transport #transportNextSong{grid-column:2;grid-row:2}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{
+ width:100%;height:100%;min-height:112px;min-width:0;padding:16px;border-radius:16px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip svg{width:44px;height:44px}
+body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{
+ grid-column:1/-1;grid-row:3;width:100%;height:100%;min-width:0;min-height:50px;
+ padding:10px 14px;font-size:clamp(16px,4.4vw,21px);line-height:1.4;border-radius:14px;
+}
+/* Preserve the existing touch-only stage: no fader, meter, subdivision or
+   count-in controls. Their values remain available in the regular view. */
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.main-volume,
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.settings-grid{display:none!important}
+@media(max-width:359px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{--live-step:48px;--live-bpm:clamp(100px,32vw,115px);gap:10px;padding-left:10px;padding-right:10px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{gap:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-head #currentTitle{font-size:18px}
+}
+/* On roomy portrait tablets the number and all important targets grow too. */
+@media(min-width:600px) and (orientation:portrait){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{--live-step:76px;--live-bpm:clamp(190px,34vw,300px);padding:20px;gap:16px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{gap:18px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport{height:40dvh;grid-template-rows:minmax(72px,1fr) minmax(140px,1.8fr) minmax(64px,.85fr)}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats>.beat{width:52px;height:52px;flex-basis:52px;font-size:21px}
+}
+/* Wide screens use two genuinely enlarged working zones, not the old 640px
+   cluster plus an empty sidebar. The transport ordering is identical. */
+@media(min-width:900px) and (min-aspect-ratio:1/1), (min-width:640px) and (max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+  --live-bpm:clamp(148px,min(20vw,44dvh),440px);
+  --live-step:clamp(56px,6vw,100px);
+  grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);
+  grid-template-rows:auto minmax(min-content,1fr);
+  grid-template-areas:"song song" "tempo transport";
+  column-gap:clamp(20px,2.5vw,64px);row-gap:16px;
+  padding:clamp(18px,2vw,36px);
+ }
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.metro-head{min-height:52px;padding:0 0 6px;border-bottom:1px solid var(--line)}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{padding:0 62px 6px clamp(140px,12vw,185px);min-height:52px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>.tempo-zone{align-self:center}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-head #currentTitle{font-size:clamp(24px,2.5vw,38px)}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{gap:clamp(12px,1.3vw,28px)}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper{border-radius:20px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control .stepper svg{width:clamp(28px,3vw,42px);height:clamp(28px,3vw,42px)}
+ body.design-refresh.focus-mode:not(.tour-active) .bpm-caption strong{font-size:clamp(16px,1.5vw,24px)}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats{gap:12px;align-self:center}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats>.beat{width:56px;height:56px;flex-basis:56px;font-size:23px;border-radius:15px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport{
+  height:100%;max-height:780px;min-height:300px;align-self:center;
+  grid-template-rows:minmax(76px,1fr) minmax(140px,1.75fr) minmax(60px,.75fr);
+  gap:clamp(14px,2dvh,24px);
+ }
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{font-size:clamp(24px,2.6vw,40px);border-radius:21px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn svg{width:32px;height:32px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{min-height:140px;border-radius:24px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip svg{width:clamp(50px,6vw,84px);height:clamp(50px,6vw,84px)}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{font-size:clamp(19px,2.2vw,32px);border-radius:21px}
+}
+/* Small landscape still gets a larger number, with scroll fallback rather than
+   clipping or reducing the minimum touch sizes when space is very limited. */
+@media(min-width:640px) and (max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+  --live-bpm:clamp(112px,17vw,168px);--live-step:48px;
+  grid-template-rows:auto minmax(min-content,1fr);
+  column-gap:20px;row-gap:8px;padding:12px;
+ }
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.metro-head{min-height:44px;padding-bottom:0}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-head #currentTitle{font-size:21px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{gap:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats{gap:6px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats>.beat{width:44px;height:44px;flex-basis:44px;font-size:18px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport{min-height:230px;gap:10px;grid-template-rows:minmax(52px,1fr) minmax(96px,1.7fr) minmax(44px,.85fr)}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{min-height:52px;font-size:20px;border-radius:14px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{min-height:96px;border-radius:16px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip svg{width:44px;height:44px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{min-height:44px;font-size:16px;border-radius:13px}
+}
+
+
+/* Source layer: tempolive-stage-detail-v2112 */
+/* v2.1.12: stage-only song meter and a generous LIVE launcher.
+   The original controls, audio paths, setlist and normal layout are preserved. */
+.stage-song-line{display:contents}
+.stage-meter,.stage-live-slot{display:none}
+body.design-refresh.focus-mode:not(.tour-active) .stage-song-line{
+ display:flex;align-items:baseline;gap:10px;min-width:0;width:100%;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-head #currentTitle{
+ flex:0 1 auto;width:auto;min-width:0;max-width:100%;
+}
+body.design-refresh.focus-mode:not(.tour-active) .stage-meter{
+ display:inline-block;flex:none;color:var(--muted);font-size:15px;font-weight:500;
+ line-height:1.5;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:0;
+}
+/* Place the original room-gated launcher IN the existing stage header, not over
+   a tempo/transport target. The slot is display:contents to avoid extra sizing. */
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{
+ display:grid;grid-template-columns:minmax(0,1fr) 44px;
+ grid-template-areas:'title restore' 'live live';align-items:center;
+ gap:12px;min-height:0;padding:0;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-head>.metro-song-details{grid-area:title}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #focusBtn{
+ grid-area:restore;position:static;inset:auto;justify-self:end;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .stage-live-slot{display:contents}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{
+ grid-area:live;position:relative;inset:auto;transform:none;
+ display:flex;flex-direction:row;align-items:center;justify-content:center;
+ width:100%;min-width:0;max-width:none;height:60px;min-height:60px;
+ margin:0;padding:10px 16px;gap:10px;z-index:1;
+ border:1.5px solid var(--line);border-radius:14px;
+ background:var(--soft);color:var(--ink);box-shadow:none;
+ touch-action:manipulation;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:hover{border-color:var(--muted)}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:active{
+ background:var(--strong);color:var(--on-strong);border-color:var(--strong);
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.band-tab-icon{
+ position:static;width:26px;height:26px;flex:none;order:0;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen .band-tab-icon>svg{width:26px;height:26px}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen .band-tab-arrow{display:none}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.band-tab-live{
+ order:1;font-size:15px;line-height:1.3;font-weight:700;text-transform:uppercase;letter-spacing:.025em;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.band-tab-title{
+ order:2;font-size:17px;line-height:1.3;font-weight:600;writing-mode:horizontal-tb;letter-spacing:0;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.band-new-badge{
+ order:3;position:static;inset:auto;transform:none;flex:none;
+ min-width:32px;height:18px;padding:0 5px;font-size:9px;line-height:1;
+ border:0;background:var(--strong);color:var(--on-strong);
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:active>.band-new-badge{
+ background:var(--surface);color:var(--ink);
+}
+@media(min-width:600px){
+ body.design-refresh.focus-mode:not(.tour-active) .stage-meter{font-size:18px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{
+  grid-template-columns:minmax(0,1fr) 210px 44px;
+  grid-template-areas:'title live restore';column-gap:16px;row-gap:0;
+ }
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{height:64px;min-height:64px;gap:8px;padding:10px 12px}
+}
+@media(min-width:900px) and (min-aspect-ratio:1/1){
+ body.design-refresh.focus-mode:not(.tour-active) .stage-meter{font-size:20px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{padding:0 0 6px;min-height:70px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{height:64px;min-height:64px}
+}
+@media(min-width:640px) and (max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .stage-meter{font-size:16px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{
+  grid-template-columns:minmax(0,1fr) 200px 44px;min-height:62px;padding:0 0 6px;column-gap:12px;
+ }
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{height:56px;min-height:56px}
+}
+@media(max-width:359px){
+ body.design-refresh.focus-mode:not(.tour-active) .stage-song-line{gap:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-meter{font-size:14px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{gap:9px}
+}
+
