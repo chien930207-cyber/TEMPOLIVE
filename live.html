@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light" data-tempolive-booting>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TEMPOLIVE 連線節拍器</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/TEMPOLIVE/icon-compare-tempolive.png">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7f7f5">
+<meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
+<meta name="application-version" content="2.1.14">
+<meta name="tempolive-version" content="2.1.14">
+<meta name="tempolive-build" content="2.1.14-isolated-entry">
+<meta name="tempolive-icon-release" content="live-entry-single-png">
+<meta name="tempolive-entry-release" content="live-entry-20261006">
+<!-- Keep the proven static PNG declaration above. Initial document load has no
+     app iframe, application initializer, external stylesheet, or manifest load.
+     App resources are mounted in this SAME document after window.load.
+     This is not a redirect, not an outer iframe, and not a storage reset. -->
+<style id="tempolive-entry-style">
+html{background:#f7f7f5;color:#202020;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+html[data-theme=dark]{background:#191a18;color:#f3f3ed}
+body{margin:0}
+html[data-tempolive-booting] body>:not(#tempoliveStart):not(noscript){visibility:hidden!important}
+#tempoliveStart{position:fixed;inset:0;z-index:2147483646;display:flex;align-items:center;justify-content:center;background:inherit;padding:24px;box-sizing:border-box;text-align:center}
+#tempoliveStart .entry-copy{max-width:440px}
+#tempoliveStart strong{display:block;font-size:24px;letter-spacing:.07em}
+#tempoliveStart p{font-size:16px;line-height:1.7;margin:14px 0}
+#tempoliveStart button{font:inherit;color:inherit;min-height:48px;border:1px solid currentColor;border-radius:12px;padding:10px 24px;background:transparent;cursor:pointer;touch-action:manipulation}
+#tempoliveStart button:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+#tempoliveStart [hidden]{display:none!important}
+#tempoliveNoScript{display:block;text-align:center;padding:140px 24px 24px;position:relative;z-index:2147483647;background:inherit;font-size:18px}
+</style>
+</head>
+<body aria-busy="true">
+<div id="tempoliveStart" role="status" aria-live="polite"><div class="entry-copy"><strong>TEMPOLIVE</strong><p id="tempoliveStartText">正在開啟節拍器…</p><p id="tempoliveStartHint" hidden></p><button id="tempoliveStartRetry" type="button" hidden>重新載入</button></div></div>
+<noscript id="tempoliveNoScript">請開啟 JavaScript 以使用節拍器。</noscript>
+<script>
+/* Entry lifecycle only. The metronome/audio/rooms/game remain in the original
+   application bundle. No attempt is made to inspect Safari's private icon cache. */
+(()=>{
+ 'use strict';
+ const RELEASE='2.1.14-isolated-entry';
+ const COPY={"zh-Hant":{"loading":"\u6b63\u5728\u958b\u555f\u7bc0\u62cd\u5668\u2026","failed":"\u7db2\u9801\u5c1a\u672a\u8f09\u5165\u5b8c\u6210","hint":"\u8acb\u78ba\u8a8d\u7db2\u8def\u9023\u7dda\u5f8c\u91cd\u65b0\u6574\u7406\u3002\u6b4c\u55ae\u8207\u8a2d\u5b9a\u4e0d\u6703\u56e0\u6b64\u88ab\u6e05\u9664\u3002","retry":"\u91cd\u65b0\u8f09\u5165","file":"\u8acb\u5c07\u6574\u5305\u6a94\u6848\u4e0a\u50b3\u5f8c\uff0c\u5f9e GitHub Pages \u7db2\u5740\u958b\u555f\u3002","noscript":"\u8acb\u958b\u555f JavaScript \u4ee5\u4f7f\u7528\u7bc0\u62cd\u5668\u3002"},"en":{"loading":"Opening your metronome...","failed":"The page could not finish loading","hint":"Check your connection and reload. Your saved setlist and settings are not cleared.","retry":"Reload","file":"Upload the complete package, then open the published GitHub Pages website.","noscript":"Enable JavaScript to use the metronome."},"de":{"loading":"Metronom wird ge\u00f6ffnet ...","failed":"Die Seite konnte nicht vollst\u00e4ndig geladen werden","hint":"Pr\u00fcfe deine Verbindung und lade die Seite neu. Deine gespeicherte Setlist und Einstellungen werden nicht gel\u00f6scht.","retry":"Neu laden","file":"Lade das vollst\u00e4ndige Paket hoch und \u00f6ffne dann die ver\u00f6ffentlichte GitHub-Pages-Website.","noscript":"Aktiviere JavaScript, um das Metronom zu verwenden."}};
+ const root=document.documentElement, status=document.getElementById('tempoliveStartText');
+ const hint=document.getElementById('tempoliveStartHint'),retry=document.getElementById('tempoliveStartRetry');
+ let lang='zh-Hant';
+ try{const stored=localStorage.getItem('tempolive.ui-language.v1');if(stored==='en'||stored==='de')lang=stored;
+  const state=JSON.parse(localStorage.getItem('tw.metronome.v1')||'null');
+  if(state?.theme==='dark'){root.dataset.theme='dark';document.querySelector('meta[name=theme-color]').content='#191a18';}
+ }catch(_){}
+ const text=COPY[lang];root.lang=lang;status.textContent=text.loading;retry.textContent=text.retry;
+ retry.addEventListener('click',()=>location.reload());
+ const state={release:RELEASE,phase:'entry',entryLoadCompleted:false,applicationReady:false,startedAt:0,readyAt:0,error:''};
+ window.TempoliveStartup=Object.freeze({snapshot:()=>({...state})});
+ const asset=name=>{const url=new URL(name,document.baseURI);url.searchParams.set('v',RELEASE);return url.href;};
+ function fail(error){
+  state.phase='error';state.error=String(error?.message||error);
+  document.body.removeAttribute('aria-busy');status.textContent=text.failed;
+  hint.hidden=false;hint.textContent=location.protocol==='file:'?text.file:text.hint;retry.hidden=false;
+  document.getElementById('tempoliveStart').setAttribute('role','alert');
+  console.error('TEMPOLIVE initialization failed:',error);
+ }
+ async function loadInterface(){
+  const control=new AbortController(),timer=setTimeout(()=>control.abort(),20000);
+  try{const response=await fetch(asset('./tempolive-interface.html'),{signal:control.signal,cache:'no-cache',credentials:'same-origin'});
+   if(!response.ok)throw new Error('Interface HTTP '+response.status);
+   const doc=new DOMParser().parseFromString(await response.text(),'text/html');
+   if(doc.querySelector('meta[name="tempolive-interface-release"]')?.content!==RELEASE)throw new Error('Interface release mismatch');
+   if(!doc.querySelector('#playBtn')||!doc.querySelector('#rhythmGameSource'))throw new Error('Incomplete interface');
+   if([...doc.scripts].some(s=>s.type!=='application/json'))throw new Error('Unexpected executable interface script');
+   return doc;
+  }finally{clearTimeout(timer);}
+ }
+ function stylesheet(){return new Promise((resolve,reject)=>{
+  const link=document.createElement('link');link.rel='stylesheet';link.href=asset('./tempolive-styles.css');
+  const timer=setTimeout(()=>reject(new Error('Stylesheet timed out')),20000);
+  link.onload=()=>{clearTimeout(timer);resolve();};link.onerror=()=>{clearTimeout(timer);reject(new Error('Stylesheet unavailable'));};document.head.append(link);
+ });}
+ function appMetadata(){
+  const values={'application-name':'TEMPOLIVE','apple-mobile-web-app-title':'TEMPOLIVE','mobile-web-app-capable':'yes','apple-mobile-web-app-capable':'yes','apple-mobile-web-app-status-bar-style':'default','tempolive-app-release':'app-r3'};
+  for(const [name,content] of Object.entries(values)){let node=document.querySelector('meta[name="'+name+'"]');if(!node){node=document.createElement('meta');node.name=name;document.head.append(node);}node.content=content;}
+  // Same manifest identity/start_url and original Home Screen artwork. It is
+  // attached only after the lightweight entry's load lifecycle has completed.
+  const manifest=document.createElement('link');manifest.rel='manifest';manifest.href='./site.webmanifest';document.head.append(manifest);
+  // Home Screen artwork remains in site.webmanifest. Do not add another
+  // link-icon candidate after the ordinary tab icon has been discovered.
+ }
+ function runtime(){return new Promise((resolve,reject)=>{
+  const script=document.createElement('script');script.src=asset('./tempolive-runtime.js');script.async=false;
+  let executionError=null;const capture=e=>{if(e.error)executionError=e.error;};window.addEventListener('error',capture);
+  const timer=setTimeout(()=>{window.removeEventListener('error',capture);reject(new Error('Runtime timed out'));},20000);
+  script.onload=()=>{clearTimeout(timer);window.removeEventListener('error',capture);
+   if(executionError)return reject(executionError);
+   if(window.TempoliveRuntimeRelease!==RELEASE||!window.MetronomeDiagnostics||!window.TempoliveI18n)return reject(new Error('Runtime did not initialize'));
+   resolve();
+  };script.onerror=()=>{clearTimeout(timer);window.removeEventListener('error',capture);reject(new Error('Runtime unavailable'));};document.body.append(script);
+ });}
+ let started=false;
+ async function start(){
+  if(started)return;started=true;state.phase='resources';state.startedAt=performance.now();
+  try{
+   const [doc]=await Promise.all([loadInterface(),stylesheet()]);
+   document.body.className=doc.body.className;
+   const fragment=document.createDocumentFragment();for(const child of [...doc.body.childNodes])fragment.append(document.importNode(child,true));
+   document.body.append(fragment);appMetadata();state.phase='application';
+   await runtime();await Promise.resolve();
+   state.phase='ready';state.applicationReady=true;state.readyAt=performance.now();
+   document.getElementById('tempoliveStart')?.remove();document.getElementById('tempoliveNoScript')?.remove();
+   document.getElementById('tempolive-entry-style')?.remove();root.removeAttribute('data-tempolive-booting');document.body.removeAttribute('aria-busy');
+   window.dispatchEvent(new CustomEvent('tempolive:ready',{detail:{release:RELEASE}}));
+  }catch(error){fail(error);}
+ }
+ function entryLoaded(){
+  state.entryLoadCompleted=true;state.phase='entry-complete';
+  // A new task lets the initial document finish its native load processing;
+  // no multi-second delay, synthetic load event, or favicon cache claim.
+  setTimeout(start,0);
+ }
+ if(document.readyState==='complete')entryLoaded();else window.addEventListener('load',entryLoaded,{once:true});
+})();
+</script>
+</body>
+</html>

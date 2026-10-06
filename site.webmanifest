@@ -4,7 +4,7 @@
   "short_name": "TEMPOLIVE",
   "lang": "zh-Hant-TW",
   "description": "TEMPOLIVE connected metronome, setlists and live team communication.",
-  "start_url": "./",
+  "start_url": "./live.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f7f7f5",

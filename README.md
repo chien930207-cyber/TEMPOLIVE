@@ -1,95 +1,27 @@
-# TEMPOLIVE v2.1.14
+# TEMPOLIVE - new canonical entry
 
-## 本次上架
+This complete package preserves the existing metronome application (2.1.14) and changes the browser entry route. It is a **workaround, not a proven diagnosis or a guaranteed Safari favicon repair**.
 
-這是完整網站包，不是測試頁或補丁。將解壓縮後的全部檔案放到原本 GitHub Pages 發布資料夾，同名檔案替換即可。不必刪除儲存庫，也不需要 Actions、Mac 或額外套件。
+## Upload
 
-部署完成後照常開啟原網址：
-`https://chien930207-cyber.github.io/TEMPOLIVE/`
+Upload all 21 files from this ZIP into the same GitHub Pages publishing directory as the current index.html; replace matching files. Do not delete unrelated repository files, workflows, verification files or browser data. No build tools, Actions inspection, new account, custom domain or extra device setting is required.
 
-主要入口仍為 `index.html`。`tempolive.html` 保留為舊連結的相容入口。不要直接開啟 `tempolive-interface.html`；它是由主頁自動載入的介面資源。
+The original /TEMPOLIVE/ and /TEMPOLIVE/tempolive.html addresses automatically navigate to /TEMPOLIVE/live.html. A fixed same-directory destination preserves query parameters and fragments. live.html is the complete app, not a test screen and not an outer iframe. Keep live.html permanently.
 
-## Entry architecture
+## What changed
 
-The initial page declares the exact 32px PNG that worked in the on-device B comparison. It completes its own load before mounting the interface, stylesheet, existing application runtime and Home Screen metadata in the same document. No redirect, outer iframe, service worker, storage reset or new relay is introduced.
+- index.html and tempolive.html are small entry redirects using location.replace.
+- live.html is the prior complete application loader at a previously unused document path. It does not add an Apple touch link after loading; the single normal-tab PNG is retained.
+- site.webmanifest start_url is now ./live.html. The existing application id /TEMPOLIVE/, scope, display mode and artwork stay unchanged.
+- Application JavaScript, interface HTML, styles, translations, audio synthesis, room protocol, game and storage keys are byte-identical to the supplied 2.1.14 package.
+- The current icon-compare-tempolive.png remains a production dependency, despite its historical filename. It is not regenerated.
 
-Required new application files: `tempolive-interface.html` and `tempolive-runtime.js`. The existing `tempolive-styles.css` is unchanged. The historical `tempolive-languages.js` and older icon files are retained for compatibility with already cached old pages. The active new runtime already includes the complete existing language dictionaries.
+## Data and App
 
-The manifest identity `/TEMPOLIVE/`, start URL and icon bytes are unchanged. Home Screen metadata is attached after the initial document load. Do not remove an existing working Home Screen app or clear its data merely to update the tab icon.
+The original and new documents share the same HTTPS origin and use the same localStorage keys. No data migration/reset is performed. Existing installed Apps that start at the old URL can follow the same redirect. New installations use the updated manifest start URL. Real Home Screen installation and native iPad Safari icon selection are not verified in this environment.
 
-Native iPadOS 18.7.8 tab-icon rendering has not been tested by the author of this build. This is a complete entry/initialization rework, not a claim that the exact device-level root cause has been proved. Image decoding is not treated as proof of native favicon selection.
+## Evidence limit
 
-## Original project documentation (v2.1.13 reference)
+The user confirmed that the same PNG displays in the static B comparison page, while formal-homepage revisions fail. That supports separating the document URL from the already successful image, but does not prove cached metadata is the root cause or that a new URL must succeed. No screenshot of an HTML logo or successful image decode is counted as native Safari favicon success.
 
-The instructions above supersede earlier file-count and loading descriptions below. Product features and the original source remain documented below.
-
-# TEMPOLIVE 連線節拍器
-
-節拍、歌單、團隊同步與 live傳話，放在同一個網頁中。
-
-**完整上架版：2.1.13-full**。以最新 v2.1.12 功能、主畫面 App 與圖示設定整合，不需要搭配舊補丁。
-
-[開啟節拍器](./index.html)｜[另一個完整入口](./tempolive.html)
-
-## 功能
-
-- 40–300 BPM、點按測速、拍號、四分／八分／十六分音符與輕重音。
-- 歌單編輯、前後首切換、JSON 匯入／匯出，切歌延續目前拍點偏好。
-- 四位數字房間、主持人控制同步節拍、依樂器傳送 live 文字／語音提醒。
-- 放大模式、目前歌名與拍號、大字 BPM、大按鈕及房間 LIVE 傳話。
-- 繁體中文預設、English、Deutsch、深淺色、分步教學與節奏小遊戲。
-- 玩遊戲時暫停本機節拍聲，結束或返回後依原本播放狀態恢復。
-- 主畫面 App 獨立啟動、TEMPOLIVE 圖示與媒體播放資訊。
-
-## 上傳 GitHub Pages
-
-1. 先在舊網站匯出歌單。備份留在自己裝置，不要上傳公開儲存庫。
-2. 解壓縮後，把這一層的所有檔案上傳到發布目錄。不要上傳 ZIP，不要再套一層資料夾。
-3. 簡單的靜態上架可在 Settings > Pages 選 Deploy from a branch，選實際上傳的分支與 /(root)。本包不需 npm、建置指令或自訂 Actions。
-4. 等待 Pages 部署成功，再開啟網站。保留目前的儲存庫名稱 TEMPOLIVE 與原網址。
-
-可清理舊網站檔案，但不要刪除整個儲存庫、Pages 設定或其他專案。若已有 .github、CNAME、LICENSE 或自訂文件，請先備份；不要為了圖示直接刪除其他部署設定。
-
-若原本使用 /docs 發布，檔案就必須放在 /docs；若改放到根目錄，Pages 也要同步選 /(root)。
-
-## 檔案用途
-
-| 檔案 | 用途 |
-| --- | --- |
-| index.html | 正式首頁，包含完整節拍器、房間、遊戲與傳話程式。 |
-| tempolive.html | 與首頁完全相同的完整入口，可用新文件網址檢查分頁圖示；不是診斷空頁或自動跳轉。 |
-| tempolive-styles.css | 原本 17 層樣式依原順序整合，保留版面。 |
-| tempolive-languages.js | 原本的三語字典與切換程式。 |
-| tempolive-favicon-v213.ico | 明確引用的多尺寸 ICO。 |
-| favicon.ico | 同檔內容的傳統備用檔名；位於專案目錄，不是帳號網域根目錄。 |
-| tempolive-icon-32-v213.png / tempolive-icon-96-v213.png | 獨立 PNG 分頁圖示。 |
-| safari-pinned-tab.svg | Safari 釘選分頁適用的黑色向量遮罩；不代替一般分頁的 PNG / ICO。 |
-| apple-touch-icon.png | 保留已成功的 180px 主畫面圖示。 |
-| app-icon-192.png / app-icon-512.png | 主畫面應用圖示。 |
-| site.webmanifest | 獨立 App 啟動；識別仍為 /TEMPOLIVE/。 |
-| tempolive-cover.png | 保留鎖定畫面的播放封面。 |
-| .nojekyll | 靜態發布標記。 |
-
-請整包上傳，不要只上傳 index.html。不需要先前的 assets、圖示檢查頁、r2、r3 或 r4 圖檔。
-
-## 圖示與 App
-
-分頁圖示在 HTML 最前面靜態宣告，不依賴 SVG favicon、data URL、JavaScript 延後插入或舊補丁路徑。主畫面 App 識別、啟動範圍與 standalone 模式保留，不必刪除已可使用的 App。
-
-可以從新分頁開啟 `tempolive.html` 比較，不只重整舊分頁。這會使用新的文件網址，但不保證繞過 Safari 所有圖示快取。網頁不能強制清除 Safari 的圖示資料庫，本包也不會清除瀏覽器資料。實體 iPadOS 18.7.8 分頁圖示尚未在本次製作環境驗證。
-
-## 資料與限制
-
-沿用原本 localStorage 儲存鍵，不會在升級時清空歌單。同網站來源與同瀏覽器可讀取原有資料，但主畫面 App 與 Safari 的儲存環境不保證共用。歌單 JSON 匯入會取代原歌單。
-
-單人功能在頁面與必要資源載入後可執行，本包不新增離線快取。首次開啟、重新載入及團隊房間請保持網路。房間仍使用原本公開 MQTT / WSS 測試中繼，不保證服務可用率、零延遲、鎖屏背景播放或藍牙同步精度。請先用實際設備與現場網路測試。
-
-## 授權
-
-本包不新增或變更程式與素材的授權。正式授權由專案維護者確認。
-
-## 技術參考
-
-- [HTML icon 規範](https://html.spec.whatwg.org/multipage/links.html#rel-icon)
-- [GitHub Pages 發布設定](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [Apple 主畫面網頁應用設定](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html)
+Do not clear Safari data merely to change the favicon. Do not upload private setlist backups to a public repository.
