@@ -1,3 +1,28 @@
+# TEMPOLIVE v2.1.14
+
+## 本次上架
+
+這是完整網站包，不是測試頁或補丁。將解壓縮後的全部檔案放到原本 GitHub Pages 發布資料夾，同名檔案替換即可。不必刪除儲存庫，也不需要 Actions、Mac 或額外套件。
+
+部署完成後照常開啟原網址：
+`https://chien930207-cyber.github.io/TEMPOLIVE/`
+
+主要入口仍為 `index.html`。`tempolive.html` 保留為舊連結的相容入口。不要直接開啟 `tempolive-interface.html`；它是由主頁自動載入的介面資源。
+
+## Entry architecture
+
+The initial page declares the exact 32px PNG that worked in the on-device B comparison. It completes its own load before mounting the interface, stylesheet, existing application runtime and Home Screen metadata in the same document. No redirect, outer iframe, service worker, storage reset or new relay is introduced.
+
+Required new application files: `tempolive-interface.html` and `tempolive-runtime.js`. The existing `tempolive-styles.css` is unchanged. The historical `tempolive-languages.js` and older icon files are retained for compatibility with already cached old pages. The active new runtime already includes the complete existing language dictionaries.
+
+The manifest identity `/TEMPOLIVE/`, start URL and icon bytes are unchanged. Home Screen metadata is attached after the initial document load. Do not remove an existing working Home Screen app or clear its data merely to update the tab icon.
+
+Native iPadOS 18.7.8 tab-icon rendering has not been tested by the author of this build. This is a complete entry/initialization rework, not a claim that the exact device-level root cause has been proved. Image decoding is not treated as proof of native favicon selection.
+
+## Original project documentation (v2.1.13 reference)
+
+The instructions above supersede earlier file-count and loading descriptions below. Product features and the original source remain documented below.
+
 # TEMPOLIVE 連線節拍器
 
 節拍、歌單、團隊同步與 live傳話，放在同一個網頁中。
