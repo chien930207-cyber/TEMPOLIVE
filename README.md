@@ -1,27 +1,119 @@
-# TEMPOLIVE - new canonical entry
+<p align="center">
+  <img src="./app-icon-192.png" alt="TEMPOLIVE Logo" width="80" height="80">
+</p>
 
-This complete package preserves the existing metronome application (2.1.14) and changes the browser entry route. It is a **workaround, not a proven diagnosis or a guaranteed Safari favicon repair**.
+# TEMPOLIVE 連線節拍器
 
-## Upload
+給教會敬拜團、樂團與音控同工的網頁節拍器。事先準備歌曲速度，排練時快速切歌；建立房間後，由一位主持人控制節拍，團員在各自的裝置上收聽，也能透過 LIVE 傳話交換提醒。
 
-Upload all 21 files from this ZIP into the same GitHub Pages publishing directory as the current index.html; replace matching files. Do not delete unrelated repository files, workflows, verification files or browser data. No build tools, Actions inspection, new account, custom domain or extra device setting is required.
+**[開啟 TEMPOLIVE](https://chien930207-cyber.github.io/TEMPOLIVE/)**
 
-The original /TEMPOLIVE/ and /TEMPOLIVE/tempolive.html addresses automatically navigate to /TEMPOLIVE/live.html. A fixed same-directory destination preserves query parameters and fragments. live.html is the complete app, not a test screen and not an outer iframe. Keep live.html permanently.
+## 主要功能
 
-## What changed
+| 功能 | 說明 |
+| --- | --- |
+| 節拍控制 | 40–300 BPM，支援直接輸入、加減鍵、滑桿與點按測速。每個拍點可設為重音、一般或靜音。 |
+| 拍號與音符 | 提供 2/4、3/4、4/4、5/4、6/8、7/8、12/8，以及四分、八分、十六分音符細分。預備拍可選關閉、1 小節或 2 小節。 |
+| 歌曲清單 | 儲存歌名、速度、拍號與音符設定，支援新增、編輯、排序、前後首切換，以及 JSON 歌單匯入／匯出，最多 200 首。 |
+| 連線房間 | 使用四位數字代碼建立或加入房間，由主持人統一控制播放與節奏。目前每間房間上限為 12 人，包含主持人。 |
+| LIVE 傳話 | 選擇房間內的樂器／角色或全部團員，再點選短句傳送。支援自訂訊息、常用短句與語音播報。 |
+| 放大模式 | 顯示目前歌名、拍號與大型 BPM，保留大面積播放、切歌及測速操作；房間內也可開啟 LIVE 傳話。 |
+| 音色與外觀 | 木塊、清晰電子、牛鈴、短鈴與馬林巴五種音色，提供標準／加強輸出、深淺色外觀與可選擇的拍點閃爍。 |
+| 教學與練習 | 內建操作教學與節奏記憶小遊戲。介面預設繁體中文，也可切換英文、德文。 |
 
-- index.html and tempolive.html are small entry redirects using location.replace.
-- live.html is the prior complete application loader at a previously unused document path. It does not add an Apple touch link after loading; the single normal-tab PNG is retained.
-- site.webmanifest start_url is now ./live.html. The existing application id /TEMPOLIVE/, scope, display mode and artwork stay unchanged.
-- Application JavaScript, interface HTML, styles, translations, audio synthesis, room protocol, game and storage keys are byte-identical to the supplied 2.1.14 package.
-- The current icon-compare-tempolive.png remains a production dependency, despite its historical filename. It is not regenerated.
+## 開始使用
 
-## Data and App
+### 個人練習
 
-The original and new documents share the same HTTPS origin and use the same localStorage keys. No data migration/reset is performed. Existing installed Apps that start at the old URL can follow the same redirect. New installations use the updated manifest start URL. Real Home Screen installation and native iPad Safari icon selection are not verified in this environment.
+開啟網站，設定 BPM、拍號與音符細分，再按「開始節拍」。也可以連續點按「點按測速」，將手上的節奏帶入節拍器。
 
-## Evidence limit
+按「新增歌曲」可將常用曲目整理成歌單。新增歌曲預設為 **4/4 拍、四分音符、預備拍關閉**；編輯既有歌曲或儲存目前設定時，會沿用該筆設定。
 
-The user confirmed that the same PNG displays in the static B comparison page, while formal-homepage revisions fail. That supports separating the document URL from the already successful image, but does not prove cached metadata is the root cause or that a new URL must succeed. No screenshot of an HTML logo or successful image decode is counted as native Safari favicon success.
+BPM 以四分音符為基準，音符細分選項決定發聲密度。播放中調整 BPM、音符細分或拍點強弱會立即套用；切換歌曲則安排在小節交界，畫面會提示待套用的變更。
 
-Do not clear Safari data merely to change the favicon. Do not upload private setlist backups to a public repository.
+內建的「開場讚美」「安靜敬拜」「回應詩歌」是示範歌單，不代表特定歌曲的建議速度。
+
+### 團隊同步
+
+1. 主持人選擇「建立房間」，選好自己的樂器／角色，將四位數字代碼分享給團員。
+2. 團員開啟相同版本的 TEMPOLIVE，選擇「代碼加入」，填入代碼並選擇樂器／角色。
+3. 等待連線與校時完成，確認各自裝置有聲音後，由主持人開始播放或切換歌曲。
+
+團員跟隨主持人的節奏，但可各自調整本機音量、音色與時間校正。房間傳送的是節奏設定與校時資料，各裝置自行產生節拍聲，並非串流主持人的音訊，也不會同步整份私人歌單。
+
+### LIVE 傳話
+
+加入房間後，開啟「LIVE 傳話」，依序選擇 **對象 → 短句**。點選預設短句即會送出並收起面板；自訂訊息則在輸入後送出。
+
+預設短句包含「太快」「太慢」「多一點」「少一點」「監聽大」「監聽小」「要幫忙」。收到訊息時可顯示文字並語音播報。使用前請先試聽、啟用語音；自訂文字不會自動翻譯。
+
+傳話不會下達停止節拍的指令，但語音與節拍能否同時正常輸出，仍取決於裝置與瀏覽器。
+
+## 音訊與連線須知
+
+**藍牙用來連接各自的耳機，不是裝置之間的房間連線方式。** 請先在系統配對耳機，再開啟 TEMPOLIVE。未連接耳機時可使用裝置喇叭；網頁內選擇輸出裝置的能力取決於瀏覽器，不支援時請由系統切換。
+
+連線房間需要網路，目前使用 shiftr.io 的公開測試中繼服務。網路、藍牙與音訊裝置都可能產生延遲或中斷，時間校正不代表所有耳機的實際聲音完全同步。正式演出前請先用實際設備測試；對同步要求較高時，優先採用有線監聽與專用連線服務。
+
+首次開啟與重新載入網站需要網路；目前沒有提供完整的離線快取。鎖定螢幕、切換到背景或系統中斷時，也不保證持續播放。
+
+使用耳機請先降低音量，再逐步調整。手機外放音量仍受喇叭能力限制；對閃光敏感者請保持拍點閃爍關閉。
+
+## 歌單與隱私
+
+歌單、外觀、音訊偏好及常用短句儲存在目前瀏覽器的 `localStorage`，不會自動跨裝置同步。重要歌單請使用「匯出歌單」備份；匯入時會取代目前瀏覽器的原有歌單。
+
+房間代碼是邀請碼，不是安全密碼。樂器／角色、目前歌名、節奏設定及傳話文字會經過公開中繼；指定對象的傳話由主持人轉送，並非端對端加密。請勿輸入敏感資料，也不要將私人歌單備份放進公開儲存庫。
+
+節拍器與 LIVE 傳話不錄製或傳送麥克風聲音。部分瀏覽器在列出音訊裝置時可能要求短暫的麥克風權限，程式取得清單後會關閉音軌。語音播報使用裝置提供的語音服務，部分聲音可能需要網路。
+
+## 加入主畫面
+
+在 iPhone／iPad 的 Safari 開啟網站，選擇 **分享 → 加入主畫面**。之後可從主畫面的 TEMPOLIVE 圖示，以獨立視窗開啟。
+
+首次改用主畫面 App 前，請先匯出原瀏覽器的歌單。若 App 中未出現原有歌單，可匯入備份，不需要清除網站資料。
+
+## 鍵盤操作
+
+| 按鍵 | 功能 |
+| --- | --- |
+| 空白鍵 | 開始／停止；房間參與者依目前狀態控制本機收聽。 |
+| `T` | 點按測速。 |
+| `N` | 下一首。 |
+| `↑`／`↓` | 速度增加／減少 1 BPM，搭配 `Shift` 為 5 BPM。 |
+| `F` | 切換放大模式。 |
+| `Esc` | 離開放大模式；開啟面板時依面板操作處理。 |
+
+輸入文字或操作對話框時，節拍器的全域快捷鍵會暫停；參與者仍受房間控制權限限制。
+
+<details>
+<summary>部署與維護</summary>
+
+本專案使用 HTML、CSS 與 JavaScript，不需要安裝 npm 套件或執行建置。請將網站檔案放在同一個 GitHub Pages 發布資料夾，並透過發布後的 HTTPS 網址開啟。
+
+目前入口與核心檔案如下：
+
+| 檔案 | 用途 |
+| --- | --- |
+| `index.html` | 網站首頁，導向 `live.html`。 |
+| `tempolive.html` | 保留舊網址的相容入口。 |
+| `live.html` | 正式節拍器入口與載入程序。 |
+| `tempolive-interface.html` | 介面及內嵌遊戲資料。 |
+| `tempolive-runtime.js` | 節拍器、房間、傳話、遊戲整合及三語程式。 |
+| `tempolive-styles.css` | 一般／放大模式與行動裝置版面。 |
+| `icon-compare-tempolive.png` | 正式使用的瀏覽器分頁圖示，請勿因檔名而當成測試檔刪除。 |
+| `site.webmanifest` | 主畫面 App 識別、啟動位置與圖示設定。 |
+| `app-icon-192.png`、`app-icon-512.png` | Manifest 使用的 App 圖示。 |
+| `tempolive-cover.png` | 播放資訊封面。 |
+
+`favicon.ico`、`apple-touch-icon.png` 可保留作為相容圖示；`.nojekyll` 為發布輔助檔案。
+
+此版本會載入同目錄的介面、樣式與程式，不能只下載或上傳單一 `index.html`。目前分頁圖示固定使用 `/TEMPOLIVE/icon-compare-tempolive.png`；若搬到不同的專案路徑，需一併核對三個入口的圖示路徑，以及 Manifest 的 `id`、`start_url` 和 `scope`。
+
+連線設定集中於 `tempolive-runtime.js` 的 `CONFIG.relay`。更換中繼服務時，所有參與裝置須使用相同設定；請勿將私人長期憑證直接寫入公開前端程式。
+
+</details>
+
+## 問題回報
+
+請透過 [GitHub Issues](https://github.com/chien930207-cyber/TEMPOLIVE/issues) 提供裝置、作業系統、瀏覽器版本、操作步驟與預期結果。音訊問題也請註明使用喇叭、有線耳機或藍牙耳機；分享截圖前，請先移除私人歌名與其他敏感資訊。
