@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TEMPOLIVE 連線節拍器</title>
 <link rel="icon" type="image/png" sizes="32x32" href="/TEMPOLIVE/icon-compare-tempolive.png">
-<!-- TEMPOLIVE link preview v2.3.4: static, before styles and scripts.
+<!-- TEMPOLIVE link preview v2.3.5: static, before styles and scripts.
      LINE reads og:title, og:description and og:image.
      Use the existing 512px App Logo; do not use a data URL or runtime image.
      The explicit index.html sharing URL avoids the historical root redirect URL.
-     Canonical app identity, saved songs and installation URLs are unchanged. -->
+     Public canonical address matches sharing; App identity and data are unchanged. -->
 <meta property="og:title" content="TEMPOLIVE 連線節拍器">
 <meta property="og:description" content="儲存歌單、多人同步跟拍，還能用 LIVE 傳話溝通。">
 <meta property="og:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/app-icon-512.png">
@@ -29,13 +29,40 @@
 <meta name="twitter:image:alt" content="TEMPOLIVE Logo">
 <link rel="image_src" href="https://chien930207-cyber.github.io/TEMPOLIVE/app-icon-512.png">
 <!-- /TEMPOLIVE social preview -->
-<link rel="canonical" href="https://chien930207-cyber.github.io/TEMPOLIVE/">
+<link rel="canonical" href="https://chien930207-cyber.github.io/TEMPOLIVE/index.html?share=line-v234">
+<script id="tempolive-public-address">
+/* v2.3.5: use the exact sharing address verified on mobile LINE.
+   Same document, no navigation/reload, no storage or application changes.
+   This does not invalidate preview cards already stored by another app. */
+(function () {
+  'use strict';
+  function normalizePublicAddress() {
+    try {
+      if (window.top !== window.self) return;
+      if (document.querySelector('meta[name="tempolive-test-build"]')) return;
+      var url = new URL(window.location.href);
+      if (url.origin !== 'https://chien930207-cyber.github.io') return;
+      if (url.pathname !== '/TEMPOLIVE/' &&
+          url.pathname !== '/TEMPOLIVE/index.html') return;
+      url.pathname = '/TEMPOLIVE/index.html';
+      url.searchParams.set('share', 'line-v234');
+      if (url.href !== window.location.href) {
+        window.history.replaceState(window.history.state, '', url.href);
+      }
+    } catch (_) {
+      // A restricted History API must never stop the metronome.
+    }
+  }
+  normalizePublicAddress();
+  window.addEventListener('pageshow', normalizePublicAddress);
+})();
+</script>
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.3.4">
-<meta name="tempolive-version" content="2.3.4">
-<meta name="tempolive-build" content="2.3.4-direct-preview">
+<meta name="application-version" content="2.3.5">
+<meta name="tempolive-version" content="2.3.5">
+<meta name="tempolive-build" content="2.3.5-public-address">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
