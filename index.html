@@ -5,36 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TEMPOLIVE 連線節拍器</title>
 <link rel="icon" type="image/png" sizes="32x32" href="/TEMPOLIVE/icon-compare-tempolive.png">
-<!-- TEMPOLIVE social preview: static metadata for link-preview crawlers.
-     Canonical app entry: index.html. Legacy files are redirect-only.
-     Preview image is separate from favicon and Home Screen app icons.
-     If the project path changes, update these full HTTPS URLs together. -->
+<!-- TEMPOLIVE link preview v2.3.2: static, before styles and scripts.
+     LINE reads og:title, og:description and og:image.
+     Use the existing 512px App Logo; do not use a data URL or runtime image.
+     The versioned sharing URL serves this same index.html, without redirect.
+     Canonical app identity, saved songs and installation URLs are unchanged. -->
+<meta property="og:title" content="TEMPOLIVE 連線節拍器">
+<meta property="og:description" content="儲存歌單、多人同步跟拍，還能用 LIVE 傳話溝通。">
+<meta property="og:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/app-icon-512.png?share=logo-20261008">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="TEMPOLIVE">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:title" content="TEMPOLIVE 連線節拍器">
-<meta property="og:description" content="儲存歌單、多人同步跟拍，還能用 LIVE 傳話溝通。">
-<meta property="og:url" content="https://chien930207-cyber.github.io/TEMPOLIVE/">
-<meta property="og:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
-<meta property="og:image:secure_url" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
+<meta property="og:url" content="https://chien930207-cyber.github.io/TEMPOLIVE/?share=logo-20261008">
+<meta property="og:image:secure_url" content="https://chien930207-cyber.github.io/TEMPOLIVE/app-icon-512.png?share=logo-20261008">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="TEMPOLIVE Logo：深色背景上的白色節拍器圖示。">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="TEMPOLIVE Logo">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TEMPOLIVE 連線節拍器">
 <meta name="twitter:description" content="儲存歌單、多人同步跟拍，還能用 LIVE 傳話溝通。">
-<meta name="twitter:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
-<meta name="twitter:image:alt" content="TEMPOLIVE Logo：深色背景上的白色節拍器圖示。">
-<link rel="image_src" href="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
+<meta name="twitter:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/app-icon-512.png?share=logo-20261008">
+<meta name="twitter:image:alt" content="TEMPOLIVE Logo">
+<link rel="image_src" href="https://chien930207-cyber.github.io/TEMPOLIVE/app-icon-512.png?share=logo-20261008">
 <!-- /TEMPOLIVE social preview -->
 <link rel="canonical" href="https://chien930207-cyber.github.io/TEMPOLIVE/">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.3.1">
-<meta name="tempolive-version" content="2.3.1">
-<meta name="tempolive-build" content="2.3.1-share">
+<meta name="application-version" content="2.3.2">
+<meta name="tempolive-version" content="2.3.2">
+<meta name="tempolive-build" content="2.3.2-line-logo">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
@@ -4607,7 +4608,7 @@ texts();
       quietMs: 1800, startGuardMs: 4200, pollMs: 500, persistEveryMs: 5000,
       reminderGapMs: 30000,
       dailyKey: 'tempolive.reminders.daily.v1',
-      shareURL: 'https://chien930207-cyber.github.io/TEMPOLIVE/'
+      shareURL: 'https://chien930207-cyber.github.io/TEMPOLIVE/?share=logo-20261008'
     });
     const COPY = {
   "zh-Hant": {
@@ -5553,7 +5554,7 @@ texts();
     window.TempoliveSharePrompt = Object.freeze({
       snapshot: () => {
         syncDaily();const next=eligibleKind(),at=nextThreshold(next);
-        return {version:'2.3.1-daily-app5-share10',day:daily.day,
+        return {version:'2.3.2-daily-app5-share10',day:daily.day,
           installAtMs:CONFIG.installAtMs,shareAtMs:CONFIG.shareAtMs,
           foregroundMs:Math.floor(total()),nextAtMs:Number.isFinite(at)?at:null,
           remainingMs:next?Math.max(0,Math.ceil(Math.max(at,daily.notBeforeMs)-total())):null,
