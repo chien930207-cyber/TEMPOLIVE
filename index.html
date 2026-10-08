@@ -15,8 +15,8 @@
 <meta property="og:title" content="TEMPOLIVE 連線節拍器">
 <meta property="og:description" content="儲存歌單、多人同步跟拍，還能用 LIVE 傳話溝通。">
 <meta property="og:url" content="https://chien930207-cyber.github.io/TEMPOLIVE/">
-<meta property="og:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png?v=2.2.1">
-<meta property="og:image:secure_url" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png?v=2.2.1">
+<meta property="og:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
+<meta property="og:image:secure_url" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,19 +24,21 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="TEMPOLIVE 連線節拍器">
 <meta name="twitter:description" content="儲存歌單、多人同步跟拍，還能用 LIVE 傳話溝通。">
-<meta name="twitter:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png?v=2.2.1">
+<meta name="twitter:image" content="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
 <meta name="twitter:image:alt" content="TEMPOLIVE Logo：深色背景上的白色節拍器圖示。">
+<link rel="image_src" href="https://chien930207-cyber.github.io/TEMPOLIVE/tempolive-share-preview.png">
 <!-- /TEMPOLIVE social preview -->
 <link rel="canonical" href="https://chien930207-cyber.github.io/TEMPOLIVE/">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.2.1">
-<meta name="tempolive-version" content="2.2.1">
-<meta name="tempolive-build" content="2.2.1-integrated">
+<meta name="application-version" content="2.3.1">
+<meta name="tempolive-version" content="2.3.1">
+<meta name="tempolive-build" content="2.3.1-share">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/TEMPOLIVE/apple-touch-icon.png">
 <meta name="application-name" content="TEMPOLIVE">
 <meta name="apple-mobile-web-app-title" content="TEMPOLIVE">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1609,6 +1611,49 @@ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:act
 
 
 </style>
+<script id="tempolive-install-controller">
+/* Real browser install events only. No redirect, forced installation, or
+   persistent "installed" guess. Installed-app identity is in the manifest. */
+(function () {
+  'use strict';
+  const test = !!document.querySelector('meta[name="tempolive-test-build"]');
+  const appURL = new URL(test ? 'tempolive-share-app-test.html' : './', location.href).href;
+  const name = test ? 'TEMPOLIVE TEST' : 'TEMPOLIVE';
+  const words = {"zh-Hant": {"installNow": "\u5b89\u88dd App", "iosButton": "\u52a0\u5165\u4e3b\u756b\u9762", "instructions": "\u67e5\u770b\u5b89\u88dd\u65b9\u5f0f", "busy": "\u8acb\u5728\u7cfb\u7d71\u8996\u7a97\u78ba\u8a8d", "back": "\u8fd4\u56de\u7bc0\u62cd\u5668", "standalone": "\u5df2\u5728 App \u7368\u7acb\u8996\u7a97\u958b\u555f\u3002\u4e0d\u9700\u91cd\u8907\u5b89\u88dd\u3002", "accepted": "\u5df2\u5411\u7cfb\u7d71\u78ba\u8a8d\u5b89\u88dd\uff1b\u8acb\u5f9e\u4e3b\u756b\u9762\u6216\u61c9\u7528\u7a0b\u5f0f\u6e05\u55ae\u958b\u555f\u78ba\u8a8d\u3002", "event": "\u700f\u89bd\u5668\u5df2\u56de\u5831\u5b89\u88dd\u4e8b\u4ef6\uff1b\u8acb\u5f9e\u4e3b\u756b\u9762\u6216\u61c9\u7528\u7a0b\u5f0f\u6e05\u55ae\u958b\u555f\u3002", "ready": "\u7cfb\u7d71\u5b89\u88dd\u63d0\u793a\u5df2\u5c31\u7dd2\u3002\u9ede\u300c\u5b89\u88dd App\u300d\u5f8c\uff0c\u5728\u7cfb\u7d71\u8996\u7a97\u78ba\u8a8d\u5373\u53ef\u3002", "ios": "iPhone\uff0fiPad \u8acb\u5728 Safari \u4f7f\u7528\u300c\u5206\u4eab \u2192 \u52a0\u5165\u4e3b\u756b\u9762\u300d\u3002\u7db2\u9801\u7121\u6cd5\u81ea\u52d5\u4ee3\u6309\u300c\u52a0\u5165\u300d\u3002", "waiting": "\u700f\u89bd\u5668\u5c1a\u672a\u63d0\u4f9b\u5b89\u88dd\u63d0\u793a\u3002\u53ef\u5148\u4f7f\u7528\u7db2\u9801\uff0c\u6216\u4f9d\u4e0b\u65b9\u6559\u5b78\u5f9e\u700f\u89bd\u5668\u9078\u55ae\u5b89\u88dd\u3002", "dismissed": "\u4f60\u5df2\u53d6\u6d88\u7cfb\u7d71\u5b89\u88dd\uff0c\u672a\u5b8c\u6210\u5b89\u88dd\u3002\u53ef\u4f7f\u7528\u9078\u55ae\uff0c\u6216\u7b49\u5f85\u700f\u89bd\u5668\u518d\u6b21\u63d0\u4f9b\u63d0\u793a\u3002", "error": "\u7121\u6cd5\u958b\u555f\u7cfb\u7d71\u5b89\u88dd\u8996\u7a97\uff0c\u672a\u5b8c\u6210\u5b89\u88dd\u3002\u8acb\u4f7f\u7528\u4e0b\u65b9\u700f\u89bd\u5668\u9078\u55ae\u6b65\u9a5f\u3002", "local": "\u5b89\u88dd\u9700\u8981 HTTPS \u7db2\u5740\uff0c\u4e0d\u80fd\u5f9e\u4e0b\u8f09\u6a94\u6848\u9810\u89bd\u5b89\u88dd\u3002\u8acb\u4e0a\u50b3\u5b8c\u6574\u66f4\u65b0\u5305\u5f8c\u958b\u555f\u6b64\u6e2c\u8a66\u9801\u7684 HTTPS \u7db2\u5740\u3002", "testNote": "\u5b89\u88dd\u540d\u7a31\uff1aTEMPOLIVE TEST\u3002\u5b89\u88dd\u5f8c\u958b\u555f\u9019\u500b\u6e2c\u8a66\u7248\uff0c\u4e0d\u5c0e\u5411\u6b63\u5f0f\u7db2\u7ad9\u3002", "prodNote": "\u4f7f\u7528\u73fe\u6709 TEMPOLIVE Logo\uff0c\u5b89\u88dd\u5f8c\u5f9e\u4e3b\u756b\u9762\u958b\u555f\u3002", "copyAddress": "\u8907\u88fd\u9019\u500b\u9801\u9762\u7684\u7db2\u5740", "guideIntro": "\u5c31\u5728\u9019\u500b\u9801\u9762\u5b8c\u6210\u5b89\u88dd\uff0c\u4e0d\u9700\u8981\u958b\u555f\u53e6\u4e00\u500b\u7db2\u7ad9\u3002", "confirmation": "\u7531\u4f60\u5728\u7cfb\u7d71\u8996\u7a97\u78ba\u8a8d\uff1b\u4e0d\u6703\u5728\u80cc\u666f\u81ea\u52d5\u5b89\u88dd\u3002"}, "en": {"installNow": "Install app", "iosButton": "Add to Home Screen", "instructions": "How to install", "busy": "Confirm in the system dialog", "back": "Back to metronome", "standalone": "Running in the standalone app window. No reinstall is needed.", "accepted": "Installation accepted. Open the app from your Home Screen or app list to verify.", "event": "The browser reported an installation event. Open the app from your Home Screen or app list.", "ready": "The system install prompt is ready. Choose Install app, then confirm in the system dialog.", "ios": "On iPhone/iPad, use Safari: Share > Add to Home Screen. A web button cannot confirm Add for you.", "waiting": "The browser has not offered an install prompt yet. Use the page for a while or follow the browser-menu instructions below.", "dismissed": "Installation was cancelled. Use the browser menu or wait for a new install prompt.", "error": "The system install dialog could not open. Installation is not complete; use the menu instructions below.", "local": "Installation requires an HTTPS page, not a downloaded-file preview. Upload the complete update and open this test page over HTTPS.", "testNote": "Installs as TEMPOLIVE TEST and launches this test page, not the production site.", "prodNote": "Uses the existing TEMPOLIVE logo. Launch from your Home Screen after installation.", "copyAddress": "Copy this page address", "guideIntro": "Install this page directly. There is no need to open a different website.", "confirmation": "You confirm in the system dialog. Nothing is installed automatically."}, "de": {"installNow": "App installieren", "iosButton": "Zum Home-Bildschirm", "instructions": "Installationsanleitung", "busy": "Im Systemdialog best\u00e4tigen", "back": "Zur\u00fcck zum Metronom", "standalone": "Die App ist im eigenen Fenster ge\u00f6ffnet. Keine erneute Installation n\u00f6tig.", "accepted": "Installation best\u00e4tigt. \u00d6ffne die App zur Kontrolle vom Home-Bildschirm oder aus der App-Liste.", "event": "Der Browser hat eine Installation gemeldet. \u00d6ffne die App vom Home-Bildschirm oder aus der App-Liste.", "ready": "Der Installationsdialog ist bereit. W\u00e4hle App installieren und best\u00e4tige im Systemdialog.", "ios": "Auf iPhone/iPad in Safari: Teilen > Zum Home-Bildschirm. Eine Web-Schaltfl\u00e4che kann Hinzufuegen nicht f\u00fcr dich best\u00e4tigen.", "waiting": "Der Browser bietet noch keinen Installationsdialog an. Nutze die Seite kurz oder folge unten den Schritten im Browsermen\u00fc.", "dismissed": "Installation abgebrochen. Nutze das Browsermen\u00fc oder warte auf einen neuen Installationsdialog.", "error": "Der Installationsdialog konnte nicht ge\u00f6ffnet werden. Die App wurde nicht installiert; nutze die Anleitung unten.", "local": "Die Installation erfordert eine HTTPS-Seite. Lade das vollst\u00e4ndige Paket hoch und \u00f6ffne diese Testseite \u00fcber HTTPS.", "testNote": "Wird als TEMPOLIVE TEST installiert und \u00f6ffnet diese Testseite, nicht die Live-Website.", "prodNote": "Verwendet das vorhandene TEMPOLIVE-Logo. Nach der Installation vom Home-Bildschirm \u00f6ffnen.", "copyAddress": "Adresse dieser Seite kopieren", "guideIntro": "Diese Seite direkt installieren. Du musst keine andere Website \u00f6ffnen.", "confirmation": "Du best\u00e4tigst im Systemdialog. Es wird nichts automatisch installiert."}};
+  const mode = window.matchMedia('(display-mode: standalone)');
+  const apple = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  let deferred = null, busy = false, result = '', installReported = false;
+  const listeners = new Set();
+  const standalone = () => navigator.standalone === true || mode.matches;
+  const local = () => !window.isSecureContext || !/^https?:$/.test(location.protocol);
+  const text = () => words[window.TempoliveI18n?.lang || document.documentElement.lang] || words['zh-Hant'];
+  function snapshot() {
+    const code = standalone() ? 'standalone' : local() ? 'local' : busy ? 'busy' : installReported ? 'event' : result === 'accepted' ? 'accepted' : deferred ? 'ready' : result === 'dismissed' ? 'dismissed' : result === 'error' ? 'error' : apple ? 'ios' : 'waiting';
+    return {name,test,appURL,standalone:standalone(),canPrompt:!!deferred&&!busy&&!standalone()&&!local(),busy,result,installReported,code,message:text()[code],iconURL:new URL('/TEMPOLIVE/apple-touch-icon.png',location.href).href};
+  }
+  function notify() { for (const fn of listeners) {try {fn(snapshot());} catch (e) {console.warn('Install status listener failed',e);}} }
+  window.addEventListener('beforeinstallprompt', event => {
+    if (typeof event.prompt !== 'function') return;
+    event.preventDefault(); deferred = event; result = ''; notify();
+  });
+  window.addEventListener('appinstalled', () => {installReported=true;deferred=null;busy=false;notify();});
+  mode.addEventListener?.('change',notify);
+  window.addEventListener('pageshow',notify);
+  function request() {
+    if (!snapshot().canPrompt) return Promise.resolve({outcome:standalone()?'standalone':'unavailable'});
+    const event=deferred; deferred=null;busy=true;result='prompting';
+    let prompt;
+    // prompt() is called before any await, within the user's click gesture.
+    try {prompt=event.prompt();} catch (error) {busy=false;result='error';notify();return Promise.resolve({outcome:'error'});}
+    notify();
+    return Promise.resolve(event.userChoice || prompt).then(choice => {
+      result=choice?.outcome==='accepted'?'accepted':choice?.outcome==='dismissed'?'dismissed':'error';
+      return {outcome:result};
+    }).catch(() => {result='error';return {outcome:'error'};}).finally(() => {busy=false;notify();});
+  }
+  window.TempoliveInstall=Object.freeze({snapshot,text,request,onChange(fn){listeners.add(fn);return ()=>listeners.delete(fn);}});
+})();
+</script>
 </head>
 <body class="design-refresh">
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-restore-panel" viewBox="0 0 24 24"><path d="M3 8h5V3m8 0v5h5M3 16h5v5m8 0v-5h5"/></symbol><symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.2 15.2 5.3 5.3M10.5 7.5v6M7.5 10.5h6"/></symbol><symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.2 15.2 5.3 5.3M7.5 10.5h6"/></symbol><symbol id="i-guide-keyboard" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 15h10"/></symbol><symbol id="i-previous-track" viewBox="0 0 24 24"><path d="m18 5-10 7 10 7ZM5 5v14"/></symbol></defs></svg>
@@ -1705,14 +1750,8 @@ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:act
 <div class="settings-top"><div class="dialog-head"><div class="row settings-heading"><h2 id="settingsTitle">設定</h2><span id="modePill" class="pill"><span class="dot"></span><span id="modeText">單人模式</span></span></div><button type="button" class="icon-btn" data-close="settingsDialog" aria-label="關閉設定" autofocus><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><p id="settingsNotice" class="settings-notice" role="status" aria-live="polite" hidden></p></div>
 <div class="settings-body"><section class="settings-appearance" aria-labelledby="themeLabel"><div><h3 id="themeLabel">深色模式</h3><p id="themeState">目前使用淺色外觀</p></div><button type="button" id="themeBtn" class="theme-toggle" role="switch" aria-checked="false" aria-labelledby="themeLabel" aria-describedby="themeState"><span class="theme-track"><span class="theme-thumb"><svg aria-hidden="true"><use href="#i-sun"/></svg></span></span></button></section>
 <section class="settings-appearance settings-flash" aria-labelledby="screenFlashLabel"><div><h3 id="screenFlashLabel">螢幕閃爍 <span class="flash-new-badge" lang="en">NEW</span></h3><p id="screenFlashState">關閉，不顯示拍點螢光</p></div><button type="button" id="screenFlashBtn" class="theme-toggle" role="switch" aria-checked="false" aria-labelledby="screenFlashLabel" aria-describedby="screenFlashState screenFlashHint"><span class="theme-track"><span class="theme-thumb"><svg aria-hidden="true"><use href="#i-screen-flash"/></svg></span></span></button></section><p id="screenFlashHint" class="flash-hint">預設關閉。僅在節拍器區塊顯示拍點螢光：淺色模式為黑色，深色模式為白色，每次發光約 0.32 秒，並逐漸淡出，不閃動整個頁面。高速時自動減少閃爍次數；對閃光敏感者請保持關閉。</p>
-<section class="settings-audio" id="audioPanel" aria-labelledby="audioSettingsTitle"><div class="settings-audio-heading"><h3 id="audioSettingsTitle">音訊與藍牙</h3><p id="audioSummary">馬林巴 · 加強</p></div><div class="audio-content"><div class="audio-grid"><div><label class="field-label" for="tone">節拍音色</label><select id="tone" aria-describedby="toneDescription"></select><p class="audio-explain" id="toneDescription" style="margin-top:9px"></p></div></div><div class="audio-power-row"><label class="field-label" for="audioPower">輸出強度</label><select id="audioPower" aria-describedby="audioPowerHint"><option value="standard">標準</option><option value="boost" selected>加強</option></select></div><p class="audio-explain" id="audioPowerHint" style="margin-top:9px"></p><p class="audio-explain" style="margin-top:9px">使用耳機請先降低音量，再逐步調整。手機外放的實際音量仍受喇叭功率限制。</p><hr class="rule"><label class="field-label" for="audioOutput">聲音輸出裝置</label><div class="output-row"><select id="audioOutput"><option value="">系統預設（喇叭／耳機）</option></select><button id="chooseOutput" class="btn small-btn">選擇輸出</button><button id="testAudio" class="btn small-btn">試聽音色</button></div><p class="audio-explain" style="margin-top:12px" id="outputHint">未連接耳機時，可直接使用手機喇叭；請調高系統的媒體音量。使用藍牙時，請先在系統配對並選擇輸出。</p><section class="audio-continuity-setting"><label class="check-row" for="continueAudio"><input type="checkbox" id="continueAudio" checked aria-describedby="continueAudioHint earDetectionHint"><span>音訊中斷後自動續播 <span class="flash-new-badge" lang="en">NEW</span></span></label><p class="audio-explain" id="continueAudioHint">預設開啟。耳機切換或音訊中斷後，會嘗試恢復原本播放的節拍；不會自動開始已停止或靜音的節拍。</p><p class="audio-explain" id="earDetectionHint">網頁無法關閉耳機的配戴偵測。若拿下單邊耳機仍會暫停，請在耳機或系統設定關閉「自動耳部偵測／取下暫停」。</p></section><div class="calibration"><div class="calibration-header"><label for="latency">本機時間校正</label><div class="row" style="gap:6px"><input type="number" id="latencyValue" aria-label="時間校正毫秒" min="-300" max="300" step="5" value="0"><span class="small muted">ms</span></div></div><input type="range" id="latency" min="-300" max="300" step="5" value="0"><div class="range-labels"><span>提前 300 ms</span><span>延後 300 ms</span></div><p class="audio-explain" style="margin-top:13px">聲音比其他人慢，往負值調整；太快則往正值調整。只影響這台裝置。</p></div><label class="check-row"><input type="checkbox" id="autoLatency" checked><span>使用瀏覽器提供的輸出延遲估計（不等於實際量測）</span></label><label class="check-row" style="margin-top:12px"><input type="checkbox" id="keepAwake" checked><span>播放時保持螢幕開啟（裝置支援時）<span id="wakeStatus" class="muted"></span></span></label><section class="media-brand-info" aria-labelledby="mediaBrandingLabel"><h3><span id="mediaBrandingLabel" data-i18n-dynamic>鎖定畫面品牌資訊</span><span class="flash-new-badge" lang="en">NEW</span></h3><p id="mediaBrandingHint" class="audio-explain" data-i18n-dynamic>播放時提供 TEMPOLIVE 名稱與 Logo；實際顯示由系統決定，仍可能保留網站來源。</p></section>
-<section class="media-brand-info app-install-info" aria-labelledby="appInstallLabel">
- <h3><span id="appInstallLabel" data-i18n-dynamic>主畫面 App</span><span class="flash-new-badge" lang="en">NEW</span></h3>
- <p class="audio-explain" id="appInstallState" data-i18n-dynamic role="status">目前在瀏覽器分頁</p>
- <p class="audio-explain" id="appInstallHint" data-i18n-dynamic></p>
- <p class="audio-explain" id="appInstallData" data-i18n-dynamic></p>
- <p class="audio-explain" id="appInstallNetwork" data-i18n-dynamic></p>
-</section>
+<section class="settings-audio" id="audioPanel" aria-labelledby="audioSettingsTitle"><div class="settings-audio-heading"><h3 id="audioSettingsTitle">音訊與藍牙</h3><p id="audioSummary">馬林巴 · 加強</p></div><div class="audio-content"><div class="audio-grid"><div><label class="field-label" for="tone">節拍音色</label><select id="tone" aria-describedby="toneDescription"></select><p class="audio-explain" id="toneDescription" style="margin-top:9px"></p></div></div><div class="audio-power-row"><label class="field-label" for="audioPower">輸出強度</label><select id="audioPower" aria-describedby="audioPowerHint"><option value="standard">標準</option><option value="boost" selected>加強</option></select></div><p class="audio-explain" id="audioPowerHint" style="margin-top:9px"></p><p class="audio-explain" style="margin-top:9px">使用耳機請先降低音量，再逐步調整。手機外放的實際音量仍受喇叭功率限制。</p><hr class="rule"><label class="field-label" for="audioOutput">聲音輸出裝置</label><div class="output-row"><select id="audioOutput"><option value="">系統預設（喇叭／耳機）</option></select><button id="chooseOutput" class="btn small-btn">選擇輸出</button><button id="testAudio" class="btn small-btn">試聽音色</button></div><p class="audio-explain" style="margin-top:12px" id="outputHint">未連接耳機時，可直接使用手機喇叭；請調高系統的媒體音量。使用藍牙時，請先在系統配對並選擇輸出。</p><section class="audio-continuity-setting"><label class="check-row" for="continueAudio"><input type="checkbox" id="continueAudio" checked aria-describedby="continueAudioHint earDetectionHint"><span>音訊中斷後自動續播 <span class="flash-new-badge" lang="en">NEW</span></span></label><p class="audio-explain" id="continueAudioHint">預設開啟。耳機切換或音訊中斷後，會嘗試恢復原本播放的節拍；不會自動開始已停止或靜音的節拍。</p><p class="audio-explain" id="earDetectionHint">網頁無法關閉耳機的配戴偵測。若拿下單邊耳機仍會暫停，請在耳機或系統設定關閉「自動耳部偵測／取下暫停」。</p></section><div class="calibration"><div class="calibration-header"><label for="latency">本機時間校正</label><div class="row" style="gap:6px"><input type="number" id="latencyValue" aria-label="時間校正毫秒" min="-300" max="300" step="5" value="0"><span class="small muted">ms</span></div></div><input type="range" id="latency" min="-300" max="300" step="5" value="0"><div class="range-labels"><span>提前 300 ms</span><span>延後 300 ms</span></div><p class="audio-explain" style="margin-top:13px">聲音比其他人慢，往負值調整；太快則往正值調整。只影響這台裝置。</p></div><label class="check-row"><input type="checkbox" id="autoLatency" checked><span>使用瀏覽器提供的輸出延遲估計（不等於實際量測）</span></label><label class="check-row" style="margin-top:12px"><input type="checkbox" id="keepAwake" checked><span>播放時保持螢幕開啟（裝置支援時）<span id="wakeStatus" class="muted"></span></span></label>
+
 <p class="audio-warning">藍牙不是房間連線方式。各台裝置需要網路，並各自連接耳機。藍牙延遲不一且可能變動，正式演出請優先使用有線監聽，並先實測。</p></div></section></div>
 </dialog>
 <dialog id="songDialog" aria-labelledby="songDialogTitle"><div class="dialog-head"><h2 id="songDialogTitle">新增歌曲</h2><button class="icon-btn" data-close="songDialog" aria-label="關閉"><svg><use href="#i-close"/></svg></button></div><form id="songForm" class="dialog-body"><p>儲存速度與拍號，下次點歌名即可切換。</p><label class="field-label" for="songName">歌曲名稱</label><input id="songName" maxlength="40" required placeholder="例如：本週開場詩歌" autocomplete="off"><div class="dialog-grid"><div><label class="field-label" for="songBpm">速度 BPM</label><input type="number" id="songBpm" min="40" max="300" required></div><div><label class="field-label" for="songMeter">拍號</label><select id="songMeter"><option>2/4</option><option>3/4</option><option selected>4/4</option><option>5/4</option><option>6/8</option><option>7/8</option><option>12/8</option></select></div><div><label class="field-label" for="songNote">音符細分</label><select id="songNote"><option value="4">四分音符</option><option value="8">八分音符</option><option value="16">十六分音符</option></select></div><div><label class="field-label" for="songCountIn">預備拍</label><select id="songCountIn"><option value="0">關閉</option><option value="1">1 小節</option><option value="2">2 小節</option></select></div></div><div class="song-order" id="songOrder"><span class="muted">歌單順序</span><button type="button" class="btn small-btn" id="moveSongUp">↑ 上移</button><button type="button" class="btn small-btn" id="moveSongDown">↓ 下移</button><span id="songPosition" class="muted"></span></div><div class="dialog-actions"><button type="button" id="deleteSong" class="btn danger">刪除</button><button type="button" class="btn" data-close="songDialog">取消</button><button type="submit" class="btn primary">儲存歌曲</button></div></form></dialog>
@@ -2013,6 +2052,24 @@ const CONFIG = Object.freeze({
   roomPrefix: 'tw-beat-v2-', roomLead: 1600, maxPeople: 12, syncRefreshMs: 60000,
   relay: {url:'wss://public.cloud.shiftr.io',username:'public',password:'public',namespace:'tw-metronome-202609-v2',connectTimeout:8500,requestTimeout:7000,maxReconnects:2}
 });
+
+/* v2.3.0 timing: absolute room timeline + local output-clock mapping.
+   RTT is NOT acoustic error. No microphone, no fabricated Bluetooth measurement.
+   getOutputTimestamp already maps output time: never subtract latency twice.
+   https://www.w3.org/TR/webaudio-1.1/#dom-audiocontext-getoutputtimestamp
+   https://www.rfc-editor.org/rfc/rfc5905#section-10 */
+const SYNC_CONFIG=Object.freeze({version:1,windowMs:12000,maxSamples:48,
+  pingMs:1000,burstMs:15000,slewMsPerSecond:8,retimeThresholdMs:1,
+  minLeadMs:650,maxLeadMs:7000,readyWaitMs:8000,outputCapMs:2000,
+  outputSampleMs:150,clockGuardMs:70,manualLimitMs:1000});
+const syncMedian=values=>{const a=[...values].sort((a,b)=>a-b);return a.length?(a[Math.floor((a.length-1)/2)]+a[Math.floor(a.length/2)])/2:0;};
+function syncText(key){
+ const en={change:'Change at the shared time',waiting:'Waiting for the band to enable audio and synchronize...',cancel:'Cancel start',timeout:'Some members are not ready. Enable audio on their devices, then press Start again.',cancelled:'Start cancelled.',heading:'Sync and latency compensation',refresh:'Recalibrate',note:'Output timing is a browser estimate, not a measurement of headphone sound. Use the local time correction above for any remaining mismatch.',solo:'Not in a room',host:'Host clock',sampling:'Sampling clock offset',tracking:'Clock tracking',adjusting:'Clock correction in progress',unstable:'High timing uncertainty',output:'Output timing',timestamp:'Output timestamp',estimate:'System estimate',partial:'Partial estimate only',unavailable:'No output estimate',off:'Automatic output correction is off',network:'Network',buffer:'Command buffer',pending:'Room changes apply together after the command buffer; solo controls stay immediate.',refreshed:'Timing samples refreshed. Check the actual sound on your output device.'};
+ const de={change:'Gemeinsamer Zeitpunkt der Aenderung',waiting:'Warte auf Audiofreigabe und Zeitsynchronisation der Band...',cancel:'Start abbrechen',timeout:'Einige Mitglieder sind noch nicht bereit. Audio auf diesen Ger\u00e4ten freigeben, dann erneut starten.',cancelled:'Start abgebrochen.',heading:'Synchronisation und Latenzausgleich',refresh:'Neu abgleichen',note:'Die Ausgabelatenz ist eine Browsersch\u00e4tzung, keine Messung am Kopfh\u00f6rer. Verbleibende Abweichungen oben mit der lokalen Zeitkorrektur ausgleichen.',solo:'Nicht in einem Raum',host:'Host-Zeit',sampling:'Zeitversatz wird ermittelt',tracking:'Zeit wird laufend abgeglichen',adjusting:'Zeitkorrektur l\u00e4uft',unstable:'Hohe Zeitunsicherheit',output:'Audioausgabe',timestamp:'Ausgabezeitstempel',estimate:'Systemsch\u00e4tzung',partial:'Nur teilweise gesch\u00e4tzt',unavailable:'Keine Ausgabesch\u00e4tzung',off:'Automatischer Ausgleich ist aus',network:'Netzwerk',buffer:'Befehlspuffer',pending:'\u00c4nderungen im Raum werden nach dem Befehlspuffer gemeinsam wirksam. Solo-Bedienung bleibt direkt.',refreshed:'Zeitdaten neu erfasst. Den tats\u00e4chlichen Ton am Ausgabeger\u00e4t pr\u00fcfen.'};
+ const zh={change:'\u8b8a\u66f4\u5c07\u65bc\u5171\u540c\u6642\u9593\u5957\u7528',waiting:'\u7b49\u5019\u5718\u54e1\u555f\u7528\u8072\u97f3\u4e26\u5b8c\u6210\u6821\u6642\u2026',cancel:'\u53d6\u6d88\u958b\u59cb',timeout:'\u90e8\u5206\u5718\u54e1\u5c1a\u672a\u5c31\u7dd2\uff0c\u8acb\u5148\u555f\u7528\u5404\u81ea\u88dd\u7f6e\u7684\u8072\u97f3\uff0c\u518d\u6309\u958b\u59cb\u3002',cancelled:'\u5df2\u53d6\u6d88\u958b\u59cb\u3002',heading:'\u540c\u6b65\u8207\u5ef6\u9072\u88dc\u511f',refresh:'\u91cd\u65b0\u6821\u6b63',note:'\u8f38\u51fa\u6642\u9593\u662f\u700f\u89bd\u5668\u4f30\u8a08\uff0c\u4e0d\u662f\u8033\u6a5f\u5be6\u969b\u767c\u8072\u7684\u91cf\u6e2c\u3002\u4ecd\u6709\u5dee\u7570\u6642\uff0c\u53ef\u7528\u4e0a\u65b9\u672c\u6a5f\u6642\u9593\u6821\u6b63\u5fae\u8abf\u3002',solo:'\u672a\u52a0\u5165\u623f\u9593',host:'\u4e3b\u6301\u4eba\u6642\u9418',sampling:'\u6821\u6642\u53d6\u6a23\u4e2d',tracking:'\u6301\u7e8c\u6821\u6642\u4e2d',adjusting:'\u6b63\u5728\u4fee\u6b63\u6642\u9593\u5dee',unstable:'\u6821\u6642\u4e0d\u78ba\u5b9a\u6027\u8f03\u9ad8',output:'\u97f3\u8a0a\u8f38\u51fa',timestamp:'\u8f38\u51fa\u6642\u9593\u6233',estimate:'\u7cfb\u7d71\u4f30\u8a08',partial:'\u50c5\u53d6\u5f97\u90e8\u5206\u4f30\u8a08',unavailable:'\u5c1a\u672a\u53d6\u5f97\u8f38\u51fa\u8cc7\u6599',off:'\u81ea\u52d5\u8f38\u51fa\u6821\u6b63\u5df2\u95dc\u9589',network:'\u7db2\u8def',buffer:'\u6307\u4ee4\u7de9\u885d',pending:'\u623f\u9593\u5167\u7684\u8abf\u6574\u6703\u7d93\u6307\u4ee4\u7de9\u885d\u5f8c\u540c\u6642\u751f\u6548\uff1b\u55ae\u4eba\u64cd\u4f5c\u4ecd\u7acb\u5373\u751f\u6548\u3002',refreshed:'\u5df2\u91cd\u65b0\u53d6\u6a23\u6642\u9593\u8cc7\u6599\uff0c\u8acb\u4ee5\u8f38\u51fa\u88dd\u7f6e\u7684\u5be6\u969b\u8072\u97f3\u78ba\u8a8d\u3002'};
+ return (I18N.lang==='de'?de:I18N.lang==='en'?en:zh)[key]||key;
+}
+
 const TEXT = Object.freeze({
   free:'自由練習', solo:'單人模式', host:'主持人', guest:'參與者',
   start:'開始節拍', stop:'停止播放', muted:'本機靜音', unmute:'恢復收聽',
@@ -2118,7 +2175,7 @@ try{
     // Apply the requested marimba default once when upgrading. Later choices persist.
     state.tone=saved.audioUiVersion===14&&hasOwn(AUDIO_TONES,saved.tone)?saved.tone:'marimba';
     state.audioPower=saved.audioPower==='standard'?'standard':'boost';
-    state.latency=clamp(Number(saved.latency)||0,-300,300);state.autoLatency=saved.autoLatency!==false;state.keepAwake=saved.keepAwake!==false;state.continueAudio=saved.continueAudio!==false;
+    state.latency=clamp(Number(saved.latency)||0,-SYNC_CONFIG.manualLimitMs,SYNC_CONFIG.manualLimitMs);state.autoLatency=saved.autoLatency!==false;state.keepAwake=saved.keepAwake!==false;state.continueAudio=saved.continueAudio!==false;
     state.theme=saved.theme==='dark'?'dark':'light';state.screenFlash=saved.screenFlash===true;state.name=cleanText(saved.name,16);
   }
 }catch(e){storageProblem=true;}
@@ -2255,9 +2312,10 @@ class AudioEngine{
   }
   createContext(){
     const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error('此瀏覽器不支援 Web Audio。');
-    const ctx=new AC({latencyHint:'interactive'});this.ctx=ctx;this.master=ctx.createGain();this.master.gain.value=0;this.connectOutput();this.setVolume();
-    ctx.addEventListener('statechange',()=>{if(this.ctx!==ctx)return;if(ctx.state!=='running')this.stopAll();renderAudioStatus();room.sendLocalStatus();if(ctx.state==='running')this.schedule();});
+    const ctx=new AC({latencyHint:'interactive'});this.ctx=ctx;this.resetOutputTiming();this.master=ctx.createGain();this.master.gain.value=0;this.connectOutput();this.setVolume();
+    ctx.addEventListener('statechange',()=>{if(this.ctx!==ctx)return;if(ctx.state!=='running'){this.stopAll();this.resetOutputTiming();}renderAudioStatus();room.sendLocalStatus();if(ctx.state==='running')this.schedule();});
     window.TempoliveAudioContinuity?.bindContext(ctx);
+    ctx.addEventListener('sinkchange',()=>{this.resetOutputTiming();this.invalidate();this.schedule();room.sendLocalStatus();});
     if(!this.worker){try{const url=URL.createObjectURL(new Blob(['setInterval(function(){postMessage(1)},25)'],{type:'application/javascript'}));this.worker=new Worker(url);this.worker.onmessage=()=>this.schedule();URL.revokeObjectURL(url);}catch(e){this.worker=setInterval(()=>this.schedule(),25);}}
   }
   async ensure(){
@@ -2304,14 +2362,45 @@ class AudioEngine{
     this.levelNoticeShown=true;
     toast('新版發聲更強；耳機請先降低音量，再逐步調整。');
   }
-  latencyMs(){return this.ctx&&state.autoLatency?((this.ctx.outputLatency||0)+(this.ctx.baseLatency||0))*1000:0;}
+
+  resetOutputTiming(){this.outputClock=null;this.lastOutputSample=-Infinity;this.lastSchedulePerf=0;}
+  sampleOutputTiming(force=false){
+    const ctx=this.ctx;if(!ctx)return null;
+    const p=performance.now();
+    if(!force&&this.outputClock?.context===ctx&&p-(this.lastOutputSample||0)<SYNC_CONFIG.outputSampleMs)return this.outputClock;
+    this.lastOutputSample=p;
+    const seconds=value=>Number.isFinite(value)&&value>0&&value<=SYNC_CONFIG.outputCapMs/1000?value:0;
+    const base=seconds(ctx.baseLatency),output=seconds(ctx.outputLatency);
+    const reported=Math.min(SYNC_CONFIG.outputCapMs,(base+output)*1000);
+    let intercept=ctx.currentTime-p/1000-reported/1000;
+    let kind=output?'estimate':base?'partial':'unavailable';
+    if(ctx.state==='running'&&typeof ctx.getOutputTimestamp==='function'){
+      try{
+        const t=ctx.getOutputTimestamp(),age=p-t.performanceTime;
+        const queue=ctx.currentTime-(t.contextTime+age/1000);
+        if(Number.isFinite(t.contextTime)&&Number.isFinite(t.performanceTime)&&t.contextTime>0&&t.performanceTime>0&&age>=-50&&age<2500&&queue>=-.025&&queue<=SYNC_CONFIG.outputCapMs/1000){
+          intercept=t.contextTime-t.performanceTime/1000;kind='timestamp';
+        }
+      }catch(_){/* Broken/unsupported timestamp APIs must not stop the scheduler. */}
+    }
+    const old=this.outputClock;
+    if(old?.context===ctx&&old.kind===kind&&Math.abs(intercept-old.intercept)<.05){
+      // Smooth sub-quantum jitter. A changed route/source takes effect at once.
+      intercept=old.intercept+clamp(intercept-old.intercept,-.002,.002);
+    }
+    // Mapping lead is a scheduling budget, NOT a measured Bluetooth latency.
+    const mapLead=Math.max(0,(ctx.currentTime-(p/1000+intercept))*1000);
+    const budget=Math.min(SYNC_CONFIG.outputCapMs,Math.max(reported,mapLead));
+    this.outputClock={context:ctx,intercept,kind,reportedMs:reported,budgetMs:budget,at:p};
+    if(state.autoLatency&&old?.context===ctx&&Math.abs(old.intercept-intercept)>.00075)this.invalidate();
+    return this.outputClock;
+  }
+  latencyMs(){return this.ctx&&state.autoLatency?(this.sampleOutputTiming()?.budgetMs||0):0;}
+  requiredLeadMs(){return Math.max(0,this.latencyMs()-state.latency)+Math.max(90,this.schedulerMarginMs||90);}
   audioTime(nominal){
     const targetPerf=nominal-(room.role==='guest'?room.offset:0)-performance.timeOrigin+state.latency;
-    if(state.autoLatency&&this.ctx.getOutputTimestamp){
-      const ts=this.ctx.getOutputTimestamp();
-      if(ts.contextTime>0&&ts.performanceTime>0&&Math.abs(performance.now()-ts.performanceTime)<1200){return ts.contextTime+(targetPerf-ts.performanceTime)/1000;}
-    }
-    return this.ctx.currentTime+(targetPerf-performance.now())/1000-(state.autoLatency?this.latencyMs()/1000:0);
+    if(state.autoLatency){const c=this.sampleOutputTiming();if(c)return targetPerf/1000+c.intercept;}
+    return this.ctx.currentTime+(targetPerf-performance.now())/1000;
   }
 
   clickBuffer(tone,accent,spacingMs){
@@ -2379,11 +2468,14 @@ class AudioEngine{
     this.closeIdleMediaGate();
     if(desiredEvent().playing||currentEvent().playing)this.cancelPreview();
     if(!this.isReady()||(room.role==='guest'&&!room.synced)||room.role==='connecting'||room.recovering)return;
+    const perf=performance.now(),gap=perf-(this.lastSchedulePerf||perf);this.lastSchedulePerf=perf;
+    this.schedulerMarginMs=Math.max(90,Math.min(1200,Math.max((this.schedulerMarginMs||90)*.995,gap*1.5)));
+    room.advanceClock();this.sampleOutputTiming();
     const now=hostNow(),audioNow=this.ctx.currentTime;
     for(const [key,e] of this.entries){if(e.nominal<now-3000)this.entries.delete(key);}
     const committed=new Set();
     for(const item of this.entries.values())if(item.voice&&item.voice.when<=audioNow+AUDIO_CONFIG.editGuardSeconds)committed.add(item.phaseId+':'+item.tick);
-    const lo=now-450,hi=now+Math.max(1100,this.latencyMs()+450);
+    const lo=now-Math.max(450,state.latency+100),hi=now+Math.max(1100,this.requiredLeadMs()+350);
     for(let ei=0;ei<events.length;ei++){
       const ev=events[ei],limit=events[ei+1]?.at??Infinity;if(!ev.playing||limit<lo||ev.at>hi)continue;
       const m=metrics(ev.settings);let begin=Math.max(0,Math.floor((Math.max(lo,ev.at)-ev.anchor)/m.stepMs)-1),end=Math.ceil((Math.min(hi,limit)-ev.anchor)/m.stepMs);
@@ -2416,10 +2508,17 @@ const engine=new AudioEngine();
 
 /* === TRANSPORT AUTHORITY === */
 let changeTimer;
-function localLead(){return Math.max(220,engine.latencyMs()-state.latency+90);}
+function localLead(){return Math.max(220,engine.requiredLeadMs());}
 function hostLead(){
-  const rtts=[...room.clients.values()].filter(client=>client.hello&&Number.isFinite(client.rtt)).map(client=>client.rtt);
-  return rtts.length?clamp(Math.ceil(Math.max(...rtts)*1.5+250),600,CONFIG.roomLead):Math.min(850,CONFIG.roomLead);
+  // Budget each member's transit AND rendering, not only the fastest RTT.
+  let lead=Math.max(SYNC_CONFIG.minLeadMs,engine.requiredLeadMs()+150);
+  for(const member of room.clients.values()){
+    if(!member.hello||!member.conn.open)continue;
+    const t=member.timing,network=Math.max(member.rtt||0,t?.rttTailMs||0);
+    const output=t?.leadMs??Math.max(550,engine.requiredLeadMs());
+    lead=Math.max(lead,network*1.5+output+Math.min(300,t?.spreadMs||0)+180);
+  }
+  return clamp(Math.ceil(lead),SYNC_CONFIG.minLeadMs,SYNC_CONFIG.maxLeadMs);
 }
 function applyEvents(next){
   let changedAt=Infinity;
@@ -2432,7 +2531,7 @@ function keepHistory(next,now=hostNow()){
   next.sort((a,b)=>a.at-b.at||a.rev-b.rev);let cut=0;for(let i=0;i<next.length;i++)if(next[i].at<=now-4000)cut=i;
   return next.slice(cut).slice(-20);
 }
-function publish(next){applyEvents(keepHistory(next));if(room.role==='host')room.broadcastSnapshot();}
+function publish(next){applyEvents(keepHistory(next));if(room.role==='host'){room.broadcastSnapshot();room.repeatSnapshot();}}
 function requestSettings(patch,{songChange=false,immediate=false,keepAccents=false}={}){
   if(room.role==='guest'||room.role==='connecting'||room.recovering)return;
   const meter=patch.meter??state.settings.meter;
@@ -2455,6 +2554,7 @@ function requestSettings(patch,{songChange=false,immediate=false,keepAccents=fal
    Start/count-in and explicit song changes retain their previous behavior. */
 function commitLiveSettings(patch){
   if(room.role==='guest'||room.role==='connecting'||room.recovering)return;
+  if(room.role==='host'&&room.clients.size){commitRoomLiveSettings(patch);return;}
   const now=hostNow(),old=currentEvent(now),future=events.filter(e=>e.at>now);
   const updateSettings=(previous)=>{
     const next=clone(previous);
@@ -2483,6 +2583,29 @@ function commitLiveSettings(patch){
   publish([...events.filter(e=>e.at<=now),current,...queued]);
 }
 
+
+function commitRoomLiveSettings(patch){
+ const now=hostNow(),lead=hostLead();
+ // Fixed slots coalesce rapid edits without an unbounded event queue.
+ const slot=Math.max(100,Math.ceil(lead/8)),at=Math.ceil((now+lead)/slot)*slot;
+ const old=currentEvent(at);
+ const update=previous=>validSettings({...previous,
+   ...(hasOwn(patch,'bpm')?{bpm:state.settings.bpm}:{}),
+   ...(hasOwn(patch,'note')?{note:state.settings.note}:{}),
+   ...(hasOwn(patch,'accents')&&previous.meter===state.settings.meter?{accents:[...state.settings.accents]}:{})});
+ const settings=update(old.settings);
+ const anchor=old.playing?at-(at-old.anchor)*old.settings.bpm/settings.bpm:at;
+ const next={...old,rev:++rev,at,anchor,settings,syncEdit:true,
+   runAt:old.playing&&at<old.runAt?anchor+old.countIn*metrics(settings).barMs:old.runAt,
+   phaseId:hasOwn(patch,'note')?rev:(old.phaseId||old.rev)};
+ const future=events.filter(e=>e.at>at).map(ev=>{
+   const s=update(ev.settings),anchor=ev.at-(ev.at-ev.anchor)*ev.settings.bpm/s.bpm;
+   return {...ev,rev:++rev,anchor,settings:s,phaseId:hasOwn(patch,'note')?rev:ev.phaseId,
+     runAt:ev.countIn?anchor+ev.countIn*metrics(s).barMs:ev.runAt};
+ });
+ publish([...events.filter(e=>e.at<at),next,...future]);
+}
+
 function commitSettings(songChange=false){
   if(room.role==='guest'||room.role==='connecting'||room.recovering)return;
   const now=hostNow(),old=currentEvent(now),last=desiredEvent(),lead=room.role==='host'?hostLead():localLead();
@@ -2492,7 +2615,7 @@ function commitSettings(songChange=false){
     else{const m=metrics(old.settings),boundaryMs=songChange?m.barMs:60000/old.settings.bpm*m.beatQ;at=old.anchor+Math.ceil((now+lead-old.anchor)/boundaryMs)*boundaryMs;anchor=at;barBase=songChange?0:Math.max(0,old.barBase+Math.floor((at-old.anchor)/m.barMs)-old.countIn);runAt=songChange?at:old.runAt;}
   }
   const e={rev:++rev,at,anchor,playing,settings:clone(state.settings),title:titleNow(),countIn,barBase,runAt};
-  publish([...events.filter(x=>x.at<=now),e]);
+  publish([...events.filter(x=>x.at<at),e]);
 }
 async function togglePlay(){
   if(room.role==='guest'){
@@ -2502,12 +2625,25 @@ async function togglePlay(){
     engine.setVolume();renderAudio();renderControls();room.sendLocalStatus();return;
   }
   if(room.role==='connecting'||room.recovering)return;
+  if(room.startPending){room.cancelStart();renderControls();return;}
   clearTimeout(changeTimer);
   if(desiredEvent().playing){stopTransport();return;}
-  try{await engine.ensure();}catch(e){toast(e.message);return;}
-  const at=hostNow()+(room.role==='host'?hostLead():localLead());
-  const e={rev:++rev,at,anchor:at,playing:true,settings:clone(state.settings),title:titleNow(),countIn:state.settings.countIn,barBase:0,runAt:at+metrics(state.settings).barMs*state.settings.countIn};
-  publish([...events.filter(x=>x.at<=hostNow()),e]);
+  const generation=room.generation,token=++room.startToken,role=room.role;
+  if(role==='host'){room.startPending=true;renderControls();}
+  try{
+    await engine.ensure();
+    if(token!==room.startToken||generation!==room.generation||room.role!==role)return;
+    if(role==='host'){
+      const result=await room.waitForReady(generation,token);
+      if(token!==room.startToken||generation!==room.generation)return;
+      room.startPending=false;renderControls();
+      if(result!=='ready'){if(result==='timeout')toast(syncText('timeout'));return;}
+    }
+    if(!engine.isReady()||engine.gameOutputSuppressed)return;
+    const at=hostNow()+(role==='host'?hostLead():localLead());
+    const e={rev:++rev,at,anchor:at,playing:true,settings:clone(state.settings),title:titleNow(),countIn:state.settings.countIn,barBase:0,runAt:at+metrics(state.settings).barMs*state.settings.countIn};
+    publish([...events.filter(x=>x.at<at),e]);
+  }catch(e){if(token===room.startToken){room.startPending=false;renderControls();toast(e.message);}}
 }
 async function restoreGuestAudio(){
   try{
@@ -2516,9 +2652,10 @@ async function restoreGuestAudio(){
   }catch(e){guestAudioRecoveryRequired=true;renderControls();toast(e.message);}
 }
 function stopTransport(){
+  room.cancelStart();
   window.TempoliveAudioContinuity?.cancel('stopped');
-  clearTimeout(changeTimer);const now=hostNow(),at=now+(room.role==='host'?200:0);
-  publish([...events.filter(x=>x.at<=now),{rev:++rev,at,anchor:at,playing:false,settings:clone(state.settings),title:titleNow(),countIn:0,barBase:0,runAt:at}]);
+  clearTimeout(changeTimer);const now=hostNow(),at=now+(room.role==='host'&&room.clients.size?hostLead():0);
+  publish([...events.filter(x=>x.at<at),{rev:++rev,at,anchor:at,playing:false,settings:clone(state.settings),title:titleNow(),countIn:0,barBase:0,runAt:at}]);
   if(room.role!=='host')engine.stopAll();clearScreenFlash();releaseWake();
 }
 function resetStopped(settings=state.settings){
@@ -2696,7 +2833,7 @@ function peerErrorMessage(e){return cleanText(e?.message,260)||TEXT.peerFailed;}
 
 /* === ROOM PROTOCOL: one host, revisioned transport and four-timestamp sync === */
 class Room{
-  constructor(){this.role='solo';this.code='';this.name='';this.peer=null;this.connection=null;this.clients=new Map();this.offset=0;this.samples=[];this.pendingPings=new Map();this.synced=false;this.session='';this.generation=0;this.connecting=false;this.recovering=false;this.signalOnline=true;this.roster=[];this.backup=null;this.lastSeen=0;this.lastPing=0;this.lastSyncBurst=0;this.lastSnapshotVersion=0;this.snapshotVersion=0;this.acceptedSession=false;this.connectedAt=0;this.rtt=null;this.spread=null;this.progress='';setInterval(()=>this.heartbeat(),1000);}
+  constructor(){this.role='solo';this.code='';this.name='';this.peer=null;this.connection=null;this.clients=new Map();this.offset=0;this.samples=[];this.pendingPings=new Map();this.synced=false;this.session='';this.generation=0;this.connecting=false;this.recovering=false;this.signalOnline=true;this.roster=[];this.backup=null;this.lastSeen=0;this.lastPing=0;this.lastSyncBurst=0;this.lastSnapshotVersion=0;this.snapshotVersion=0;this.acceptedSession=false;this.connectedAt=0;this.rtt=null;this.spread=null;this.progress='';this.startToken=0;this.startPending=false;this.clockTarget=0;this.lastClockAdjust=wallNow();this.lastRetimeOffset=0;this.rttTail=0;this.syncTimers=[];this.repeatTimers=[];setInterval(()=>this.heartbeat(),500);}
   send(conn,data){try{if(conn?.open)conn.send(data);}catch(e){console.warn('Room send failed');}}
   packet(type,extra={}){return {app:'tw-beat',v:2,type,session:this.session,...extra};}
   broadcast(data){for(const c of this.clients.values())if(c.hello)this.send(c.conn,data);}
@@ -2726,12 +2863,12 @@ class Room{
           else{
             this.setProgress('中繼已連線，正在尋找房間 '+this.code+'…');
             const conn=this.peer.connect(CONFIG.roomPrefix+this.code);this.connection=conn;
-            conn.on('open',()=>{if(generation!==this.generation)return;this.send(conn,{app:'tw-beat',v:2,type:'hello',name:this.name,audio:this.localAudioStatus()});});
+            conn.on('open',()=>{if(generation!==this.generation)return;this.send(conn,{app:'tw-beat',v:2,type:'hello',name:this.name,audio:this.localAudioStatus(),timing:this.timingStatus()});});
             conn.on('data',data=>{
               if(generation!==this.generation||data?.app!=='tw-beat'||data.v!==2)return;
               if(data.type==='denied'){if(!joined)fail(networkError(cleanText(data.message,160)));else this.leave(true,cleanText(data.message,160));return;}
               if(data.type==='welcome'&&!this.acceptedSession){
-                this.session=cleanText(data.session,64);if(!this.session)return;this.acceptedSession=true;this.role='guest';this.offset=0;this.synced=false;this.samples=[];this.lastSeen=wallNow();
+                this.session=cleanText(data.session,64);if(!this.session)return;this.acceptedSession=true;this.role='guest';this.offset=0;this.clockTarget=0;this.lastRetimeOffset=0;this.lastClockAdjust=wallNow();this.synced=false;this.samples=[];this.lastSeen=wallNow();
                 this.receiveSnapshot(data);this.roster=Array.isArray(data.roster)?data.roster.slice(0,CONFIG.maxPeople):[];success();this.burstSync();renderRoom();renderControls();
               }else if(data.type==='welcome'&&data.session===this.session){this.receiveSnapshot(data);this.lastSeen=wallNow();this.burstSync();}
               else this.receiveGuest(data);
@@ -2752,18 +2889,19 @@ class Room{
     }catch(e){if(generation!==this.generation)return false;this.leave(false);throw e;}
   }
   accept(conn,generation){
-    const entry={conn,name:'',hello:false,audio:TEXT.audioOff,lastSeen:wallNow(),rtt:null,lastPong:0};
+    const entry={conn,name:'',hello:false,audio:TEXT.audioOff,lastSeen:wallNow(),rtt:null,lastPong:0,timing:null};
     if(this.clients.size>=CONFIG.maxPeople-1){conn.on('open',()=>{this.send(conn,this.packet('denied',{message:'房間已達本版 12 人上限。'}));setTimeout(()=>conn.close(),200);});return;}
     this.clients.set(conn.peer,entry);
     conn.on('data',data=>{
       if(generation!==this.generation||this.role!=='host'||!data||data.app!=='tw-beat'||data.v!==2)return;
       entry.lastSeen=wallNow();
       if(data.type==='hello'){
+        this.readTiming(entry,data.timing);
         if(!entry.hello){entry.hello=true;entry.name=cleanText(data.name,16)||TEXT.guest;entry.audio=cleanText(data.audio,20);}
         this.send(conn,this.packet('welcome',{sequence:++this.snapshotVersion,events:clone(events),roster:this.makeRoster()}));this.updateRoster();
       }else if(entry.hello&&data.session===this.session){
         if(data.type==='ping'&&Number.isFinite(data.t0)&&typeof data.nonce==='string'&&wallNow()-entry.lastPong>=30){const t1=wallNow();entry.lastPong=t1;this.send(conn,this.packet('pong',{nonce:cleanText(data.nonce,64),t0:data.t0,t1,t2:wallNow()}));}
-        else if(data.type==='status'){entry.audio=cleanText(data.audio,20);entry.rtt=Number.isFinite(data.rtt)?clamp(data.rtt,0,10000):null;this.updateRoster();}
+        else if(data.type==='status'){this.readTiming(entry,data.timing);entry.audio=cleanText(data.audio,20);entry.rtt=Number.isFinite(data.rtt)?clamp(data.rtt,0,10000):null;this.updateRoster();}
         else if(data.type==='resync'){this.send(conn,this.snapshot());}
         // Clients cannot issue transport commands; only the host publishes them.
       }
@@ -2776,13 +2914,14 @@ class Room{
     if(this.role!=='guest'||data?.session!==this.session)return;this.lastSeen=wallNow();
     if(data.type==='snapshot')this.receiveSnapshot(data);
     else if(data.type==='pong')this.pong(data);
+    else if(data.type==='sync-refresh'){this.burstSync();engine.resetOutputTiming();engine.invalidate();this.sendLocalStatus();}
     else if(data.type==='roster'){this.roster=Array.isArray(data.people)?data.people.slice(0,CONFIG.maxPeople):[];renderRoom();}
     else if(data.type==='bye')this.leave(true,'主持人已結束房間，節拍已停止。');
   }
   receiveSnapshot(data){
     if(!Number.isSafeInteger(data.sequence)||data.sequence<=this.lastSnapshotVersion||!Array.isArray(data.events)||!data.events.length||data.events.length>20)return;
     try{
-      const next=data.events.map(e=>{if(!e||!Number.isSafeInteger(e.rev)||![e.at,e.anchor,e.runAt].every(Number.isFinite)||Math.abs(e.at)>1e15||Math.abs(e.anchor)>1e15||![0,1,2].includes(e.countIn)||!Number.isFinite(e.barBase)||e.barBase<0)throw Error('Bad snapshot');return {rev:e.rev,at:e.at,anchor:e.anchor,playing:!!e.playing,title:cleanText(e.title)||TEXT.free,settings:validSettings(e.settings,true),countIn:e.countIn,barBase:Math.floor(e.barBase),runAt:e.runAt,phaseId:Number.isSafeInteger(e.phaseId)&&e.phaseId>0?e.phaseId:e.rev};}).sort((a,b)=>a.at-b.at||a.rev-b.rev);
+      const next=data.events.map(e=>{if(!e||!Number.isSafeInteger(e.rev)||![e.at,e.anchor,e.runAt].every(Number.isFinite)||Math.abs(e.at)>1e15||Math.abs(e.anchor)>1e15||![0,1,2].includes(e.countIn)||!Number.isFinite(e.barBase)||e.barBase<0)throw Error('Bad snapshot');return {rev:e.rev,at:e.at,anchor:e.anchor,playing:!!e.playing,title:cleanText(e.title)||TEXT.free,settings:validSettings(e.settings,true),countIn:e.countIn,barBase:Math.floor(e.barBase),runAt:e.runAt,phaseId:Number.isSafeInteger(e.phaseId)&&e.phaseId>0?e.phaseId:e.rev,syncEdit:e.syncEdit===true};}).sort((a,b)=>a.at-b.at||a.rev-b.rev);
       if(new Set(next.map(e=>e.rev)).size!==next.length)return;
       this.lastSnapshotVersion=data.sequence;applyEvents(next);rev=Math.max(rev,...next.map(e=>e.rev));renderRoom();
     }catch(e){console.warn('Ignored invalid room snapshot');}
@@ -2794,46 +2933,105 @@ class Room{
   }
   pong(data){
     const t3=wallNow(),t0=this.pendingPings.get(data.nonce);this.pendingPings.delete(data.nonce);
-    if(t0===undefined||![data.t1,data.t2].every(Number.isFinite))return;
+    if(t0===undefined||![data.t1,data.t2].every(Number.isFinite)||data.t2<data.t1)return;
     const rtt=(t3-t0)-(data.t2-data.t1),offset=((data.t1-t0)+(data.t2-t3))/2;
     if(rtt<0||rtt>3000||!Number.isFinite(offset))return;
-    this.samples.push({rtt,offset});if(this.samples.length>24)this.samples.shift();
-    const best=[...this.samples].sort((a,b)=>a.rtt-b.rtt).slice(0,5),offsets=best.map(s=>s.offset).sort((a,b)=>a-b),target=offsets[Math.floor(offsets.length/2)];
-    this.rtt=Math.round(best[0].rtt);this.spread=Math.round(Math.max(...offsets)-Math.min(...offsets));
-    if(this.samples.length>=5){
-      const wasSynced=this.synced;
-      if(!this.synced||!currentEvent().playing||Math.abs(target-this.offset)>80){this.offset=target;engine.invalidate();}
-      else{const diff=clamp(target-this.offset,-2,2);this.offset+=diff;}
-      this.synced=true;if(!wasSynced){engine.schedule();this.sendLocalStatus();toast('房間校時完成，正在跟隨主持人。');}
+    this.samples=this.samples.filter(s=>Number.isFinite(s.at)&&t3-s.at<=SYNC_CONFIG.windowMs);
+    this.samples.push({rtt,offset,at:t3});if(this.samples.length>SYNC_CONFIG.maxSamples)this.samples.shift();
+    const ranked=[...this.samples].sort((a,b)=>a.rtt-b.rtt);
+    const best=ranked.slice(0,Math.min(9,Math.max(3,Math.ceil(ranked.length*.4))));
+    const middle=syncMedian(best.map(s=>s.offset)),mad=syncMedian(best.map(s=>Math.abs(s.offset-middle)));
+    const stable=best.filter(s=>Math.abs(s.offset-middle)<=Math.max(3,mad*3));
+    const offsets=stable.map(s=>s.offset),target=syncMedian(offsets);
+    this.rtt=Math.round(ranked[0].rtt);this.rttTail=ranked[Math.floor((ranked.length-1)*.9)].rtt;
+    this.spread=Math.round(Math.max(...offsets)-Math.min(...offsets));
+    if(this.samples.length>=5&&stable.length>=3){
+      const wasSynced=this.synced;this.clockTarget=target;
+      if(!wasSynced||!currentEvent().playing){this.offset=target;this.lastRetimeOffset=target;engine.invalidate();}
+      this.synced=true;this.lastGoodClockAt=t3;this.lastClockAdjust=t3;
+      if(!wasSynced){engine.schedule();toast('\u623f\u9593\u6821\u6642\u5b8c\u6210\uff0c\u6b63\u5728\u8ddf\u96a8\u4e3b\u6301\u4eba\u3002');}
+      this.sendLocalStatus();
     }
     renderRoom();renderAudioStatus();
   }
-  burstSync(){this.lastSyncBurst=wallNow();this.pendingPings.clear();const generation=this.generation;for(let i=0;i<10;i++)setTimeout(()=>{if(generation===this.generation)this.ping();},i*150);}
+  advanceClock(){
+    if(this.role!=='guest'||!this.synced||!Number.isFinite(this.clockTarget))return;
+    const t=wallNow(),dt=clamp(t-(this.lastClockAdjust||t),0,500);this.lastClockAdjust=t;
+    const limit=SYNC_CONFIG.slewMsPerSecond*dt/1000;
+    this.offset+=clamp(this.clockTarget-this.offset,-limit,limit);
+    if(Math.abs(this.offset-this.lastRetimeOffset)>=SYNC_CONFIG.retimeThresholdMs){
+      this.lastRetimeOffset=this.offset;engine.invalidate();
+    }
+  }
+  burstSync(){
+    this.lastSyncBurst=wallNow();for(const timer of this.syncTimers)clearTimeout(timer);this.syncTimers=[];
+    this.pendingPings.clear();const generation=this.generation,session=this.session;
+    for(let i=0;i<10;i++)this.syncTimers.push(setTimeout(()=>{if(generation===this.generation&&session===this.session)this.ping();},i*150));
+  }
+  timingStatus(){
+    const c=engine.sampleOutputTiming();
+    return {version:SYNC_CONFIG.version,ready:engine.isReady()&&!engine.gameOutputSuppressed&&!document.hidden,
+      synced:this.role!=='guest'||(this.synced&&wallNow()-(this.lastGoodClockAt||0)<SYNC_CONFIG.windowMs),
+      residualMs:this.role==='guest'?Math.abs((this.clockTarget||0)-this.offset):0,
+      leadMs:Math.ceil(engine.requiredLeadMs()),spreadMs:this.spread||0,rttTailMs:this.rttTail||0,
+      source:state.autoLatency?(c?.kind||'unavailable'):'off'};
+  }
+  readTiming(entry,t){
+    if(!t||t.version!==SYNC_CONFIG.version)return;
+    const numeric=k=>Number.isFinite(t[k])&&t[k]>=0?t[k]:null;
+    const lead=numeric('leadMs'),tail=numeric('rttTailMs'),spread=numeric('spreadMs'),residual=numeric('residualMs');
+    if(lead===null||tail===null||spread===null||residual===null)return;
+    entry.timing={version:t.version,ready:t.ready===true,synced:t.synced===true,
+      leadMs:clamp(lead,0,5000),rttTailMs:clamp(tail,0,3000),spreadMs:clamp(spread,0,3000),residualMs:clamp(residual,0,3000),at:wallNow()};
+  }
+  async waitForReady(generation,token){
+    const started=wallNow();
+    this.broadcast(this.packet('sync-refresh'));
+    while(wallNow()-started<SYNC_CONFIG.readyWaitMs){
+      if(generation!==this.generation||token!==this.startToken||this.role!=='host'||this.recovering)return 'cancelled';
+      const people=[...this.clients.values()];
+      const ready=people.every(p=>p.hello&&p.conn.open&&(p.timing?
+        p.timing.ready&&p.timing.synced&&p.timing.residualMs<=10&&wallNow()-p.timing.at<4500:
+        p.audio===TEXT.ready||p.audio===TEXT.silent));
+      if(ready&&engine.isReady()&&!engine.gameOutputSuppressed&&(people.length===0||wallNow()-started>=300))return 'ready';
+      await delay(100);
+    }
+    return 'timeout';
+  }
+  cancelStart(){this.startToken++;this.startPending=false;}
+  repeatSnapshot(){
+    for(const timer of this.repeatTimers)clearTimeout(timer);this.repeatTimers=[];
+    const generation=this.generation,session=this.session;
+    for(const ms of [80,220])this.repeatTimers.push(setTimeout(()=>{
+      if(this.role==='host'&&this.generation===generation&&this.session===session&&!this.recovering)this.broadcastSnapshot();
+    },ms));
+  }
   localAudioStatus(){return !engine.isReady()?TEXT.audioOff:state.mute||!state.volume?TEXT.silent:this.role==='guest'&&!this.synced?TEXT.syncing:TEXT.ready;}
-  sendLocalStatus(){if(this.role==='guest')this.send(this.connection,this.packet('status',{audio:this.localAudioStatus(),rtt:this.rtt}));else if(this.role==='host')this.updateRoster();}
+  sendLocalStatus(){if(this.role==='guest')this.send(this.connection,this.packet('status',{audio:this.localAudioStatus(),rtt:this.rtt,timing:this.timingStatus()}));else if(this.role==='host')this.updateRoster();}
   makeRoster(){return [{name:this.name,role:'host',audio:this.localAudioStatus()},...[...this.clients.values()].filter(c=>c.hello).map(c=>({name:c.name,role:'guest',audio:c.audio}))];}
   updateRoster(){if(this.role!=='host')return;this.roster=this.makeRoster();this.broadcast(this.packet('roster',{people:this.roster}));renderRoom();}
   heartbeat(){
-    const now=wallNow();
+    const now=wallNow();this.advanceClock();
     if(this.recovering)return;
     if(this.role==='guest'){
       if(now-this.lastSeen>10000){this.leave(true,TEXT.lost);return;}
-      if(!document.hidden&&this.connection?.open&&now-this.lastSyncBurst>=CONFIG.syncRefreshMs){this.samples=[];this.burstSync();}
-      if(now-this.lastPing>2500){this.ping();this.sendLocalStatus();}
+      if(!document.hidden&&this.connection?.open&&now-this.lastSyncBurst>=SYNC_CONFIG.burstMs){this.burstSync();}
+      if(now-this.lastPing>=SYNC_CONFIG.pingMs){this.ping();this.sendLocalStatus();}
       if(!this.synced&&now-this.connectedAt>15000){this.leave(true,'已連上房間，但網路延遲過大而無法校時。已停止等待，請更換網路後重試。 [R12]');}
     }else if(this.role==='host'){
-      this.broadcastSnapshot();
+      if(now-(this.lastHeartbeatSnapshot||0)>=1000){this.lastHeartbeatSnapshot=now;this.broadcastSnapshot();}
       for(const [key,c] of this.clients){if(now-c.lastSeen>12000){c.conn.close();this.clients.delete(key);this.updateRoster();}}
     }
   }
-  resync(){if(this.role==='guest'){this.samples=[];this.burstSync();this.send(this.connection,this.packet('resync'));toast('已重新取樣校時，不改變播放進度。');}else if(this.role==='host'){this.broadcastSnapshot();toast('已重新傳送節奏狀態。');}}
+  resync(){if(this.role==='guest'){this.samples=[];this.burstSync();this.send(this.connection,this.packet('resync'));toast('已重新取樣校時，不改變播放進度。');}else if(this.role==='host'){this.broadcast(this.packet('sync-refresh'));this.broadcastSnapshot();toast('已重新傳送節奏狀態。');}}
   cancelAttempt(){if(this.connecting||this.role==='connecting')this.leave(false);}
   leave(notify=true,message=''){
+    this.cancelStart();for(const t of [...this.syncTimers,...this.repeatTimers])clearTimeout(t);this.syncTimers=[];this.repeatTimers=[];
     const wasRole=this.role;this.generation++;this.cancelPending?.();this.cancelPending=null;this.connecting=false;this.recovering=false;
     if(wasRole==='host')this.broadcast(this.packet('bye'));
     const p=this.peer;this.peer=null;this.connection=null;this.role='solo';this.clients.clear();
     if(this.backup&&wasRole==='guest'){state.settings=this.backup.settings;state.activeId=this.backup.activeId;}this.backup=null;
-    this.code='';this.session='';this.offset=0;this.synced=false;this.samples=[];this.pendingPings.clear();this.rtt=null;this.roster=[];this.lastSnapshotVersion=0;this.acceptedSession=false;this.signalOnline=true;
+    this.code='';this.session='';this.offset=0;this.clockTarget=0;this.lastRetimeOffset=0;this.lastGoodClockAt=0;this.synced=false;this.samples=[];this.pendingPings.clear();this.rtt=null;this.roster=[];this.lastSnapshotVersion=0;this.acceptedSession=false;this.signalOnline=true;
     resetStopped();renderRoom();renderControls();saveLocal();
     if(p)setTimeout(()=>{try{p.destroy();}catch(e){}},70);
     if(notify)toast(message||'已離開房間，回到單人模式。');
@@ -2880,6 +3078,7 @@ function renderControls(){
   I18N.set($('playBtn').querySelector('span'),follower?(needsRecovery?'恢復本機聲音':state.mute?TEXT.unmute:TEXT.muted):(playing?TEXT.stop:TEXT.start));
   I18N.bindAttr($('playBtn'),'aria-label',()=>$('playBtn').textContent.trim());
   I18N.set($('modeText'),follower?'團隊收聽':room.role==='host'?'房間主持':busy?'連線中':TEXT.solo);
+  if(room.startPending){setIcon($('playBtn'),'stop');I18N.bind($('playBtn').querySelector('span'),()=>syncText('cancel'));$('playBtn').setAttribute('aria-label',syncText('cancel'));}
   renderAudioStatus();renderSongs();
 }
 function renderAudio(){
@@ -2991,9 +3190,10 @@ function animate(){
     else{const seconds=Math.max(0,Math.floor((now-ev.runAt)/1000));counter=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')+' · 第 '+(bar-ev.countIn+ev.barBase+1)+' 小節';info=room.role==='guest'?'跟隨主持人 · '+ev.settings.bpm+' BPM':ev.settings.bpm+' BPM · '+ev.settings.meter+' · 四分音符為基準';}
     if((elapsed%(m.barMs/m.n))/(m.barMs/m.n)>.78)beat=-1;
   }
-  if(pending){const wait=Math.max(0,(latest.at-now)/1000).toFixed(1);info=latest.playing?(ev.playing?TEXT.nextBar+' · '+wait+' 秒':'將於 '+wait+' 秒後開始'):'將於 '+wait+' 秒後停止';if(!ev.playing)status=TEXT.waiting;}
+  if(pending){const wait=Math.max(0,(latest.at-now)/1000).toFixed(1);info=latest.playing?(ev.playing?(latest.syncEdit?syncText('change'):TEXT.nextBar)+' · '+wait+' 秒':'將於 '+wait+' 秒後開始'):'將於 '+wait+' 秒後停止';if(!ev.playing)status=TEXT.waiting;}
   if(room.role==='guest'&&!room.synced){status=TEXT.syncing;info='正在校正裝置時間…';beat=-1;}
   if(room.recovering){status='重連中';info='連線中斷，聲音暫停；正在重新連線。';beat=-1;}
+  if(room.startPending){status=syncText('waiting');info=syncText('waiting');beat=-1;}
   if(ev.rev!==lastVisualRev)renderBeatLayout(ev.playing?ev.settings:(room.role==='guest'?latest.settings:state.settings));
   if(beat!==lastVisualBeat||ev.rev!==lastVisualRev){const buttons=$('beats').children;for(let i=0;i<buttons.length;i++)buttons[i].classList.toggle('active',i===beat);lastVisualBeat=beat;lastVisualRev=ev.rev;}
   if(lastSecondText!==counter){I18N.set($('counter'),counter);lastSecondText=counter;}
@@ -3075,9 +3275,9 @@ $('volume').addEventListener('input',e=>{state.volume=Number(e.target.value);eng
 $('muteBtn').addEventListener('click',()=>{if(room.role==='guest'&&(guestAudioRecoveryRequired||!engine.isReady())){restoreGuestAudio();return;}state.mute=!state.mute;engine.setVolume();if(!state.mute)engine.ensure().then(()=>{engine.invalidate();engine.schedule();room.sendLocalStatus();}).catch(e=>toast(e.message));renderAudio();renderControls();room.sendLocalStatus();});
 $('tone').addEventListener('change',e=>{if(!hasOwn(AUDIO_TONES,e.target.value))return;state.tone=e.target.value;engine.cancelPreview();engine.invalidate();engine.schedule();saveLocal();renderAudio();});
 $('audioPower').addEventListener('change',e=>{if(!hasOwn(AUDIO_POWER,e.target.value))return;state.audioPower=e.target.value;engine.cancelPreview();engine.setVolume();engine.invalidate();engine.schedule();saveLocal();renderAudio();if(state.audioPower==='boost')toast('已切換加強，請從較低音量開始試聽。');});
-function setLatency(value){state.latency=Math.round(clamp(Number(value)||0,-300,300)/5)*5;engine.invalidate();engine.schedule();renderAudio();saveLocal();}
+function setLatency(value){state.latency=Math.round(clamp(Number(value)||0,-SYNC_CONFIG.manualLimitMs,SYNC_CONFIG.manualLimitMs)/5)*5;engine.invalidate();engine.schedule();renderAudio();saveLocal();}
 $('latency').addEventListener('input',e=>setLatency(e.target.value));$('latencyValue').addEventListener('change',e=>setLatency(e.target.value));
-$('autoLatency').addEventListener('change',e=>{state.autoLatency=e.target.checked;engine.invalidate();engine.schedule();saveLocal();});
+$('autoLatency').addEventListener('change',e=>{state.autoLatency=e.target.checked;engine.resetOutputTiming();engine.invalidate();engine.schedule();saveLocal();});
 $('testAudio').addEventListener('click',()=>engine.test().catch(e=>toast(e.message)));
 
 /* v2.1.2: opening Settings is a read-only refresh of its controls.
@@ -3165,7 +3365,7 @@ $('chooseOutput').addEventListener('click',async()=>{
   if(!supportsSink()){I18N.set($('outputHint'),'此瀏覽器使用系統的音訊輸出。要用手機外放，請在控制中心選擇手機喇叭或中斷藍牙耳機，調高媒體音量，再點「試聽」。不需要耳機或麥克風權限即可播放。');toast('可使用手機喇叭；請確認系統輸出與媒體音量，再點試聽。');return;}
   try{
     await engine.ensure();
-    if(navigator.mediaDevices.selectAudioOutput){const out=await navigator.mediaDevices.selectAudioOutput();await engine.ctx.setSinkId(out.deviceId);await refreshDevices();if(![...$('audioOutput').options].some(o=>o.value===out.deviceId))$('audioOutput').append(I18N.option(()=>out.label||I18N.t('已選輸出'),out.deviceId));$('audioOutput').value=out.deviceId;engine.invalidate();renderAudio();toast('已切換音訊輸出。');}
+    if(navigator.mediaDevices.selectAudioOutput){const out=await navigator.mediaDevices.selectAudioOutput();await engine.ctx.setSinkId(out.deviceId);engine.resetOutputTiming();await refreshDevices();if(![...$('audioOutput').options].some(o=>o.value===out.deviceId))$('audioOutput').append(I18N.option(()=>out.label||I18N.t('已選輸出'),out.deviceId));$('audioOutput').value=out.deviceId;engine.invalidate();renderAudio();toast('已切換音訊輸出。');}
     else $('permissionDialog').showModal();
   }catch(e){toast('未切換輸出：請允許裝置權限，或改由系統選擇耳機。');}
 });
@@ -3175,8 +3375,8 @@ $('grantDevicePermission').addEventListener('click',async()=>{
   catch(e){toast('無法取得裝置清單，請改由系統選擇輸出。');}
   finally{stream?.getTracks().forEach(t=>t.stop());engine.configurePlaybackSession();engine.restoreOutput();}
 });
-$('audioOutput').addEventListener('change',async()=>{try{await engine.ensure();await engine.ctx.setSinkId($('audioOutput').value);engine.invalidate();engine.schedule();renderAudio();toast('已切換聲音輸出，請試聽確認。');}catch(e){$('audioOutput').value=typeof engine.ctx?.sinkId==='string'?engine.ctx.sinkId:'';toast('無法切換輸出，原輸出保持不變。');}});
-if(navigator.mediaDevices?.addEventListener)navigator.mediaDevices.addEventListener('devicechange',()=>refreshDevices().catch(()=>{}).finally(()=>{engine.configurePlaybackSession();window.TempoliveAudioContinuity?.check('devicechange');}));
+$('audioOutput').addEventListener('change',async()=>{try{await engine.ensure();await engine.ctx.setSinkId($('audioOutput').value);engine.resetOutputTiming();engine.invalidate();engine.schedule();renderAudio();toast('已切換聲音輸出，請試聽確認。');}catch(e){$('audioOutput').value=typeof engine.ctx?.sinkId==='string'?engine.ctx.sinkId:'';toast('無法切換輸出，原輸出保持不變。');}});
+if(navigator.mediaDevices?.addEventListener)navigator.mediaDevices.addEventListener('devicechange',()=>refreshDevices().catch(()=>{}).finally(()=>{engine.resetOutputTiming();engine.configurePlaybackSession();window.TempoliveAudioContinuity?.check('devicechange');}));
 
 /* === SCREEN WAKE LOCK / VISIBILITY === */
 let wakeLock=null,wakePending=false;
@@ -3412,7 +3612,7 @@ try{const s=JSON.parse(localStorage.getItem(C.storageKey)||'null');if(s){prefs.i
 let storageError=false;function save(){try{localStorage.setItem(C.storageKey,JSON.stringify(prefs));}catch(e){storageError=true;}}
 const statusText={pending:'等待送達',accepted:'主持人已接收',received:'已送達',queued:'已送達，等待播報',speaking:'正在播報',played:'裝置已完成播報',confirmed:'對方已確認',blocked:'已送達，語音未啟用',muted:'已送達，語音音量為零',disabled:'已送達，自動播報關閉',failed:'已送達，播報失敗',expired:'已送達，已逾播報時限',busy:'已送達，語音佇列已滿',unsupported:'對方需更新版本',offline:'對方離線／尚未確認送達',noack:'逾時未確認送達',interrupted:'裝置無法同時播放語音',rejected:'未送出'};
 let route='',lastRender='',targetSig='',historySig='',phraseSig='',instrumentSig='',lastStatusAt=0,toastTimer;
-let selectedTarget='',selectedPhrase='',selectedInstrument=prefs.instrument,sendLock=0,activeAlert=null,alertShownAt=0;
+let selectedTarget='',selectedPhrase='',selectedInstrument=prefs.instrument,sendLock=0,activeAlert=null,alertShownAt=0,alertHideTimer=0;
 let composerStep='targets',sending=false,focusEpoch=0,customComposing=false,lastCompositionEnd=-Infinity;
 let session='',inbox=[],outbox=[],ledger=new Map(),seen=new Map(),rate=new Map(),requests=new Map(),recipientIds=[];
 const currentId=()=>room.peer?.id||'';
@@ -3625,13 +3825,14 @@ function makeRequest(){
  }finally{sending=false;setTimeout(updatePreview,C.minSendGap+10);}
 }
 function replay(item){if(!item)return;showAlert(item);speaker.refresh();speaker.problem='';speaker.enqueue({id:item.id,text:spoken(item),expiresAt:now()+C.ttl},true);}
-function showAlert(item){
- activeAlert=item;alertShownAt=performance.now();paintAlert(item);const alert=$b('bandAlert');
+function showAlert(item,restartTimer=true){
+ if(restartTimer){clearTimeout(alertHideTimer);alertShownAt=performance.now();alertHideTimer=setTimeout(hideAlert,3000);}
+ activeAlert=item;paintAlert(item);const alert=$b('bandAlert');
  const modal=[...document.querySelectorAll('dialog[open]')].at(-1),parent=modal||document.body;
  if(alert.parentElement!==parent){try{if(alert.matches(':popover-open'))alert.hidePopover();}catch(e){}parent.append(alert);}
  if(alert.showPopover){try{if(!alert.matches(':popover-open'))alert.showPopover();}catch(e){alert.classList.add('band-alert-fallback');}}else alert.classList.add('band-alert-fallback');
 }
-function hideAlert(){const alert=$b('bandAlert');try{if(alert.matches(':popover-open'))alert.hidePopover();}catch(e){}alert.classList.remove('band-alert-fallback');activeAlert=null;}
+function hideAlert(){clearTimeout(alertHideTimer);alertHideTimer=0;const alert=$b('bandAlert');try{if(alert.matches(':popover-open'))alert.hidePopover();}catch(e){}alert.classList.remove('band-alert-fallback');activeAlert=null;}
 function paintAlert(item){
  I18N.bind($b('bandAlertFrom'),()=>I18N.person({name:item.senderLabel,instrument:item.senderInstrument})+I18N.t(' 傳給 ')+(['全部人','所有人'].includes(item.targetLabel)?I18N.t(item.targetLabel):I18N.person({name:item.targetLabel,instrument:item.targetInstrument})));I18N.bind($b('bandAlertText'),()=>messagePhrase(item));
  // Local playback trouble is useful to the recipient; it is NOT sent back to
@@ -3720,7 +3921,7 @@ function tick(){
   }
  }
  for(const [key,t] of seen)if(time-t>C.receiptLife)seen.delete(key);
- if(activeAlert&&performance.now()-alertShownAt>20000)hideAlert();
+ if(activeAlert&&performance.now()-alertShownAt>=3000)hideAlert();
  updatePreview();
 }
 // Minimal room hooks. Original methods still process all transport operations.
@@ -3776,8 +3977,8 @@ $b('bandVoiceSelect').addEventListener('change',e=>{if(I18N.lang==='de')prefs.vo
 $b('bandAlertClose').addEventListener('click',hideAlert);$b('bandAlertReplay').addEventListener('click',()=>replay(activeAlert));
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&(speaker.active||speaker.queue.length))speaker.cancel('blocked');});
 window.addEventListener('pagehide',()=>{speaker.cancel('blocked');hideAlert();});
-new MutationObserver(changes=>{if(activeAlert&&changes.some(m=>m.target.tagName==='DIALOG'))showAlert(activeAlert);}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['open']});
-window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel});
+new MutationObserver(changes=>{if(activeAlert&&changes.some(m=>m.target.tagName==='DIALOG'))showAlert(activeAlert,false);}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['open']});
+window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel});
 I18N.onChange(()=>{renderVoices();renderVoiceState();});
 renderInstruments();renderPhrases();renderVoices();renderVoiceState();syncRoom();setInterval(tick,500);
 })();
@@ -4343,6 +4544,49 @@ texts();
 ;window.TempoliveRuntimeRelease="2.2.1-integrated";
 
 ;
+
+/* BEGIN tempolive-sync-status */
+(()=>{
+ const panel=document.createElement('section');panel.className='calibration';panel.id='syncCompensationPanel';panel.dataset.i18nDynamic='';
+ panel.innerHTML='<h3 style="display:flex;align-items:center;gap:8px;font-size:16px"><span id="syncHeading"></span><span class="flash-new-badge" lang="en">NEW</span></h3><p id="syncNetworkLine" class="audio-explain" style="margin-top:12px"></p><p id="syncOutputLine" class="audio-explain"></p><p id="syncBufferLine" class="audio-explain"></p><p id="syncDetail" class="audio-explain" style="margin-top:10px"></p><button type="button" class="btn full" id="syncRefresh" style="margin-top:14px"></button><p id="syncBoundary" class="audio-explain" style="margin-top:12px"></p>';
+ const target=document.querySelector('#audioPanel .audio-content');target.append(panel);
+ for(const name of ['latency','latencyValue']){const input=document.getElementById(name);input.min='-1000';input.max='1000';}
+ const labels=document.querySelector('#latency').nextElementSibling?.children;
+ if(labels?.length===2)for(const label of labels)label.dataset.i18nDynamic='';
+ function snapshot(){
+  const c=engine.outputClock,guest=room.role==='guest';
+  return {version:'2.3.0',role:room.role,networkOffsetMs:room.offset,
+    clockTargetMs:guest?room.clockTarget:0,clockResidualMs:guest?Math.abs(room.clockTarget-room.offset):0,
+    rttMs:room.rtt,rttTailMs:room.rttTail||0,clockSampleSpreadMs:room.spread,sampleCount:room.samples.length,
+    networkSynced:room.synced,outputSource:state.autoLatency?(c?.kind||'unavailable'):'off',
+    reportedOutputMs:c?.reportedMs??null,localSchedulingLeadMs:Math.ceil(engine.requiredLeadMs()),
+    manualCorrectionMs:state.latency,commandLeadMs:room.role==='host'?hostLead():null,startPending:room.startPending,
+    lateClicksSkipped:engine.dropped,acousticLatencyMeasured:false};
+ }
+ function paint(){
+  if(labels?.length===2){labels[0].textContent=I18N.lang==='zh-Hant'?'\u63d0\u524d 1000 ms':I18N.lang==='de'?'1000 ms fr\u00fcher':'1000 ms earlier';labels[1].textContent=I18N.lang==='zh-Hant'?'\u5ef6\u5f8c 1000 ms':I18N.lang==='de'?'1000 ms sp\u00e4ter':'1000 ms later';}
+  const d=snapshot(),guest=room.role==='guest';
+  const key=room.role==='solo'?'solo':room.role==='host'?'host':!room.synced?'sampling':d.clockResidualMs>10?'adjusting':(room.spread||0)>20?'unstable':'tracking';
+  document.getElementById('syncHeading').textContent=syncText('heading');
+  document.getElementById('syncNetworkLine').textContent=syncText('network')+' | '+syncText(key)+(guest&&room.rtt!==null?' | RTT '+room.rtt+' ms':'');
+  document.getElementById('syncOutputLine').textContent=syncText('output')+' | '+syncText(d.outputSource)+(d.reportedOutputMs>0?' | '+Math.round(d.reportedOutputMs)+' ms':'');
+  const buffer=document.getElementById('syncBufferLine');buffer.hidden=room.role!=='host';buffer.textContent=syncText('buffer')+' | '+d.commandLeadMs+' ms';
+  document.getElementById('syncDetail').textContent=syncText('pending');
+  document.getElementById('syncBoundary').textContent=syncText('note');
+  document.getElementById('syncRefresh').textContent=syncText('refresh');
+ }
+ document.getElementById('syncRefresh').addEventListener('click',async()=>{
+  const button=document.getElementById('syncRefresh');button.disabled=true;
+  try{await engine.ensure();engine.resetOutputTiming();engine.sampleOutputTiming(true);engine.invalidate();engine.schedule();if(room.role!=='solo')room.resync();room.sendLocalStatus();toast(syncText('refreshed'));}
+  catch(e){toast(e.message);}finally{button.disabled=false;paint();}
+ });
+ I18N.onChange(paint);document.getElementById('settingsBtn').addEventListener('click',paint);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden){engine.resetOutputTiming();engine.invalidate();}});
+ setInterval(()=>{if(document.getElementById('settingsDialog').open)paint();},1000);
+ window.TempoliveSync=Object.freeze({snapshot});paint();
+})();
+/* END tempolive-sync-status */
+
 /* BEGIN production share and installation reminders (approved v2.1.6 UI) */
 
 (function () {
@@ -4353,15 +4597,16 @@ texts();
     reminderStyle.id='tempolive-reminders-style';
     reminderStyle.textContent="/* Production: scoped reminder styling. Existing metronome UI is unchanged. */\n#sharePromptDialog{box-sizing:border-box;inset:0;margin:auto;width:min(460px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);padding:0;border:1px solid var(--line);border-radius:26px;overflow:auto;background:var(--surface);color:var(--ink);font-family:inherit;box-shadow:0 24px 80px #0003;overscroll-behavior:contain;scrollbar-width:thin}\n#sharePromptDialog.sp-guide-open{width:min(540px,calc(100vw - 32px))}\n#sharePromptDialog::backdrop{background:#0005;backdrop-filter:blur(3px)}\n#sharePromptDialog .sp-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px 4px;gap:12px}\n#sharePromptDialog .sp-brand{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:650;letter-spacing:.065em}\n#sharePromptDialog .sp-brand svg{width:25px;height:25px}\n#sharePromptDialog .sp-close{width:44px;height:44px;min-width:44px;min-height:44px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);background:transparent;border:0}\n#sharePromptDialog .sp-close:hover{background:var(--soft);color:var(--ink)}\n#sharePromptDialog .sp-content{padding:14px 28px 20px}\n#sharePromptDialog h2{font-size:28px;font-weight:700;line-height:1.42;letter-spacing:-.015em;margin:0 0 12px;overflow-wrap:anywhere;text-wrap:balance}\n#sharePromptDialog h2:focus{outline:none}\n#sharePromptDialog .sp-body{font-size:16px;line-height:1.85;color:var(--muted);margin:0 0 26px}\n#sharePromptDialog .sp-actions{display:flex;flex-direction:column;align-items:stretch;gap:8px}\n#sharePromptDialog .sp-main{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:68px;padding:16px 20px;border-radius:16px;font-size:22px;font-weight:650;line-height:1.45;background:var(--strong);color:var(--on-strong);border:1px solid var(--strong);text-align:center;text-decoration:none;letter-spacing:.01em;overflow-wrap:anywhere}\n#sharePromptDialog .sp-main:hover{opacity:.92}\n#sharePromptDialog .sp-main:active{transform:translateY(1px)}\n#sharePromptDialog .sp-main svg{width:26px;height:26px;flex-shrink:0}\n#sharePromptDialog .sp-later{align-self:center;display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:88px;margin:0;padding:8px 16px;border:0;border-radius:10px;background:transparent;box-shadow:none;color:var(--muted);font-size:14px;font-weight:450;line-height:1.5;text-decoration:none;text-underline-offset:4px}\n#sharePromptDialog .sp-later:hover{color:var(--ink);text-decoration:underline}\n#sharePromptDialog .sp-privacy{font-size:12px;line-height:1.7;color:var(--muted);margin:12px 0 0;text-align:center}\n#sharePromptDialog .sp-status{font-size:14px;line-height:1.7;margin:12px 0 0;padding:10px 12px;border-radius:10px;background:var(--soft);color:var(--ink);overflow-wrap:anywhere}\n#sharePromptDialog .sp-manual{margin-top:12px}\n#sharePromptDialog .sp-manual label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}\n#sharePromptDialog .sp-manual textarea{display:block;box-sizing:border-box;width:100%;min-width:0;font:inherit;font-size:16px;line-height:1.65;min-height:48px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--ink);resize:vertical;overflow-wrap:anywhere}\n#sharePromptDialog button,#sharePromptDialog a{touch-action:manipulation}\n#sharePromptDialog :is(button,a,select,summary,input):focus-visible{outline:3px solid var(--ink);outline-offset:3px}\n#sharePromptDialog .sp-platforms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;background:var(--soft);padding:5px;border-radius:14px;margin:0 0 14px}\n#sharePromptDialog .sp-platforms button{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:10px 4px;border-radius:10px;font-size:15px;font-weight:550;line-height:1.3;color:var(--muted);border:1px solid transparent;min-width:0}\n#sharePromptDialog .sp-platforms button[aria-selected=true]{background:var(--surface);color:var(--ink);border-color:var(--line);box-shadow:0 1px 3px #00000008}\n#sharePromptDialog .sp-platforms svg{width:18px;height:18px}\n#sharePromptDialog .sp-browser{margin-bottom:16px;display:flex;align-items:center;gap:10px}\n#sharePromptDialog .sp-browser label{font-size:13px;color:var(--muted);flex-shrink:0}\n#sharePromptDialog .sp-browser select{flex:1;min-width:0;font-size:16px;min-height:44px;padding:8px 12px}\n#sharePromptDialog .sp-guide-label{font-size:13px;color:var(--muted);font-weight:550;line-height:1.5;margin:2px 0 16px}\n#sharePromptDialog .sp-steps{list-style:none;margin:0;padding:0;display:grid;gap:18px}\n#sharePromptDialog .sp-steps li{display:flex;align-items:flex-start;gap:12px;min-width:0}\n#sharePromptDialog .sp-step-number{display:flex;align-items:center;justify-content:center;width:28px;height:28px;flex-shrink:0;border-radius:9px;background:var(--soft);border:1px solid var(--line);font-size:13px;line-height:1;font-variant-numeric:tabular-nums;font-weight:650;margin-top:1px}\n#sharePromptDialog .sp-step-copy{min-width:0}\n#sharePromptDialog .sp-step-copy h3{font-size:16px;font-weight:650;line-height:1.6;overflow-wrap:anywhere;margin:0 0 3px}\n#sharePromptDialog .sp-step-copy p{font-size:14px;line-height:1.75;color:var(--muted);overflow-wrap:anywhere;margin:0}\n#sharePromptDialog .sp-guide-notice{font-size:12px;line-height:1.7;border:1px solid var(--line);background:var(--soft);border-radius:11px;padding:10px 12px;margin:18px 0 14px;color:var(--ink)}\n#sharePromptDialog .sp-guide-actions{display:flex;flex-direction:column;align-items:stretch;gap:4px}\n#sharePromptDialog .sp-guide-actions .sp-main{min-height:56px;font-size:18px;padding:12px 14px;border-radius:14px}\n#sharePromptDialog .sp-guide-actions .sp-main svg{width:20px;height:20px}\n#sharePromptDialog .sp-guide-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}\n#sharePromptDialog .sp-guide-links button{font-size:13px;min-height:44px;color:var(--muted);text-decoration:underline;text-underline-offset:4px;padding:6px 10px}\n#sharePromptDialog .sp-help{border-top:1px solid var(--line);margin-top:12px;padding-top:4px;color:var(--muted)}\n#sharePromptDialog .sp-help summary{font-size:13px;min-height:44px;line-height:1.6;padding:12px 0;cursor:pointer}\n#sharePromptDialog .sp-help p{font-size:13px;line-height:1.8;margin:0 0 12px}\n#sharePromptDialog .sp-help a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;text-underline-offset:4px;color:var(--ink)}\n#sharePromptDialog.sp-guide-open h2{font-size:25px}\n#sharePromptDialog.sp-guide-open .sp-body{font-size:14px;margin-bottom:17px}\n@media(max-width:390px){#sharePromptDialog .sp-head{padding:14px 14px 2px}#sharePromptDialog .sp-content{padding:10px 20px 16px}#sharePromptDialog h2{font-size:25px}#sharePromptDialog .sp-body{font-size:15px}#sharePromptDialog .sp-main{font-size:21px;min-height:66px;padding:14px}#sharePromptDialog.sp-guide-open h2{font-size:23px}#sharePromptDialog .sp-platforms button{font-size:14px;gap:4px}}\n@media(max-height:500px){#sharePromptDialog .sp-head{padding-top:8px}#sharePromptDialog .sp-content{padding-top:4px}#sharePromptDialog h2{font-size:23px}#sharePromptDialog .sp-body{margin-bottom:16px}}\n\n/* Rich invitation fallback; only visible if formatted copying is unavailable. */\n#sharePromptDialog #spCopyHint{margin:3px 0 0;font-size:12px}\n#sharePromptDialog .sp-rich-manual{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--soft)}\n#sharePromptDialog .sp-rich-label{font-size:12px;color:var(--muted);margin:0 0 10px}\n#sharePromptDialog .sp-rich-content{font-size:16px;line-height:1.7;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text}\n#sharePromptDialog .sp-rich-content a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding-block:8px}\n#sharePromptDialog .sp-rich-content:focus-visible{outline:2px solid var(--ink);outline-offset:3px}\n\n/* Large reminder copy and readable body text. Other UI is unchanged. */\n#sharePromptDialog.sp-share-open .sp-body{font-size:18px;line-height:1.75;margin-bottom:20px;color:var(--ink)}\n#sharePromptDialog #spCopyHint{font-size:14px;line-height:1.75;text-align:left;margin:2px 0 0}\n#sharePromptDialog:not(.sp-share-open) .sp-dismiss-actions{margin-top:8px}\n#sharePromptDialog.sp-share-open #sharePromptLater{display:flex;margin:4px auto 0;font-size:14px;min-height:44px}\n#sharePromptDialog.sp-share-open .sp-status{font-size:16px;line-height:1.75}\n#sharePromptDialog.sp-share-open .sp-manual label,#sharePromptDialog .sp-rich-label{font-size:15px;line-height:1.6}\n#sharePromptDialog.sp-share-open .sp-manual textarea,#sharePromptDialog .sp-rich-content{font-size:18px;line-height:1.75}\n#sharePromptDialog .sp-rich-content>div{font-size:inherit!important;line-height:inherit!important}\n#sharePromptDialog .sp-rich-manual .sp-guide-links{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:12px}\n#sharePromptDialog .sp-rich-manual .sp-guide-links button{display:block;width:100%;min-height:56px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:12px;font-size:17px;font-weight:550;line-height:1.6;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}\n\n#sharePromptDialog.sp-share-open #spCopyHint{font-size:15px;line-height:1.7;text-align:center;margin:12px 0 6px;color:var(--muted)}\n@media(max-width:390px){#sharePromptDialog.sp-share-open .sp-body{font-size:17px}}\n\n/* v2.1.6: native sharing first, one secondary copy fallback below it. */\n#sharePromptDialog .sp-copy-backup{margin-top:18px;display:grid;gap:10px}\n#sharePromptDialog .sp-copy-backup #spCopyHint{margin:0;font-size:15px;line-height:1.65;color:var(--muted)}\n#sharePromptDialog .sp-copy-backup-button{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit;font-size:19px;font-weight:600;line-height:1.5;overflow-wrap:anywhere}\n#sharePromptDialog .sp-copy-backup-button svg{width:23px;height:23px;flex-shrink:0}\n#sharePromptDialog .sp-copy-backup-button:hover:not(:disabled){background:var(--soft);border-color:var(--muted)}\n#sharePromptDialog .sp-copy-backup-button:active:not(:disabled){transform:translateY(1px)}\n#sharePromptDialog.sp-share-open .sp-dismiss-actions{margin-top:8px}";
     document.head.append(reminderStyle);
-    /* Two alternating invitations. Read-only app state: never stop audio,
-       leave rooms, change songs, overwrite setlists or auto-install.
-       Clock: foreground time only. No catch-up queue for skipped intervals.
-       After closing any invitation, wait another full ten minutes.
-       Reminder session storage is separate from all existing setlist keys. */
+    /* Daily reminders, using the device's local calendar day.
+       At 5 foreground minutes: installation. At 10 minutes: sharing.
+       Each is shown at most once per day, including after dismissal/reload.
+       The daily ledger is separate from songs and other application settings.
+       No audio, room, clipboard or installation action runs automatically. */
     const CONFIG = Object.freeze({
-      thresholdMs: 10 * 60 * 1000,
-      quietMs: 1800, startGuardMs: 4200, pollMs: 500, persistEveryMs: 15000,
-      sessionKey: 'tempolive.reminders.v1',
+      installAtMs: 5 * 60 * 1000, shareAtMs: 10 * 60 * 1000,
+      quietMs: 1800, startGuardMs: 4200, pollMs: 500, persistEveryMs: 5000,
+      reminderGapMs: 30000,
+      dailyKey: 'tempolive.reminders.daily.v1',
       shareURL: 'https://chien930207-cyber.github.io/TEMPOLIVE/'
     });
     const COPY = {
@@ -4380,25 +4625,25 @@ texts();
     "cancelled": "\u5df2\u8fd4\u56de\u5206\u4eab\u63d0\u9192\u3002\u4e5f\u53ef\u4f7f\u7528\u4e0b\u65b9\u300c\u8907\u88fd\u5206\u4eab\u6587\u300d\u3002",
     "manual": "\u7121\u6cd5\u81ea\u52d5\u8907\u88fd\u3002\u8acb\u9577\u6309\u4e0b\u65b9\u9023\u7d50\uff0c\u6216\u4f7f\u7528 Ctrl/Cmd+C \u624b\u52d5\u8907\u88fd\u3002",
     "fallback": "\u6b64\u700f\u89bd\u5668\u7121\u6cd5\u958b\u555f\u5206\u4eab\u9078\u55ae\uff0c\u8acb\u4f7f\u7528\u4e0b\u65b9\u300c\u8907\u88fd\u5206\u4eab\u6587\u300d\u3002",
-    "shareText": "\ud83d\udce2\u63a8\u85a6\u4f60\u8a66\u8a66 TEMPOLIVE \u9023\u7dda\u7bc0\u62cd\u5668\uff01\n\u53ef\u4ee5\u5132\u5b58\u6b4c\u55ae\u3001\u591a\u4eba\u540c\u6b65\u8ddf\u62cd\uff0c\u9084\u80fd\u7528 LIVE \u50b3\u8a71\u6e9d\u901a~",
+    "shareText": "\ud83d\udce2\u63a8\u85a6\u4f60\u8a66\u8a66 TEMPOLIVE \u9023\u7dda\u7bc0\u62cd\u5668\uff01\n\n\u53ef\u4ee5\u5132\u5b58\u6b4c\u55ae\u3001\u591a\u4eba\u540c\u6b65\u8ddf\u62cd\uff0c\u9084\u80fd\u7528 LIVE \u50b3\u8a71\u6e9d\u901a~",
     "installTitle": "\u5c07 TEMPOLIVE \u5132\u5b58\u5230\u684c\u9762",
-    "installBody": "\u653e\u5230\u624b\u6a5f\u4e3b\u756b\u9762\u6216\u96fb\u8166\uff0c\u4e0b\u6b21\u7df4\u7fd2\u66f4\u5feb\u958b\u555f\u3002",
+    "installBody": "\u4f7f\u7528\u73fe\u6709 TEMPOLIVE Logo\uff0c\u5b89\u88dd\u5f8c\u5f9e\u4e3b\u756b\u9762\u958b\u555f\u3002",
     "install": "\u5132\u5b58\u5230\u684c\u9762",
-    "installPrivacy": "\u9ede\u9078\u5f8c\u67e5\u770b\u6559\u5b78\uff0c\u4e0d\u6703\u81ea\u52d5\u5b89\u88dd\u3002",
+    "installPrivacy": "\u7531\u4f60\u5728\u7cfb\u7d71\u8996\u7a97\u78ba\u8a8d\uff1b\u4e0d\u6703\u5728\u80cc\u666f\u81ea\u52d5\u5b89\u88dd\u3002",
     "guideTitle": "\u5c07 TEMPOLIVE \u5132\u5b58\u5230\u684c\u9762",
-    "guideIntro": "\u9078\u64c7\u4f60\u7684\u88dd\u7f6e\uff0c\u7167\u8457\u6b65\u9a5f\u64cd\u4f5c\u5373\u53ef\u3002",
+    "guideIntro": "\u5c31\u5728\u9019\u500b\u9801\u9762\u5b8c\u6210\u5b89\u88dd\uff0c\u4e0d\u9700\u8981\u958b\u555f\u53e6\u4e00\u500b\u7db2\u7ad9\u3002",
     "ios": "iOS",
     "android": "Android",
     "desktop": "\u7b46\u96fb",
     "platforms": "\u88dd\u7f6e\u6559\u5b78",
     "browserLabel": "\u4f7f\u7528\u7684\u700f\u89bd\u5668",
     "official": "\u958b\u555f\u6b63\u5f0f\u7db2\u7ad9",
-    "officialHint": "\u4f9d\u7167\u4e0a\u65b9\u6b65\u9a5f\u5132\u5b58\uff0c\u4e0b\u6b21\u5c31\u80fd\u5f9e\u4e3b\u756b\u9762\u6216\u684c\u9762\u958b\u555f TEMPOLIVE\u3002",
+    "officialHint": "\u4f7f\u7528\u73fe\u6709 TEMPOLIVE Logo\uff0c\u5b89\u88dd\u5f8c\u5f9e\u4e3b\u756b\u9762\u958b\u555f\u3002",
     "return": "\u8fd4\u56de\u7bc0\u62cd\u5668",
     "back": "\u8fd4\u56de\u63d0\u9192",
-    "copyOfficial": "\u8907\u88fd\u6b63\u5f0f\u7db2\u5740",
+    "copyOfficial": "\u8907\u88fd\u9019\u500b\u9801\u9762\u7684\u7db2\u5740",
     "source": "\u67e5\u770b\u700f\u89bd\u5668\u5b98\u65b9\u8aaa\u660e",
-    "saveCopied": "\u5df2\u8907\u88fd\u6b63\u5f0f\u7db2\u5740\uff0c\u8acb\u5728\u5c0d\u61c9\u700f\u89bd\u5668\u8cbc\u4e0a\u958b\u555f\u3002",
+    "saveCopied": "\u5df2\u8907\u88fd\u6b64\u9801\u7db2\u5740\u3002",
     "backup": "\u5207\u63db\u5230 App \u524d\u5148\u532f\u51fa\u91cd\u8981\u6b4c\u55ae\uff1b\u82e5 App \u6c92\u6709\u539f\u6b4c\u55ae\uff0c\u518d\u532f\u5165\u5099\u4efd\u3002",
     "missingOption": "\u627e\u4e0d\u5230\u9078\u9805\uff1f",
     "helpBody": "\u8acb\u96e2\u958b LINE\u3001Instagram \u7b49 App \u5167\u5efa\u700f\u89bd\u5668\uff0c\u6539\u5728 Safari\u3001Chrome \u6216 Edge \u958b\u555f\u6b63\u5f0f\u7db2\u7ad9\u3002\u9078\u55ae\u540d\u7a31\u6703\u4f9d\u7248\u672c\u7565\u6709\u4e0d\u540c\u3002",
@@ -4440,24 +4685,24 @@ texts();
     "manual": "Automatic copying is unavailable. Touch and hold the link, or press Ctrl/Cmd+C to copy it.",
     "fallback": "The share menu is unavailable. Use Copy invitation below.",
     "shareText": "Try TEMPOLIVE, a connected metronome for your band!\nSave setlists, follow a shared beat on separate devices and send quick messages with LIVE Talk. Just open the link and try it together at your next rehearsal.",
-    "installTitle": "Keep TEMPOLIVE on your device",
-    "installBody": "Add it to your Home Screen or computer for quicker access next time you practise.",
+    "installTitle": "Install TEMPOLIVE",
+    "installBody": "Uses the existing TEMPOLIVE logo. Launch from your Home Screen after installation.",
     "install": "Save to device",
-    "installPrivacy": "Opens a guide. Nothing is installed automatically.",
+    "installPrivacy": "You confirm in the system dialog. Nothing is installed automatically.",
     "guideTitle": "Keep TEMPOLIVE on your device",
-    "guideIntro": "Choose your device and follow the steps below.",
+    "guideIntro": "Install this page directly. There is no need to open a different website.",
     "ios": "iOS",
     "android": "Android",
     "desktop": "Laptop",
     "platforms": "Device guides",
     "browserLabel": "Browser",
     "official": "Open the live website",
-    "officialHint": "Follow the steps above to open TEMPOLIVE from your Home Screen or desktop next time.",
+    "officialHint": "Uses the existing TEMPOLIVE logo. Launch from your Home Screen after installation.",
     "return": "Back to metronome",
     "back": "Back to reminder",
-    "copyOfficial": "Copy website address",
+    "copyOfficial": "Copy this page address",
     "source": "Browser help",
-    "saveCopied": "Website address copied. Paste it into the browser shown above.",
+    "saveCopied": "This page address was copied.",
     "backup": "Export important setlists before switching to the app. If they are missing there, import your backup.",
     "missingOption": "Cannot find the option?",
     "helpBody": "Open the live website in Safari, Chrome or Edge rather than an in-app browser such as LINE or Instagram. Menu wording varies by version.",
@@ -4499,24 +4744,24 @@ texts();
     "manual": "Automatisches Kopieren ist nicht verf\u00fcgbar. Halte den Link gedr\u00fcckt oder kopiere ihn mit Strg/Cmd+C.",
     "fallback": "Das Teilen-Men\u00fc ist nicht verf\u00fcgbar. Nutze unten Einladung kopieren.",
     "shareText": "Probier TEMPOLIVE aus, das vernetzte Metronom f\u00fcr deine Band!\nDamit k\u00f6nnt ihr Setlists speichern, auf euren eigenen Ger\u00e4ten einem gemeinsamen Takt folgen und euch \u00fcber LIVE-Nachrichten verst\u00e4ndigen. Einfach den Link \u00f6ffnen und bei der n\u00e4chsten Probe gemeinsam ausprobieren!",
-    "installTitle": "TEMPOLIVE auf dem Ger\u00e4t speichern",
-    "installBody": "F\u00fcge TEMPOLIVE zum Home-Bildschirm oder Computer hinzu, damit du bei der n\u00e4chsten Probe schneller starten kannst.",
+    "installTitle": "TEMPOLIVE installieren",
+    "installBody": "Verwendet das vorhandene TEMPOLIVE-Logo. Nach der Installation vom Home-Bildschirm \u00f6ffnen.",
     "install": "Auf dem Ger\u00e4t speichern",
-    "installPrivacy": "\u00d6ffnet eine Anleitung. Es wird nichts automatisch installiert.",
+    "installPrivacy": "Du best\u00e4tigst im Systemdialog. Es wird nichts automatisch installiert.",
     "guideTitle": "TEMPOLIVE auf dem Ger\u00e4t speichern",
-    "guideIntro": "W\u00e4hle dein Ger\u00e4t und folge den Schritten.",
+    "guideIntro": "Diese Seite direkt installieren. Du musst keine andere Website \u00f6ffnen.",
     "ios": "iOS",
     "android": "Android",
     "desktop": "Laptop",
     "platforms": "Ger\u00e4teanleitungen",
     "browserLabel": "Browser",
     "official": "Live-Website \u00f6ffnen",
-    "officialHint": "Folge den Schritten oben, um TEMPOLIVE vom Home-Bildschirm oder Desktop zu starten.",
+    "officialHint": "Verwendet das vorhandene TEMPOLIVE-Logo. Nach der Installation vom Home-Bildschirm \u00f6ffnen.",
     "return": "Zur\u00fcck zum Metronom",
     "back": "Zur\u00fcck zum Hinweis",
-    "copyOfficial": "Website-Adresse kopieren",
+    "copyOfficial": "Adresse dieser Seite kopieren",
     "source": "Browser-Hilfe",
-    "saveCopied": "Adresse kopiert. F\u00fcge sie in den oben angegebenen Browser ein.",
+    "saveCopied": "Die Adresse dieser Seite wurde kopiert.",
     "backup": "Exportiere wichtige Setlists vor dem Wechsel zur App. Fehlen sie dort, importiere deine Sicherung.",
     "missingOption": "Die Option fehlt?",
     "helpBody": "\u00d6ffne die Live-Website in Safari, Chrome oder Edge statt im integrierten Browser von LINE oder Instagram. Men\u00fcnamen k\u00f6nnen je nach Version abweichen.",
@@ -4549,8 +4794,8 @@ texts();
       "label": "iPhone / iPad \u00b7 Safari",
       "steps": [
         [
-          "\u5728 Safari \u958b\u555f TEMPOLIVE",
-          "\u5982\u679c\u662f\u5f9e\u901a\u8a0a\u8edf\u9ad4\u5167\u958b\u555f\uff0c\u8acb\u8907\u88fd\u7db2\u5740\uff0c\u6539\u7528 Safari \u958b\u555f\u3002"
+          "\u7559\u5728\u76ee\u524d\u9019\u500b\u9801\u9762",
+          "\u4f7f\u7528\u76ee\u524d\u700f\u89bd\u5668\u7684\u9078\u55ae\u5b89\u88dd\u9019\u500b\u9801\u9762\u3002"
         ],
         [
           "\u9ede\u300c\u5206\u4eab\u300d\uff0c\u9078\u300c\u52a0\u5165\u4e3b\u756b\u9762\u300d",
@@ -4567,8 +4812,8 @@ texts();
       "label": "Android \u00b7 Chrome",
       "steps": [
         [
-          "\u5728 Chrome \u958b\u555f TEMPOLIVE",
-          "\u5982\u679c\u662f\u5f9e\u901a\u8a0a\u8edf\u9ad4\u5167\u958b\u555f\uff0c\u8acb\u8907\u88fd\u7db2\u5740\uff0c\u6539\u7528 Chrome \u958b\u555f\u3002"
+          "\u7559\u5728\u76ee\u524d\u9019\u500b\u9801\u9762",
+          "\u4f7f\u7528\u76ee\u524d\u700f\u89bd\u5668\u7684\u9078\u55ae\u5b89\u88dd\u9019\u500b\u9801\u9762\u3002"
         ],
         [
           "\u9ede\u53f3\u4e0a\u89d2 \u22ee \u958b\u555f\u9078\u55ae",
@@ -4585,8 +4830,8 @@ texts();
       "label": "\u7b46\u96fb / \u684c\u6a5f \u00b7 Chrome",
       "steps": [
         [
-          "\u7528 Chrome \u958b\u555f\u6b63\u5f0f\u7db2\u7ad9",
-          "\u5148\u78ba\u8a8d\u7db2\u5740\u662f TEMPOLIVE \u6b63\u5f0f\u7db2\u7ad9\u3002"
+          "\u7559\u5728\u76ee\u524d\u9019\u500b\u9801\u9762",
+          "\u4f7f\u7528\u76ee\u524d\u700f\u89bd\u5668\u7684\u9078\u55ae\u5b89\u88dd\u9019\u500b\u9801\u9762\u3002"
         ],
         [
           "\u9078\u300c\u5c07\u9801\u9762\u5b89\u88dd\u70ba\u61c9\u7528\u7a0b\u5f0f\u300d",
@@ -4603,8 +4848,8 @@ texts();
       "label": "\u7b46\u96fb / \u684c\u6a5f \u00b7 Edge",
       "steps": [
         [
-          "\u7528 Edge \u958b\u555f\u6b63\u5f0f\u7db2\u7ad9",
-          "\u5148\u78ba\u8a8d\u7db2\u5740\u662f TEMPOLIVE \u6b63\u5f0f\u7db2\u7ad9\u3002"
+          "\u7559\u5728\u76ee\u524d\u9019\u500b\u9801\u9762",
+          "\u4f7f\u7528\u76ee\u524d\u700f\u89bd\u5668\u7684\u9078\u55ae\u5b89\u88dd\u9019\u500b\u9801\u9762\u3002"
         ],
         [
           "\u9078\u300c\u5c07\u6b64\u7db2\u7ad9\u5b89\u88dd\u70ba\u61c9\u7528\u7a0b\u5f0f\u300d",
@@ -4621,8 +4866,8 @@ texts();
       "label": "Mac \u00b7 Safari\uff08macOS 14+\uff09",
       "steps": [
         [
-          "\u7528 Safari \u958b\u555f\u6b63\u5f0f\u7db2\u7ad9",
-          "\u9700\u8981 macOS Sonoma 14 \u6216\u66f4\u65b0\u7248\u672c\u3002"
+          "\u7559\u5728\u76ee\u524d\u9019\u500b\u9801\u9762",
+          "\u4f7f\u7528\u76ee\u524d\u700f\u89bd\u5668\u7684\u9078\u55ae\u5b89\u88dd\u9019\u500b\u9801\u9762\u3002"
         ],
         [
           "\u9078\u300c\u6a94\u6848\u300d\u2192\u300c\u52a0\u5165 Dock \u4e2d\u300d",
@@ -4641,8 +4886,8 @@ texts();
       "label": "iPhone / iPad \u00b7 Safari",
       "steps": [
         [
-          "Open TEMPOLIVE in Safari",
-          "If you are in an in-app browser, copy the address and open it in Safari."
+          "Stay on this page",
+          "Install TEMPOLIVE here; no switch to another website is needed."
         ],
         [
           "Choose Share, then Add to Home Screen",
@@ -4659,8 +4904,8 @@ texts();
       "label": "Android \u00b7 Chrome",
       "steps": [
         [
-          "Open TEMPOLIVE in Chrome",
-          "If you are in an in-app browser, copy the address and open it in Chrome."
+          "Stay on this page",
+          "Install TEMPOLIVE here; no switch to another website is needed."
         ],
         [
           "Open the top-right three-dot menu",
@@ -4677,8 +4922,8 @@ texts();
       "label": "Laptop / desktop \u00b7 Chrome",
       "steps": [
         [
-          "Open the live website in Chrome",
-          "Check that you are on the published TEMPOLIVE website."
+          "Stay on this page",
+          "Install TEMPOLIVE here; no switch to another website is needed."
         ],
         [
           "Choose Install page as app",
@@ -4695,8 +4940,8 @@ texts();
       "label": "Laptop / desktop \u00b7 Edge",
       "steps": [
         [
-          "Open the live website in Edge",
-          "Check that you are on the published TEMPOLIVE website."
+          "Stay on this page",
+          "Install TEMPOLIVE here; no switch to another website is needed."
         ],
         [
           "Choose Install this site as an app",
@@ -4713,8 +4958,8 @@ texts();
       "label": "Mac \u00b7 Safari (macOS 14+)",
       "steps": [
         [
-          "Open the live website in Safari",
-          "Requires macOS Sonoma 14 or later."
+          "Stay on this page",
+          "Install TEMPOLIVE here; no switch to another website is needed."
         ],
         [
           "Choose File > Add to Dock",
@@ -4733,8 +4978,8 @@ texts();
       "label": "iPhone / iPad \u00b7 Safari",
       "steps": [
         [
-          "TEMPOLIVE in Safari \u00f6ffnen",
-          "In einem In-App-Browser die Adresse kopieren und in Safari \u00f6ffnen."
+          "Auf dieser Seite bleiben",
+          "TEMPOLIVE hier installieren, ohne eine andere Website zu \u00f6ffnen."
         ],
         [
           "Teilen und dann Zum Home-Bildschirm w\u00e4hlen",
@@ -4751,8 +4996,8 @@ texts();
       "label": "Android \u00b7 Chrome",
       "steps": [
         [
-          "TEMPOLIVE in Chrome \u00f6ffnen",
-          "In einem In-App-Browser die Adresse kopieren und in Chrome \u00f6ffnen."
+          "Auf dieser Seite bleiben",
+          "TEMPOLIVE hier installieren, ohne eine andere Website zu \u00f6ffnen."
         ],
         [
           "Das Dreipunkt-Men\u00fc oben rechts \u00f6ffnen",
@@ -4769,8 +5014,8 @@ texts();
       "label": "Laptop / Desktop \u00b7 Chrome",
       "steps": [
         [
-          "Die Live-Website in Chrome \u00f6ffnen",
-          "Pr\u00fcfe, dass du die ver\u00f6ffentlichte TEMPOLIVE-Website verwendest."
+          "Auf dieser Seite bleiben",
+          "TEMPOLIVE hier installieren, ohne eine andere Website zu \u00f6ffnen."
         ],
         [
           "Seite als App installieren w\u00e4hlen",
@@ -4787,8 +5032,8 @@ texts();
       "label": "Laptop / Desktop \u00b7 Edge",
       "steps": [
         [
-          "Die Live-Website in Edge \u00f6ffnen",
-          "Pr\u00fcfe, dass du die ver\u00f6ffentlichte TEMPOLIVE-Website verwendest."
+          "Auf dieser Seite bleiben",
+          "TEMPOLIVE hier installieren, ohne eine andere Website zu \u00f6ffnen."
         ],
         [
           "Diese Website als App installieren w\u00e4hlen",
@@ -4805,8 +5050,8 @@ texts();
       "label": "Mac \u00b7 Safari (macOS 14+)",
       "steps": [
         [
-          "Die Live-Website in Safari \u00f6ffnen",
-          "Erfordert macOS Sonoma 14 oder neuer."
+          "Auf dieser Seite bleiben",
+          "TEMPOLIVE hier installieren, ohne eine andere Website zu \u00f6ffnen."
         ],
         [
           "Ablage > Zum Dock hinzuf\u00fcgen w\u00e4hlen",
@@ -4840,8 +5085,13 @@ texts();
     const now = () => performance.now();
     const language = () => window.TempoliveI18n?.lang || document.documentElement.lang;
     const copy = () => COPY[language()] || COPY['zh-Hant'];
+    const installation = window.TempoliveInstall;
+    const installURL = installation.snapshot().appURL;
     // Default public invitation: no private setlist or room data.
-    const shareMessage = () => copy().shareText + '\n\n' + CONFIG.shareURL;
+    // One source for the introduction and call to action. The plain clipboard
+    // representation includes exactly one URL on the next line.
+    const invitationText = () => copy().shareText + '\n\n' + copy().useNow;
+    const shareMessage = () => invitationText() + '\n' + CONFIG.shareURL;
     // Rich mail and plain chat are two representations of the same invitation.
     // Never pass HTML in navigator.share().text; receiving apps own rendering.
     const escapeHTML = value => String(value).replace(/[&<>"']/g, ch => ({
@@ -4852,10 +5102,20 @@ texts();
       return '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.7">' +
         '<p style="margin:0 0 16px">' + lines + '</p>' +
         '<p style="margin:0"><a href="' + escapeHTML(CONFIG.shareURL) +
-        '" style="font-weight:600;text-decoration:underline">' + escapeHTML(copy().useNow) + '</a></p></div>';
+        '" style="font-weight:600;text-decoration:underline">' + escapeHTML(copy().useNow) + '</a><br>' +
+        '<a href="' + escapeHTML(CONFIG.shareURL) + '" style="text-decoration:underline;overflow-wrap:anywhere">' +
+        escapeHTML(CONFIG.shareURL) + '</a></p></div>';
     }
-    let elapsed = 0, nextAt = CONFIG.thresholdMs, nextKind = 'share', shownCount = 0;
-    let visibleSince = document.hidden ? null : now();
+    let openingPrompt = false;
+    let lastClockMono = now(), lastClockWall = Date.now();
+    let countingForeground = !document.hidden;
+    const localDay = time => {
+      const date = new Date(time);
+      return date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+    };
+    const dayStart = time => {const date=new Date(time);date.setHours(0,0,0,0);return date.getTime();};
+    const emptyDay = day => ({version:1,day,elapsedMs:0,countedUntil:0,shown:{install:false,share:false},notBeforeMs:0});
+    let daily = emptyDay(localDay(lastClockWall));
     let response = '', currentKind = 'share', view = 'prompt', statusKey = '';
     let lastActivity = now(), startGuardUntil = 0, lastPersist = now();
     let sharedPending = false, forceCopy = false, actionToken = 0;
@@ -4869,22 +5129,55 @@ texts();
     const appleMobile = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     let platform = appleMobile ? 'ios' : /Android/i.test(ua) ? 'android' : 'desktop';
     let browser = /Edg\//.test(ua) ? 'edge' : /Macintosh/.test(ua) && !/Chrome|Chromium/.test(ua) ? 'safari' : 'chrome';
-    try {
-      const saved = JSON.parse(sessionStorage.getItem(CONFIG.sessionKey) || 'null');
-      if (saved && saved.version === 2) {
-        if (Number.isFinite(saved.elapsedMs) && saved.elapsedMs >= 0) elapsed = Math.min(saved.elapsedMs, 30 * 86400000);
-        if (Number.isFinite(saved.nextAtMs) && saved.nextAtMs >= 0) {
-          // Convert an existing 20-minute countdown without losing its elapsed time or next invitation.
-          const savedIntervalMs = Number.isFinite(saved.intervalMs) && saved.intervalMs > 0 ? saved.intervalMs : 20 * 60 * 1000;
-          nextAt = Math.min(Math.max(0, saved.nextAtMs - savedIntervalMs + CONFIG.thresholdMs), elapsed + CONFIG.thresholdMs);
-        }
-        nextKind = saved.nextKind === 'install' ? 'install' : 'share';
-        shownCount = Number.isSafeInteger(saved.shownCount) ? Math.max(0, saved.shownCount) : 0;
+    // The old session-only timer has no date. Do not mistake its lifetime
+    // elapsed value for today's time or import its alternating counters.
+    function readDaily(day) {
+      try {
+        const saved=JSON.parse(localStorage.getItem(CONFIG.dailyKey)||'null');
+        storageAvailable=true;
+        if (!saved || saved.version!==1 || saved.day!==day) return emptyDay(day);
+        return {version:1,day,
+          elapsedMs:Number.isFinite(saved.elapsedMs)?Math.max(0,Math.min(saved.elapsedMs,172800000)):0,
+          countedUntil:Number.isFinite(saved.countedUntil)?saved.countedUntil:0,
+          shown:{install:saved.shown?.install===true,share:saved.shown?.share===true},
+          notBeforeMs:Number.isFinite(saved.notBeforeMs)?Math.max(0,saved.notBeforeMs):0};
+      } catch (_) {storageAvailable=false;return emptyDay(day);}
+    }
+    function syncDaily(write=false) {
+      const mono=now(),wall=Date.now(),day=localDay(wall);
+      const changed=day!==daily.day;
+      if(changed) daily=emptyDay(day);
+      const saved=readDaily(day);
+      daily.elapsedMs=Math.max(daily.elapsedMs,saved.elapsedMs);
+      daily.countedUntil=Math.max(daily.countedUntil,saved.countedUntil);
+      daily.shown.install=daily.shown.install||saved.shown.install;
+      daily.shown.share=daily.shown.share||saved.shown.share;
+      daily.notBeforeMs=Math.max(daily.notBeforeMs,saved.notBeforeMs);
+      // Only the previously visible interval counts. Union overlapping visible
+      // intervals so opening another tab does not intentionally double time.
+      if(countingForeground){
+        const delta=Math.max(0,Math.min(mono-lastClockMono,wall-lastClockWall,wall-dayStart(wall)));
+        const from=Math.max(wall-delta,daily.countedUntil,dayStart(wall));
+        daily.elapsedMs+=Math.max(0,wall-from);
+        daily.countedUntil=wall;
       }
-    } catch (_) { storageAvailable = false; }
-    const total = () => elapsed + (visibleSince === null ? 0 : Math.max(0, now() - visibleSince));
+      lastClockMono=mono;lastClockWall=wall;
+      if(write){
+        try{localStorage.setItem(CONFIG.dailyKey,JSON.stringify(daily));storageAvailable=true;}
+        catch(_){storageAvailable=false;}
+        lastPersist=mono;
+      }
+      return changed;
+    }
+    syncDaily();
+    const total = () => daily.elapsedMs;
     const nativeShare = () => window.isSecureContext && typeof navigator.share === 'function';
-    const eligibleKind = () => nextKind === 'install' && isStandalone() ? 'share' : nextKind;
+    const eligibleKind = () => {
+      if(!daily.shown.install && !isStandalone()) return 'install';
+      if(!daily.shown.share) return 'share';
+      return null;
+    };
+    const nextThreshold = kind => kind==='install'?CONFIG.installAtMs:kind==='share'?CONFIG.shareAtMs:Infinity;
     const dialog = document.createElement('dialog');
     dialog.id = 'sharePromptDialog';
     dialog.setAttribute('aria-labelledby', 'sharePromptTitle');
@@ -4893,6 +5186,7 @@ texts();
       <div class="sp-head"><div class="sp-brand"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>TEMPOLIVE</span></div><button type="button" class="sp-close" id="sharePromptClose"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
       <div class="sp-content">
         <h2 id="sharePromptTitle" tabindex="-1"></h2><p class="sp-body" id="sharePromptBody"></p>
+        <div id="spInstallIdentity" hidden style="display:flex;gap:12px;align-items:center;margin:0 0 16px"><img src="/TEMPOLIVE/apple-touch-icon.png" width="56" height="56" alt="TEMPOLIVE Logo" style="border-radius:12px;flex-shrink:0"><strong id="spInstallAppName" style="font-size:18px"></strong></div><p id="spInstallStatus" class="sp-guide-notice" role="status" aria-live="polite" hidden></p>
         <section id="sharePromptWelcome">
           <div class="sp-actions"><button type="button" id="sharePromptAccept" class="sp-main"><span id="sharePromptAcceptIcon" aria-hidden="true"></span><span id="sharePromptAcceptText"></span></button></div>
           <div id="spCopyRow" class="sp-copy-backup">
@@ -4911,7 +5205,7 @@ texts();
           <div id="spBrowserRow" class="sp-browser"><label for="spDesktopBrowser" id="spBrowserLabel"></label><select id="spDesktopBrowser"><option value="chrome">Chrome</option><option value="edge">Edge</option><option value="safari">Safari (Mac)</option></select></div>
           <div id="spGuidePanel" role="tabpanel"><p id="spGuideLabel" class="sp-guide-label"></p><ol id="spGuideSteps" class="sp-steps"></ol></div>
           <p id="spGuideNotice" class="sp-guide-notice"></p>
-          <div class="sp-guide-actions"><a class="sp-main" id="spOfficialSite" target="_blank" rel="noopener noreferrer">${svg('external')}<span></span></a><div class="sp-guide-links"><button type="button" id="spCopyOfficial"></button><button type="button" id="spBack"></button></div></div>
+          <div class="sp-guide-actions"><button type="button" class="sp-main" id="spInstallNow" hidden>${svg('install')}<span></span></button><div class="sp-guide-links"><button type="button" id="spCopyOfficial"></button><button type="button" id="spBack"></button></div></div>
           <details class="sp-help" id="spGuideHelp"><summary id="spHelpTitle"></summary><p id="spGuideNote"></p><p id="spHelpBody"></p><p id="spBackupNote"></p><a id="spGuideSource" target="_blank" rel="noopener noreferrer"></a></details>
           <div class="sp-actions"><button type="button" id="spGuideDone" class="sp-later"></button></div>
         </section>
@@ -4925,12 +5219,8 @@ texts();
       </div>`;
     document.body.append(dialog);
     get('sharePromptLink').value = CONFIG.shareURL;
-    get('spOfficialSite').href = CONFIG.shareURL;
-    function persist() {
-      try { sessionStorage.setItem(CONFIG.sessionKey, JSON.stringify({version:2,intervalMs:CONFIG.thresholdMs,elapsedMs:total(),nextAtMs:nextAt,nextKind,shownCount})); storageAvailable = true; }
-      catch (_) { storageAvailable = false; }
-      lastPersist = now();
-    }
+    get('spInstallAppName').textContent = installation.snapshot().name;
+    function persist() {syncDaily(true);}
     function blockReason(ignoreQuiet = false) {
       if (document.hidden) return 'background';
       let app;
@@ -4950,8 +5240,10 @@ texts();
     function closePrompt(reason, restore = true) {
       if (!dialog.open) return;
       response = reason; actionToken++; sharedPending = false; nativePending = false; returningFromShare = false;
-      // Delayed reminders never cause several invitations back-to-back.
-      nextAt = total() + CONFIG.thresholdMs;
+      // Keep the 10-minute daily milestone independent of dismissal time.
+      // A short safety gap prevents two overdue prompts opening back-to-back.
+      syncDaily();
+      daily.notBeforeMs = Math.max(daily.notBeforeMs,total()+CONFIG.reminderGapMs);
       dialog.close(); view = 'prompt'; persist();
       if (restore && !document.hidden && priorFocus?.isConnected && !document.querySelector('dialog[open]')) {
         try { priorFocus.focus({preventScroll:true}); } catch (_) {}
@@ -4959,17 +5251,44 @@ texts();
       paint();
     }
     function openPrompt(ignoreQuiet = false) {
-      if (dialog.open || total() <= nextAt || blockReason(ignoreQuiet)) return false;
-      currentKind = eligibleKind(); view = 'prompt'; priorFocus = document.activeElement;
-      statusKey = ''; forceCopy = false; richManual = false; nativePending = false; returningFromShare = false;
-      get('sharePromptManual').hidden = true; get('spGuideHelp').open = false;
-      paint();
-      try { dialog.showModal(); get('sharePromptTitle').focus({preventScroll:true}); }
-      catch (_) { return false; }
-      shownCount++; response = 'shown';
-      nextKind = currentKind === 'share' ? 'install' : 'share';
-      nextAt = total() + CONFIG.thresholdMs;
-      persist(); paint(); return true;
+      if (openingPrompt || dialog.open || blockReason(ignoreQuiet)) return;
+      openingPrompt=true;
+      const show=()=>{
+        syncDaily(true);
+        const kind=eligibleKind();
+        if(!kind || dialog.open || total()<nextThreshold(kind) || total()<daily.notBeforeMs || blockReason(ignoreQuiet)) return false;
+        currentKind=kind;view='prompt';priorFocus=document.activeElement;
+        statusKey='';forceCopy=false;richManual=false;nativePending=false;returningFromShare=false;
+        get('sharePromptManual').hidden=true;get('spGuideHelp').open=false;
+        paint();
+        try {dialog.showModal();} catch(_){return false;}
+        // Mark on display, not only on a successful install/share. Cancelling
+        // or reloading must not make the same daily prompt appear again.
+        daily.shown[kind]=true;response='shown';persist();
+        get('sharePromptTitle').focus({preventScroll:true});paint();return true;
+      };
+      // Serialize display decisions between same-origin tabs when supported.
+      // This changes no OS/browser permissions. Storage failure falls back to
+      // the current page only; clearing website data resets the daily ledger.
+      if(navigator.locks?.request){
+        navigator.locks.request('tempolive-daily-reminder-display',{ifAvailable:true},lock=>lock?show():false)
+          .catch(()=>show()).finally(()=>{openingPrompt=false;});
+      }else{try{show();}finally{openingPrompt=false;}}
+    }
+    function requestInstall() {
+      if (sharedPending) return;
+      const info=installation.snapshot();
+      if (info.standalone || info.installReported) {closePrompt('already-installed');return;}
+      if (!info.canPrompt) {showGuide();return;}
+      const token=++actionToken;
+      sharedPending=true;statusKey='';
+      // Invoke the genuine browser prompt within this same click.
+      const task=installation.request();paint();
+      Promise.resolve(task).then(result=>{
+        if(token!==actionToken || !dialog.open)return;
+        sharedPending=false;response='install-'+result.outcome;
+        if(result.outcome==='dismissed'||result.outcome==='error')showGuide();else paint();
+      });
     }
     function showGuide() {
       view = 'guide'; statusKey = ''; response = 'guide-opened'; richManual = false;
@@ -4998,7 +5317,9 @@ texts();
         block.append(h,p); li.append(n,block); steps.append(li);
       });
       get('spGuideNotice').textContent = t.officialHint;
-      get('spOfficialSite').querySelector('span').textContent = t.official;
+      get('spInstallNow').querySelector('span').textContent = installation.text().installNow;
+      get('spInstallNow').hidden = !installation.snapshot().canPrompt;
+      get('spInstallNow').disabled = sharedPending;
       get('spCopyOfficial').textContent = t.copyOfficial;
       get('spBack').textContent = t.back;
       get('spHelpTitle').textContent = t.missingOption;
@@ -5019,7 +5340,11 @@ texts();
       get('sharePromptLater').textContent = ['copied','richCopied'].includes(statusKey) ? t.done : t.later;
       get('sharePromptClose').setAttribute('aria-label', t.close);
       // Primary action opens the device share sheet; copying stays secondary.
-      get('sharePromptAcceptText').textContent = install ? t.install : nativePending ? t.sharing : t.share;
+      const installState = installation.snapshot(), installText = installation.text();
+      get('spInstallIdentity').hidden = !install;
+      get('spInstallStatus').hidden = !install;
+      get('spInstallStatus').textContent = installState.message;
+      get('sharePromptAcceptText').textContent = install ? (installState.standalone || installState.installReported ? installText.back : installState.busy ? installText.busy : installState.canPrompt ? installText.installNow : installState.code === 'ios' ? installText.iosButton : installText.instructions) : nativePending ? t.sharing : t.share;
       get('sharePromptAcceptIcon').innerHTML = svg(install ? 'install' : 'share');
       get('sharePromptAccept').disabled = sharedPending;
       get('sharePromptAccept').title = install ? t.installPrivacy : t.share;
@@ -5038,20 +5363,23 @@ texts();
         if (preview.dataset.content !== markup) {preview.innerHTML = markup; preview.dataset.content = markup;}
       }
       get('sharePromptLinkLabel').textContent = guide ? t.link : t.shareContent;
-      const manualText = guide ? CONFIG.shareURL : shareMessage();
+      const manualText = guide ? installURL : shareMessage();
       if (get('sharePromptLink').value !== manualText) get('sharePromptLink').value = manualText;
       get('sharePromptLink').rows = guide ? 2 : 5;
       get('sharePromptStatus').hidden = !statusKey; get('sharePromptStatus').textContent = t[statusKey] || '';
       if (guide) paintGuide();
     }
     function tick() {
+      const changedDay=syncDaily();
+      if(changedDay && dialog.open) closePrompt('new-day',false);
       if (dialog.open && !sharedPending) {
         const blocked = blockReason(true);
         // Keep instructions available when a user opens the real website in a
         // new tab. Do not keep a prompt over playback or another app panel.
         if (blocked && blocked !== 'editing' && !((view === 'guide' || returningFromShare) && blocked === 'background')) closePrompt('interrupted', false);
       }
-      if (!dialog.open && total() > nextAt) openPrompt();
+      const next=eligibleKind();
+      if (!dialog.open && next && total()>=nextThreshold(next) && total()>=daily.notBeforeMs) openPrompt();
       if (now() - lastPersist >= CONFIG.persistEveryMs) persist();
     }
     function noteActivity(event) {
@@ -5061,16 +5389,15 @@ texts();
     }
     for (const type of ['pointerdown','keydown','input','click']) document.addEventListener(type,noteActivity,{capture:true,passive:true});
     document.addEventListener('visibilitychange', () => {
+      syncDaily(true);
+      countingForeground=!document.hidden;
       if (document.hidden) {
-        if (visibleSince !== null) { elapsed += Math.max(0,now()-visibleSince); visibleSince = null; }
         if (dialog.open && !sharedPending && view !== 'guide' && !returningFromShare) closePrompt('interrupted',false);
-      } else {
-        if (visibleSince === null) visibleSince = now(); lastActivity = now();
-      }
-      persist();
+      } else {lastActivity=now();}
     });
-    window.addEventListener('pagehide', () => { if (visibleSince !== null) { elapsed += Math.max(0,now()-visibleSince); visibleSince = null; } persist(); });
-    window.addEventListener('pageshow', () => { if (!document.hidden && visibleSince === null) visibleSince = now(); });
+    window.addEventListener('pagehide', () => {syncDaily(true);countingForeground=false;});
+    window.addEventListener('pageshow', () => {syncDaily();countingForeground=!document.hidden;lastActivity=now();});
+    window.addEventListener('storage', event => {if(event.key===CONFIG.dailyKey)syncDaily();});
     window.addEventListener('appinstalled', () => { installedInThisTab = true; });
     for (const id of ['sharePromptLater','sharePromptClose','spGuideDone']) get(id).addEventListener('click', () => closePrompt('later'));
     dialog.addEventListener('cancel', e => { e.preventDefault(); closePrompt('later'); });
@@ -5100,7 +5427,7 @@ texts();
     async function copyLink(token, forGuide = false) {
       // Installation help still copies only the address; sharing copies the invitation.
       richManual = false;
-      const content = forGuide ? CONFIG.shareURL : shareMessage();
+      const content = forGuide ? installURL : shareMessage();
       let timer;
       try {
         if (!navigator.clipboard?.writeText || !window.isSecureContext) throw Error('clipboard unavailable');
@@ -5185,7 +5512,7 @@ texts();
     });
     get('sharePromptAccept').addEventListener('click', () => {
       if (sharedPending) return;
-      if (currentKind === 'install') { showGuide(); return; }
+      if (currentKind === 'install') { requestInstall(); return; }
       if (currentKind !== 'share' || view !== 'prompt') return;
       if (!nativeShare()) {
         statusKey = 'fallback'; response = 'share-unavailable'; paint();
@@ -5207,7 +5534,7 @@ texts();
       // Apps may still display the address or omit accompanying text; the
       // existing Copy invitation action preserves an HTML anchor plus plain text.
       // Never pass a fake HTML/Markdown link as plain text and claim it is rich.
-      try { promise = navigator.share({title:copy().useNow,text:copy().shareText,url:CONFIG.shareURL}); }
+      try { promise = navigator.share({title:copy().useNow,text:invitationText(),url:CONFIG.shareURL}); }
       catch (error) {
         finish(error?.name === 'AbortError' ? 'cancelled' : 'fallback', 'share-unavailable');
         return;
@@ -5220,9 +5547,20 @@ texts();
           error?.name === 'AbortError' ? 'share-cancelled' : 'share-unavailable');
       });
     });
+    get('spInstallNow').addEventListener('click',requestInstall);
+    installation.onChange(paint);
     window.TempoliveI18n?.onChange(paint);
     window.TempoliveSharePrompt = Object.freeze({
-      snapshot: () => ({version:'2.2.1',thresholdMs:CONFIG.thresholdMs,foregroundMs:Math.floor(total()),nextAtMs:Math.floor(nextAt),remainingMs:Math.max(0,Math.ceil(nextAt-total())),nextKind:eligibleKind(),shownCount,shown:shownCount>0,open:dialog.open,currentKind,view,platform,browser,response,blockedBy:blockReason(),storageAvailable,sharing:sharedPending,shareURL:CONFIG.shareURL,standalone:isStandalone()})
+      snapshot: () => {
+        syncDaily();const next=eligibleKind(),at=nextThreshold(next);
+        return {version:'2.3.1-daily-app5-share10',day:daily.day,
+          installAtMs:CONFIG.installAtMs,shareAtMs:CONFIG.shareAtMs,
+          foregroundMs:Math.floor(total()),nextAtMs:Number.isFinite(at)?at:null,
+          remainingMs:next?Math.max(0,Math.ceil(Math.max(at,daily.notBeforeMs)-total())):null,
+          nextKind:next,shownToday:{...daily.shown},shownCount:Number(daily.shown.install)+Number(daily.shown.share),
+          shown:daily.shown.install||daily.shown.share,open:dialog.open,currentKind,view,platform,browser,response,
+          blockedBy:blockReason(),storageAvailable,sharing:sharedPending,shareURL:CONFIG.shareURL,standalone:isStandalone()};
+      }
     });
     paint(); setInterval(tick,CONFIG.pollMs);
   }
