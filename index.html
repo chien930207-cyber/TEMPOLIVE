@@ -60,9 +60,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.4.3">
-<meta name="tempolive-version" content="2.4.3">
-<meta name="tempolive-build" content="2.4.3-approved-stage-local-notes">
+<meta name="application-version" content="2.4.4">
+<meta name="tempolive-version" content="2.4.4">
+<meta name="tempolive-build" content="2.4.4-lockscreen-controls">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
@@ -2419,7 +2419,7 @@ class AudioEngine{
     try{
       if(navigator.audioSession){
         if(navigator.audioSession.type!=='playback')navigator.audioSession.type='playback';
-        if(navigator.audioSession.type==='playback'){this.sessionMode='playback';this.mediaGateNeeded=false;this.mediaGate?.pause();return;}
+        if(navigator.audioSession.type==='playback'){this.sessionMode='playback';this.mediaGateNeeded=false;return;}
       }
     }catch(e){/* Restricted embedded browsers may expose, but reject, this API. */}
     const appleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
@@ -2427,9 +2427,10 @@ class AudioEngine{
   }
   createMediaGate(){
     if(this.mediaGate)return;
-    // One second of PCM silence. No oscillators, network files or microphone.
+    // Ten seconds of digital silence for the native media-control carrier.
+    // It is never the beat clock or an extra audible metronome.
     // Do NOT use muted=true or volume=0: older iOS then stays on the ringer path.
-    const rate=22050,bytes=rate*2,buffer=new ArrayBuffer(44+bytes),view=new DataView(buffer);
+    const rate=22050,bytes=rate*2*10,buffer=new ArrayBuffer(44+bytes),view=new DataView(buffer);
     const text=(offset,value)=>{for(let i=0;i<value.length;i++)view.setUint8(offset+i,value.charCodeAt(i));};
     text(0,'RIFF');view.setUint32(4,36+bytes,true);text(8,'WAVE');text(12,'fmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,1,true);view.setUint32(24,rate,true);view.setUint32(28,rate*2,true);view.setUint16(32,2,true);view.setUint16(34,16,true);text(36,'data');view.setUint32(40,bytes,true);
     const audio=document.createElement('audio');audio.id='mobilePlaybackGate';audio.hidden=true;audio.setAttribute('aria-hidden','true');audio.setAttribute('playsinline','');audio.setAttribute('webkit-playsinline','');audio.preload='auto';audio.loop=true;audio.muted=false;audio.volume=1;
@@ -2438,7 +2439,8 @@ class AudioEngine{
     audio.addEventListener('playing',()=>{renderAudioStatus();this.schedule();});
   }
   openMediaGate(){
-    if(!this.mediaGateNeeded)return Promise.resolve();
+    const required=this.mediaGateNeeded,controls=window.TempoliveMediaControls;
+    if(!required&&!controls?.usesCarrier())return Promise.resolve();
     this.createMediaGate();this.gateHoldUntil=wallNow()+1500;
     if(this.gatePlayPromise)return this.gatePlayPromise;
     if(!this.mediaGate.paused)return Promise.resolve();
@@ -2485,7 +2487,8 @@ class AudioEngine{
     // before the first await. Audio permission never blocks room networking.
     this.configurePlaybackSession();
     if(!this.ctx||this.ctx.state==='closed')this.createContext();
-    const mediaReady=this.openMediaGate();
+    // Failure of the optional media-control carrier must not stop real audio.
+    const mediaReady=this.mediaGateNeeded?this.openMediaGate():this.openMediaGate().catch(()=>{});
     if(this.ctx.state!=='running'&&!this.resumePromise){
       const pending=audioDeadline(this.ctx.resume(),'\u700f\u89bd\u5668\u5c1a\u672a\u5141\u8a31\u64ad\u653e\uff0c\u8acb\u518d\u9ede\u4e00\u6b21\u958b\u59cb\u6216\u300c\u555f\u7528\u672c\u6a5f\u8072\u97f3\u300d\u3002');
       this.resumePromise=pending;const clear=()=>{if(this.resumePromise===pending)this.resumePromise=null;};pending.then(clear,clear);
@@ -2875,8 +2878,8 @@ async function togglePlay(){
   if(desiredEvent().playing){stopTransport();return;}
   return startPlayback();
 }
-async function startPlayback(){
-  if(room.role==='guest'||room.role==='connecting'||document.hidden||engine.gameOutputSuppressed)return;
+async function startPlayback({fromMediaSession=false}={}){
+  if(room.role==='guest'||room.role==='connecting'||(document.hidden&&!fromMediaSession)||engine.gameOutputSuppressed)return;
   if(room.startPending)return;
   if(desiredEvent().playing){
     if(!engine.isReady())try{await engine.ensure();engine.schedule();}catch(_){toast(localText('needs'));}
@@ -3356,7 +3359,7 @@ function renderControls(){
   I18N.bindAttr($('playBtn'),'aria-label',()=>$('playBtn').textContent.trim());
   I18N.set($('modeText'),follower?'團隊收聽':room.role==='host'?'房間主持':busy?'連線中':TEXT.solo);
   if(room.startPending){setIcon($('playBtn'),'stop');I18N.bind($('playBtn').querySelector('span'),()=>syncText('cancel'));$('playBtn').setAttribute('aria-label',syncText('cancel'));}
-  renderAudioStatus();renderSongs();renderRecoveryControl();
+  renderAudioStatus();renderSongs();renderRecoveryControl();window.TempoliveMediaControls?.refresh();
 }
 function renderAudio(){
   if(!$('tone').options.length){for(const [key,spec] of Object.entries(AUDIO_TONES))$('tone').append(I18N.option(spec.label,key));}
@@ -3373,6 +3376,7 @@ function renderAudio(){
 function renderAudioStatus(){
   const follower=room.role==='guest',needAudio=!engine.isReady()&&(follower||desiredEvent().playing);
   if(follower&&needAudio&&!state.mute&&state.volume>0)guestAudioRecoveryRequired=true;
+  window.TempoliveMediaControls?.refresh();
   // v1.16: no explanatory banner above the metronome. Actual local audio
   // recovery remains on the existing center button and the volume/mute button.
 }
@@ -4884,6 +4888,166 @@ texts();
 })();
 
 /* END tempolive-media-branding */
+
+;
+/* BEGIN tempolive-media-controls */
+/* v2.4.4: OS lock-screen / Control Center commands.
+   Only explicit MediaSession actions may operate the shared host transport.
+   A media-element pause, AudioContext suspension or lost audio focus NEVER
+   calls stopTransport. A guest Pause affects only that guest's local output.
+   The optional silent HTMLAudioElement helps expose native media controls;
+   beats and LIVE speech keep their existing AudioContext/output clock.
+   A closed/killed page or OS-owned audio cannot be overridden by this API.
+   https://www.w3.org/TR/mediasession/
+   https://web.dev/articles/media-session */
+(()=>{
+ 'use strict';
+ const session=navigator.mediaSession;
+ if(!session||typeof session.setActionHandler!=='function')return;
+ const registrations={},boundContexts=new WeakSet(),boundGates=new WeakSet();
+ let serial=0,pending=false,seenPlayback=false,queued=false,lastAction='',lastError='';
+ let playTask=null,carrierAttemptAt=-Infinity,carrierPending=false,refreshTimer=0,lastRequested=false;
+ const isGame=()=>engine.gameOutputSuppressed||!!document.getElementById('rhythmGameDialog')?.open;
+ const connectedRole=()=>room.role==='solo'||room.role==='host'||room.role==='guest';
+ const requested=()=>connectedRole()&&!isGame()&&!state.mute&&state.volume>0&&
+   (desiredEvent().playing||room.startPending||pending);
+ const supported=()=>!!registrations.play&&!!registrations.pause;
+ function stopCarrier(){
+   // Keep src/metadata and handlers so native Play can resume the same session.
+   engine.stopMediaGate();
+ }
+ function reportError(error){
+   lastError=error?.name||'AudioUnavailable';
+   if(!document.hidden)toast(localText('system'));
+   renderRecoveryControl();
+ }
+ function bindAudio(){
+   const ctx=engine.ctx,gate=engine.mediaGate;
+   if(ctx&&!boundContexts.has(ctx)){
+     boundContexts.add(ctx);ctx.addEventListener('statechange',refresh);
+   }
+   if(gate&&!boundGates.has(gate)){
+     boundGates.add(gate);
+     for(const name of ['play','playing','pause','ended','error'])gate.addEventListener(name,refresh);
+   }
+ }
+ function synchronize(){
+   queued=false;bindAudio();
+   if(desiredEvent().playing||room.startPending)seenPlayback=true;
+   const wants=requested(),wasRequested=lastRequested,ctx=engine.ctx;lastRequested=wants;
+   // Do not autoplay on initial visits. Carrier playback begins in the same
+   // page/system gesture as ensure(), or after an already-authorized room Start.
+   if(!wants){
+     if(engine.mediaGate&&!engine.mediaGate.paused&&!engine.previewVoices.length&&
+        !window.TempoliveBand?.snapshot()?.speaking&&(wasRequested||wallNow()>=engine.gateHoldUntil))stopCarrier();
+   }else if(ctx&&ctx.state==='running'&&navigator.audioSession?.state!=='interrupted'){
+     if(!engine.mediaGate||engine.mediaGate.paused){
+       if(!carrierPending&&performance.now()-carrierAttemptAt>3000){
+         carrierAttemptAt=performance.now();carrierPending=true;
+         try{
+           Promise.resolve(engine.openMediaGate()).catch(()=>{}).finally(()=>{
+             carrierPending=false;
+             // Late resolution after Pause must not re-open a silent player.
+             if(!requested())stopCarrier();
+             refresh();
+           });
+         }catch(_){carrierPending=false;}
+       }
+     }
+   }
+   const playing=wants&&engine.isReady()&&navigator.audioSession?.state!=='interrupted'&&
+     (room.role!=='guest'||room.synced);
+   const playbackState=playing?'playing':seenPlayback?'paused':'none';
+   try{if(session.playbackState!==playbackState)session.playbackState=playbackState;}
+   catch(error){lastError=error?.name||'PlaybackStateError';}
+   // No made-up progress/duration for the metronome's indefinitely running beat.
+   // Metadata remains the original TEMPOLIVE name and original Logo.
+ }
+ function refresh(){
+   if(queued)return;queued=true;queueMicrotask(synchronize);
+ }
+ function refreshSoon(){
+   clearTimeout(refreshTimer);refreshTimer=setTimeout(refresh,80);refresh();
+ }
+ function play(){
+   if(isGame()||!connectedRole())return Promise.resolve(false);
+   if(playTask)return playTask;
+   const token=++serial,generation=room.generation,role=room.role;
+   lastAction='play';lastError='';pending=true;seenPlayback=true;
+   // Never raise the user's volume or resume a game to make the card "playing".
+   if(state.volume===0){pending=false;if(!document.hidden)toast(localText('zero'));refresh();return Promise.resolve(false);}
+   state.mute=false;engine.setVolume();
+   window.TempoliveMediaBranding?.refresh();
+   let task;
+   try{
+     if(role==='guest'){
+       // Join the existing phase, including while hidden. No host Start is sent.
+       const ready=(guestAudioRecoveryRequired&&desiredEvent().playing)?engine.recover():engine.ensure();
+       task=Promise.resolve(ready).then(()=>{
+         if(token!==serial||generation!==room.generation||role!==room.role)return false;
+         guestAudioRecoveryRequired=false;engine.setVolume();engine.schedule();
+         room.kickRecovery();room.sendLocalStatus();return true;
+       });
+     }else{
+       // Idempotent Play is not togglePlay(): duplicate OS events cannot Stop.
+       task=Promise.resolve(startPlayback({fromMediaSession:true})).then(()=>
+         token===serial&&generation===room.generation&&role===room.role&&desiredEvent().playing);
+     }
+   }catch(error){task=Promise.reject(error);}
+   const tracked=task.catch(error=>{if(token===serial)reportError(error);return false;}).finally(()=>{
+     if(playTask===tracked)playTask=null;
+     if(token===serial)pending=false;
+     if(!requested())stopCarrier();
+     renderAudio();renderControls();refresh();
+   });
+   playTask=tracked;refresh();return tracked;
+ }
+ function pause(){
+   if(isGame()||!connectedRole())return;
+   ++serial;pending=false;playTask=null;lastAction='pause';lastError='';seenPlayback=true;
+   // Cancel local retry before changing output. No generic media 'pause' event
+   // is interpreted as a host command; only this registered action is.
+   window.TempoliveAudioContinuity?.cancel('media-session-pause');
+   if(room.role==='guest'){
+     state.mute=true;engine.setVolume();
+     // Suspending a muted guest affects no room event and prevents the OS from
+     // classifying a silent, still-running AudioContext as active playback.
+     if(engine.ctx?.state==='running')try{engine.ctx.suspend().catch(()=>{});}catch(_){}
+     room.sendLocalStatus();
+   }else if(desiredEvent().playing||room.startPending){stopTransport();}
+   stopCarrier();
+   renderAudio();renderControls();refreshSoon();
+ }
+ for(const [name,handler] of [['play',play],['pause',pause],['stop',pause]]){
+   try{session.setActionHandler(name,handler);registrations[name]=true;}
+   catch(_){registrations[name]=false;}
+ }
+ // Seeking a silent carrier must not look like seeking the band's beat.
+ for(const name of ['seekbackward','seekforward','seekto','previoustrack','nexttrack']){
+   try{session.setActionHandler(name,null);}catch(_){}
+ }
+ try{session.setPositionState?.();}catch(_){}
+ for(const name of ['click','input'])document.addEventListener(name,refreshSoon,true);
+ document.addEventListener('visibilitychange',refreshSoon);
+ window.addEventListener('pageshow',refreshSoon);
+ // Reload/BFCache is local lifecycle only; it must never publish a group Pause.
+ window.addEventListener('pagehide',()=>{++serial;pending=false;playTask=null;clearTimeout(refreshTimer);});
+ navigator.audioSession?.addEventListener?.('statechange',refresh);
+ const game=document.getElementById('rhythmGameDialog');
+ if(game)new MutationObserver(refresh).observe(game,{attributes:true,attributeFilter:['open']});
+ window.TempoliveMediaControls=Object.freeze({
+   refresh,usesCarrier:supported,
+   snapshot:()=>({version:'2.4.4',supported:supported(),actions:{...registrations},
+     playbackState:session.playbackState,lastAction,error:lastError,pending,
+     role:room.role,localMute:state.mute,carrierCreated:!!engine.mediaGate,
+     carrierPlaying:!!engine.mediaGate&&!engine.mediaGate.paused})
+ });
+ // State updates survive a hidden-page Start/Pause; this timer is NOT a clock
+ // for the sound or a claim of background execution. Audio loops stay native.
+ setInterval(refresh,500);refresh();
+})();
+/* END tempolive-media-controls */
+
 
 ;
 /* BEGIN tempolive-app-shell */
