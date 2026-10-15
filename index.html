@@ -60,9 +60,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.4.4">
-<meta name="tempolive-version" content="2.4.4">
-<meta name="tempolive-build" content="2.4.4-lockscreen-controls">
+<meta name="application-version" content="2.4.5">
+<meta name="tempolive-version" content="2.4.5">
+<meta name="tempolive-build" content="2.4.5-lockscreen-unbounded">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
@@ -4891,7 +4891,7 @@ texts();
 
 ;
 /* BEGIN tempolive-media-controls */
-/* v2.4.4: OS lock-screen / Control Center commands.
+/* v2.4.5: OS lock-screen / Control Center commands; unbounded media timeline.
    Only explicit MediaSession actions may operate the shared host transport.
    A media-element pause, AudioContext suspension or lost audio focus NEVER
    calls stopTransport. A guest Pause affects only that guest's local output.
@@ -4907,11 +4907,55 @@ texts();
  const registrations={},boundContexts=new WeakSet(),boundGates=new WeakSet();
  let serial=0,pending=false,seenPlayback=false,queued=false,lastAction='',lastError='';
  let playTask=null,carrierAttemptAt=-Infinity,carrierPending=false,refreshTimer=0,lastRequested=false;
+ // The real metronome has no track length. Clearing position state alone lets
+ // the browser fall back to the ten-second silent carrier's duration/currentTime.
+ // Advertise unbounded media explicitly; never seek/reset the carrier or beat.
+ // A successful API call is not proof that a particular OS hides its time labels.
+ // https://www.w3.org/TR/mediasession/#the-mediapositionstate-dictionary
+ let timelineDirty=true,timelineOwned=false,timelineMode='not-set';
+ let timelineState='',timelineMetadata=null,timelineWrites=0,timelineError='';
+ let acceptsUnbounded=null;
  const isGame=()=>engine.gameOutputSuppressed||!!document.getElementById('rhythmGameDialog')?.open;
  const connectedRole=()=>room.role==='solo'||room.role==='host'||room.role==='guest';
  const requested=()=>connectedRole()&&!isGame()&&!state.mute&&state.volume>0&&
    (desiredEvent().playing||room.startPending||pending);
  const supported=()=>!!registrations.play&&!!registrations.pause;
+ function updateTimeline(){
+   if(typeof session.setPositionState!=='function'){
+     timelineMode='unavailable';timelineDirty=false;return;
+   }
+   if(isGame()){
+     // Release only this module's override; do not apply the metronome's
+     // unbounded position to the embedded game's media session.
+     if(timelineOwned){
+       try{session.setPositionState();timelineWrites++;timelineOwned=false;timelineMode='game';}
+       catch(error){timelineError=error?.name||'PositionStateError';}
+     }
+     timelineDirty=true;return;
+   }
+   if(!timelineDirty&&timelineState===session.playbackState&&timelineMetadata===session.metadata)return;
+   timelineDirty=false;timelineState=session.playbackState;timelineMetadata=session.metadata;
+   if(acceptsUnbounded!==false){
+     try{
+       // Infinity is the standard live/unbounded duration, not a fabricated
+       // recording length. No carrier currentTime or practice counter is sent.
+       // playbackRate must be nonzero; setting it to zero is invalid.
+       session.setPositionState({duration:Infinity,position:0,playbackRate:1});
+       acceptsUnbounded=true;timelineOwned=true;timelineMode='unbounded';
+       timelineWrites++;timelineError='';return;
+     }catch(error){
+       acceptsUnbounded=false;timelineError=error?.name||'PositionStateError';
+     }
+   }
+   // Older implementations may reject Infinity. Retain functioning Play/Pause;
+   // do not invent a zero-length track or remove the working audio carrier.
+   try{
+     session.setPositionState();timelineOwned=true;timelineMode='cleared-fallback';timelineWrites++;
+   }catch(error){
+     timelineMode='rejected';timelineError=error?.name||'PositionStateError';
+   }
+ }
+ function timelineChanged(){timelineDirty=true;refresh();}
  function stopCarrier(){
    // Keep src/metadata and handlers so native Play can resume the same session.
    engine.stopMediaGate();
@@ -4924,11 +4968,13 @@ texts();
  function bindAudio(){
    const ctx=engine.ctx,gate=engine.mediaGate;
    if(ctx&&!boundContexts.has(ctx)){
-     boundContexts.add(ctx);ctx.addEventListener('statechange',refresh);
+     boundContexts.add(ctx);timelineDirty=true;ctx.addEventListener('statechange',refresh);
    }
    if(gate&&!boundGates.has(gate)){
-     boundGates.add(gate);
-     for(const name of ['play','playing','pause','ended','error'])gate.addEventListener(name,refresh);
+     boundGates.add(gate);timelineDirty=true;
+     // Loading, resuming and a loop boundary can refresh the native element's
+     // information. Reassert the unbounded session then, not every audio tick.
+     for(const name of ['loadedmetadata','durationchange','play','playing','pause','ended','error','ratechange','seeked'])gate.addEventListener(name,timelineChanged);
    }
  }
  function synchronize(){
@@ -4960,14 +5006,15 @@ texts();
    const playbackState=playing?'playing':seenPlayback?'paused':'none';
    try{if(session.playbackState!==playbackState)session.playbackState=playbackState;}
    catch(error){lastError=error?.name||'PlaybackStateError';}
-   // No made-up progress/duration for the metronome's indefinitely running beat.
-   // Metadata remains the original TEMPOLIVE name and original Logo.
+   // Keep the same live timeline when paused; clearing it here would expose
+   // the finite carrier again. Name, Logo and actual audio timing are unchanged.
+   updateTimeline();
  }
  function refresh(){
    if(queued)return;queued=true;queueMicrotask(synchronize);
  }
  function refreshSoon(){
-   clearTimeout(refreshTimer);refreshTimer=setTimeout(refresh,80);refresh();
+   timelineDirty=true;clearTimeout(refreshTimer);refreshTimer=setTimeout(refresh,80);refresh();
  }
  function play(){
    if(isGame()||!connectedRole())return Promise.resolve(false);
@@ -5026,7 +5073,7 @@ texts();
  for(const name of ['seekbackward','seekforward','seekto','previoustrack','nexttrack']){
    try{session.setActionHandler(name,null);}catch(_){}
  }
- try{session.setPositionState?.();}catch(_){}
+ updateTimeline();
  for(const name of ['click','input'])document.addEventListener(name,refreshSoon,true);
  document.addEventListener('visibilitychange',refreshSoon);
  window.addEventListener('pageshow',refreshSoon);
@@ -5037,8 +5084,10 @@ texts();
  if(game)new MutationObserver(refresh).observe(game,{attributes:true,attributeFilter:['open']});
  window.TempoliveMediaControls=Object.freeze({
    refresh,usesCarrier:supported,
-   snapshot:()=>({version:'2.4.4',supported:supported(),actions:{...registrations},
+   snapshot:()=>({version:'2.4.5',supported:supported(),actions:{...registrations},
      playbackState:session.playbackState,lastAction,error:lastError,pending,
+     timelineMode,timelineWrites,timelineError,
+     reportedDuration:timelineMode==='unbounded'?'unbounded':null,
      role:room.role,localMute:state.mute,carrierCreated:!!engine.mediaGate,
      carrierPlaying:!!engine.mediaGate&&!engine.mediaGate.paused})
  });
