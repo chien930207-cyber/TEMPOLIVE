@@ -60,9 +60,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.4.5">
-<meta name="tempolive-version" content="2.4.5">
-<meta name="tempolive-build" content="2.4.5-lockscreen-unbounded">
+<meta name="application-version" content="2.4.6">
+<meta name="tempolive-version" content="2.4.6">
+<meta name="tempolive-build" content="2.4.6-live-lockscreen-source">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
@@ -2412,7 +2412,7 @@ class AudioEngine{
     this.gameOutputSuppressed=false;this.gameOutputGate=null;
     this.loops=new Map();this.loopSources=new Set();this.barBuffers=new Map();this.renderFloor=0;this.totalLoops=0;this.scheduling=false;
     this.ctx=null;this.master=null;this.limiter=null;this.entries=new Map();this.voices=new Set();this.worker=null;this.totalScheduled=0;this.dropped=0;this.noise=null;this.presence=null;this.buffers=new Map();this.previewVoices=[];this.levelNoticeShown=false;
-    this.sessionMode='system';this.mediaGate=null;this.mediaGateURL=null;this.mediaGateNeeded=false;this.gateHoldUntil=0;this.gatePlayPromise=null;this.resumePromise=null;this.recoverPromise=null;
+    this.sessionMode='system';this.mediaGate=null;this.mediaGateContext=null;this.mediaGateDestination=null;this.mediaGateSource=null;this.mediaGateMode='idle';this.mediaGateNeeded=false;this.gateHoldUntil=0;this.gatePlayPromise=null;this.resumePromise=null;this.recoverPromise=null;
   }
   configurePlaybackSession(){
     // Feature-detect: do not require this Safari API on Android or desktop.
@@ -2423,25 +2423,60 @@ class AudioEngine{
       }
     }catch(e){/* Restricted embedded browsers may expose, but reject, this API. */}
     const appleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-    this.mediaGateNeeded=appleMobile;this.sessionMode=appleMobile?'legacy-media':'system';
+    this.mediaGateNeeded=appleMobile&&this.mediaGateMode!=='unavailable';this.sessionMode=appleMobile?'legacy-media':'system';
+  }
+  disposeMediaGate(){
+    // Release only the silent carrier. Never touch the room or the beat timeline.
+    const audio=this.mediaGate,source=this.mediaGateSource,destination=this.mediaGateDestination;
+    this.mediaGate=null;this.mediaGateContext=null;this.mediaGateSource=null;
+    this.mediaGateDestination=null;this.gatePlayPromise=null;this.mediaGateMode='idle';
+    if(audio){try{audio.pause();audio.srcObject=null;audio.removeAttribute('src');audio.load();}catch(_){}audio.remove();}
+    if(source){try{source.stop();}catch(_){}try{source.disconnect();}catch(_){}}
+    if(destination){for(const track of destination.stream.getTracks())track.stop();try{destination.disconnect();}catch(_){}}
   }
   createMediaGate(){
-    if(this.mediaGate)return;
-    // Ten seconds of digital silence for the native media-control carrier.
-    // It is never the beat clock or an extra audible metronome.
-    // Do NOT use muted=true or volume=0: older iOS then stays on the ringer path.
-    const rate=22050,bytes=rate*2*10,buffer=new ArrayBuffer(44+bytes),view=new DataView(buffer);
-    const text=(offset,value)=>{for(let i=0;i<value.length;i++)view.setUint8(offset+i,value.charCodeAt(i));};
-    text(0,'RIFF');view.setUint32(4,36+bytes,true);text(8,'WAVE');text(12,'fmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,1,true);view.setUint32(24,rate,true);view.setUint32(28,rate*2,true);view.setUint16(32,2,true);view.setUint16(34,16,true);text(36,'data');view.setUint32(40,bytes,true);
-    const audio=document.createElement('audio');audio.id='mobilePlaybackGate';audio.hidden=true;audio.setAttribute('aria-hidden','true');audio.setAttribute('playsinline','');audio.setAttribute('webkit-playsinline','');audio.preload='auto';audio.loop=true;audio.muted=false;audio.volume=1;
-    audio.disableRemotePlayback=true;this.mediaGateURL=URL.createObjectURL(new Blob([buffer],{type:'audio/wav'}));audio.src=this.mediaGateURL;this.mediaGate=audio;document.body.append(audio);window.TempoliveAudioContinuity?.bindGate(audio);
-    audio.addEventListener('pause',()=>{if(desiredEvent().playing||room.role==='guest')renderAudioStatus();});
-    audio.addEventListener('playing',()=>{renderAudioStatus();this.schedule();});
+    // v2.4.6: a LOCAL live MediaStream, not a finite silent recording.
+    // Non-seekable media has no 10-second duration/current-position fallback.
+    // The real clicks/LIVE voice still go directly to ctx.destination unchanged.
+    const ctx=this.ctx;
+    if(this.mediaGate&&this.mediaGateContext===ctx&&this.mediaGateDestination?.stream.active)return this.mediaGate;
+    this.disposeMediaGate();
+    const audio=document.createElement('audio');
+    if(!ctx||ctx.state==='closed'||typeof ctx.createMediaStreamDestination!=='function'||
+       typeof ctx.createConstantSource!=='function'||!('srcObject' in audio)){
+      // No finite-file fallback: retain direct Web Audio instead of recreating
+      // the timer defect. Native card availability is browser/OS-controlled.
+      this.mediaGateMode='unavailable';this.mediaGateNeeded=false;return null;
+    }
+    let destination=null,source=null;
+    try{
+      destination=ctx.createMediaStreamDestination();
+      source=ctx.createConstantSource();source.offset.value=0;
+      source.connect(destination);source.start();
+      audio.id='mobilePlaybackGate';audio.hidden=true;audio.setAttribute('aria-hidden','true');
+      audio.setAttribute('playsinline','');audio.setAttribute('webkit-playsinline','');
+      audio.preload='none';audio.loop=false;audio.muted=false;audio.volume=1;
+      audio.disableRemotePlayback=true;audio.srcObject=destination.stream;
+      this.mediaGate=audio;this.mediaGateContext=ctx;
+      this.mediaGateDestination=destination;this.mediaGateSource=source;this.mediaGateMode='live-stream';
+      document.body.append(audio);window.TempoliveAudioContinuity?.bindGate(audio);
+      audio.addEventListener('pause',()=>{if(this.mediaGate===audio&&(desiredEvent().playing||room.role==='guest'))renderAudioStatus();});
+      audio.addEventListener('playing',()=>{if(this.mediaGate===audio){renderAudioStatus();this.schedule();}});
+      return audio;
+    }catch(error){
+      try{audio.pause();audio.srcObject=null;audio.remove();}catch(_){}
+      try{source?.stop();source?.disconnect();}catch(_){}
+      if(destination){for(const track of destination.stream.getTracks())track.stop();try{destination.disconnect();}catch(_){}}
+      this.mediaGate=null;this.mediaGateContext=null;this.mediaGateDestination=null;this.mediaGateSource=null;
+      this.mediaGateMode='unavailable';this.mediaGateNeeded=false;
+      return null;
+    }
   }
   openMediaGate(){
     const required=this.mediaGateNeeded,controls=window.TempoliveMediaControls;
     if(!required&&!controls?.usesCarrier())return Promise.resolve();
-    this.createMediaGate();this.gateHoldUntil=wallNow()+1500;
+    const gate=this.createMediaGate();if(!gate)return Promise.resolve();
+    this.gateHoldUntil=wallNow()+1500;
     if(this.gatePlayPromise)return this.gatePlayPromise;
     if(!this.mediaGate.paused)return Promise.resolve();
     let play;
@@ -2504,7 +2539,7 @@ class AudioEngine{
     // silent after the page loses foreground. A fresh context is the explicit,
     // user-gesture recovery path; the shared transport state stays untouched.
     this.configurePlaybackSession();window.TempoliveBand?.cancelLocalSpeech?.();this.stopAll();this.cancelPreview();this.entries.clear();
-    const old=this.ctx;
+    const old=this.ctx;this.disposeMediaGate();
     if(old){this.ctx=null;this.master=null;this.limiter=null;this.presence=null;this.buffers.clear();this.barBuffers.clear();this.resumePromise=null;this.gatePlayPromise=null;try{old.close().catch(()=>{});}catch(e){}}
     const pending=this.ensure().then(ctx=>{this.invalidate();this.schedule();room.sendLocalStatus();return ctx;});
     this.recoverPromise=pending;const clear=()=>{if(this.recoverPromise===pending)this.recoverPromise=null;};pending.then(clear,clear);return pending;
@@ -4907,14 +4942,10 @@ texts();
  const registrations={},boundContexts=new WeakSet(),boundGates=new WeakSet();
  let serial=0,pending=false,seenPlayback=false,queued=false,lastAction='',lastError='';
  let playTask=null,carrierAttemptAt=-Infinity,carrierPending=false,refreshTimer=0,lastRequested=false;
- // The real metronome has no track length. Clearing position state alone lets
- // the browser fall back to the ten-second silent carrier's duration/currentTime.
- // Advertise unbounded media explicitly; never seek/reset the carrier or beat.
- // A successful API call is not proof that a particular OS hides its time labels.
- // https://www.w3.org/TR/mediasession/#the-mediapositionstate-dictionary
- let timelineDirty=true,timelineOwned=false,timelineMode='not-set';
- let timelineState='',timelineMetadata=null,timelineWrites=0,timelineError='';
- let acceptsUnbounded=null;
+ // v2.4.6: remove the finite carrier AND the synthetic position override.
+ // The OS owns its card layout; no seconds counter or seekable file is supplied.
+ let timelineDirty=true,timelineMode='not-set',timelineState='',timelineGate=null;
+ let timelineMetadata=null,timelineWrites=0,timelineError='';
  const isGame=()=>engine.gameOutputSuppressed||!!document.getElementById('rhythmGameDialog')?.open;
  const connectedRole=()=>room.role==='solo'||room.role==='host'||room.role==='guest';
  const requested=()=>connectedRole()&&!isGame()&&!state.mute&&state.volume>0&&
@@ -4924,36 +4955,19 @@ texts();
    if(typeof session.setPositionState!=='function'){
      timelineMode='unavailable';timelineDirty=false;return;
    }
-   if(isGame()){
-     // Release only this module's override; do not apply the metronome's
-     // unbounded position to the embedded game's media session.
-     if(timelineOwned){
-       try{session.setPositionState();timelineWrites++;timelineOwned=false;timelineMode='game';}
-       catch(error){timelineError=error?.name||'PositionStateError';}
-     }
-     timelineDirty=true;return;
-   }
-   if(!timelineDirty&&timelineState===session.playbackState&&timelineMetadata===session.metadata)return;
-   timelineDirty=false;timelineState=session.playbackState;timelineMetadata=session.metadata;
-   if(acceptsUnbounded!==false){
-     try{
-       // Infinity is the standard live/unbounded duration, not a fabricated
-       // recording length. No carrier currentTime or practice counter is sent.
-       // playbackRate must be nonzero; setting it to zero is invalid.
-       session.setPositionState({duration:Infinity,position:0,playbackRate:1});
-       acceptsUnbounded=true;timelineOwned=true;timelineMode='unbounded';
-       timelineWrites++;timelineError='';return;
-     }catch(error){
-       acceptsUnbounded=false;timelineError=error?.name||'PositionStateError';
-     }
-   }
-   // Older implementations may reject Infinity. Retain functioning Play/Pause;
-   // do not invent a zero-length track or remove the working audio carrier.
+   if(isGame()){timelineDirty=true;return;}
+   if(!timelineDirty&&timelineState===session.playbackState&&
+      timelineMetadata===session.metadata&&timelineGate===engine.mediaGate)return;
+   timelineDirty=false;timelineState=session.playbackState;
+   timelineMetadata=session.metadata;timelineGate=engine.mediaGate;
    try{
-     session.setPositionState();timelineOwned=true;timelineMode='cleared-fallback';timelineWrites++;
-   }catch(error){
-     timelineMode='rejected';timelineError=error?.name||'PositionStateError';
-   }
+     // A live srcObject is intrinsically non-seekable. Clear the old synthetic
+     // position so WebKit may leave duration/current time unspecified in its
+     // native Now Playing info. Do NOT report position:0/rate:1 repeatedly:
+     // that would introduce another extrapolated elapsed-time clock.
+     session.setPositionState();timelineWrites++;timelineError='';
+     timelineMode=engine.mediaGateMode==='live-stream'?'live-source-no-position':'no-position';
+   }catch(error){timelineMode='rejected';timelineError=error?.name||'PositionStateError';}
  }
  function timelineChanged(){timelineDirty=true;refresh();}
  function stopCarrier(){
@@ -5084,10 +5098,12 @@ texts();
  if(game)new MutationObserver(refresh).observe(game,{attributes:true,attributeFilter:['open']});
  window.TempoliveMediaControls=Object.freeze({
    refresh,usesCarrier:supported,
-   snapshot:()=>({version:'2.4.5',supported:supported(),actions:{...registrations},
+   snapshot:()=>({version:'2.4.6',supported:supported(),actions:{...registrations},
      playbackState:session.playbackState,lastAction,error:lastError,pending,
      timelineMode,timelineWrites,timelineError,
-     reportedDuration:timelineMode==='unbounded'?'unbounded':null,
+     reportedDuration:null,carrierMode:engine.mediaGateMode,
+     carrierDuration:engine.mediaGate?.duration===Infinity?'unbounded':Number.isFinite(engine.mediaGate?.duration)?engine.mediaGate.duration:null,
+     carrierSeekableRanges:engine.mediaGate?.seekable?.length??0,
      role:room.role,localMute:state.mute,carrierCreated:!!engine.mediaGate,
      carrierPlaying:!!engine.mediaGate&&!engine.mediaGate.paused})
  });
