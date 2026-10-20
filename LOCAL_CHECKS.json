@@ -1,0 +1,57 @@
+{
+  "scope": "Local static and mocked integration tests only",
+  "results": [
+    {
+      "test": "YAML structure, push trigger, permission scope, and publication verification order",
+      "passed": true
+    },
+    {
+      "test": "JavaScript syntax checks for 5 inline scripts",
+      "passed": true
+    },
+    {
+      "test": "Branch-based Pages detection without changing settings",
+      "passed": true
+    },
+    {
+      "test": "Unsupported publishing source aborts without overwriting state or site",
+      "passed": true
+    },
+    {
+      "test": "Unexpected ZIP paths rejected before touching website files",
+      "passed": true
+    },
+    {
+      "test": "Checksum mismatch leaves original website unchanged",
+      "passed": true
+    },
+    {
+      "test": "Successful staging writes exactly two files and preserves originals in backup",
+      "passed": true
+    },
+    {
+      "test": "Concurrent changes on main prevent all commit/push operations",
+      "passed": true
+    },
+    {
+      "test": "Commit is restricted to the validated files and never force-pushes",
+      "passed": true
+    },
+    {
+      "test": "Explicit Pages build request avoids relying on token-generated push events",
+      "passed": true
+    },
+    {
+      "test": "Public file checks validate exact hashes and disclose unverified listening",
+      "passed": true
+    },
+    {
+      "test": "Stale public website cannot produce a green success result",
+      "passed": true
+    }
+  ],
+  "actualNeuralAudioGeneratedHere": false,
+  "githubActionsRunOnUserRepository": false,
+  "pronunciationListeningVerified": false,
+  "iPhoneBluetoothTested": false
+}

@@ -1,0 +1,105 @@
+name: TEMPOLIVE LIVE Auto Fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tempolive-natural-voices.yml'
+      - '.github/tempolive-live/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: tempolive-live-auto-fix
+  cancel-in-progress: false
+
+jobs:
+  fix-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+    steps:
+      - name: Read the current site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check source compatibility before making any changes
+        run: python .github/tempolive-live/build.py --preflight
+
+      - name: Check the existing Pages configuration
+        id: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python .github/tempolive-live/automate.py preflight
+
+      - name: Restore previously generated recordings for safe retries
+        uses: actions/cache@v4
+        with:
+          path: .voice-build-cache
+          key: tempolive-neural-sentences-r1-${{ hashFiles('.github/tempolive-live/build.py') }}
+          restore-keys: |
+            tempolive-neural-sentences-r1-
+
+      - name: Install the speech client and audio decoder
+        run: |
+          python -m pip install --disable-pip-version-check 'edge-tts>=7.2,<8'
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Generate and decode-check all 297 recordings
+        run: python .github/tempolive-live/build.py
+
+      - name: Verify checksums and back up the two original files
+        run: python .github/tempolive-live/automate.py stage
+
+      - name: Keep a backup, listening preview, and validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: TEMPOLIVE-LIVE-backup-and-results
+          path: |
+            voice-build-output/TEMPOLIVE-before-LIVE-fix.zip
+            voice-build-output/TEMPOLIVE-live-natural-upload.zip
+            voice-build-output/voice-preview.html
+            voice-build-output/audio-checks.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Automatically update only the two website files
+        run: python .github/tempolive-live/automate.py commit
+
+      - name: Publish using the existing branch-based Pages setting
+        if: steps.site.outputs.mode == 'legacy'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python .github/tempolive-live/automate.py legacy-build
+
+      - name: Prepare the site for an existing Actions-based Pages setting
+        if: steps.site.outputs.mode == 'workflow'
+        id: artifact
+        run: python .github/tempolive-live/automate.py pages-artifact
+
+      - name: Upload the site artifact
+        if: steps.site.outputs.mode == 'workflow'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.artifact.outputs.directory }}
+
+      - name: Publish using the existing Actions-based Pages setting
+        if: steps.site.outputs.mode == 'workflow'
+        uses: actions/deploy-pages@v4
+
+      - name: Confirm the public site really serves the new files
+        run: python .github/tempolive-live/automate.py verify
