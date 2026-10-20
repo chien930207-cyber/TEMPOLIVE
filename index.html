@@ -60,9 +60,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.4.6">
-<meta name="tempolive-version" content="2.4.6">
-<meta name="tempolive-build" content="2.4.6-live-lockscreen-source">
+<meta name="application-version" content="2.4.8">
+<meta name="tempolive-version" content="2.4.8">
+<meta name="tempolive-build" content="2.4.8-voice-phrases">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
@@ -2489,7 +2489,7 @@ class AudioEngine{
   closeIdleMediaGate(){
     if(!this.mediaGate||this.mediaGate.paused||wallNow()<this.gateHoldUntil)return;
     // Guests keep their authorized media route ready for remote host starts.
-    if(room.role==='guest'||room.role==='connecting'||desiredEvent().playing||currentEvent().playing||this.voices.size)return;
+    if(room.role==='guest'||room.role==='connecting'||desiredEvent().playing||currentEvent().playing||this.voices.size||window.TempoliveBand?.snapshot()?.speaking)return;
     this.mediaGate.pause();
   }
   stopMediaGate(){this.gateHoldUntil=0;this.mediaGate?.pause();}
@@ -4059,34 +4059,79 @@ function announceStatus(){const t=performance.now();if(t-lastStatusAt<150)return
    is requested, arbitrary custom text therefore uses a spoken screen alert.
    It is never silently passed to system TTS over a running metronome. */
 const SafeBandVoice=(()=>{
- let pack=null,loading=null;const buffers=new Map();
- const url=new URL('tempolive-live-voices.json',document.baseURI).href;
+ const VERSION=2,REVISION='2.4.8-mandarin-clauses-r1';
+ const LANGUAGE=['zh-Hant','en','de'];
+ const BASIC=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound','member','says','all','fast','slow','more','less','monitor-up','monitor-down','help','custom','test'];
+ const ROLE=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound','member'];
+ const ACTION=['fast','slow','more','less','monitor-up','monitor-down','help','custom'];
+ const url=new URL('tempolive-live-voices.json',document.baseURI);url.searchParams.set('v',REVISION);
+ let pack=null,loading=null,lastError='';const clips=new Map(),utterances=new Map();
+ const language=v=>LANGUAGE.includes(v)?v:'zh-Hant';
  function load(){
   if(pack)return Promise.resolve(pack);if(loading)return loading;
-  const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),5000);
-  loading=fetch(url,{cache:'no-cache',signal:abort.signal}).then(r=>{if(!r.ok)throw Error('Voice HTTP '+r.status);return r.json();})
-    .then(data=>{if(data.version!==1||!data.voices)throw Error('Invalid voice pack');pack=data;return data;})
-    .finally(()=>{clearTimeout(timer);loading=null;});
-  return loading;
+  const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),15000);
+  const task=fetch(url.href,{cache:'no-cache',signal:abort.signal}).then(r=>{
+   if(!r.ok)throw Error('VOICE_HTTP_'+r.status);return r.json();
+  }).then(data=>{
+   if(data.version!==VERSION||data.revision!==REVISION||data.format!=='audio/mpeg')throw Error('VOICE_UPDATE_REQUIRED');
+   const check=(lang,key)=>{const x=data.voices?.[lang]?.[key];if(typeof x!=='string'||x.length<100)throw Error('VOICE_CLIP_MISSING');};
+   for(const lang of LANGUAGE)for(const key of BASIC)check(lang,key);
+   for(const role of ROLE)check('zh-Hant','from:'+role);
+   for(const target of [...ROLE,'all'])for(const action of ACTION)check('zh-Hant','to:'+target+':'+action);
+   pack=data;lastError='';return data;
+  }).catch(error=>{lastError=error?.message||'VOICE_LOAD_FAILED';throw error;}).finally(()=>{clearTimeout(timer);if(loading===task)loading=null;});
+  loading=task;return task;
  }
- async function prepare(keys){
-  const context=engine.ctx;if(!context||!engine.isReady())throw Error('Audio not ready');
-  const data=await load(),lang=I18N.lang==='en'?'en':I18N.lang==='de'?'de':'zh-Hant';
-  return Promise.all(keys.map(async key=>{
-   const id=context.sampleRate+':'+lang+':'+key;if(buffers.has(id))return buffers.get(id);
-   const encoded=data.voices[lang]?.[key];if(!encoded)throw Error('Missing voice clip');
-   const raw=atob(encoded),bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
-   const buffer=await context.decodeAudioData(bytes.buffer);buffers.set(id,buffer);return buffer;
+ function trimCache(cache,max){while(cache.size>max)cache.delete(cache.keys().next().value);}
+ async function prepare(keys,chosenLanguage=I18N.lang,context=engine.ctx){
+  const lang=language(chosenLanguage),data=await load();
+  if(!context||context.state==='closed')throw Error('VOICE_CONTEXT_CLOSED');
+  return Promise.all(keys.map(key=>{
+   const cacheKey=context.sampleRate+':'+lang+':'+key;
+   if(clips.has(cacheKey))return clips.get(cacheKey);
+   const task=Promise.resolve().then(()=>{
+    const encoded=data.voices[lang]?.[key];if(!encoded)throw Error('VOICE_CLIP_MISSING');
+    const raw=atob(encoded),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
+    return context.decodeAudioData(bytes.buffer);
+   }).then(buffer=>{
+    if(!buffer.numberOfChannels||!Number.isFinite(buffer.duration)||buffer.duration<=0||buffer.duration>30)throw Error('VOICE_BAD_AUDIO');
+    return buffer;
+   }).catch(error=>{if(clips.get(cacheKey)===task)clips.delete(cacheKey);lastError=error?.message||'VOICE_DECODE_FAILED';throw error;});
+   clips.set(cacheKey,task);trimCache(clips,48);return task;
   }));
  }
- const instruments=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound'];
- function instrument(name){const clean=String(name||'').replace(/\s*\d+$/,'').replace(/\u624b$/,'');const index=C.instruments.findIndex(x=>x===clean||x===name);return index<0?'member':instruments[index];}
- function keys(message){
-  const phrase=C.phrases.find(p=>p.say===message.text);
-  const all=message.targetLabel==='\u6240\u6709\u4eba'||message.targetLabel==='\u5168\u90e8\u4eba';
-  return [instrument(message.senderLabel),'says',all?'all':instrument(message.targetLabel),phrase?.id||'custom'];
+ async function sentence(keys,chosenLanguage,context){
+  // Assemble first, then play ONE source at its natural rate from offset zero.
+  // No JS-timer handoffs, duration caps or trimming of word onsets/tails.
+  const lang=language(chosenLanguage),id=context.sampleRate+':'+lang+':'+keys.join('|');
+  if(utterances.has(id))return utterances.get(id);
+  const buffers=await prepare(keys,lang,context),rate=context.sampleRate;
+  const lead=Math.round(.18*rate),gap=Math.round(.04*rate),tail=Math.round(.12*rate);
+  const length=lead+tail+buffers.reduce((n,b)=>n+b.length,0)+gap*Math.max(0,buffers.length-1);
+  const combined=context.createBuffer(1,length,rate),out=combined.getChannelData(0);let offset=lead;
+  for(const buffer of buffers){
+   for(let channel=0;channel<buffer.numberOfChannels;channel++){
+    const data=buffer.getChannelData(channel);for(let i=0;i<data.length;i++)out[offset+i]+=data[i]/buffer.numberOfChannels;
+   }
+   offset+=buffer.length+gap;
+  }
+  utterances.set(id,combined);trimCache(utterances,8);return combined;
  }
- return {load,prepare,keys,ready:()=>!!pack};
+ function instrument(label,explicit=''){
+  for(const name of [explicit,label]){
+   const clean=String(name||'').replace(/\s*\d+$/,'').replace(/\u624b$/,'');
+   const index=C.instruments.findIndex(x=>x===clean||x===name);if(index>=0)return ROLE[index];
+  }
+  return 'member';
+ }
+ function keys(message,chosenLanguage=I18N.lang){
+  const phrase=C.phrases.find(p=>p.id===message.phraseId)||C.phrases.find(p=>p.say===message.text);
+  const all=['\u6240\u6709\u4eba','\u5168\u90e8\u4eba'].includes(message.targetLabel);
+  const sender=instrument(message.senderLabel,message.senderInstrument),target=all?'all':instrument(message.targetLabel,message.targetInstrument);
+  const action=phrase?.id||'custom';
+  return language(chosenLanguage)==='zh-Hant'?['from:'+sender,'to:'+target+':'+action]:[sender,'says',target,action];
+ }
+ return {load,prepare,sentence,keys,ready:()=>!!pack,snapshot:()=>({revision:pack?.revision||null,expectedRevision:REVISION,loaded:!!pack,error:lastError,decodedClips:clips.size,cachedSentences:utterances.size})};
 })();
 
 class Speaker{
@@ -4097,9 +4142,9 @@ class Speaker{
  status(){if(!this.available())return '不支援語音';if(!prefs.autoSpeak)return '僅顯示文字';if(!prefs.volume)return '語音靜音';if(this.problem)return '需要重新試聽';return this.armed?'語音已啟用':'待啟用語音';}
  arm(){
   if(this.active)return;
-  this.problem='';this.armed=true;
+  this.problem='';const language=I18N.lang;
   const pending=engine.ensure();SafeBandVoice.load().catch(()=>{});
-  pending.then(()=>this.enqueue({test:true,safeKeys:['test'],text:'',language:I18N.lang,expiresAt:now()+C.ttl},true)).catch(()=>{this.problem=localText('needs');renderVoiceState();});
+  pending.then(()=>{this.armed=true;this.enqueue({test:true,safeKeys:['test'],text:'',language,expiresAt:now()+C.ttl},true);}).catch(()=>{this.problem=localText('needs');renderVoiceState();});
  }
  enqueue(item,manual=false){
   if(!this.available()){this.reject(item,'failed','此瀏覽器不支援語音合成，仍可接收文字。');return;}
@@ -4112,28 +4157,39 @@ class Speaker{
  }
  reject(item,state,message=''){if(item.id)receipt(item.id,state);if(item.test||message){this.problem=message||'語音無法播放';notify(this.problem);}renderVoiceState();announceStatus();}
  pumpSafe(item){
-  const job={item,safe:true,done:false,sources:[],context:engine.ctx,finish:null};this.active=job;
+  const context=engine.ctx,job={item,safe:true,done:false,sources:[],context,finish:null,timer:null,listener:null,gain:null,endsAt:null};this.active=job;
+  const failedText=(code)=>item.language==='en'?(code==='VOICE_UPDATE_REQUIRED'?'Update tempolive-live-voices.json together with index.html.':'Voice playback did not finish. Please retry after restoring local audio.'):item.language==='de'?(code==='VOICE_UPDATE_REQUIRED'?'Bitte tempolive-live-voices.json und index.html gemeinsam aktualisieren.':'Die Sprachausgabe wurde nicht beendet. Bitte den lokalen Ton wiederherstellen und erneut versuchen.'):(code==='VOICE_UPDATE_REQUIRED'?'\u8acb\u540c\u6642\u66f4\u65b0 tempolive-live-voices.json \u8207 index.html\uff0c\u76ee\u524d\u662f\u820a\u7248\u8a9e\u97f3\u6a94\u3002':'\u8a9e\u97f3\u672a\u5b8c\u6574\u64ad\u653e\uff0c\u8acb\u6062\u5fa9\u672c\u6a5f\u8072\u97f3\u5f8c\u518d\u8a66\u4e00\u6b21\u3002');
   const finish=(status,message='')=>{
-   if(job.done||this.active!==job)return;job.done=true;this.active=null;
-   if(status==='played'){this.armed=true;this.problem='';}
-   else if(message)this.problem=message;
-   if(item.id)receipt(item.id,status);
-   if(item.test&&message)notify(message);
+   if(job.done||this.active!==job)return;job.done=true;clearTimeout(job.timer);
+   context?.removeEventListener?.('statechange',job.listener);this.active=null;
+   for(const source of job.sources){if(status!=='played')try{source.stop();}catch(_){}try{source.disconnect();}catch(_){}}
+   try{job.gain?.disconnect();}catch(_){}
+   if(status==='played'){this.armed=true;this.problem='';}else if(message)this.problem=message;
+   if(item.id)receipt(item.id,status);if(item.test&&message)notify(message);
    renderVoiceState();announceStatus();setTimeout(()=>this.pump(),70);
   };
   job.finish=finish;
-  SafeBandVoice.prepare(item.safeKeys||['custom']).then(buffers=>{
-   if(job.done||this.active!==job||engine.ctx!==job.context||!engine.isReady()){finish('blocked');return;}
+  if(!context||!engine.isReady()){finish('blocked',localText('needs'));return;}
+  job.listener=()=>{if(context.state!=='running')finish('interrupted',failedText());};
+  context.addEventListener('statechange',job.listener);
+  job.timer=setTimeout(()=>finish('failed',failedText()),18000);
+  SafeBandVoice.sentence(item.safeKeys||['custom'],item.language,context).then(buffer=>{
+   if(job.done||this.active!==job)return;
+   if(engine.ctx!==context||!engine.isReady()){finish('blocked',localText('needs'));return;}
    if(!item.manual&&now()>item.expiresAt){finish('expired');return;}
-   let start=job.context.currentTime+.025;
-   for(let i=0;i<buffers.length;i++){
-    const source=job.context.createBufferSource(),gain=job.context.createGain();source.buffer=buffers[i];
-    gain.gain.value=prefs.volume/100*.7;source.connect(gain);gain.connect(job.context.destination);
-    source.onended=()=>{try{source.disconnect();gain.disconnect();}catch(_){}if(i===buffers.length-1)finish('played');};
-    job.sources.push(source);source.start(start);start+=buffers[i].duration+.045;
-   }
+   const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;
+   source.playbackRate.value=1;source.detune.value=0;source.loop=false;
+   gain.gain.value=prefs.volume/100*.7;source.connect(gain);gain.connect(context.destination);
+   job.gain=gain;job.sources.push(source);
+   const start=context.currentTime+.06;job.endsAt=start+buffer.duration;
+   // Keep the already-authorized output alive through the end of the sentence.
+   // This is a local route hold, never a room command or metronome re-anchor.
+   engine.gateHoldUntil=Math.max(engine.gateHoldUntil,wallNow()+(buffer.duration+.55)*1000);
+   source.onended=()=>{if(!job.done)finish(context.currentTime>=job.endsAt-.03?'played':'interrupted',context.currentTime>=job.endsAt-.03?'':failedText());};
+   source.start(start,0);
+   clearTimeout(job.timer);job.timer=setTimeout(()=>finish('failed',failedText()),Math.max(7000,(buffer.duration+6)*1000));
    if(item.id)receipt(item.id,'speaking');renderVoiceState();
-  }).catch(()=>finish('failed',I18N.lang==='en'?'Built-in speech is unavailable. Text is still shown.':I18N.lang==='de'?'Sprachdatei nicht verfuegbar. Die Nachricht bleibt als Text sichtbar.':'\u5167\u5efa\u8a9e\u97f3\u672a\u8f09\u5165\uff0c\u4ecd\u6703\u986f\u793a\u6587\u5b57\uff1b\u8acb\u78ba\u8a8d\u8a9e\u97f3\u6a94\u5df2\u4e0a\u50b3\u3002'));
+  }).catch(error=>finish('failed',failedText(error?.message)));
  }
 
  pump(){
@@ -4391,7 +4447,7 @@ function openPanel(){
 }
 
 function tick(){
- if(room.recovering){if(speaker.active||speaker.queue.length)speaker.cancel('blocked');}
+ if(room.recovering&&speaker.active&&!speaker.active.safe)speaker.cancel('blocked');
  const time=now();
  if(online()){
   for(const [mid,r] of requests){if(time-r.data.createdAt>C.ttl){requests.delete(mid);const row=outbox.find(x=>x.id===mid);if(row&&!row.accepted){row.status='noack';notify('live傳話未能送出，請確認連線後再試。');}}else if(r.attempts<3&&time-r.at>1400){r.at=time;r.attempts++;if(room.role==='host')hostSubmit(currentId(),r.data);else sendToHost('band-send',{request:r.data});}}
@@ -4426,7 +4482,7 @@ Room.prototype.receiveGuest=function(data){const result=originalReceive.call(thi
 const originalRenderRoom=renderRoom;
 renderRoom=function(){const result=originalRenderRoom();syncRoom();return result;};
 // Registration name remains an internal compatibility field; user never types a nickname.
-for(const name of ['createRoom','joinRoom'])$b(name).addEventListener('click',()=>{selectedInstrument=prefs.instrument;instrumentSig='';renderInstruments();$b('instrumentAddBox').hidden=true;renderVoiceState();});
+for(const name of ['createRoom','joinRoom'])$b(name).addEventListener('click',()=>{selectedInstrument=prefs.instrument;instrumentSig='';renderInstruments();$b('instrumentAddBox').hidden=true;renderVoiceState();SafeBandVoice.load().catch(()=>{});});
 $b('roomForm').addEventListener('submit',event=>{
  if(!selectedInstrument||!allInstruments().includes(selectedInstrument)){event.preventDefault();event.stopImmediatePropagation();I18N.set($b('roomError'),'請先選擇你的樂器或角色。');return;}
  $b('displayName').value=selectedInstrument;prefs.instrument=selectedInstrument;save();
@@ -4456,10 +4512,12 @@ for(const id of ['bandAutoSpeak','roomAutoSpeak'])$b(id).addEventListener('chang
 $b('bandVoiceVolume').addEventListener('input',e=>{prefs.volume=Number(e.target.value);save();if(!prefs.volume)speaker.cancel('muted');renderVoiceState();announceStatus();});
 $b('bandVoiceSelect').addEventListener('change',e=>{if(I18N.lang==='de')prefs.voiceDeURI=e.target.value;else if(I18N.lang==='en')prefs.voiceEnURI=e.target.value;else prefs.voiceURI=e.target.value;save();speaker.armed=false;speaker.problem='';renderVoiceState();announceStatus();});
 $b('bandAlertClose').addEventListener('click',hideAlert);$b('bandAlertReplay').addEventListener('click',()=>replay(activeAlert));
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&(speaker.active||speaker.queue.length))speaker.cancel('blocked');});
+// Decoded speech is scheduled as one audio-thread buffer. Hiding the page
+// must not truncate it. Only native system speech keeps the old focus guard.
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&speaker.active&&!speaker.active.safe)speaker.cancel('blocked');});
 window.addEventListener('pagehide',()=>{speaker.cancel('blocked');hideAlert();});
 new MutationObserver(changes=>{if(activeAlert&&changes.some(m=>m.target.tagName==='DIALOG'))showAlert(activeAlert,false);}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['open']});
-window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel,cancelLocalSpeech:()=>speaker.cancel('interrupted'),cancelNativeSpeech:()=>{if(speaker.active&&!speaker.active.safe)speaker.cancel('interrupted');},speechMode:()=>({safe:!!speaker.active?.safe,loaded:SafeBandVoice.ready()})});
+window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel,cancelLocalSpeech:()=>speaker.cancel('interrupted'),cancelNativeSpeech:()=>{if(speaker.active&&!speaker.active.safe)speaker.cancel('interrupted');},speechMode:()=>({safe:!!speaker.active?.safe,loaded:SafeBandVoice.ready(),bank:SafeBandVoice.snapshot()})});
 I18N.onChange(()=>{renderVoices();renderVoiceState();});
 renderInstruments();renderPhrases();renderVoices();renderVoiceState();syncRoom();setInterval(tick,500);
 })();
