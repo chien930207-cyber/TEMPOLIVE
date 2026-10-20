@@ -60,9 +60,9 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="description" content="TEMPOLIVE 連線節拍器：調整節奏、準備歌單、與團隊同步播放與 LIVE 傳話。">
-<meta name="application-version" content="2.4.8">
-<meta name="tempolive-version" content="2.4.8">
-<meta name="tempolive-build" content="2.4.8-voice-phrases">
+<meta name="application-version" content="2.4.9">
+<meta name="tempolive-version" content="2.4.9">
+<meta name="tempolive-build" content="2.4.9-system-mandarin">
 <meta name="tempolive-icon-release" content="live-entry-single-png">
 <meta name="tempolive-entry-release" content="integrated-20261008">
 <link rel="manifest" href="/TEMPOLIVE/site.webmanifest">
@@ -1894,7 +1894,8 @@ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option spa
         <div class="band-voice-bar"><div><strong>語音提醒</strong><span id="bandVoiceStatus">尚未試聽</span></div><button type="button" class="btn small-btn" id="bandEnableVoice">啟用／試聽</button></div>
         <label class="check-row"><input id="bandAutoSpeak" type="checkbox" checked><span>收到訊息時自動播報</span></label>
         <div class="band-volume-row"><label for="bandVoiceVolume">語音音量</label><input id="bandVoiceVolume" type="range" min="0" max="100" value="100"><output id="bandVoiceVolumeValue" for="bandVoiceVolume">100%</output></div>
-        <label class="field-label" for="bandVoiceSelect">播報聲音</label><select id="bandVoiceSelect"><option value="">自動選擇中文聲音</option></select>
+        <div class="band-volume-row" id="bandMandarinRateRow"><label for="bandMandarinRate">中文語速</label><input id="bandMandarinRate" type="range" min="0.9" max="1.5" step="0.05" value="1.2" aria-label="中文語速"><output id="bandMandarinRateValue" for="bandMandarinRate">1.2×</output></div>
+<label class="field-label" for="bandVoiceSelect">播報聲音</label><select id="bandVoiceSelect"><option value="">自動選擇中文聲音</option></select>
         <p id="bandVoiceHint" class="band-helper"></p>
         <div class="band-saved-list" id="bandSavedPhrases"></div>
         <p class="band-helper">自訂樂器、常用短句與語音設定僅存於此瀏覽器。傳話不需回覆收到；公開測試中繼不適合敏感資料。</p>
@@ -4022,8 +4023,26 @@ const C=Object.freeze({version:1,storageKey:'tempolive.band.v1',ttl:20000,receip
 const $b=id=>document.getElementById(id),now=()=>hostNow(),uid=()=>id();
 const text=(v,n=40)=>String(v??'').normalize('NFKC').replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2066-\u2069]/g,'').trim().slice(0,n);
 const isId=v=>typeof v==='string'&&/^[-a-zA-Z0-9]{1,80}$/.test(v);
-const prefs={instrument:'',customInstruments:[],customPhrases:[],autoSpeak:true,volume:100,voiceURI:'',voiceEnURI:'',voiceDeURI:''};
-try{const s=JSON.parse(localStorage.getItem(C.storageKey)||'null');if(s){prefs.instrument=text(s.instrument,16);prefs.customInstruments=Array.isArray(s.customInstruments)?[...new Set(s.customInstruments.map(x=>text(x,16)).filter(x=>x&&!C.instruments.includes(x)))].slice(0,12):[];prefs.customPhrases=Array.isArray(s.customPhrases)?[...new Set(s.customPhrases.map(x=>text(x)).filter(Boolean))].slice(0,12):[];prefs.autoSpeak=s.autoSpeak!==false;prefs.volume=Number.isFinite(s.volume)?Math.min(100,Math.max(0,s.volume)):100;prefs.voiceURI=text(s.voiceURI,240);prefs.voiceEnURI=text(s.voiceEnURI,240);prefs.voiceDeURI=text(s.voiceDeURI,240);}}catch(e){}
+/* v2.4.9: restore whole-sentence DEVICE Mandarin rather than the rejected
+   eSpeak recording bank. Native voices use the OS output. No audio cloning,
+   microphone, cross-room transport command or fake pronunciation test occurs. */
+const MANDARIN_RATE=Object.freeze({normal:1.2,min:.9,max:1.5,step:.05});
+function mandarinVoice(voice){
+ const lang=String(voice?.lang||'').replace(/_/g,'-');
+ return /^(?:zh|cmn)(?:-|$)/i.test(lang)&&!/(?:^|-)(?:HK|MO|yue)(?:-|$)/i.test(lang)&&
+   !/(?:cantonese|yue|espeak|festival|flite)/i.test(String(voice?.name||''));
+}
+function pickMandarinVoice(voices,uri=''){
+ const usable=voices.filter(mandarinVoice),chosen=usable.find(v=>v.voiceURI===uri);
+ if(chosen)return chosen;
+ // Taiwan language tags take priority; prefer a local/enhanced voice within
+ // the same language group. Names are hints only, not a promised installed voice.
+ const rank=v=>{const lang=String(v.lang).replace(/_/g,'-');return (/(?:^|-)TW(?:-|$)/i.test(lang)?100:/Hant/i.test(lang)?70:/^(?:zh|cmn)-(?:CN|Hans)/i.test(lang)?40:20)+(v.localService?8:0)+(/enhanced|premium|natural|\u589e\u5f37|\u512a\u8cea/i.test(v.name)?4:0);};
+ return [...usable].sort((a,b)=>rank(b)-rank(a))[0]||null;
+}
+
+const prefs={zhVoiceRate:1.2,instrument:'',customInstruments:[],customPhrases:[],autoSpeak:true,volume:100,voiceURI:'',voiceEnURI:'',voiceDeURI:''};
+try{const s=JSON.parse(localStorage.getItem(C.storageKey)||'null');if(s){prefs.instrument=text(s.instrument,16);prefs.customInstruments=Array.isArray(s.customInstruments)?[...new Set(s.customInstruments.map(x=>text(x,16)).filter(x=>x&&!C.instruments.includes(x)))].slice(0,12):[];prefs.customPhrases=Array.isArray(s.customPhrases)?[...new Set(s.customPhrases.map(x=>text(x)).filter(Boolean))].slice(0,12):[];prefs.autoSpeak=s.autoSpeak!==false;prefs.volume=Number.isFinite(s.volume)?Math.min(100,Math.max(0,s.volume)):100;prefs.zhVoiceRate=Number.isFinite(s.zhVoiceRate)&&s.zhVoiceRate>=.9&&s.zhVoiceRate<=1.5?s.zhVoiceRate:1.2;prefs.voiceURI=text(s.voiceURI,240);prefs.voiceEnURI=text(s.voiceEnURI,240);prefs.voiceDeURI=text(s.voiceDeURI,240);}}catch(e){}
 let storageError=false;function save(){try{localStorage.setItem(C.storageKey,JSON.stringify(prefs));}catch(e){storageError=true;}}
 const statusText={pending:'等待送達',accepted:'主持人已接收',received:'已送達',queued:'已送達，等待播報',speaking:'正在播報',played:'裝置已完成播報',confirmed:'對方已確認',blocked:'已送達，語音未啟用',muted:'已送達，語音音量為零',disabled:'已送達，自動播報關閉',failed:'已送達，播報失敗',expired:'已送達，已逾播報時限',busy:'已送達，語音佇列已滿',unsupported:'對方需更新版本',offline:'對方離線／尚未確認送達',noack:'逾時未確認送達',interrupted:'裝置無法同時播放語音',rejected:'未送出'};
 let route='',lastRender='',targetSig='',historySig='',phraseSig='',instrumentSig='',lastStatusAt=0,toastTimer;
@@ -4039,7 +4058,7 @@ const self=()=>getPeople().find(p=>p.id===currentId())||{id:currentId(),name:roo
 function messagePhrase(m,language=I18N.lang){const preset=C.phrases.find(p=>p.id===m.phraseId);return preset?I18N.t(preset.say,language):m.text;}
 function speakLabel(label,language,instrument){if(language==='zh-Hant')return shortRole(label);const name=I18N.person({name:label,instrument},language);return language==='de'?name.replace(/^Schlagzeug(?= |$)/,'Schlagzeuger'):name.replace(/^Drums(?= |$)/,'Drummer');}
 function voiceLanguage(language=I18N.lang){return language==='de'?'de-DE':language==='en'?'en-US':'zh-TW';}
-function voiceMatches(voice,language=I18N.lang){return (language==='de'?/^de(?:[-_]|$)/i:language==='en'?/^en(?:[-_]|$)/i:/^zh(?:[-_]|$)/i).test(voice.lang);}
+function voiceMatches(voice,language=I18N.lang){return language==='de'?/^de(?:[-_]|$)/i.test(voice.lang):language==='en'?/^en(?:[-_]|$)/i.test(voice.lang):mandarinVoice(voice);}
 const safeMessage=m=>m&&isId(m.id)&&isId(m.senderId)&&typeof m.senderLabel==='string'&&typeof m.targetLabel==='string'&&typeof m.text==='string'&&m.text.length<=40&&Array.isArray(m.targetIds)&&m.targetIds.length<=CONFIG.maxPeople&&m.targetIds.every(isId)&&Number.isFinite(m.createdAt)&&Number.isFinite(m.expiresAt)&&m.expiresAt-m.createdAt<=C.ttl+100;
 function notify(message){if($b('bandDialog').open){I18N.set($b('bandInlineNotice'),message);$b('bandInlineNotice').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$b('bandInlineNotice').hidden=true,5000);}else toast(message);}
 function spoken(m){if(I18N.lang==='de'){
@@ -4048,36 +4067,32 @@ function spoken(m){if(I18N.lang==='de'){
  // Custom messages are read verbatim; no machine translation of user text.
  const text=spokenPreset[m.phraseId]||m.text;
  return speakLabel(m.senderLabel,'de',m.senderInstrument)+' sagt: '+target+', '+text+(/[.!?\u3002\uff01\uff1f]$/.test(text)?'':'.');
-}if(I18N.lang!=='en')return shortRole(m.senderLabel)+'說，'+m.targetLabel+'，'+m.text+'。';const target=['所有人','全部人'].includes(m.targetLabel)?'Everyone':I18N.person({name:m.targetLabel,instrument:m.targetInstrument});return speakLabel(m.senderLabel,'en',m.senderInstrument)+' says: '+target+', '+(messagePhrase(m,'en').startsWith('I ')?messagePhrase(m,'en'):messagePhrase(m,'en').replace(/^./,c=>c.toLowerCase()))+'.';}
+}if(I18N.lang!=='en'){const end=/[.!?。！？]$/.test(m.text)?'':'。';return shortRole(m.senderLabel)+'說：'+m.targetLabel+'，'+m.text+end;}const target=['所有人','全部人'].includes(m.targetLabel)?'Everyone':I18N.person({name:m.targetLabel,instrument:m.targetInstrument});return speakLabel(m.senderLabel,'en',m.senderInstrument)+' says: '+target+', '+(messagePhrase(m,'en').startsWith('I ')?messagePhrase(m,'en'):messagePhrase(m,'en').replace(/^./,c=>c.toLowerCase()))+'.';}
 function localMessage(m){return {id:m.id,senderId:m.senderId,senderLabel:text(m.senderLabel,24),targetLabel:text(m.targetLabel,24),text:text(m.text),targetIds:[...m.targetIds],createdAt:m.createdAt,expiresAt:m.expiresAt,phraseId:C.phrases.some(p=>p.id===m.phraseId)?m.phraseId:'custom',senderInstrument:text(m.senderInstrument||'',16),targetInstrument:text(m.targetInstrument||'',16)};}
 function sendToHost(type,more){if(room.role==='guest'&&room.connection?.open&&!room.recovering)room.send(room.connection,room.packet(type,more));}
 function deliver(id,type,data){if(id===currentId()){receivePacket({type,...data});return;}const entry=room.clients.get(id);if(entry?.hello&&entry.conn.open)room.send(entry.conn,room.packet(type,data));}
 function announceStatus(){const t=performance.now();if(t-lastStatusAt<150)return;lastStatusAt=t;if(room.role==='guest')room.sendLocalStatus();else if(room.role==='host')room.updateRoster();}
 
-/* Preset speech uses decoded audio in the SAME AudioContext as the clicks.
-   Web Speech cannot expose PCM, and may seize iOS audio focus. While a beat
-   is requested, arbitrary custom text therefore uses a spoken screen alert.
-   It is never silently passed to system TTS over a running metronome. */
+/* English/German presets retain the existing Web Audio bank. Mandarin is
+   device speech below: no synthesized Mandarin file or pinyin reconstruction
+   is played. Native speech availability and acoustic output are OS-controlled. */
 const SafeBandVoice=(()=>{
- const VERSION=2,REVISION='2.4.8-mandarin-clauses-r1';
- const LANGUAGE=['zh-Hant','en','de'];
+ const REVISION='2.4.8-mandarin-clauses-r1';
+ const LANGUAGE=['en','de'];
  const BASIC=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound','member','says','all','fast','slow','more','less','monitor-up','monitor-down','help','custom','test'];
  const ROLE=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound','member'];
- const ACTION=['fast','slow','more','less','monitor-up','monitor-down','help','custom'];
- const url=new URL('tempolive-live-voices.json',document.baseURI);url.searchParams.set('v',REVISION);
+  const url=new URL('tempolive-live-voices.json',document.baseURI);url.searchParams.set('v',REVISION);
  let pack=null,loading=null,lastError='';const clips=new Map(),utterances=new Map();
- const language=v=>LANGUAGE.includes(v)?v:'zh-Hant';
+ const language=v=>{if(!LANGUAGE.includes(v))throw Error('MANDARIN_USES_SYSTEM_VOICE');return v;};
  function load(){
   if(pack)return Promise.resolve(pack);if(loading)return loading;
   const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),15000);
   const task=fetch(url.href,{cache:'no-cache',signal:abort.signal}).then(r=>{
    if(!r.ok)throw Error('VOICE_HTTP_'+r.status);return r.json();
   }).then(data=>{
-   if(data.version!==VERSION||data.revision!==REVISION||data.format!=='audio/mpeg')throw Error('VOICE_UPDATE_REQUIRED');
+   if(![1,2].includes(data.version)||data.format!=='audio/mpeg')throw Error('VOICE_UPDATE_REQUIRED');
    const check=(lang,key)=>{const x=data.voices?.[lang]?.[key];if(typeof x!=='string'||x.length<100)throw Error('VOICE_CLIP_MISSING');};
    for(const lang of LANGUAGE)for(const key of BASIC)check(lang,key);
-   for(const role of ROLE)check('zh-Hant','from:'+role);
-   for(const target of [...ROLE,'all'])for(const action of ACTION)check('zh-Hant','to:'+target+':'+action);
    pack=data;lastError='';return data;
   }).catch(error=>{lastError=error?.message||'VOICE_LOAD_FAILED';throw error;}).finally(()=>{clearTimeout(timer);if(loading===task)loading=null;});
   loading=task;return task;
@@ -4129,7 +4144,7 @@ const SafeBandVoice=(()=>{
   const all=['\u6240\u6709\u4eba','\u5168\u90e8\u4eba'].includes(message.targetLabel);
   const sender=instrument(message.senderLabel,message.senderInstrument),target=all?'all':instrument(message.targetLabel,message.targetInstrument);
   const action=phrase?.id||'custom';
-  return language(chosenLanguage)==='zh-Hant'?['from:'+sender,'to:'+target+':'+action]:[sender,'says',target,action];
+  language(chosenLanguage);return [sender,'says',target,action];
  }
  return {load,prepare,sentence,keys,ready:()=>!!pack,snapshot:()=>({revision:pack?.revision||null,expectedRevision:REVISION,loaded:!!pack,error:lastError,decodedClips:clips.size,cachedSentences:utterances.size})};
 })();
@@ -4137,25 +4152,93 @@ const SafeBandVoice=(()=>{
 class Speaker{
  constructor(){this.armed=false;this.problem='';this.voices=[];this.queue=[];this.active=null;this.counter=0;this.refresh();if(window.speechSynthesis?.addEventListener)window.speechSynthesis.addEventListener('voiceschanged',()=>this.refresh());}
  refresh(){try{this.voices=window.speechSynthesis?.getVoices()||[];}catch(e){this.voices=[];}renderVoices();}
- available(){return !!(window.AudioContext||window.webkitAudioContext);}
- voice(language=I18N.lang){const uri=language==='de'?prefs.voiceDeURI:language==='en'?prefs.voiceEnURI:prefs.voiceURI;const preferred=this.voices.find(v=>v.voiceURI===uri&&voiceMatches(v,language));if(preferred)return preferred;return [...this.voices].filter(v=>voiceMatches(v,language)).sort((a,b)=>((b.lang.toLowerCase()===voiceLanguage(language).toLowerCase()?10:0)+(b.localService?2:0))-((a.lang.toLowerCase()===voiceLanguage(language).toLowerCase()?10:0)+(a.localService?2:0)))[0]||null;}
+ available(language=I18N.lang){return language==='zh-Hant'?!!(window.speechSynthesis&&window.SpeechSynthesisUtterance):!!(window.AudioContext||window.webkitAudioContext);}
+ voice(language=I18N.lang){if(language==='zh-Hant')return pickMandarinVoice(this.voices,prefs.voiceURI);const uri=language==='de'?prefs.voiceDeURI:language==='en'?prefs.voiceEnURI:prefs.voiceURI;const preferred=this.voices.find(v=>v.voiceURI===uri&&voiceMatches(v,language));if(preferred)return preferred;return [...this.voices].filter(v=>voiceMatches(v,language)).sort((a,b)=>((b.lang.toLowerCase()===voiceLanguage(language).toLowerCase()?10:0)+(b.localService?2:0))-((a.lang.toLowerCase()===voiceLanguage(language).toLowerCase()?10:0)+(a.localService?2:0)))[0]||null;}
  status(){if(!this.available())return '不支援語音';if(!prefs.autoSpeak)return '僅顯示文字';if(!prefs.volume)return '語音靜音';if(this.problem)return '需要重新試聽';return this.armed?'語音已啟用':'待啟用語音';}
  arm(){
   if(this.active)return;
-  this.problem='';const language=I18N.lang;
+  this.refresh();this.problem='';const language=I18N.lang;
+  if(language==='zh-Hant'){
+   // Preserve the actual click/submit user gesture for native speech. Audio
+   // unlock and room networking proceed separately, never await one another.
+   engine.ensure().catch(()=>renderRecoveryControl());
+   this.enqueue({test:true,text:'\u8a9e\u97f3\u63d0\u9192\u5df2\u555f\u7528\u3002\u8acb\u8ddf\u4e0a\u76ee\u524d\u7bc0\u62cd\u3002',language,speechRate:prefs.zhVoiceRate,expiresAt:now()+C.ttl},true);return;
+  }
   const pending=engine.ensure();SafeBandVoice.load().catch(()=>{});
   pending.then(()=>{this.armed=true;this.enqueue({test:true,safeKeys:['test'],text:'',language,expiresAt:now()+C.ttl},true);}).catch(()=>{this.problem=localText('needs');renderVoiceState();});
  }
+
  enqueue(item,manual=false){
-  if(!this.available()){this.reject(item,'failed','此瀏覽器不支援語音合成，仍可接收文字。');return;}
+  if(!this.available(item.language||I18N.lang)){this.reject(item,'failed','此瀏覽器不支援語音合成，仍可接收文字。');return;}
   if(prefs.volume===0){this.reject(item,'muted','語音音量目前為零。');return;}
   if(!manual&&!prefs.autoSpeak){this.reject(item,'disabled');return;}
   if(!manual&&!this.armed){this.reject(item,'blocked');return;}
   if(!manual&&now()>item.expiresAt){this.reject(item,'expired');return;}
   if(this.queue.length>=C.maxQueue){this.reject(item,'busy');return;}
-  this.queue.push({...item,manual,language:item.language||I18N.lang});if(item.id)receipt(item.id,'queued');this.pump();
+  this.queue.push({...item,manual,language:item.language||I18N.lang,speechRate:item.speechRate??prefs.zhVoiceRate});if(item.id)receipt(item.id,'queued');this.pump();
  }
  reject(item,state,message=''){if(item.id)receipt(item.id,state);if(item.test||message){this.problem=message||'語音無法播放';notify(this.problem);}renderVoiceState();announceStatus();}
+ pumpMandarin(item){
+  const synth=window.speechSynthesis;
+  if(!synth||!window.SpeechSynthesisUtterance){this.reject(item,'failed','\u6b64\u700f\u89bd\u5668\u7121\u6cd5\u4f7f\u7528\u7cfb\u7d71\u570b\u8a9e\u3002\u4ecd\u4fdd\u7559\u5b8c\u6574\u6587\u5b57\uff0c\u4e0d\u6703\u6539\u64ad\u820a\u5408\u6210\u97f3\u6a94\u3002');setTimeout(()=>this.pump(),70);return;}
+  this.refresh();
+  const voice=this.voice('zh-Hant'),message=String(item.text||'').trim();
+  // An empty initial getVoices() is allowed: request zh-TW and let the browser
+  // load its suitable default. A populated list with NO Mandarin is not used
+  // to guess with an English/Cantonese/formant voice.
+  if(!message||(this.voices.length&&!voice)){
+   this.reject(item,'failed','\u88dd\u7f6e\u672a\u63d0\u4f9b\u53ef\u7528\u7684\u570b\u8a9e\u8072\u97f3\uff0c\u8acb\u5b89\u88dd\u6216\u9078\u64c7\u570b\u8a9e\u5f8c\u518d\u8a66\u807d\u3002');setTimeout(()=>this.pump(),70);return;
+  }
+  const utter=new SpeechSynthesisUtterance(message);
+  utter.lang=voice?.lang||'zh-TW';if(voice)utter.voice=voice;
+  utter.rate=Math.min(MANDARIN_RATE.max,Math.max(MANDARIN_RATE.min,Number(item.speechRate)||MANDARIN_RATE.normal));
+  utter.pitch=1;utter.volume=prefs.volume/100;
+  const context=engine.ctx,job={item,utter,mandarin:true,safe:false,started:false,done:false,timer:null,guardTimer:null,listener:null,context,finish:null};
+  this.active=job;this.lastMandarin={text:message,rate:utter.rate,language:utter.lang,voice:voice?.name||'system-default',result:'requested'};
+  const finish=(status,reason='')=>{
+   if(job.done||this.active!==job)return;
+   job.done=true;clearTimeout(job.timer);clearTimeout(job.guardTimer);context?.removeEventListener?.('statechange',job.listener);this.active=null;
+   this.lastMandarin={...this.lastMandarin,result:status};
+   if(status==='played'){this.armed=true;this.problem='';}
+   else if(['failed','interrupted','blocked'].includes(status)){this.armed=false;if(reason)this.problem=reason;}
+   if(['failed','interrupted'].includes(status)){
+    const blocked=this.queue.filter(next=>next.language==='zh-Hant');
+    this.queue=this.queue.filter(next=>next.language!=='zh-Hant');
+    for(const next of blocked)if(next.id)receipt(next.id,'blocked');
+   }
+   if(item.id)receipt(item.id,status);
+   if(item.test&&reason)notify(reason);
+   renderVoiceState();announceStatus();setTimeout(()=>this.pump(),70);
+  };
+  job.finish=finish;
+  function stopNative(){try{synth.cancel();}catch(_){} }
+  const guard=()=>{
+   if(job.done)return;
+   const wants=desiredEvent().playing&&!state.mute&&state.volume>0&&!engine.gameOutputSuppressed;
+   if(!wants||!context||context.state==='running'){clearTimeout(job.guardTimer);job.guardTimer=null;return;}
+   if(job.guardTimer)return;
+   // Do not misclassify a brief transition as a clipped utterance. If the OS
+   // actually prevents coexistence, preserve the beat, stop ONLY this speech,
+   // and expose the conflict instead of declaring an incomplete utterance done.
+   job.guardTimer=setTimeout(()=>{
+    job.guardTimer=null;if(job.done||context.state==='running'||!desiredEvent().playing||state.mute)return;
+    finish('interrupted','\u7cfb\u7d71\u8a9e\u97f3\u8207\u672c\u6a5f\u7bc0\u62cd\u767c\u751f\u97f3\u8a0a\u885d\u7a81\uff0c\u5df2\u505c\u6b62\u672c\u6b21\u8a9e\u97f3\u4e26\u4fdd\u7559\u6587\u5b57\u3002\u5176\u4ed6\u5718\u54e1\u4e0d\u53d7\u5f71\u97ff\u3002');
+    stopNative();window.TempoliveAudioContinuity?.check('speech-focus-released');
+   },300);
+  };
+  job.listener=guard;context?.addEventListener?.('statechange',guard);
+  utter.onstart=()=>{
+   if(job.done)return;job.started=true;this.armed=true;this.problem='';clearTimeout(job.timer);
+   this.lastMandarin={...this.lastMandarin,result:'speaking'};
+   if(item.id)receipt(item.id,'speaking');renderVoiceState();announceStatus();guard();
+   job.timer=setTimeout(()=>{finish('failed','\u7cfb\u7d71\u8a9e\u97f3\u64ad\u653e\u903e\u6642\uff0c\u8acb\u91cd\u65b0\u8a66\u807d\u3002');stopNative();},Math.min(45000,Math.max(12000,message.length*450/utter.rate)));
+  };
+  utter.onend=()=>finish(job.started?'played':'failed',job.started?'':'\u7cfb\u7d71\u672a\u78ba\u8a8d\u958b\u59cb\u64ad\u5831\uff0c\u8acb\u91cd\u65b0\u8a66\u807d\u3002');
+  utter.onerror=e=>finish('failed',e.error==='not-allowed'?'\u8acb\u5148\u6309\u300c\u555f\u7528\uff0f\u8a66\u807d\u300d\uff0c\u5141\u8a31\u7cfb\u7d71\u8a9e\u97f3\u64ad\u653e\u3002':'\u7cfb\u7d71\u570b\u8a9e\u64ad\u5831\u5931\u6557\uff0c\u8acb\u9078\u64c7\u5176\u4ed6\u570b\u8a9e\u8072\u97f3\u5f8c\u518d\u8a66\u807d\u3002');
+  job.timer=setTimeout(()=>{finish('failed','\u7cfb\u7d71\u8a9e\u97f3\u5c1a\u672a\u958b\u59cb\uff0c\u8acb\u91cd\u65b0\u555f\u7528\u6216\u9078\u64c7\u570b\u8a9e\u8072\u97f3\u3002');stopNative();},6500);
+  try{if(synth.paused)synth.resume();synth.speak(utter);}catch(_){finish('failed','\u7121\u6cd5\u555f\u7528\u7cfb\u7d71\u570b\u8a9e\uff0c\u4ecd\u53ef\u95b1\u8b80\u6587\u5b57\u8a0a\u606f\u3002');}
+ }
+
  pumpSafe(item){
   const context=engine.ctx,job={item,safe:true,done:false,sources:[],context,finish:null,timer:null,listener:null,gain:null,endsAt:null};this.active=job;
   const failedText=(code)=>item.language==='en'?(code==='VOICE_UPDATE_REQUIRED'?'Update tempolive-live-voices.json together with index.html.':'Voice playback did not finish. Please retry after restoring local audio.'):item.language==='de'?(code==='VOICE_UPDATE_REQUIRED'?'Bitte tempolive-live-voices.json und index.html gemeinsam aktualisieren.':'Die Sprachausgabe wurde nicht beendet. Bitte den lokalen Ton wiederherstellen und erneut versuchen.'):(code==='VOICE_UPDATE_REQUIRED'?'\u8acb\u540c\u6642\u66f4\u65b0 tempolive-live-voices.json \u8207 index.html\uff0c\u76ee\u524d\u662f\u820a\u7248\u8a9e\u97f3\u6a94\u3002':'\u8a9e\u97f3\u672a\u5b8c\u6574\u64ad\u653e\uff0c\u8acb\u6062\u5fa9\u672c\u6a5f\u8072\u97f3\u5f8c\u518d\u8a66\u4e00\u6b21\u3002');
@@ -4195,6 +4278,7 @@ class Speaker{
  pump(){
   if(this.active||!this.queue.length)return;
   const item=this.queue.shift();if(!item.test&&!item.manual&&now()>item.expiresAt){this.reject(item,'expired');this.pump();return;}
+  if(item.language==='zh-Hant'){this.pumpMandarin(item);return;}
   if(item.safeKeys||desiredEvent().playing||currentEvent().playing){this.pumpSafe(item);return;}
   if(document.hidden&&!item.manual||!window.speechSynthesis||!window.SpeechSynthesisUtterance){this.reject(item,'blocked');this.pump();return;}
   const utter=new SpeechSynthesisUtterance(item.text),voice=this.voice(item.language);utter.lang=voice?.lang||voiceLanguage(item.language);if(voice)utter.voice=voice;utter.volume=prefs.volume/100;utter.rate=1.08;utter.pitch=1;
@@ -4234,7 +4318,16 @@ function renderVoiceState(){
  I18N.set($b('bandVoiceStatus'),speaker.status()+(speaker.problem?' · '+speaker.problem:''));
  I18N.set($b('roomVoiceStatus'),speaker.status()+(speaker.problem?' '+speaker.problem:''));$b('bandAutoSpeak').checked=prefs.autoSpeak;$b('roomAutoSpeak').checked=prefs.autoSpeak;
  $b('bandVoiceVolume').value=prefs.volume;I18N.set($b('bandVoiceVolumeValue'),prefs.volume+'%');
- I18N.bind($b('bandVoiceHint'),()=>I18N.lang==='en'?'Preset phrases use built-in speech with the metronome. During playback, custom messages are announced as a screen alert; system voice below is used for custom text only when stopped.':I18N.lang==='de'?'Vorgegebene Saetze verwenden internes Audio. Eigene Nachrichten werden waehrend des Takts als Bildschirmhinweis angesagt; Systemstimmen nur bei gestopptem Metronom.':'\u9810\u8a2d\u77ed\u53e5\u4f7f\u7528\u5167\u5efa\u8a9e\u97f3\uff0c\u8207\u7bc0\u62cd\u540c\u6642\u64ad\u653e\u3002\u64ad\u653e\u4e2d\u7684\u81ea\u8a02\u6587\u5b57\u6539\u64ad\u300c\u81ea\u8a02\u8a0a\u606f\uff0c\u8acb\u770b\u756b\u9762\u300d\uff1b\u4e0b\u65b9\u7cfb\u7d71\u8072\u97f3\u50c5\u7528\u65bc\u505c\u6b62\u6642\u6717\u8b80\u81ea\u8a02\u6587\u5b57\u3002');
+ $b('bandMandarinRateRow').hidden=I18N.lang!=='zh-Hant';
+ $b('bandMandarinRate').value=String(prefs.zhVoiceRate);
+ $b('bandMandarinRateValue').textContent=prefs.zhVoiceRate.toFixed(2).replace(/0$/,'')+'\u00d7';
+ I18N.bind($b('bandVoiceHint'),()=>{
+  if(I18N.lang==='en')return 'Preset phrases use the built-in English audio. Custom text is read by the system voice only while stopped. Mandarin uses the device voice, not the recording bank.';
+  if(I18N.lang==='de')return 'Vorgegebene Saetze nutzen die englischen bzw. deutschen Audiodateien. Eigener Text nutzt die Systemstimme nur bei gestopptem Takt. Mandarin verwendet die Geraetestimme.';
+  const voice=speaker.voice('zh-Hant');
+  return '\u4e2d\u6587\u6539\u7528\u88dd\u7f6e\u570b\u8a9e\u6574\u53e5\u64ad\u5831\uff0c\u512a\u5148\u53f0\u7063\u570b\u8a9e\uff0c\u4e0d\u4f7f\u7528\u820a\u4e2d\u6587\u97f3\u6a94\u3002'+
+   '\u76ee\u524d\uff1a'+(voice?voice.name+' / '+voice.lang:'\u7cfb\u7d71\u9810\u8a2d zh-TW')+'\u3002\u8a9e\u97f3\u8d70\u7cfb\u7d71\u8f38\u51fa\uff1b\u5075\u6e2c\u5230\u8207\u7bc0\u62cd\u885d\u7a81\u6642\u505c\u6b62\u672c\u6b21\u8a9e\u97f3\u4e26\u4fdd\u7559\u6587\u5b57\u3002\u975e\u672c\u6a5f\u8072\u97f3\u53ef\u80fd\u7531\u88dd\u7f6e\u670d\u52d9\u8655\u7406\u6587\u5b57\u3002';
+ });
  if(activeAlert)paintAlert(activeAlert);
 }
 function decorateRoster(base,owner){
@@ -4292,7 +4385,7 @@ function receivePacket(packet){
   seen.set(key,now());const item={...localMessage(m),status:'received',confirmed:false,kind:'received'};inbox.unshift(item);inbox=inbox.slice(0,C.maxHistory);
   receipt(item.id,'received');showAlert(item);
   if(now()>item.expiresAt){receipt(item.id,'expired');return;}
-  speaker.enqueue({id:item.id,text:spoken(item),safeKeys:item.phraseId!=='custom'||desiredEvent().playing?SafeBandVoice.keys(item):null,language:I18N.lang,expiresAt:item.expiresAt});
+  speaker.enqueue({id:item.id,text:spoken(item),safeKeys:I18N.lang!=='zh-Hant'&&(item.phraseId!=='custom'||desiredEvent().playing)?SafeBandVoice.keys(item):null,language:I18N.lang,expiresAt:item.expiresAt});
  }else if(packet.type==='band-status'){
   const row=outbox.find(x=>x.id===packet.id);if(!row||!safeMessage(packet.message)||packet.message.senderId!==currentId()||!Array.isArray(packet.targets)||packet.targets.length>CONFIG.maxPeople)return;
   row.accepted=true;row.message=localMessage(packet.message);row.targets=packet.targets.filter(t=>isId(t.id)&&Object.hasOwn(statusText,t.state)).map(t=>({id:t.id,name:text(t.name,24),state:t.state}));row.status='accepted';requests.delete(row.id);
@@ -4361,7 +4454,7 @@ function makeRequest(){
   requests.delete(data.id);row.status='rejected';notify('傳話未能送出，請確認房間連線後再試。');return false;
  }finally{sending=false;setTimeout(updatePreview,C.minSendGap+10);}
 }
-function replay(item){if(!item)return;showAlert(item);speaker.refresh();speaker.problem='';speaker.enqueue({id:item.id,text:spoken(item),safeKeys:item.phraseId!=='custom'||desiredEvent().playing?SafeBandVoice.keys(item):null,language:I18N.lang,expiresAt:now()+C.ttl},true);}
+function replay(item){if(!item)return;showAlert(item);speaker.refresh();speaker.problem='';speaker.enqueue({id:item.id,text:spoken(item),safeKeys:I18N.lang!=='zh-Hant'&&(item.phraseId!=='custom'||desiredEvent().playing)?SafeBandVoice.keys(item):null,language:I18N.lang,expiresAt:now()+C.ttl},true);}
 function showAlert(item,restartTimer=true){
  if(restartTimer){clearTimeout(alertHideTimer);alertShownAt=performance.now();alertHideTimer=setTimeout(hideAlert,3000);}
  activeAlert=item;paintAlert(item);const alert=$b('bandAlert');
@@ -4447,7 +4540,7 @@ function openPanel(){
 }
 
 function tick(){
- if(room.recovering&&speaker.active&&!speaker.active.safe)speaker.cancel('blocked');
+ if(room.recovering&&speaker.active&&!speaker.active.safe&&!speaker.active.mandarin)speaker.cancel('blocked');
  const time=now();
  if(online()){
   for(const [mid,r] of requests){if(time-r.data.createdAt>C.ttl){requests.delete(mid);const row=outbox.find(x=>x.id===mid);if(row&&!row.accepted){row.status='noack';notify('live傳話未能送出，請確認連線後再試。');}}else if(r.attempts<3&&time-r.at>1400){r.at=time;r.attempts++;if(room.role==='host')hostSubmit(currentId(),r.data);else sendToHost('band-send',{request:r.data});}}
@@ -4482,7 +4575,7 @@ Room.prototype.receiveGuest=function(data){const result=originalReceive.call(thi
 const originalRenderRoom=renderRoom;
 renderRoom=function(){const result=originalRenderRoom();syncRoom();return result;};
 // Registration name remains an internal compatibility field; user never types a nickname.
-for(const name of ['createRoom','joinRoom'])$b(name).addEventListener('click',()=>{selectedInstrument=prefs.instrument;instrumentSig='';renderInstruments();$b('instrumentAddBox').hidden=true;renderVoiceState();SafeBandVoice.load().catch(()=>{});});
+for(const name of ['createRoom','joinRoom'])$b(name).addEventListener('click',()=>{selectedInstrument=prefs.instrument;instrumentSig='';renderInstruments();$b('instrumentAddBox').hidden=true;renderVoiceState();if(I18N.lang!=='zh-Hant')SafeBandVoice.load().catch(()=>{});});
 $b('roomForm').addEventListener('submit',event=>{
  if(!selectedInstrument||!allInstruments().includes(selectedInstrument)){event.preventDefault();event.stopImmediatePropagation();I18N.set($b('roomError'),'請先選擇你的樂器或角色。');return;}
  $b('displayName').value=selectedInstrument;prefs.instrument=selectedInstrument;save();
@@ -4510,14 +4603,15 @@ $b('bandCustomBox').addEventListener('submit',event=>{event.preventDefault();if(
 for(const id of ['bandEnableVoice','roomVoiceTest'])$b(id).addEventListener('click',()=>speaker.arm());
 for(const id of ['bandAutoSpeak','roomAutoSpeak'])$b(id).addEventListener('change',e=>{prefs.autoSpeak=e.target.checked;save();if(!prefs.autoSpeak)speaker.cancel('disabled');renderVoiceState();announceStatus();});
 $b('bandVoiceVolume').addEventListener('input',e=>{prefs.volume=Number(e.target.value);save();if(!prefs.volume)speaker.cancel('muted');renderVoiceState();announceStatus();});
+$b('bandMandarinRate').addEventListener('input',e=>{const n=Number(e.target.value);if(!Number.isFinite(n))return;prefs.zhVoiceRate=Math.round(Math.max(.9,Math.min(1.5,n))*20)/20;save();renderVoiceState();});
 $b('bandVoiceSelect').addEventListener('change',e=>{if(I18N.lang==='de')prefs.voiceDeURI=e.target.value;else if(I18N.lang==='en')prefs.voiceEnURI=e.target.value;else prefs.voiceURI=e.target.value;save();speaker.armed=false;speaker.problem='';renderVoiceState();announceStatus();});
 $b('bandAlertClose').addEventListener('click',hideAlert);$b('bandAlertReplay').addEventListener('click',()=>replay(activeAlert));
 // Decoded speech is scheduled as one audio-thread buffer. Hiding the page
 // must not truncate it. Only native system speech keeps the old focus guard.
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&speaker.active&&!speaker.active.safe)speaker.cancel('blocked');});
-window.addEventListener('pagehide',()=>{speaker.cancel('blocked');hideAlert();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&speaker.active&&!speaker.active.safe&&!speaker.active.mandarin)speaker.cancel('blocked');});
+window.addEventListener('pagehide',event=>{if(!event.persisted)speaker.cancel('blocked');hideAlert();});
 new MutationObserver(changes=>{if(activeAlert&&changes.some(m=>m.target.tagName==='DIALOG'))showAlert(activeAlert,false);}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['open']});
-window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel,cancelLocalSpeech:()=>speaker.cancel('interrupted'),cancelNativeSpeech:()=>{if(speaker.active&&!speaker.active.safe)speaker.cancel('interrupted');},speechMode:()=>({safe:!!speaker.active?.safe,loaded:SafeBandVoice.ready(),bank:SafeBandVoice.snapshot()})});
+window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel,cancelLocalSpeech:()=>speaker.cancel('interrupted'),cancelNativeSpeech:()=>{if(speaker.active&&!speaker.active.safe&&!speaker.active.mandarin)speaker.cancel('interrupted');},speechMode:()=>({safe:!!speaker.active?.safe,mode:I18N.lang==='zh-Hant'?'system-mandarin':'built-in-presets',rate:prefs.zhVoiceRate,lastMandarin:speaker.lastMandarin?{...speaker.lastMandarin}:null,loaded:SafeBandVoice.ready(),bank:SafeBandVoice.snapshot()})});
 I18N.onChange(()=>{renderVoices();renderVoiceState();});
 renderInstruments();renderPhrases();renderVoices();renderVoiceState();syncRoom();setInterval(tick,500);
 })();
