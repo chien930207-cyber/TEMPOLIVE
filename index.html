@@ -1812,6 +1812,37 @@ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option spa
 @media(max-width:360px){html[lang="de"] #recoveryDialog .rp-action{font-size:20px;gap:8px}html[lang="de"] #recoveryDialog .rp-action svg{display:none}}
 @media(max-height:520px){#recoveryDialog{max-height:calc(100dvh - 16px);width:min(500px,calc(100vw - 28px));border-radius:18px}#recoveryDialog .rp-top{padding-top:0;min-height:44px}#recoveryDialog .rp-symbol{display:none}#recoveryDialog .rp-content{padding:0 24px 12px}#recoveryDialog h2{font-size:24px}#recoveryBody{font-size:15px;margin:6px 0 8px;line-height:1.5}#recoveryDialog .rp-track{flex-direction:row;justify-content:center;gap:12px;padding:6px 10px;margin-bottom:10px}#recoveryDialog .rp-action{min-height:64px;font-size:23px;padding:12px}#recoveryDialog .rp-later{margin-top:4px}#recoveryDialog #recoveryDetail{margin-top:2px}}
 </style>
+<style id="tempolive-compact-room-style">
+/* Compact room forms r1. Scoped to the two entry dialogs only. */
+#roomDialog{width:min(420px,calc(100vw - 28px));max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain}
+#roomDialog .dialog-head{padding:18px 22px 8px;gap:12px}
+#roomDialog .dialog-head h2{margin:0;font-size:22px;line-height:1.45;letter-spacing:0}
+#roomDialog .dialog-head .icon-btn{width:44px;height:44px;flex-shrink:0}
+#roomDialog .dialog-body{padding:4px 22px 22px}
+#roomDialog .room-field{margin:0 0 18px}
+#roomDialog .field-label{font-size:14px;line-height:1.5;margin:0 0 8px}
+#roomDialog .room-role-row{display:flex;align-items:stretch;gap:8px;min-width:0}
+#roomDialog #instrumentPicker{min-width:0;flex:1;width:0;min-height:48px;font-size:16px;line-height:1.5;padding:10px 34px 10px 12px;border-radius:10px;scroll-margin-block:16px}
+#roomDialog .room-add-role{width:48px;min-width:48px;min-height:48px;padding:12px;border-radius:10px}
+#roomDialog .room-add-role svg{width:20px;height:20px}
+#roomDialog #joinCode{min-height:54px;font-size:26px;text-align:center;letter-spacing:.16em;padding:10px 12px;border-radius:10px;scroll-margin-block:16px}
+#roomDialog #joinCode::placeholder{font-family:var(--font,inherit);font-size:17px;letter-spacing:.02em}
+#roomDialog .instrument-add-box{margin:0 0 18px;padding:12px;border-radius:10px}
+#roomDialog .instrument-add-box input{font-size:16px;min-height:48px}
+#roomDialog #addInstrumentConfirm{min-height:48px;font-size:14px}
+#roomDialog #instrumentAddError:empty,#roomDialog #roomError:empty{display:none}
+#roomDialog .room-voice-setup{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;padding:12px 0 0;margin:0}
+#roomDialog .room-voice-setup .row{flex-wrap:nowrap;gap:10px;align-items:center}
+#roomDialog .room-voice-setup .check-row{display:flex;align-items:center;gap:9px;min-width:0;flex:1;min-height:44px;font-size:14px;line-height:1.5;margin:0}
+#roomDialog #roomAutoSpeak{flex-shrink:0;width:18px;height:18px}
+#roomDialog #roomVoiceTest{min-height:44px;flex-shrink:0;padding:9px 12px;font-size:13px;line-height:1.5;border-radius:9px}
+#roomDialog #roomVoiceStatus{font-size:13px;line-height:1.65;margin:8px 0 0}
+#roomDialog #roomError{min-height:0;padding:10px 0 0;font-size:14px;line-height:1.6}
+#roomDialog .dialog-actions{margin:18px 0 0;display:block}
+#roomDialog #roomSubmit{background:var(--strong);color:var(--on-strong);border-color:var(--strong);width:100%;min-height:48px;font-size:16px;line-height:1.5;padding:11px 16px;border-radius:10px}
+#roomDialog :is(button,input,select):focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media(max-width:360px){#roomDialog .dialog-head{padding:14px 18px 8px}#roomDialog .dialog-body{padding:4px 18px 18px}#roomDialog .dialog-head h2{font-size:21px}#roomDialog #roomVoiceTest{padding:9px}#roomDialog .room-voice-setup .row{gap:8px}}
+</style>
 </head>
 <body class="design-refresh">
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-restore-panel" viewBox="0 0 24 24"><path d="M3 8h5V3m8 0v5h5M3 16h5v5m8 0v-5h5"/></symbol><symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.2 15.2 5.3 5.3M10.5 7.5v6M7.5 10.5h6"/></symbol><symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.2 15.2 5.3 5.3M7.5 10.5h6"/></symbol><symbol id="i-guide-keyboard" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 15h10"/></symbol><symbol id="i-previous-track" viewBox="0 0 24 24"><path d="m18 5-10 7 10 7ZM5 5v14"/></symbol></defs></svg>
@@ -1915,7 +1946,17 @@ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option spa
 <p class="audio-warning">藍牙不是房間連線方式。各台裝置需要網路，並各自連接耳機。藍牙延遲不一且可能變動，正式演出請優先使用有線監聽，並先實測。</p></div></section></div>
 </dialog>
 <dialog id="songDialog" aria-labelledby="songDialogTitle"><div class="dialog-head"><h2 id="songDialogTitle">新增歌曲</h2><button class="icon-btn" data-close="songDialog" aria-label="關閉"><svg><use href="#i-close"/></svg></button></div><form id="songForm" class="dialog-body"><p>儲存速度與拍號，下次點歌名即可切換。</p><label class="field-label" for="songName">歌曲名稱</label><input id="songName" maxlength="40" required placeholder="例如：本週開場詩歌" autocomplete="off"><div class="dialog-grid"><div><label class="field-label" for="songBpm">速度 BPM</label><input type="number" id="songBpm" min="40" max="300" required></div><div><label class="field-label" for="songMeter">拍號</label><select id="songMeter"><option>2/4</option><option>3/4</option><option selected>4/4</option><option>5/4</option><option>6/8</option><option>7/8</option><option>12/8</option></select></div><div><label class="field-label" for="songNote">音符細分</label><select id="songNote"><option value="4">四分音符</option><option value="8">八分音符</option><option value="16">十六分音符</option></select></div><div><label class="field-label" for="songCountIn">預備拍</label><select id="songCountIn"><option value="0">關閉</option><option value="1">1 小節</option><option value="2">2 小節</option></select></div></div><div class="song-order" id="songOrder"><span class="muted">歌單順序</span><button type="button" class="btn small-btn" id="moveSongUp">↑ 上移</button><button type="button" class="btn small-btn" id="moveSongDown">↓ 下移</button><span id="songPosition" class="muted"></span></div><div class="dialog-actions"><button type="button" id="deleteSong" class="btn danger">刪除</button><button type="button" class="btn" data-close="songDialog">取消</button><button type="submit" class="btn primary">儲存歌曲</button></div></form></dialog>
-<dialog id="roomDialog" aria-labelledby="roomDialogTitle"><div class="dialog-head"><h2 id="roomDialogTitle">建立團隊房間</h2><button class="icon-btn" data-close="roomDialog" aria-label="關閉"><svg><use href="#i-close"/></svg></button></div><form id="roomForm" class="dialog-body"><p id="roomDialogIntro">你將成為主持人，統一控制大家的節奏。</p><label class="field-label" id="instrumentPickerLabel">你的樂器／角色</label><input id="displayName" type="hidden"><div id="instrumentPicker" class="instrument-picker" role="group" aria-labelledby="instrumentPickerLabel"></div><div id="instrumentSelected" class="instrument-selected" aria-live="polite">請選擇本次使用的樂器或角色。</div><div class="instrument-add-box" id="instrumentAddBox" hidden><label class="field-label" for="customInstrument">新增樂器或角色</label><div class="row"><input id="customInstrument" maxlength="16" placeholder="例如：薩克斯風" autocomplete="off"><button type="button" class="btn small-btn" id="addInstrumentConfirm">新增並選擇</button></div><p id="instrumentAddError" class="band-helper" role="status"></p></div><div class="room-voice-setup"><div class="row"><label class="check-row"><input type="checkbox" id="roomAutoSpeak" checked><span>收到團隊訊息時自動播報</span></label><button type="button" class="btn small-btn" id="roomVoiceTest">試聽語音</button></div><p id="roomVoiceStatus">待啟用語音</p><p>請先試聽，確認喇叭或耳機有聲音。語音與節拍器分開控制，不使用麥克風。</p></div><div id="joinCodeField" hidden><label class="field-label" for="joinCode">4 位數字房間代碼</label><input id="joinCode" class="join-code" type="text" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" spellcheck="false" autocomplete="off" placeholder="4826"></div><div class="note-box"><p>使用 shiftr.io 公開測試中繼（WSS 443）。傳送樂器名稱、歌名、節奏與傳話文字，不錄音、不傳送麥克風聲音。指定傳話由主持人轉送，並非端到端加密；請勿輸入敏感資料。</p></div><p class="small">主持人與團員都請使用此新版。公開中繼僅供試用，不保證服務可用率；正式演出應改用專用服務並先實測。</p><div id="roomError" class="form-error" role="status" aria-live="polite"></div><div class="dialog-actions"><button type="button" class="btn" data-close="roomDialog">取消</button><button type="submit" class="btn primary" id="roomSubmit">建立房間</button></div></form></dialog>
+<dialog id="roomDialog" aria-labelledby="roomDialogTitle" data-room-ui="compact-r1">
+ <div class="dialog-head"><h2 id="roomDialogTitle">建立房間</h2><button type="button" class="icon-btn" data-close="roomDialog" aria-label="關閉"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div>
+ <form id="roomForm" class="dialog-body">
+  <div id="joinCodeField" class="room-field" hidden><label class="field-label" for="joinCode" id="roomCodeLabel">房間代碼</label><input id="joinCode" class="join-code" type="text" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" spellcheck="false" autocomplete="off" placeholder="4 位數字"></div>
+  <div class="room-field"><label class="field-label" id="instrumentPickerLabel" for="instrumentPicker">樂器／角色</label><input id="displayName" type="hidden"><div class="room-role-row"><select id="instrumentPicker" required></select><button type="button" id="roomInstrumentAdd" class="btn room-add-role" aria-label="新增樂器／角色" title="新增樂器／角色"><svg aria-hidden="true"><use href="#i-plus"/></svg></button></div></div>
+  <div class="instrument-add-box" id="instrumentAddBox" hidden><label class="field-label" for="customInstrument" id="roomCustomLabel">樂器／角色名稱</label><div class="row"><input id="customInstrument" maxlength="16" placeholder="例如：薩克斯風" autocomplete="off"><button type="button" class="btn small-btn" id="addInstrumentConfirm">新增</button></div><p id="instrumentAddError" class="band-helper" role="status"></p></div>
+  <div class="room-voice-setup"><div class="row"><label class="check-row"><input type="checkbox" id="roomAutoSpeak" checked><span id="roomAutoSpeakLabel">自動播報</span></label><button type="button" class="btn small-btn" id="roomVoiceTest">試聽</button></div><p id="roomVoiceStatus" role="status" aria-live="polite" hidden></p></div>
+  <div id="roomError" class="form-error" role="status" aria-live="polite"></div>
+  <div class="dialog-actions"><button type="submit" class="btn primary" id="roomSubmit">建立房間</button></div>
+ </form>
+</dialog>
 <dialog id="helpDialog" aria-labelledby="helpTitle" aria-describedby="guideIntro"><div class="dialog-head guide-header"><div><h2 id="helpTitle">使用說明</h2><p id="guideIntro">連上團隊、同步節拍、即時傳話，也能獨自練習。</p></div><button type="button" id="guideClose" class="icon-btn" data-close="helpDialog" aria-label="關閉使用說明" autofocus><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><div class="guide-scroll" id="guideScroll"><section class="guide-primary" aria-labelledby="guideStartTitle"><h3 id="guideStartTitle">TEMPOLIVE 的核心功能</h3><div class="guide-primary-grid">
 <article class="guide-feature" data-guide-feature="room" aria-labelledby="guide-feature-room"><div class="guide-feature-head"><span class="guide-feature-icon" aria-hidden="true"><svg><use href="#i-people"/></svg></span><h4 id="guide-feature-room">團隊房間</h4></div><p class="guide-feature-lead">建立房間，分享 4 位代碼。</p><p class="guide-feature-copy">團員選擇樂器／角色，輸入代碼加入；全員使用相同版本。</p></article>
 <article class="guide-feature" data-guide-feature="sync" aria-labelledby="guide-feature-sync"><div class="guide-feature-head"><span class="guide-feature-icon" aria-hidden="true"><svg><use href="#i-quarter"/></svg></span><h4 id="guide-feature-sync">同步節拍</h4></div><p class="guide-feature-lead">主持人控制，全團跟隨節拍。</p><p class="guide-feature-copy">校時後跟隨主持人的速度與播放；各自調整本機音量，不影響其他人。</p></article>
@@ -3799,8 +3840,19 @@ window.addEventListener('online',()=>room.kickRecovery());
 document.addEventListener('resume',()=>{armGuestRecoveryOnReturn();engine.schedule();});
 
 /* === ROOM DIALOG: network is never blocked on AudioContext.resume() === */
+/* Room-entry labels only: all connection and speech engines stay unchanged. */
+const ROOM_UI_COPY=Object.freeze({"zh-Hant":{"create":"\u5efa\u7acb\u623f\u9593","join":"\u52a0\u5165\u623f\u9593","role":"\u6a02\u5668\uff0f\u89d2\u8272","choose":"\u8acb\u9078\u64c7","add":"\u65b0\u589e\u6a02\u5668\uff0f\u89d2\u8272","code":"\u623f\u9593\u4ee3\u78bc","codeHint":"4 \u4f4d\u6578\u5b57","auto":"\u81ea\u52d5\u64ad\u5831","test":"\u8a66\u807d","custom":"\u6a02\u5668\uff0f\u89d2\u8272\u540d\u7a31","confirm":"\u65b0\u589e"},"en":{"create":"Create room","join":"Join room","role":"Instrument / role","choose":"Select","add":"Add instrument or role","code":"Room code","codeHint":"4-digit code","auto":"Auto-read messages","test":"Test voice","custom":"Instrument / role name","confirm":"Add"},"de":{"create":"Raum erstellen","join":"Raum beitreten","role":"Instrument / Rolle","choose":"Ausw\u00e4hlen","add":"Instrument oder Rolle hinzuf\u00fcgen","code":"Raumcode","codeHint":"4-stelliger Code","auto":"Automatisch vorlesen","test":"Testen","custom":"Name des Instruments / der Rolle","confirm":"Hinzuf\u00fcgen"}});
+function roomUiText(key){return (ROOM_UI_COPY[I18N.lang]||ROOM_UI_COPY['zh-Hant'])[key];}
 let dialogRoomRole='host',roomFormBusy=false,roomDialogToken=0;
-function openRoomDialog(role){roomDialogToken++;dialogRoomRole=role;roomFormBusy=false;I18N.set($('roomError'),'');$('roomSubmit').disabled=false;$('displayName').value=state.name;$('joinCode').value='';$('joinCodeField').hidden=role!=='guest';$('joinCode').required=role==='guest';I18N.set($('roomDialogTitle'),role==='host'?'建立團隊房間':'代碼加入房間');I18N.set($('roomSubmit'),role==='host'?'建立房間':'加入並啟用聲音');I18N.set($('roomDialogIntro'),role==='host'?'你將成為主持人，統一控制大家的節奏。':'輸入主持人提供的四位數字，加入後自動跟隨節拍。');$('roomDialog').showModal();}
+function openRoomDialog(role){
+ roomDialogToken++;dialogRoomRole=role;roomFormBusy=false;I18N.set($('roomError'),'');
+ $('roomSubmit').disabled=false;$('displayName').value=state.name;$('joinCode').value='';
+ $('joinCodeField').hidden=role!=='guest';$('joinCode').required=role==='guest';
+ I18N.bind($('roomDialogTitle'),()=>roomUiText(dialogRoomRole==='host'?'create':'join'));
+ I18N.bind($('roomSubmit'),()=>roomUiText(dialogRoomRole==='host'?'create':'join'));
+ $('roomDialog').showModal();
+ (role==='guest'?$('joinCode'):$('instrumentPicker')).focus({preventScroll:true});
+}
 $('createRoom').addEventListener('click',()=>openRoomDialog('host'));$('joinRoom').addEventListener('click',()=>openRoomDialog('guest'));
 function normalizeCode(value){return String(value).normalize('NFKC').replace(/[^0-9]/g,'').slice(0,4);}
 $('joinCode').addEventListener('input',e=>{e.target.value=normalizeCode(e.target.value);});
@@ -4058,10 +4110,10 @@ const self=()=>getPeople().find(p=>p.id===currentId())||{id:currentId(),name:roo
 function messagePhrase(m,language=I18N.lang){const preset=C.phrases.find(p=>p.id===m.phraseId);return preset?I18N.t(preset.say,language):m.text;}
 function speakLabel(label,language,instrument){if(language==='zh-Hant')return shortRole(label);const name=I18N.person({name:label,instrument},language);return language==='de'?name.replace(/^Schlagzeug(?= |$)/,'Schlagzeuger'):name.replace(/^Drums(?= |$)/,'Drummer');}
 function voiceLanguage(language=I18N.lang){return language==='de'?'de-DE':language==='en'?'en-US':'zh-TW';}
-function voiceMatches(voice,language=I18N.lang){return language==='de'?/^de(?:[-_]|$)/i.test(voice.lang):language==='en'?/^en(?:[-_]|$)/i.test(voice.lang):mandarinVoice(voice);}
+function voiceMatches(voice,language=I18N.lang){return language==='en'||language==='de'?nativeVoiceAllowed(voice,language):mandarinVoice(voice);}
 const safeMessage=m=>m&&isId(m.id)&&isId(m.senderId)&&typeof m.senderLabel==='string'&&typeof m.targetLabel==='string'&&typeof m.text==='string'&&m.text.length<=40&&Array.isArray(m.targetIds)&&m.targetIds.length<=CONFIG.maxPeople&&m.targetIds.every(isId)&&Number.isFinite(m.createdAt)&&Number.isFinite(m.expiresAt)&&m.expiresAt-m.createdAt<=C.ttl+100;
 function notify(message){if($b('bandDialog').open){I18N.set($b('bandInlineNotice'),message);$b('bandInlineNotice').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$b('bandInlineNotice').hidden=true,5000);}else toast(message);}
-function spoken(m){if(I18N.lang==='de'){
+function spoken(m){if(I18N.lang==='en'||I18N.lang==='de')return nativeSpoken(m,I18N.lang);if(I18N.lang==='de'){
  const target=['\u6240\u6709\u4eba','\u5168\u90e8\u4eba'].includes(m.targetLabel)?'An alle':I18N.person({name:m.targetLabel,instrument:m.targetInstrument},'de');
  const spokenPreset={fast:'bitte langsamer',slow:'bitte schneller',more:'bitte etwas mehr',less:'bitte etwas weniger','monitor-up':'bitte den Monitorpegel erh\u00f6hen','monitor-down':'bitte den Monitorpegel verringern',help:'ich brauche Hilfe'};
  // Custom messages are read verbatim; no machine translation of user text.
@@ -4073,87 +4125,74 @@ function sendToHost(type,more){if(room.role==='guest'&&room.connection?.open&&!r
 function deliver(id,type,data){if(id===currentId()){receivePacket({type,...data});return;}const entry=room.clients.get(id);if(entry?.hello&&entry.conn.open)room.send(entry.conn,room.packet(type,data));}
 function announceStatus(){const t=performance.now();if(t-lastStatusAt<150)return;lastStatusAt=t;if(room.role==='guest')room.sendLocalStatus();else if(room.role==='host')room.updateRoster();}
 
-/* English/German presets retain the existing Web Audio bank. Mandarin is
-   device speech below: no synthesized Mandarin file or pinyin reconstruction
-   is played. Native speech availability and acoustic output are OS-controlled. */
-const SafeBandVoice=(()=>{
- const REVISION='2.4.8-mandarin-clauses-r1';
- const LANGUAGE=['en','de'];
- const BASIC=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound','member','says','all','fast','slow','more','less','monitor-up','monitor-down','help','custom','test'];
- const ROLE=['piano','keyboard','acoustic','electric','bass','drums','leader','vocals','sound','member'];
-  const url=new URL('tempolive-live-voices.json',document.baseURI);url.searchParams.set('v',REVISION);
- let pack=null,loading=null,lastError='';const clips=new Map(),utterances=new Map();
- const language=v=>{if(!LANGUAGE.includes(v))throw Error('MANDARIN_USES_SYSTEM_VOICE');return v;};
- function load(){
-  if(pack)return Promise.resolve(pack);if(loading)return loading;
-  const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),15000);
-  const task=fetch(url.href,{cache:'no-cache',signal:abort.signal}).then(r=>{
-   if(!r.ok)throw Error('VOICE_HTTP_'+r.status);return r.json();
-  }).then(data=>{
-   if(![1,2].includes(data.version)||data.format!=='audio/mpeg')throw Error('VOICE_UPDATE_REQUIRED');
-   const check=(lang,key)=>{const x=data.voices?.[lang]?.[key];if(typeof x!=='string'||x.length<100)throw Error('VOICE_CLIP_MISSING');};
-   for(const lang of LANGUAGE)for(const key of BASIC)check(lang,key);
-   pack=data;lastError='';return data;
-  }).catch(error=>{lastError=error?.message||'VOICE_LOAD_FAILED';throw error;}).finally(()=>{clearTimeout(timer);if(loading===task)loading=null;});
-  loading=task;return task;
+// LIVE EN/DE repair: use one OS utterance, never legacy word recordings.
+const LIVE_VOICE_REVISION='2.4.12-en-de-native-r1';
+const NATIVE_RATE=1;
+function nativeVoiceAllowed(v,language){
+ const tag=String(v?.lang||'').replace(/_/g,'-');
+ if(!new RegExp('^'+language+'(?:-|$)','i').test(tag))return false;
+ // Do not select formant/novelty voices when a normal speaking voice is required.
+ return !/(?:espeak|festival|flite|formant|\b(?:albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|good news|hysterical|jester|organ|trinoids|whisper|zarvox|wobble)\b)/i.test(String(v.name||'')+' '+String(v.voiceURI||''));
+}
+function pickNativeVoice(voices,language,uri=''){
+ const available=voices.filter(v=>nativeVoiceAllowed(v,language));
+ const chosen=available.find(v=>v.voiceURI===uri);if(chosen)return chosen;
+ const locale=language==='de'?'de-de':'en-us';
+ const score=v=>{
+  const name=String(v.name||'')+' '+String(v.voiceURI||'');
+  return (v.localService?100:0)+(/premium|enhanced|natural|neural/i.test(name)?50:0)+
+   (String(v.lang).replace(/_/g,'-').toLowerCase()===locale?30:0)+
+   (v.default?5:0)+(/\b(?:Samantha|Anna)\b/i.test(name)?2:0);
+ };
+ return [...available].sort((a,b)=>score(b)-score(a))[0]||null;
+}
+const NATIVE_TEST=Object.freeze({en:'Voice alerts are on. Please follow the beat.',de:'Die Sprachhinweise sind aktiviert. Bitte im Takt bleiben.'});
+const NATIVE_PHRASES=Object.freeze({
+ en:Object.freeze({fast:'please slow down',slow:'please speed up',more:'a little more, please',less:'a little less, please','monitor-up':'please turn up the monitor','monitor-down':'please turn down the monitor',help:'I need help'}),
+ de:Object.freeze({fast:'bitte etwas langsamer',slow:'bitte etwas schneller',more:'bitte etwas mehr',less:'bitte etwas weniger','monitor-up':'bitte den Monitor lauter stellen','monitor-down':'bitte den Monitor leiser stellen',help:'ich brauche Hilfe'})
+});
+const NATIVE_ROLES=Object.freeze({
+ en:['pianist','keyboard player','acoustic guitarist','electric guitarist','bass player','drummer','worship leader','vocalist','sound engineer'],
+ de:['Klavier','Keyboard','Akustikgitarre','E-Gitarre','Bass','Schlagzeug','Lobpreisleitung','Gesang','Tonregie'],
+ deFrom:['vom Klavier','vom Keyboard','von der Akustikgitarre','von der E-Gitarre','vom Bass','vom Schlagzeug','von der Lobpreisleitung','vom Gesang','von der Tonregie']
+});
+function nativeRole(label,explicit,language,from=false){
+ const raw=String(label||'').trim(),suffix=raw.match(/\s+(\d+)$/)?.[1]||'';
+ let index=-1;
+ for(const candidate of [explicit,label]){
+  const clean=String(candidate||'').trim().replace(/\s*\d+$/,'').replace(/\u624b$/,'');
+  index=C.instruments.findIndex(x=>x===clean||x===candidate);if(index>=0)break;
  }
- function trimCache(cache,max){while(cache.size>max)cache.delete(cache.keys().next().value);}
- async function prepare(keys,chosenLanguage=I18N.lang,context=engine.ctx){
-  const lang=language(chosenLanguage),data=await load();
-  if(!context||context.state==='closed')throw Error('VOICE_CONTEXT_CLOSED');
-  return Promise.all(keys.map(key=>{
-   const cacheKey=context.sampleRate+':'+lang+':'+key;
-   if(clips.has(cacheKey))return clips.get(cacheKey);
-   const task=Promise.resolve().then(()=>{
-    const encoded=data.voices[lang]?.[key];if(!encoded)throw Error('VOICE_CLIP_MISSING');
-    const raw=atob(encoded),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
-    return context.decodeAudioData(bytes.buffer);
-   }).then(buffer=>{
-    if(!buffer.numberOfChannels||!Number.isFinite(buffer.duration)||buffer.duration<=0||buffer.duration>30)throw Error('VOICE_BAD_AUDIO');
-    return buffer;
-   }).catch(error=>{if(clips.get(cacheKey)===task)clips.delete(cacheKey);lastError=error?.message||'VOICE_DECODE_FAILED';throw error;});
-   clips.set(cacheKey,task);trimCache(clips,48);return task;
-  }));
+ if(index>=0){
+  const role=(language==='de'&&from?NATIVE_ROLES.deFrom:NATIVE_ROLES[language])[index]+(suffix?' '+suffix:'');
+  return language==='en'&&from?'the '+role:role;
  }
- async function sentence(keys,chosenLanguage,context){
-  // Assemble first, then play ONE source at its natural rate from offset zero.
-  // No JS-timer handoffs, duration caps or trimming of word onsets/tails.
-  const lang=language(chosenLanguage),id=context.sampleRate+':'+lang+':'+keys.join('|');
-  if(utterances.has(id))return utterances.get(id);
-  const buffers=await prepare(keys,lang,context),rate=context.sampleRate;
-  const lead=Math.round(.18*rate),gap=Math.round(.04*rate),tail=Math.round(.12*rate);
-  const length=lead+tail+buffers.reduce((n,b)=>n+b.length,0)+gap*Math.max(0,buffers.length-1);
-  const combined=context.createBuffer(1,length,rate),out=combined.getChannelData(0);let offset=lead;
-  for(const buffer of buffers){
-   for(let channel=0;channel<buffer.numberOfChannels;channel++){
-    const data=buffer.getChannelData(channel);for(let i=0;i<data.length;i++)out[offset+i]+=data[i]/buffer.numberOfChannels;
-   }
-   offset+=buffer.length+gap;
-  }
-  utterances.set(id,combined);trimCache(utterances,8);return combined;
- }
- function instrument(label,explicit=''){
-  for(const name of [explicit,label]){
-   const clean=String(name||'').replace(/\s*\d+$/,'').replace(/\u624b$/,'');
-   const index=C.instruments.findIndex(x=>x===clean||x===name);if(index>=0)return ROLE[index];
-  }
-  return 'member';
- }
- function keys(message,chosenLanguage=I18N.lang){
-  const phrase=C.phrases.find(p=>p.id===message.phraseId)||C.phrases.find(p=>p.say===message.text);
-  const all=['\u6240\u6709\u4eba','\u5168\u90e8\u4eba'].includes(message.targetLabel);
-  const sender=instrument(message.senderLabel,message.senderInstrument),target=all?'all':instrument(message.targetLabel,message.targetInstrument);
-  const action=phrase?.id||'custom';
-  language(chosenLanguage);return [sender,'says',target,action];
- }
- return {load,prepare,sentence,keys,ready:()=>!!pack,snapshot:()=>({revision:pack?.revision||null,expectedRevision:REVISION,loaded:!!pack,error:lastError,decodedClips:clips.size,cachedSentences:utterances.size})};
-})();
+ // Preserve names/visitor numbers; do not guess translations of custom text.
+ const guest=raw.match(/^(?:\u8a2a\u5ba2|guest|gast)\s*(\d*)$/i);
+ const person=guest?(language==='de'?'Gast':'guest')+(guest[1]?' '+guest[1]:''):(I18N.person({name:raw,instrument:explicit},language)||(language==='de'?'Bandmitglied':'band member'));
+ return language==='de'&&from?'von '+person:person;
+}
+function nativeSpoken(m,language){
+ const preset=C.phrases.find(p=>p.id===m.phraseId)||C.phrases.find(p=>p.say===m.text);
+ const phrase=preset?NATIVE_PHRASES[language][preset.id]:String(m.text||'').trim();
+ const all=['\u6240\u6709\u4eba','\u5168\u90e8\u4eba'].includes(m.targetLabel);
+ const target=all?(language==='de'?'An alle':'Everyone'):nativeRole(m.targetLabel,m.targetInstrument,language);
+ const sender=nativeRole(m.senderLabel,m.senderInstrument,language,true);
+ const targetText=target.replace(/^./,c=>c.toLocaleUpperCase(language));
+ const ending=/[.!?\u3002\uff01\uff1f]$/.test(phrase)?'':'.';
+ return (language==='de'?'Nachricht ':'Message from ')+sender+'. '+targetText+', '+phrase+ending;
+}
+const NATIVE_ERRORS=Object.freeze({
+ en:{unavailable:'This browser does not provide system speech. Your text messages are still available.',missing:'No usable English voice is available. Select or install an English system voice, then tap Enable / Test. The old recordings will not be played.',empty:'The voice message is empty.',start:'Speech did not start. Tap Enable / Test and check the selected English voice.',blocked:'Tap Enable / Test to allow speech playback.',failed:'English speech failed. Try another English voice. Your text message remains available.',timeout:'Speech timed out. Please test the selected voice again.',conflict:'System speech conflicted with the local metronome. Only this voice alert was stopped; your text message remains visible.'},
+ de:{unavailable:'Dieser Browser stellt keine Systemstimme bereit. Textnachrichten bleiben verf\u00fcgbar.',missing:'Keine geeignete deutsche Stimme verf\u00fcgbar. Bitte eine deutsche Systemstimme ausw\u00e4hlen oder installieren und erneut testen. Alte Aufnahmen werden nicht abgespielt.',empty:'Die Sprachnachricht ist leer.',start:'Die Sprachausgabe wurde nicht gestartet. Bitte die ausgew\u00e4hlte deutsche Stimme erneut testen.',blocked:'Bitte zuerst Aktivieren / Testen antippen, um die Sprachausgabe zu erlauben.',failed:'Die deutsche Sprachausgabe ist fehlgeschlagen. Bitte eine andere deutsche Stimme testen. Die Textnachricht bleibt sichtbar.',timeout:'Zeit\u00fcberschreitung bei der Sprachausgabe. Bitte die Stimme erneut testen.',conflict:'Die Systemstimme hat den lokalen Metronomton unterbrochen. Nur dieser Sprachhinweis wurde gestoppt; die Textnachricht bleibt sichtbar.'}
+});
+
 
 class Speaker{
  constructor(){this.armed=false;this.problem='';this.voices=[];this.queue=[];this.active=null;this.counter=0;this.refresh();if(window.speechSynthesis?.addEventListener)window.speechSynthesis.addEventListener('voiceschanged',()=>this.refresh());}
  refresh(){try{this.voices=window.speechSynthesis?.getVoices()||[];}catch(e){this.voices=[];}renderVoices();}
- available(language=I18N.lang){return language==='zh-Hant'?!!(window.speechSynthesis&&window.SpeechSynthesisUtterance):!!(window.AudioContext||window.webkitAudioContext);}
- voice(language=I18N.lang){if(language==='zh-Hant')return pickMandarinVoice(this.voices,prefs.voiceURI);const uri=language==='de'?prefs.voiceDeURI:language==='en'?prefs.voiceEnURI:prefs.voiceURI;const preferred=this.voices.find(v=>v.voiceURI===uri&&voiceMatches(v,language));if(preferred)return preferred;return [...this.voices].filter(v=>voiceMatches(v,language)).sort((a,b)=>((b.lang.toLowerCase()===voiceLanguage(language).toLowerCase()?10:0)+(b.localService?2:0))-((a.lang.toLowerCase()===voiceLanguage(language).toLowerCase()?10:0)+(a.localService?2:0)))[0]||null;}
+ available(language=I18N.lang){return !!(window.speechSynthesis&&window.SpeechSynthesisUtterance);}
+ voice(language=I18N.lang){if(language==='zh-Hant')return pickMandarinVoice(this.voices,prefs.voiceURI);return pickNativeVoice(this.voices,language,language==='de'?prefs.voiceDeURI:prefs.voiceEnURI);}
  status(){if(!this.available())return '不支援語音';if(!prefs.autoSpeak)return '僅顯示文字';if(!prefs.volume)return '語音靜音';if(this.problem)return '需要重新試聽';return this.armed?'語音已啟用':'待啟用語音';}
  arm(){
   if(this.active)return;
@@ -4164,8 +4203,8 @@ class Speaker{
    engine.ensure().catch(()=>renderRecoveryControl());
    this.enqueue({test:true,text:'\u8a9e\u97f3\u63d0\u9192\u5df2\u555f\u7528\u3002\u8acb\u8ddf\u4e0a\u76ee\u524d\u7bc0\u62cd\u3002',language,speechRate:prefs.zhVoiceRate,expiresAt:now()+C.ttl},true);return;
   }
-  const pending=engine.ensure();SafeBandVoice.load().catch(()=>{});
-  pending.then(()=>{this.armed=true;this.enqueue({test:true,safeKeys:['test'],text:'',language,expiresAt:now()+C.ttl},true);}).catch(()=>{this.problem=localText('needs');renderVoiceState();});
+  engine.ensure().catch(()=>renderRecoveryControl());
+  this.enqueue({test:true,text:NATIVE_TEST[language],language,expiresAt:now()+C.ttl},true);
  }
 
  enqueue(item,manual=false){
@@ -4239,64 +4278,69 @@ class Speaker{
   try{if(synth.paused)synth.resume();synth.speak(utter);}catch(_){finish('failed','\u7121\u6cd5\u555f\u7528\u7cfb\u7d71\u570b\u8a9e\uff0c\u4ecd\u53ef\u95b1\u8b80\u6587\u5b57\u8a0a\u606f\u3002');}
  }
 
- pumpSafe(item){
-  const context=engine.ctx,job={item,safe:true,done:false,sources:[],context,finish:null,timer:null,listener:null,gain:null,endsAt:null};this.active=job;
-  const failedText=(code)=>item.language==='en'?(code==='VOICE_UPDATE_REQUIRED'?'Update tempolive-live-voices.json together with index.html.':'Voice playback did not finish. Please retry after restoring local audio.'):item.language==='de'?(code==='VOICE_UPDATE_REQUIRED'?'Bitte tempolive-live-voices.json und index.html gemeinsam aktualisieren.':'Die Sprachausgabe wurde nicht beendet. Bitte den lokalen Ton wiederherstellen und erneut versuchen.'):(code==='VOICE_UPDATE_REQUIRED'?'\u8acb\u540c\u6642\u66f4\u65b0 tempolive-live-voices.json \u8207 index.html\uff0c\u76ee\u524d\u662f\u820a\u7248\u8a9e\u97f3\u6a94\u3002':'\u8a9e\u97f3\u672a\u5b8c\u6574\u64ad\u653e\uff0c\u8acb\u6062\u5fa9\u672c\u6a5f\u8072\u97f3\u5f8c\u518d\u8a66\u4e00\u6b21\u3002');
-  const finish=(status,message='')=>{
-   if(job.done||this.active!==job)return;job.done=true;clearTimeout(job.timer);
-   context?.removeEventListener?.('statechange',job.listener);this.active=null;
-   for(const source of job.sources){if(status!=='played')try{source.stop();}catch(_){}try{source.disconnect();}catch(_){}}
-   try{job.gain?.disconnect();}catch(_){}
-   if(status==='played'){this.armed=true;this.problem='';}else if(message)this.problem=message;
-   if(item.id)receipt(item.id,status);if(item.test&&message)notify(message);
+ pumpNative(item){
+  const language=item.language,words=NATIVE_ERRORS[language],synth=window.speechSynthesis;
+  const reject=reason=>{this.armed=false;this.reject(item,'failed',reason);setTimeout(()=>this.pump(),70);};
+  if(!synth||!window.SpeechSynthesisUtterance){reject(words.unavailable);return;}
+  this.refresh();const voice=this.voice(language),message=String(item.text||'').trim();
+  if(!message){reject(words.empty);return;}
+  // Empty initial lists are legal: use an explicit language, never an unrelated
+  // default. A populated list with no suitable voice fails visibly, not to eSpeak.
+  if(this.voices.length&&!voice){reject(words.missing);return;}
+  const utter=new SpeechSynthesisUtterance(message);
+  utter.lang=voice?.lang||voiceLanguage(language);if(voice)utter.voice=voice;
+  utter.rate=NATIVE_RATE;utter.pitch=1;utter.volume=prefs.volume/100;
+  const context=engine.ctx,job={item,utter,native:true,safe:false,started:false,done:false,timer:null,guardTimer:null,listener:null,context,finish:null};
+  this.active=job;
+  this.lastNative={revision:LIVE_VOICE_REVISION,text:message,language,locale:utter.lang,voice:voice?.name||'system-default',voiceURI:voice?.voiceURI||'',local:voice?.localService??null,rate:utter.rate,pitch:utter.pitch,result:'requested'};
+  const finish=(status,reason='')=>{
+   if(job.done||this.active!==job)return;
+   job.done=true;clearTimeout(job.timer);clearTimeout(job.guardTimer);context?.removeEventListener?.('statechange',job.listener);this.active=null;
+   this.lastNative={...this.lastNative,result:status};
+   if(status==='played'){this.armed=true;this.problem='';}
+   else if(['failed','interrupted','blocked'].includes(status)){this.armed=false;if(reason)this.problem=reason;}
+   if(['failed','interrupted'].includes(status)){
+    const blocked=this.queue.filter(next=>next.language===language);
+    this.queue=this.queue.filter(next=>next.language!==language);
+    for(const next of blocked)if(next.id)receipt(next.id,'blocked');
+   }
+   if(item.id)receipt(item.id,status);if(item.test&&reason)notify(reason);
    renderVoiceState();announceStatus();setTimeout(()=>this.pump(),70);
   };
   job.finish=finish;
-  if(!context||!engine.isReady()){finish('blocked',localText('needs'));return;}
-  job.listener=()=>{if(context.state!=='running')finish('interrupted',failedText());};
-  context.addEventListener('statechange',job.listener);
-  job.timer=setTimeout(()=>finish('failed',failedText()),18000);
-  SafeBandVoice.sentence(item.safeKeys||['custom'],item.language,context).then(buffer=>{
-   if(job.done||this.active!==job)return;
-   if(engine.ctx!==context||!engine.isReady()){finish('blocked',localText('needs'));return;}
-   if(!item.manual&&now()>item.expiresAt){finish('expired');return;}
-   const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;
-   source.playbackRate.value=1;source.detune.value=0;source.loop=false;
-   gain.gain.value=prefs.volume/100*.7;source.connect(gain);gain.connect(context.destination);
-   job.gain=gain;job.sources.push(source);
-   const start=context.currentTime+.06;job.endsAt=start+buffer.duration;
-   // Keep the already-authorized output alive through the end of the sentence.
-   // This is a local route hold, never a room command or metronome re-anchor.
-   engine.gateHoldUntil=Math.max(engine.gateHoldUntil,wallNow()+(buffer.duration+.55)*1000);
-   source.onended=()=>{if(!job.done)finish(context.currentTime>=job.endsAt-.03?'played':'interrupted',context.currentTime>=job.endsAt-.03?'':failedText());};
-   source.start(start,0);
-   clearTimeout(job.timer);job.timer=setTimeout(()=>finish('failed',failedText()),Math.max(7000,(buffer.duration+6)*1000));
-   if(item.id)receipt(item.id,'speaking');renderVoiceState();
-  }).catch(error=>finish('failed',failedText(error?.message)));
+  const stopNative=()=>{try{synth.cancel();}catch(_){}};
+  const guard=()=>{
+   if(job.done)return;
+   const wants=desiredEvent().playing&&!state.mute&&state.volume>0&&!engine.gameOutputSuppressed;
+   if(!wants||!context||context.state==='running'){clearTimeout(job.guardTimer);job.guardTimer=null;return;}
+   if(job.guardTimer)return;
+   job.guardTimer=setTimeout(()=>{
+    job.guardTimer=null;if(job.done||context.state==='running'||!desiredEvent().playing||state.mute)return;
+    finish('interrupted',words.conflict);stopNative();window.TempoliveAudioContinuity?.check('speech-focus-released');
+   },300);
+  };
+  job.listener=guard;context?.addEventListener?.('statechange',guard);
+  utter.onstart=()=>{
+   if(job.done)return;job.started=true;this.armed=true;this.problem='';clearTimeout(job.timer);
+   this.lastNative={...this.lastNative,result:'speaking'};
+   if(item.id)receipt(item.id,'speaking');renderVoiceState();announceStatus();guard();
+   job.timer=setTimeout(()=>{finish('failed',words.timeout);stopNative();},Math.min(45000,Math.max(12000,message.length*200)));
+  };
+  utter.onend=()=>finish(job.started?'played':'failed',job.started?'':words.start);
+  utter.onerror=e=>finish('failed',e.error==='not-allowed'?words.blocked:words.failed);
+  job.timer=setTimeout(()=>{finish('failed',words.start);stopNative();},8000);
+  // Keep the user gesture. Never await an audio download or engine.ensure here.
+  try{if(synth.paused)synth.resume();synth.speak(utter);}catch(_){finish('failed',words.failed);}
  }
 
  pump(){
   if(this.active||!this.queue.length)return;
   const item=this.queue.shift();if(!item.test&&!item.manual&&now()>item.expiresAt){this.reject(item,'expired');this.pump();return;}
   if(item.language==='zh-Hant'){this.pumpMandarin(item);return;}
-  if(item.safeKeys||desiredEvent().playing||currentEvent().playing){this.pumpSafe(item);return;}
-  if(document.hidden&&!item.manual||!window.speechSynthesis||!window.SpeechSynthesisUtterance){this.reject(item,'blocked');this.pump();return;}
-  const utter=new SpeechSynthesisUtterance(item.text),voice=this.voice(item.language);utter.lang=voice?.lang||voiceLanguage(item.language);if(voice)utter.voice=voice;utter.volume=prefs.volume/100;utter.rate=1.08;utter.pitch=1;
-  const token=++this.counter,job={token,item,utter,started:false,done:false,timer:null,listener:null,context:engine.ctx};this.active=job;
-  const finish=(status,message='')=>{
-   if(job.done||this.active!==job)return;job.done=true;clearTimeout(job.timer);job.context?.removeEventListener?.('statechange',job.listener);this.active=null;
-   if(status==='played'){this.armed=true;this.problem='';}else if(['failed','interrupted'].includes(status)){this.problem=message||'語音未能播放，請重新試聽。';this.armed=false;}
-   if(item.id)receipt(item.id,status);if(item.test)notify(status==='played'?'試聽完成。請確認實際喇叭／耳機有聲音；音量仍由系統限制。':this.problem||'試聽未完成。');
-   renderVoiceState();announceStatus();setTimeout(()=>this.pump(),70);
-  };
-  job.finish=finish;
-  utter.onstart=()=>{if(job.done)return;job.started=true;this.armed=true;this.problem='';clearTimeout(job.timer);job.timer=setTimeout(()=>{finish('failed','語音播放逾時。');window.speechSynthesis.cancel();},Math.min(25000,Math.max(9000,item.text.length*450)));if(item.id)receipt(item.id,'speaking');renderVoiceState();announceStatus();};
-  utter.onend=()=>finish(job.started?'played':'failed');utter.onerror=e=>finish('failed',e.error==='not-allowed'?'瀏覽器尚未允許播報，請點「啟用／試聽」。':'語音服務無法播放，請重新試聽並確認中文語音已安裝。');
-  job.listener=()=>{if(job.done)return;if(job.context?.state!=='running'&&desiredEvent().playing&&!document.hidden){finish('interrupted','此裝置目前無法同時播放語音與節拍，已停止語音；請重新啟用節拍並改用文字確認。');window.speechSynthesis.cancel();}};
-  job.context?.addEventListener?.('statechange',job.listener);
-  job.timer=setTimeout(()=>{finish('failed','語音尚未開始，請點「啟用／試聽」，並確認中文語音及輸出裝置。');window.speechSynthesis.cancel();},5500);
-  try{window.speechSynthesis.resume();window.speechSynthesis.speak(utter);}catch(e){finish('failed','無法啟動語音，請使用支援中文語音的瀏覽器。');}
+  if(item.language==='en'||item.language==='de'){this.pumpNative(item);return;}
+  this.reject(item,'failed');setTimeout(()=>this.pump(),70);
  }
+
  cancel(reason='blocked'){
   const jobs=this.queue.splice(0);jobs.forEach(item=>{if(item.id)receipt(item.id,reason);});
   if(this.active){const active=this.active;active.finish(reason);if(active.safe){for(const source of active.sources)try{source.stop();}catch(_){}}else try{window.speechSynthesis.cancel();}catch(_){}}
@@ -4308,22 +4352,23 @@ speaker=new Speaker();
 function renderVoices(){
  if(typeof speaker==='undefined')return;
  const select=$b('bandVoiceSelect'),previous=I18N.lang==='de'?prefs.voiceDeURI:I18N.lang==='en'?prefs.voiceEnURI:prefs.voiceURI,voices=speaker.voices.filter(v=>voiceMatches(v));
- select.replaceChildren(I18N.option('自動選擇中文聲音',''));
+ select.replaceChildren(I18N.option(I18N.lang==='en'?'Automatic English voice':I18N.lang==='de'?'Deutsche Stimme automatisch ausw\u00e4hlen':'自動選擇中文聲音',''));
  for(const v of voices)select.append(I18N.option(()=>v.name+' · '+v.lang+I18N.t(v.localService?'（本機）':'（可能需網路）'),v.voiceURI));
  select.value=voices.some(v=>v.voiceURI===previous)?previous:'';
+ if(I18N.lang==='en'||I18N.lang==='de'){renderVoiceState();return;}
  const hint=speaker.available()?(voices.length?'中文語音使用系統輸出；不會跟隨網頁另外指定的音效卡。請先試聽確認。':'裝置尚未列出中文語音；可先試聽，必要時安裝系統中文語音。'):'此瀏覽器不支援語音，仍可顯示收到的文字。';
  I18N.set($b('bandVoiceHint'),hint+' 不使用麥克風。雲端語音可能由裝置服務處理文字；本機語音優先。');
 }
 function renderVoiceState(){
  I18N.set($b('bandVoiceStatus'),speaker.status()+(speaker.problem?' · '+speaker.problem:''));
- I18N.set($b('roomVoiceStatus'),speaker.status()+(speaker.problem?' '+speaker.problem:''));$b('bandAutoSpeak').checked=prefs.autoSpeak;$b('roomAutoSpeak').checked=prefs.autoSpeak;
+ I18N.set($b('roomVoiceStatus'),speaker.status()+(speaker.problem?' '+speaker.problem:''));$b('roomVoiceStatus').hidden=!speaker.problem;$b('bandAutoSpeak').checked=prefs.autoSpeak;$b('roomAutoSpeak').checked=prefs.autoSpeak;
  $b('bandVoiceVolume').value=prefs.volume;I18N.set($b('bandVoiceVolumeValue'),prefs.volume+'%');
  $b('bandMandarinRateRow').hidden=I18N.lang!=='zh-Hant';
  $b('bandMandarinRate').value=String(prefs.zhVoiceRate);
  $b('bandMandarinRateValue').textContent=prefs.zhVoiceRate.toFixed(2).replace(/0$/,'')+'\u00d7';
  I18N.bind($b('bandVoiceHint'),()=>{
-  if(I18N.lang==='en')return 'Preset phrases use the built-in English audio. Custom text is read by the system voice only while stopped. Mandarin uses the device voice, not the recording bank.';
-  if(I18N.lang==='de')return 'Vorgegebene Saetze nutzen die englischen bzw. deutschen Audiodateien. Eigener Text nutzt die Systemstimme nur bei gestopptem Takt. Mandarin verwendet die Geraetestimme.';
+  if(I18N.lang==='en'){const voice=speaker.voice('en');return 'LIVE voice fix EN/DE r1. English is spoken as a complete message at normal speed. Voice: '+(voice?voice.name+' / '+voice.lang:'system default en-US')+'. Old recordings are disabled. Uses system audio output; a non-local voice may send text to the device speech service. Test with your actual headphones.';}
+  if(I18N.lang==='de'){const voice=speaker.voice('de');return 'LIVE voice fix EN/DE r1. Ganze Nachrichten mit normalem Sprechtempo. Stimme: '+(voice?voice.name+' / '+voice.lang:'Systemstandard de-DE')+'. Alte Aufnahmen sind deaktiviert. Die Stimme nutzt den System-Audioausgang; Online-Stimmen k\u00f6nnen Text an den Sprachdienst des Ger\u00e4ts senden. Bitte mit den eigenen Kopfh\u00f6rern testen.';}
   const voice=speaker.voice('zh-Hant');
   return '\u4e2d\u6587\u6539\u7528\u88dd\u7f6e\u570b\u8a9e\u6574\u53e5\u64ad\u5831\uff0c\u512a\u5148\u53f0\u7063\u570b\u8a9e\uff0c\u4e0d\u4f7f\u7528\u820a\u4e2d\u6587\u97f3\u6a94\u3002'+
    '\u76ee\u524d\uff1a'+(voice?voice.name+' / '+voice.lang:'\u7cfb\u7d71\u9810\u8a2d zh-TW')+'\u3002\u8a9e\u97f3\u8d70\u7cfb\u7d71\u8f38\u51fa\uff1b\u5075\u6e2c\u5230\u8207\u7bc0\u62cd\u885d\u7a81\u6642\u505c\u6b62\u672c\u6b21\u8a9e\u97f3\u4e26\u4fdd\u7559\u6587\u5b57\u3002\u975e\u672c\u6a5f\u8072\u97f3\u53ef\u80fd\u7531\u88dd\u7f6e\u670d\u52d9\u8655\u7406\u6587\u5b57\u3002';
@@ -4385,7 +4430,7 @@ function receivePacket(packet){
   seen.set(key,now());const item={...localMessage(m),status:'received',confirmed:false,kind:'received'};inbox.unshift(item);inbox=inbox.slice(0,C.maxHistory);
   receipt(item.id,'received');showAlert(item);
   if(now()>item.expiresAt){receipt(item.id,'expired');return;}
-  speaker.enqueue({id:item.id,text:spoken(item),safeKeys:I18N.lang!=='zh-Hant'&&(item.phraseId!=='custom'||desiredEvent().playing)?SafeBandVoice.keys(item):null,language:I18N.lang,expiresAt:item.expiresAt});
+  speaker.enqueue({id:item.id,text:spoken(item),language:I18N.lang,expiresAt:item.expiresAt});
  }else if(packet.type==='band-status'){
   const row=outbox.find(x=>x.id===packet.id);if(!row||!safeMessage(packet.message)||packet.message.senderId!==currentId()||!Array.isArray(packet.targets)||packet.targets.length>CONFIG.maxPeople)return;
   row.accepted=true;row.message=localMessage(packet.message);row.targets=packet.targets.filter(t=>isId(t.id)&&Object.hasOwn(statusText,t.state)).map(t=>({id:t.id,name:text(t.name,24),state:t.state}));row.status='accepted';requests.delete(row.id);
@@ -4454,7 +4499,7 @@ function makeRequest(){
   requests.delete(data.id);row.status='rejected';notify('傳話未能送出，請確認房間連線後再試。');return false;
  }finally{sending=false;setTimeout(updatePreview,C.minSendGap+10);}
 }
-function replay(item){if(!item)return;showAlert(item);speaker.refresh();speaker.problem='';speaker.enqueue({id:item.id,text:spoken(item),safeKeys:I18N.lang!=='zh-Hant'&&(item.phraseId!=='custom'||desiredEvent().playing)?SafeBandVoice.keys(item):null,language:I18N.lang,expiresAt:now()+C.ttl},true);}
+function replay(item){if(!item)return;showAlert(item);speaker.refresh();speaker.problem='';speaker.enqueue({id:item.id,text:spoken(item),language:I18N.lang,expiresAt:now()+C.ttl},true);}
 function showAlert(item,restartTimer=true){
  if(restartTimer){clearTimeout(alertHideTimer);alertShownAt=performance.now();alertHideTimer=setTimeout(hideAlert,3000);}
  activeAlert=item;paintAlert(item);const alert=$b('bandAlert');
@@ -4511,10 +4556,11 @@ function updatePreview(){
 function renderInstruments(){
  const instruments=allInstruments();if(!instruments.includes(selectedInstrument))selectedInstrument='';
  const sig=JSON.stringify([instruments,selectedInstrument]);if(sig===instrumentSig)return;instrumentSig=sig;
- const grid=$b('instrumentPicker');grid.replaceChildren();
- for(const value of instruments){const button=document.createElement('button');button.type='button';I18N.bind(button,()=>I18N.instrument(value));button.setAttribute('aria-pressed',String(value===selectedInstrument));button.addEventListener('click',()=>{selectedInstrument=value;prefs.instrument=value;save();instrumentSig='';renderInstruments();});grid.append(button);}
- const add=document.createElement('button');add.type='button';I18N.set(add,'＋ 新增樂器');add.addEventListener('click',()=>{$b('instrumentAddBox').hidden=false;$b('customInstrument').focus();});grid.append(add);
- $b('displayName').value=selectedInstrument;I18N.bind($b('instrumentSelected'),()=>selectedInstrument?I18N.t('你的樂器：')+I18N.instrument(selectedInstrument):I18N.t('請選擇本次使用的樂器或角色。'));
+ const picker=$b('instrumentPicker');picker.replaceChildren();
+ const placeholder=document.createElement('option');placeholder.value='';placeholder.disabled=true;
+ I18N.bind(placeholder,()=>roomUiText('choose'));picker.append(placeholder);
+ for(const value of instruments){const option=document.createElement('option');option.value=value;I18N.bind(option,()=>I18N.instrument(value));picker.append(option);}
+ picker.value=selectedInstrument;$b('displayName').value=selectedInstrument;
 }
 function syncRoom(){
  const joined=['host','guest'].includes(room.role),nextSession=joined?room.session:'';
@@ -4575,7 +4621,17 @@ Room.prototype.receiveGuest=function(data){const result=originalReceive.call(thi
 const originalRenderRoom=renderRoom;
 renderRoom=function(){const result=originalRenderRoom();syncRoom();return result;};
 // Registration name remains an internal compatibility field; user never types a nickname.
-for(const name of ['createRoom','joinRoom'])$b(name).addEventListener('click',()=>{selectedInstrument=prefs.instrument;instrumentSig='';renderInstruments();$b('instrumentAddBox').hidden=true;renderVoiceState();if(I18N.lang!=='zh-Hant')SafeBandVoice.load().catch(()=>{});});
+// Native select replaces the grid; saved role values and submit logic are unchanged.
+for(const [id,key] of Object.entries({instrumentPickerLabel:'role',roomCodeLabel:'code',roomAutoSpeakLabel:'auto',roomVoiceTest:'test',roomCustomLabel:'custom',addInstrumentConfirm:'confirm'}))I18N.bind($b(id),()=>roomUiText(key));
+I18N.bindAttr($b('joinCode'),'placeholder',()=>roomUiText('codeHint'));
+I18N.bindAttr($b('roomInstrumentAdd'),'aria-label',()=>roomUiText('add'));
+I18N.bindAttr($b('roomInstrumentAdd'),'title',()=>roomUiText('add'));
+$b('instrumentPicker').addEventListener('change',()=>{
+ const value=$b('instrumentPicker').value;if(!allInstruments().includes(value))return;
+ selectedInstrument=value;prefs.instrument=value;save();instrumentSig='';renderInstruments();I18N.set($b('roomError'),'');
+});
+$b('roomInstrumentAdd').addEventListener('click',()=>{$b('instrumentAddBox').hidden=false;$b('customInstrument').focus();});
+for(const name of ['createRoom','joinRoom'])$b(name).addEventListener('click',()=>{selectedInstrument=prefs.instrument;instrumentSig='';renderInstruments();$b('instrumentAddBox').hidden=true;renderVoiceState();});
 $b('roomForm').addEventListener('submit',event=>{
  if(!selectedInstrument||!allInstruments().includes(selectedInstrument)){event.preventDefault();event.stopImmediatePropagation();I18N.set($b('roomError'),'請先選擇你的樂器或角色。');return;}
  $b('displayName').value=selectedInstrument;prefs.instrument=selectedInstrument;save();
@@ -4611,7 +4667,7 @@ $b('bandAlertClose').addEventListener('click',hideAlert);$b('bandAlertReplay').a
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&speaker.active&&!speaker.active.safe&&!speaker.active.mandarin)speaker.cancel('blocked');});
 window.addEventListener('pagehide',event=>{if(!event.persisted)speaker.cancel('blocked');hideAlert();});
 new MutationObserver(changes=>{if(activeAlert&&changes.some(m=>m.target.tagName==='DIALOG'))showAlert(activeAlert,false);}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['open']});
-window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel,cancelLocalSpeech:()=>speaker.cancel('interrupted'),cancelNativeSpeech:()=>{if(speaker.active&&!speaker.active.safe&&!speaker.active.mandarin)speaker.cancel('interrupted');},speechMode:()=>({safe:!!speaker.active?.safe,mode:I18N.lang==='zh-Hant'?'system-mandarin':'built-in-presets',rate:prefs.zhVoiceRate,lastMandarin:speaker.lastMandarin?{...speaker.lastMandarin}:null,loaded:SafeBandVoice.ready(),bank:SafeBandVoice.snapshot()})});
+window.TempoliveBand=Object.freeze({version:'1.14-live-drawer',snapshot:()=>({session,online:online(),drawerOpen:drawerVisible(),alertVisible:!!activeAlert,alertAutoHideMs:3000,composerStep,selectedTarget,sending,instrument:prefs.instrument,self:currentId(),people:getPeople().map(p=>({...p})),volume:prefs.volume,voiceState:speaker.status(),autoSpeak:prefs.autoSpeak,queue:speaker.queue.length,speaking:!!speaker.active,received:inbox.map(m=>({...m})),sent:outbox.map(m=>({...m,targets:m.targets.map(t=>({...t}))})),localStorageAvailable:!storageError,customInstruments:[...prefs.customInstruments],customPhrases:[...prefs.customPhrases]}),open:openPanel,cancelLocalSpeech:()=>speaker.cancel('interrupted'),cancelNativeSpeech:()=>{if(speaker.active&&!speaker.active.safe&&!speaker.active.mandarin&&!speaker.active.native)speaker.cancel('interrupted');},speechMode:()=>({safe:!!speaker.active?.safe,revision:LIVE_VOICE_REVISION,mode:I18N.lang==='zh-Hant'?'system-mandarin':'system-'+I18N.lang,rate:I18N.lang==='zh-Hant'?prefs.zhVoiceRate:NATIVE_RATE,lastMandarin:speaker.lastMandarin?{...speaker.lastMandarin}:null,lastNative:speaker.lastNative?{...speaker.lastNative}:null,selectedVoice:speaker.voice()?.name||null,selectedLocale:speaker.voice()?.lang||voiceLanguage(),loaded:false,bank:{disabled:true,reason:'Legacy recordings are never played'}})});
 I18N.onChange(()=>{renderVoices();renderVoiceState();});
 renderInstruments();renderPhrases();renderVoices();renderVoiceState();syncRoom();setInterval(tick,500);
 })();
