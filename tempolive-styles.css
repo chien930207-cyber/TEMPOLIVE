@@ -1,3 +1,4 @@
+
 /* Source layer: base */
 
 /* Edit this palette to change the visual identity. No external fonts or images. */
@@ -168,7 +169,6 @@ button,summary{-webkit-user-select:none;user-select:none}
 .game-toolbar-btn{position:relative;overflow:visible}
 .game-toolbar-btn>svg{width:23px;height:23px}
 .game-toolbar-btn[aria-expanded="true"]{background:var(--soft)}
-.game-new-badge{position:absolute;top:-3px;right:-1px;display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:14px;padding:0 4px;border:1px solid var(--bg);border-radius:99px;background:var(--strong);color:var(--on-strong);font-family:inherit;font-size:8px;font-weight:750;line-height:1;letter-spacing:.04em;pointer-events:none}
 
 /* v1.8: independent, always-visible GAME volume; not the metronome slider. */
 .rhythm-game-audio{display:flex;align-items:center;gap:12px;flex-shrink:0;padding:9px 22px;border-bottom:1px solid var(--line);background:var(--surface)}
@@ -223,9 +223,7 @@ button,summary{-webkit-user-select:none;user-select:none}
 }
 .settings-flash{padding-bottom:14px;border-bottom:0}
 .flash-hint{font-size:12px;line-height:1.75;color:var(--muted);margin:0;padding:0 0 17px;border-bottom:1px solid var(--line)}
-/* v1.12: theme-matched monochrome pulse and a settings-only NEW label. */
 #screenFlashLabel{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.flash-new-badge{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;height:18px;padding:0 6px;border-radius:99px;background:var(--strong);color:var(--on-strong);font-family:inherit;font-size:10px;font-weight:750;line-height:1;letter-spacing:.04em}
 
 
 /* Source layer: band-addon-style */
@@ -234,10 +232,6 @@ button,summary{-webkit-user-select:none;user-select:none}
 /* v1.14 live message drawer. Main metronome and instrument picker are untouched. */
 .band-quick-open{position:fixed;right:max(0px,env(safe-area-inset-right));top:50%;bottom:auto;transform:translateY(-50%);z-index:70;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:46px;min-height:118px;padding:10px 5px;border:1px solid var(--line);border-right:0;border-radius:15px 0 0 15px;background:var(--strong);color:var(--on-strong);box-shadow:-3px 3px 17px #0002;touch-action:manipulation}
 .band-quick-open[hidden]{display:none!important}.band-quick-open:disabled{opacity:.5}
-/* v1.15 presentation-only change. Project convention: add a NEW badge to
-   newly introduced feature entry points; retain existing feature badges. */
-.band-new-badge{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:33px;height:18px;padding:0 5px;border-radius:99px;background:var(--strong);color:var(--on-strong);font-family:inherit;font-size:9px;font-weight:750;line-height:1;letter-spacing:.04em;white-space:nowrap;pointer-events:none}
-#bandQuickOpen>.band-new-badge{position:absolute;top:-7px;left:6px;min-width:32px;height:16px;padding:0 4px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 #bandTitle{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
 .band-tab-icon{position:relative;display:flex;align-items:center;justify-content:center;height:24px;width:31px}.band-tab-icon>svg{width:22px;height:22px}.band-tab-arrow{position:absolute;left:-2px;top:7px;width:7px!important;height:11px!important}
@@ -320,8 +314,6 @@ body.design-refresh{font-family:var(--ui-font);font-size:16px;background:var(--b
 .design-refresh .header-actions>.icon-btn:hover{border-color:var(--line);background:var(--surface)}
 .design-refresh #focusBtn[aria-pressed=true],.design-refresh #settingsBtn[aria-expanded=true]{background:var(--surface);border-color:var(--line)}
 .design-refresh .header-actions svg{width:21px;height:21px;stroke-width:1.7}
-.design-refresh :is(.game-new-badge,.flash-new-badge,.band-new-badge){border-radius:4px;letter-spacing:.035em;font-weight:700;box-shadow:none}
-.design-refresh .game-new-badge{top:-2px;right:-1px;min-width:28px;height:14px;font-size:8px;border:1px solid var(--bg)}
 .design-refresh .shell{max-width:1248px;padding:26px 24px 22px}
 .design-refresh .intro{margin-bottom:18px}
 .design-refresh .intro-tip{font-size:12px;padding-bottom:0;gap:7px}
@@ -490,7 +482,6 @@ body.design-refresh{font-family:var(--ui-font);font-size:16px;background:var(--b
 .design-refresh .band-tile[data-target=all]{background:var(--strong);min-height:65px}
 .design-refresh .band-target-strip{padding:12px 14px;border-radius:12px}
 .design-refresh .band-quick-open{width:42px;min-height:116px;border-radius:13px 0 0 13px;box-shadow:-2px 3px 12px rgba(0,0,0,.12)}
-.design-refresh #bandQuickOpen>.band-new-badge{left:5px;font-size:8px;min-width:30px;height:15px;border-radius:4px}
 .design-refresh .band-tab-title{font-size:16px}
 .design-refresh .band-options>summary{font-size:14px;min-height:46px}
 .design-refresh .band-alert{border-width:1px;border-radius:16px;padding:14px 18px 18px;box-shadow:0 16px 55px rgba(0,0,0,.18)}
@@ -611,8 +602,6 @@ body.design-refresh{font-family:var(--ui-font);font-size:16px;background:var(--b
 }
 /* The room-only live tab gets its own narrow rail on phones so it cannot cover
    the volume, tempo slider or another important control while scrolling. */
-@media(max-width:600px){
-}
 @media(max-width:360px){.design-refresh #bpm{font-size:96px;height:109px}}
 /* Minimum touch target pass. Selected notes remain visually nested, but all
    three segments retain a full 44px activation height. */
@@ -631,7 +620,6 @@ body.design-refresh{font-family:var(--ui-font);font-size:16px;background:var(--b
 /* v1.19 localized text fitting only; original design tokens and controls remain. */
 .language-btn{position:relative;overflow:visible;border:1px solid var(--line);font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
 .language-btn[aria-pressed=true]{background:var(--soft)}
-/* v2.1.1: the language selector uses EN / TW only, without a NEW badge. */
 html[lang=en] .brand-description{font-size:14px;letter-spacing:.005em}
 html[lang=en] .current-title{max-width:min(360px,50vw)}
 html[lang=en] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr)}
@@ -859,7 +847,6 @@ html[lang=en] .member-state{max-width:105px;text-align:right;white-space:normal;
 #tutorialBtn{position:relative;flex-shrink:0}
 #tutorialBtn>svg{width:22px;height:22px}
 #tutorialBtn[aria-expanded=true]{background:var(--soft);border-color:var(--line)}
-.tour-new{position:absolute;top:-4px;right:-2px;min-width:28px;height:14px;display:inline-flex;justify-content:center;align-items:center;padding:0 3px;border:1px solid var(--bg);border-radius:4px;background:var(--strong);color:var(--on-strong);font-size:8px;font-weight:700;line-height:1;letter-spacing:.03em;pointer-events:none}
 /* The fourth action fits a normal phone without shrinking touch targets. */
 @media(min-width:380px) and (max-width:560px){.design-refresh .header .header-actions{gap:3px!important}.design-refresh .header{gap:5px!important;padding-left:12px!important;padding-right:12px!important}.design-refresh .header .brand-name{font-size:18px}}
 @media(max-width:379px){.design-refresh .header{flex-wrap:wrap!important;gap:6px!important;padding-top:10px!important;padding-bottom:9px!important}.design-refresh .header .header-actions{margin-left:auto!important;gap:6px!important}.design-refresh .header .brand{flex-basis:100%}.design-refresh #settingsDialog{top:131px;max-height:calc(100dvh - 143px)}}
@@ -909,7 +896,6 @@ body.tour-active{overflow:hidden!important}
 #tourCoach{position:fixed;inset:0 0 0 auto;z-index:210;display:flex;flex-direction:column;width:var(--tour-dock-width);max-width:100vw;background:var(--surface);color:var(--ink);border:0;border-left:1px solid var(--line);box-shadow:-8px 0 30px #00000005;overflow:hidden}
 .tour-coach-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:19px 20px 10px;flex-shrink:0}
 .tour-coach-brand{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:14px;line-height:1.5;font-weight:650;min-width:0}
-.tour-coach-brand .flash-new-badge{font-size:8px;height:15px;min-height:0;padding:0 4px}
 .tour-coach-tools{display:flex;align-items:center;gap:2px;flex-shrink:0}
 #tourCoach .icon-btn{width:44px;min-width:44px;height:44px;min-height:44px;border:1px solid transparent}
 #tourCoach .icon-btn:hover{border-color:var(--line);background:var(--soft)}
@@ -956,11 +942,6 @@ body.tour-active{overflow:hidden!important}
 /* Explicit primary hover avoids inheriting the old generic pale hover fill. */
 #tourCoach .tour-nav .btn.primary:hover:not(:disabled){background:var(--strong);color:var(--on-strong);border-color:var(--strong);opacity:.92}
 .tour-active .header.tour-focus{outline-offset:-3px!important}
-
-
-/* Source layer: tempolive-german-layout */
-/* v2.1.3: local German text fitting and compact ordered language picker.
-   Existing Chinese/English layouts, theme controls and beat visuals stay intact. */
 .language-btn{position:relative}
 .language-btn[aria-expanded=true]{background:var(--soft)}
 .language-menu{position:fixed;inset:auto;margin:0;z-index:1000;max-width:calc(100vw - 24px);padding:7px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--ink);box-shadow:0 12px 38px #0002;box-sizing:border-box}
@@ -972,82 +953,9 @@ body.tour-active{overflow:hidden!important}
 .language-menu button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
 .language-option-code{font-size:12px;font-weight:650;min-width:25px;font-variant-numeric:tabular-nums}
 .language-option-name{flex:1;min-width:0}
-.language-option-new{font-size:8px;font-weight:750;line-height:1;border-radius:99px;padding:4px 5px;background:var(--strong);color:var(--on-strong);letter-spacing:.03em}
 .language-option-check{width:12px;font-size:13px;visibility:hidden}
 .language-menu button[aria-checked=true] .language-option-check{visibility:visible}
-#languageBtn.language-is-de::after,#tourLang.language-is-de::after{content:'NEW';position:absolute;top:-5px;right:-1px;padding:2px 4px;background:var(--strong);color:var(--on-strong);border:1px solid var(--surface);border-radius:99px;font-size:8px;line-height:1;font-weight:750;letter-spacing:.025em;pointer-events:none}
 #tourLang{position:relative;overflow:visible}
-html[lang=de] .brand-description{font-size:14px;letter-spacing:0}
-html[lang=de] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr)}
-html[lang=de] .settings-grid .field-label{line-height:1.5}
-html[lang=de] .transport .btn{white-space:normal;line-height:1.4}
-html[lang=de] .main-volume>label{font-size:13px;white-space:normal;max-width:116px;line-height:1.45}
-html[lang=de] .transport-info{font-size:12px;line-height:1.65;overflow-wrap:break-word}
-html[lang=de] .save-current{white-space:normal;text-align:right;line-height:1.45;max-width:190px}
-html[lang=de] .song-step{font-size:14px;line-height:1.45}
-html[lang=de] .room-buttons .btn{font-size:14px;line-height:1.4;padding:10px 8px}
-html[lang=de] .settings-appearance{gap:12px}
-html[lang=de] #settingsTitle{font-size:19px}
-html[lang=de] .settings-heading .pill{font-size:11px;white-space:normal;line-height:1.4}
-html[lang=de] .band-quick-open .band-tab-title{writing-mode:horizontal-tb;font-size:10px;letter-spacing:0;line-height:1.5}
-html[lang=de] .band-tile{font-size:16px;line-height:1.45;hyphens:auto;overflow-wrap:break-word;word-break:normal}
-html[lang=de] .band-tile small{font-size:12px}
-html[lang=de] .band-target-strip strong{font-size:17px}
-html[lang=de] .band-target-strip .btn{font-size:12px;max-width:128px;white-space:normal;line-height:1.4}
-html[lang=de] .instrument-picker button{font-size:14px;min-height:62px;hyphens:auto;overflow-wrap:break-word;word-break:normal}
-html[lang=de] .instrument-add-box .row{flex-wrap:wrap}
-html[lang=de] .instrument-add-box .row input{flex-basis:100%}
-html[lang=de] .room-voice-setup .check-row{min-width:140px}
-html[lang=de] .member-name{min-width:0;max-width:none;flex:1}
-html[lang=de] .member-state{max-width:105px;text-align:right;line-height:1.4;white-space:normal}
-html[lang=de] .band-flow-line p{font-size:12px;line-height:1.6}
-html[lang=de] .band-step-panel h3{font-size:22px;hyphens:auto}
-html[lang=de] .band-voice-bar .btn{white-space:normal;min-width:105px;line-height:1.5;font-size:12px}
-html[lang=de] .band-volume-row label{white-space:normal;max-width:125px;font-size:13px;line-height:1.4}
-html[lang=de] .guide-primary-title,html[lang=de] .guide-item-title,html[lang=de] #tourStepTitle{hyphens:auto;overflow-wrap:break-word}
-html[lang=de] .rhythm-dialog-header>div{min-width:0}
-html[lang=de] .rhythm-dialog-header h2{font-size:17px}
-html[lang=de] .rhythm-dialog-header p{font-size:12px;line-height:1.5}
-html[lang=de] .tour-preview-grid .tour-preview-tile{hyphens:auto;overflow-wrap:break-word}
-html[lang=de] .tour-step-actions .btn{white-space:normal}
-@media(max-width:560px){
- html[lang=de] .header .brand-description{font-size:10px!important}
- html[lang=de] .transport .transport-next{font-size:12px;padding:8px 4px;min-width:0}
- html[lang=de] .transport .play-btn{font-size:15px;padding:8px}
- html[lang=de] .transport .tap-btn{font-size:12px;padding:8px 4px;min-width:0}
- html[lang=de] .settings-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
- html[lang=de] .counter{font-size:12px}
- html[lang=de] .save-current{font-size:12px;max-width:140px}
- html[lang=de] .song-step{font-size:13px}
- html[lang=de] #songDialog .dialog-actions .btn{font-size:13px;padding:10px}
- html[lang=de] .beat-hint{font-size:12px;line-height:1.6}
- html[lang=de] #screenFlashLabel{font-size:15px}
- html[lang=de] .rhythm-dialog-header h2{font-size:15px}
- html[lang=de] .rhythm-dialog-header p{font-size:11px}
- html[lang=de] #rhythmGameVolumeLabel{font-size:12px}
- html[lang=de] #bandDialog .band-dialog-top h2{font-size:21px}
- html[lang=de] .band-target-strip .btn{max-width:118px}
- html[lang=de] #tourStepTitle{font-size:19px;line-height:1.3}
- html[lang=de] #tourNext{white-space:normal;font-size:13px}
-}
-@media(max-width:350px){html[lang=de] .main-volume>label{font-size:11px;max-width:81px}html[lang=de] .instrument-picker button{font-size:12px}html[lang=de] .control-foot{align-items:flex-start;gap:8px}html[lang=de] .save-current{max-width:122px}html[lang=de] .band-tile{font-size:15px}}
-/* German settings heading is wider than its Chinese/English counterparts. */
-html[lang=de] #settingsDialog .settings-heading{min-width:0;flex-wrap:wrap;gap:6px 10px}
-@media(max-width:379px){html[lang=de] .design-refresh #settingsDialog{width:calc(100vw - 20px);max-width:calc(100vw - 20px);left:auto;right:10px}html[lang=de] #settingsDialog .settings-heading{flex:1}html[lang=de] #settingsDialog .dialog-head{gap:8px}html[lang=de] #settingsTitle{font-size:18px}}
-@media(max-width:560px){
- html[lang=de] .design-refresh .sidebar{grid-template-columns:minmax(0,1fr)}
- html[lang=de] .design-refresh .room-buttons,html[lang=de] .design-refresh .song-navigation{grid-template-columns:repeat(2,minmax(0,1fr))}
- html[lang=de] .design-refresh .room-buttons .btn,html[lang=de] .design-refresh .song-navigation .btn{min-width:0;hyphens:auto;overflow-wrap:break-word}
- html[lang=de] .design-refresh .shortcut-help{flex-wrap:wrap;gap:8px;min-width:0}
- html[lang=de] .design-refresh .song-tools{flex-wrap:wrap;gap:10px}
- html[lang=de] .design-refresh .song-tools>*{min-width:0}
-}
-/* Keep intrinsic German button widths from expanding narrow desktop sidebars. */
-html[lang=de] .design-refresh .sidebar>.card{min-width:0}
-html[lang=de] .design-refresh .room-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
-html[lang=de] .design-refresh .room-buttons .btn{min-width:0;hyphens:auto;overflow-wrap:break-word}
-html[lang=de] .design-refresh .song-tools{flex-wrap:wrap;gap:10px}
-html[lang=de] .design-refresh .song-tools>*{min-width:0}
 
 
 /* Source layer: tempolive-stage-layout */
@@ -1062,7 +970,6 @@ html[lang=de] .design-refresh .song-tools>*{min-width:0}
 .audio-continuity-setting{padding:17px 0 0;margin-top:18px;border-top:1px solid var(--line)}
 .audio-continuity-setting .check-row{font-size:14px;line-height:1.65;align-items:flex-start;gap:10px}
 .audio-continuity-setting .check-row>span{flex:1;min-width:0}
-.audio-continuity-setting .flash-new-badge{margin-left:5px;vertical-align:middle}
 .audio-continuity-setting .audio-explain{margin-top:9px;font-size:12px}
 @media(max-width:600px){
  .design-refresh .transport{grid-template-columns:48px minmax(0,1fr) 48px;gap:8px}
@@ -1088,7 +995,7 @@ body.design-refresh.focus-mode:not(.tour-active) .sidebar{display:block!importan
 body.design-refresh.focus-mode:not(.tour-active) .sidebar>:not(.song-card),
 body.design-refresh.focus-mode:not(.tour-active) .left>:not(.metro-card){display:none!important}
 body.design-refresh.focus-mode:not(.tour-active) .metro-card{display:flex;flex-direction:column;position:relative;height:100%;width:100%;min-width:0;min-height:0;padding:60px 15px 15px;border-radius:20px;overflow:hidden}
-body.design-refresh.focus-mode:not(.tour-active) .metro-card>:not(.stage-tempo-group):not(#beats):not(#beatScreenFlash):not(.metro-head):not(.tempo-zone):not(.transport):not(.main-volume):not(.settings-grid){display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>:not(#quickSync):not(.stage-tempo-group):not(#beats):not(#beatScreenFlash):not(.metro-head):not(.tempo-zone):not(.transport):not(.main-volume):not(.settings-grid){display:none!important}
 body.design-refresh.focus-mode:not(.tour-active) .metro-head{position:absolute;right:10px;top:8px;left:auto;min-height:44px;margin:0;padding:0;background:none;border:0}
 body.design-refresh.focus-mode:not(.tour-active) .metro-head>.metro-song-details{display:none!important}
 body.design-refresh.focus-mode:not(.tour-active) #focusBtn{height:44px;width:44px;min-height:44px;min-width:44px;padding:0}
@@ -1220,8 +1127,6 @@ body.design-refresh.focus-mode:not(.tour-active) .note-option svg{display:block;
  body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{font-size:72px;letter-spacing:-.04em}
  body.design-refresh.focus-mode:not(.tour-active) .main-volume{padding-left:5px;padding-right:6px}
 }
-/* In stage view, LIVE Talk floats in the reserved upper-left area rather than
-   covering the new +/- or wide navigation buttons. It still uses no side gutter. */
 body.design-refresh.focus-mode:not(.tour-active) .band-quick-open{
  left:max(24px,calc(env(safe-area-inset-left) + 24px));right:auto;
  top:max(18px,calc(env(safe-area-inset-top) + 18px));bottom:auto;transform:none;
@@ -1232,7 +1137,6 @@ body.design-refresh.focus-mode:not(.tour-active) .band-tab-icon{width:23px;heigh
 body.design-refresh.focus-mode:not(.tour-active) .band-tab-icon>.band-tab-arrow{display:none}
 body.design-refresh.focus-mode:not(.tour-active) .band-tab-live{font-size:10px;line-height:1.2}
 body.design-refresh.focus-mode:not(.tour-active) .band-tab-title{writing-mode:horizontal-tb;font-size:13px;line-height:1.3;letter-spacing:0}
-body.design-refresh.focus-mode:not(.tour-active) #bandQuickOpen>.band-new-badge{top:-7px;left:5px;font-size:8px;min-width:28px;height:13px;padding:0 4px}
 @media(max-height:500px){
  body.design-refresh.focus-mode:not(.tour-active) .metro-card{justify-content:flex-start;padding-top:52px}
 }
@@ -1523,14 +1427,6 @@ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.ba
 body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.band-tab-title{
  order:2;font-size:17px;line-height:1.3;font-weight:600;writing-mode:horizontal-tb;letter-spacing:0;
 }
-body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen>.band-new-badge{
- order:3;position:static;inset:auto;transform:none;flex:none;
- min-width:32px;height:18px;padding:0 5px;font-size:9px;line-height:1;
- border:0;background:var(--strong);color:var(--on-strong);
-}
-body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:active>.band-new-badge{
- background:var(--surface);color:var(--ink);
-}
 @media(min-width:600px){
  body.design-refresh.focus-mode:not(.tour-active) .stage-meter{font-size:18px}
  body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{
@@ -1557,3 +1453,221 @@ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen:act
  body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{gap:9px}
 }
 
+
+
+/* v2.4.3: approved balanced stage layout; production local-note controls. Normal view is unchanged.
+   In stage view only, flatten the transport layout box into the card grid.
+   DOM and keyboard order remain Play, previous, next, Tap, subdivisions. */
+#localNoteHint{font-size:12px;color:var(--muted);line-height:1.55;margin-top:6px}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+ display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+ grid-template-rows:auto minmax(140px,1fr) clamp(80px,11.5dvh,120px) clamp(80px,12dvh,120px) 72px;
+ grid-template-areas:'song song song song song song' 'tempo tempo tempo tempo tempo tempo' 'play play play play play play' 'previous previous previous next next next' 'tap tap notes notes notes notes';
+ gap:12px;align-items:stretch;overflow-y:auto;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.transport{display:contents!important}
+body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{
+ grid-area:play;min-height:80px;height:100%;width:100%;min-width:0;margin:0;
+ padding:12px 18px;font-size:clamp(25px,6vw,32px);font-weight:700;line-height:1.4;border-radius:18px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn svg{width:32px;height:32px}
+body.design-refresh.focus-mode:not(.tour-active) .transport #transportPrevSong{grid-area:previous}
+body.design-refresh.focus-mode:not(.tour-active) .transport #transportNextSong{grid-area:next}
+body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{
+ width:100%;height:100%;min-height:80px;min-width:0;padding:12px;border-radius:16px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{
+ grid-area:tap;min-height:44px;height:100%;width:100%;min-width:0;margin:0;
+ padding:8px 7px;font-size:19px;font-weight:550;line-height:1.35;border-radius:12px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>.settings-grid{
+ grid-area:notes;display:block!important;align-self:stretch;max-width:none;min-width:0;
+ width:100%;height:100%;margin:0;padding:0;border:0;
+}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid>div:not(:nth-child(2)){display:none!important}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid>div:nth-child(2){display:block!important;height:100%;min-width:0}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-segment{
+ display:grid;grid-template-columns:repeat(3,minmax(44px,1fr));width:100%;height:100%;min-height:44px;
+ min-width:0;max-width:none;margin:0;padding:3px;gap:4px;border-radius:12px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option{
+ min-height:44px;min-width:44px;width:100%;height:100%;flex-direction:row;
+ gap:4px;padding:6px 3px;font-size:20px;line-height:1.2;border-radius:9px;
+}
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option svg{width:22px;height:28px}
+body.design-refresh.focus-mode:not(.tour-active) #noteLabel,
+body.design-refresh.focus-mode:not(.tour-active) #localNoteHint{display:none}
+@media(max-width:480px) and (max-height:750px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+  --live-bpm:clamp(92px,28vw,140px);gap:8px;padding:12px;
+  grid-template-rows:auto minmax(120px,1fr) 84px 80px 64px;
+ }
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group{gap:8px;min-height:0}
+}
+@media(max-width:480px) and (max-height:640px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{gap:6px;padding:8px;grid-template-rows:auto minmax(110px,1fr) 76px 76px 60px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group{gap:2px;min-height:0}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-zone{gap:0;min-height:0}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control{min-height:60px}
+ body.design-refresh.focus-mode:not(.tour-active) .bpm-caption{min-height:18px}
+ body.design-refresh.focus-mode:not(.tour-active) .bpm-caption strong{font-size:12px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group>#beats{min-height:36px;gap:6px}
+ body.design-refresh.focus-mode:not(.tour-active) #beats>.beat{width:36px;height:36px;min-height:36px;flex-basis:36px;font-size:16px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{min-height:76px;font-size:24px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{min-height:76px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-segment{padding:3px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{gap:6px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{height:44px;min-height:44px;padding:6px 10px}
+}
+@media(min-width:600px) and (orientation:portrait){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{grid-template-rows:auto minmax(180px,1fr) clamp(96px,12dvh,144px) clamp(100px,12dvh,150px) 80px;gap:16px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{font-size:32px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{font-size:24px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option{font-size:24px}
+}
+@media(min-width:900px) and (min-aspect-ratio:1/1),(min-width:640px) and (max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-template-rows:auto minmax(110px,.9fr) minmax(100px,1.1fr) minmax(72px,.55fr);
+  grid-template-areas:'song song song song song song song song song song song song' 'tempo tempo tempo tempo tempo tempo play play play play play play' 'tempo tempo tempo tempo tempo tempo previous previous previous next next next' 'tempo tempo tempo tempo tempo tempo tap tap notes notes notes notes';
+  gap:16px;
+ }
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{font-size:clamp(28px,2.8vw,40px);border-radius:22px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn svg{width:36px;height:36px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{min-height:100px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{font-size:24px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option{font-size:24px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option svg{width:28px;height:36px}
+}
+@media(min-width:640px) and (max-height:500px){
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card{padding:8px;gap:6px 10px;grid-template-rows:auto minmax(72px,.9fr) minmax(68px,1.1fr) 60px}
+ body.design-refresh.focus-mode:not(.tour-active) .metro-card>.metro-head,
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{min-height:44px;padding:0;gap:8px}
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) #bandQuickOpen{height:44px;min-height:44px;padding:6px 10px}
+ body.design-refresh.focus-mode:not(.tour-active) .stage-tempo-group{min-height:0;gap:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .tempo-control #bpm{font-size:clamp(88px,32vh,156px);height:1.1em}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn{min-height:72px;padding:8px 12px;font-size:24px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #playBtn svg{width:28px;height:28px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip{min-height:68px;padding:8px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport>.transport-skip svg{width:36px;height:36px}
+ body.design-refresh.focus-mode:not(.tour-active) .transport #tapBtn{font-size:16px;padding:6px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-segment{padding:3px;gap:3px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option{font-size:17px}
+ body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option svg{width:20px;height:26px}
+}
+
+/* Keep stage digits the same readable size as their button labels. */
+body.design-refresh.focus-mode:not(.tour-active) .settings-grid .note-option span{font-size:inherit;line-height:inherit}
+
+
+#recoveryDialog{position:fixed;inset:0;margin:auto;width:min(480px,calc(100vw - 28px));max-width:calc(100vw - 28px);max-height:calc(100dvh - 32px);box-sizing:border-box;padding:0;border:1px solid var(--line);border-radius:26px;background:var(--surface);color:var(--ink);box-shadow:0 24px 80px #0005;overflow:auto;overscroll-behavior:contain;z-index:150}
+#recoveryDialog::backdrop{background:#0009;backdrop-filter:blur(3px)}
+#recoveryDialog .rp-top{display:flex;align-items:center;gap:9px;padding:12px 16px 0 24px;min-height:56px}
+#recoveryDialog .rp-brand{font-size:13px;font-weight:750;letter-spacing:.1em}
+#recoveryDialog .rp-close{display:flex;align-items:center;justify-content:center;margin-left:auto;width:44px;height:44px;border-radius:12px;background:none;color:var(--muted)}
+#recoveryDialog .rp-content{padding:8px 28px 22px;text-align:center}
+#recoveryDialog .rp-symbol{display:flex;align-items:center;justify-content:center;width:58px;height:58px;margin:0 auto 16px;border-radius:18px;background:var(--soft);border:1px solid var(--line)}
+#recoveryDialog .rp-symbol svg{width:30px;height:30px}
+#recoveryDialog h2{margin:0;font-size:30px;line-height:1.4;font-weight:750;letter-spacing:-.01em;text-wrap:balance}
+#recoveryBody{margin:12px 0 18px;font-size:17px;line-height:1.7;color:var(--muted);white-space:pre-line}
+#recoveryDialog .rp-track{display:flex;gap:5px;flex-direction:column;align-items:center;padding:10px 12px;margin:0 0 20px;border-radius:12px;background:var(--soft);font-size:16px;font-weight:650;overflow-wrap:anywhere}
+#recoveryTempo{font-size:13px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+#recoveryDialog .rp-action{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:88px;padding:18px 16px;border:1px solid var(--strong);border-radius:18px;background:var(--strong);color:var(--on-strong);font:inherit;font-size:25px;line-height:1.4;font-weight:750;touch-action:manipulation;overflow-wrap:anywhere}
+#recoveryDialog .rp-action svg{width:26px;height:26px}
+#recoveryDialog .rp-later{display:flex;align-items:center;justify-content:center;min-height:44px;margin:12px auto 4px;padding:8px 18px;font-size:15px;line-height:1.5;color:var(--muted);border-radius:10px}
+#recoveryDialog #recoveryDetail{font-size:13px;line-height:1.7;color:var(--muted);margin:8px 0 0}
+#recoveryDialog #recoveryNotice{margin:14px 0 0;padding:12px;background:var(--soft);border:1px solid var(--line);border-radius:12px;font-size:15px;line-height:1.7;text-align:left}
+#recoveryDialog button:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+#recoveryDialog button:disabled{cursor:wait;opacity:.55}
+#recoveryDialog button:active:not(:disabled){transform:translateY(1px)}
+@media(max-width:360px){#recoveryDialog .rp-content{padding:8px 20px 18px}#recoveryDialog h2{font-size:26px}#recoveryBody{font-size:16px}#recoveryDialog .rp-action{min-height:80px;font-size:23px}}
+@media(max-height:640px) and (min-height:521px){#recoveryDialog .rp-symbol{display:none}#recoveryDialog .rp-top{min-height:48px;padding-top:4px}#recoveryDialog .rp-content{padding-top:0;padding-bottom:14px}#recoveryDialog h2{font-size:24px}#recoveryBody{font-size:15px;line-height:1.55;margin:8px 0 12px}#recoveryDialog .rp-track{margin-bottom:12px;padding:8px 10px}#recoveryDialog .rp-action{min-height:80px;font-size:22px}#recoveryDialog .rp-later{margin-top:6px}#recoveryDialog #recoveryDetail{font-size:12px;margin-top:4px}}
+@media(max-height:520px){#recoveryDialog{max-height:calc(100dvh - 16px);width:min(500px,calc(100vw - 28px));border-radius:18px}#recoveryDialog .rp-top{padding-top:0;min-height:44px}#recoveryDialog .rp-symbol{display:none}#recoveryDialog .rp-content{padding:0 24px 12px}#recoveryDialog h2{font-size:24px}#recoveryBody{font-size:15px;margin:6px 0 8px;line-height:1.5}#recoveryDialog .rp-track{flex-direction:row;justify-content:center;gap:12px;padding:6px 10px;margin-bottom:10px}#recoveryDialog .rp-action{min-height:64px;font-size:23px;padding:12px}#recoveryDialog .rp-later{margin-top:4px}#recoveryDialog #recoveryDetail{margin-top:2px}}
+
+
+/* Compact room forms r1. Scoped to the two entry dialogs only. */
+#roomDialog{width:min(420px,calc(100vw - 28px));max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain}
+#roomDialog .dialog-head{padding:18px 22px 8px;gap:12px}
+#roomDialog .dialog-head h2{margin:0;font-size:22px;line-height:1.45;letter-spacing:0}
+#roomDialog .dialog-head .icon-btn{width:44px;height:44px;flex-shrink:0}
+#roomDialog .dialog-body{padding:4px 22px 22px}
+#roomDialog .room-field{margin:0 0 18px}
+#roomDialog .field-label{font-size:14px;line-height:1.5;margin:0 0 8px}
+#roomDialog .room-role-row{display:flex;align-items:stretch;gap:8px;min-width:0}
+#roomDialog #instrumentPicker{min-width:0;flex:1;width:0;min-height:48px;font-size:16px;line-height:1.5;padding:10px 34px 10px 12px;border-radius:10px;scroll-margin-block:16px}
+#roomDialog .room-add-role{width:48px;min-width:48px;min-height:48px;padding:12px;border-radius:10px}
+#roomDialog .room-add-role svg{width:20px;height:20px}
+#roomDialog #joinCode{min-height:54px;font-size:26px;text-align:center;letter-spacing:.16em;padding:10px 12px;border-radius:10px;scroll-margin-block:16px}
+#roomDialog #joinCode::placeholder{font-family:var(--font,inherit);font-size:17px;letter-spacing:.02em}
+#roomDialog .instrument-add-box{margin:0 0 18px;padding:12px;border-radius:10px}
+#roomDialog .instrument-add-box input{font-size:16px;min-height:48px}
+#roomDialog #addInstrumentConfirm{min-height:48px;font-size:14px}
+#roomDialog #instrumentAddError:empty,#roomDialog #roomError:empty{display:none}
+#roomDialog .room-voice-setup{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;padding:12px 0 0;margin:0}
+#roomDialog .room-voice-setup .row{flex-wrap:nowrap;gap:10px;align-items:center}
+#roomDialog .room-voice-setup .check-row{display:flex;align-items:center;gap:9px;min-width:0;flex:1;min-height:44px;font-size:14px;line-height:1.5;margin:0}
+#roomDialog #roomAutoSpeak{flex-shrink:0;width:18px;height:18px}
+#roomDialog #roomVoiceTest{min-height:44px;flex-shrink:0;padding:9px 12px;font-size:13px;line-height:1.5;border-radius:9px}
+#roomDialog #roomVoiceStatus{font-size:13px;line-height:1.65;margin:8px 0 0}
+#roomDialog #roomError{min-height:0;padding:10px 0 0;font-size:14px;line-height:1.6}
+#roomDialog .dialog-actions{margin:18px 0 0;display:block}
+#roomDialog #roomSubmit{background:var(--strong);color:var(--on-strong);border-color:var(--strong);width:100%;min-height:48px;font-size:16px;line-height:1.5;padding:11px 16px;border-radius:10px}
+#roomDialog :is(button,input,select):focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media(max-width:360px){#roomDialog .dialog-head{padding:14px 18px 8px}#roomDialog .dialog-body{padding:4px 18px 18px}#roomDialog .dialog-head h2{font-size:21px}#roomDialog #roomVoiceTest{padding:9px}#roomDialog .room-voice-setup .row{gap:8px}}
+
+/* Connected-only controls; shared palette, no modal needed for timing. */
+#quickSync{margin:12px 0 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);width:100%;min-width:0;box-sizing:border-box;grid-column:1/-1}
+#quickSync[hidden],#roomInvite[hidden],#installHint[hidden]{display:none!important}
+#quickSync>summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;cursor:pointer;font-size:14px;font-weight:550;touch-action:manipulation}
+#quickSync>summary::-webkit-details-marker{display:none}
+#quickSync>summary>svg{width:18px;height:18px;flex:0 0 18px}
+#quickSync>summary>svg:last-child{width:15px;height:15px;flex-basis:15px;transition:transform .15s}
+#quickSync[open]>summary>svg:last-child{transform:rotate(180deg)}
+#quickSyncSummary{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.quick-sync-body{padding:0 12px 12px;border-top:1px solid var(--line)}
+.quick-sync-stepper{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin-top:12px}
+.quick-sync-stepper .btn{font:inherit;font-size:13px;min-height:44px;padding:8px 9px;line-height:1.3;white-space:normal}
+#quickSyncValue{min-width:64px;text-align:center;font-size:16px;font-weight:650;font-variant-numeric:tabular-nums}
+#quickSyncRange{display:block;box-sizing:border-box;width:100%;margin:8px 0 0;min-height:36px}
+.quick-sync-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+#quickSyncReset{min-height:44px;padding:8px 10px;font-size:12px}
+#quickSyncHelp{font-size:12px;line-height:1.6;color:var(--muted);margin:0;overflow-wrap:anywhere}
+.room-invite-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
+.room-invite-actions>.btn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 8px;font-size:14px;line-height:1.3;min-width:0}
+.room-invite-actions svg{width:18px;height:18px;flex:0 0 18px}
+#roomInviteStatus{font-size:12px;line-height:1.6;margin:-5px 0 12px;color:var(--muted)}
+#roomInviteManual{box-sizing:border-box;display:block;width:100%;font-size:16px;margin:0 0 12px;padding:10px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+#roomInviteManual[hidden]{display:none}
+#copyCode{min-width:44px!important;min-height:44px!important}
+#installHint{position:fixed;z-index:80;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;max-width:390px;width:calc(100% - 24px);min-height:48px;border:1px solid var(--line);border-radius:14px;box-sizing:border-box;background:var(--surface);color:var(--ink);box-shadow:0 3px 18px #0000000d}
+#installHintAction{display:flex;align-items:center;gap:9px;flex:1;min-width:0;min-height:46px;padding:10px 14px;border:0;background:none;color:inherit;font:inherit;font-size:14px;font-weight:550;line-height:1.4;text-align:left;touch-action:manipulation;border-radius:14px}
+#installHintAction>svg{width:17px;height:17px;flex-shrink:0}
+.install-hint-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+#installHintTitle{display:block;line-height:1.4;font-weight:600}
+#installHintDescription{display:block;color:var(--muted);font-size:13px;font-weight:400;line-height:1.45;overflow-wrap:anywhere}
+#installHintClose{display:flex;align-items:center;justify-content:center;flex:0 0 44px;min-height:44px;border:0;background:none;color:var(--muted);padding:0;border-radius:12px;touch-action:manipulation}
+#installHintClose>svg{width:18px;height:18px}
+body.has-install-hint{padding-bottom:calc(var(--tempolive-install-hint-height,96px) + 24px + env(safe-area-inset-bottom,0px))!important}
+body.has-install-hint #toast{bottom:calc(var(--tempolive-install-hint-height,96px) + 24px + env(safe-area-inset-bottom,0px))!important}
+#quickInstallGuide{max-width:360px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);padding:0}
+#quickInstallGuide h2{font-size:20px;margin:0}
+#quickInstallSteps{font-size:16px;line-height:1.8;margin:0 0 18px}
+#quickInstallGuide #quickInstallBenefit{font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:12px}
+#quickInstallGuide .dialog-head{padding:18px 20px 8px}
+#quickInstallGuide .dialog-body{padding:8px 20px 20px}
+#quickSync :focus-visible,#installHint :focus-visible,#roomInvite :focus-visible,#quickInstallGuide :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+body.design-refresh.focus-mode:not(.tour-active) .metro-card>#quickSync:not([hidden]){display:block!important;flex:0 0 auto;order:8;max-width:640px;margin:0 auto;width:100%}
+@media(prefers-reduced-motion:reduce){#quickSync>summary>svg{transition:none}}
+/* Reserve an intrinsic tempo row when the local tools are expanded. The stage
+   scrolls on short screens instead of overlapping beats and playback buttons. */
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card{
+ grid-template-rows:max-content minmax(max-content,1fr) clamp(80px,11.5dvh,120px) clamp(80px,12dvh,120px) 72px auto;
+}
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .stage-tempo-group{min-height:max-content}
+@media(min-width:900px) and (min-aspect-ratio:1/1),(min-width:640px) and (max-height:500px){
+ body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card{
+  grid-template-rows:max-content minmax(110px,.9fr) minmax(100px,1.1fr) minmax(72px,.55fr) auto;
+ }
+}
+
+body.design-refresh.focus-mode.band-in-room:not(.tour-active) .metro-card>.metro-head{min-height:max-content;height:auto}
